@@ -1,0 +1,8 @@
+/* Placeholder for icon-192x192.png 
+   This file should be replaced with an actual 192x192 PNG icon
+   You can create this using any image editor or online icon generator
+   
+   Recommended: A simple logo or initial "C" for Charles Otwere
+   Colors: Use your portfolio theme colors (#3b82f6 or #1e40af)
+   
+   For now, this is a text placeholder */

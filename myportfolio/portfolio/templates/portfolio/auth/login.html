@@ -1,0 +1,101 @@
+{% extends 'portfolio/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Login" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<section class="section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card shadow-lg">
+                    <div class="card-body p-5">
+                        <div class="text-center mb-4">
+                            <h2 class="fw-bold">{% trans "Welcome Back" %}</h2>
+                            <p class="text-muted">{% trans "Sign in to your account" %}</p>
+                        </div>
+
+                        <!-- Social Login Buttons -->
+                        <div class="d-grid gap-3 mb-4">
+                            <a href="{% url 'social:begin' 'github' %}" class="btn btn-dark btn-lg">
+                                <i class="fab fa-github me-2"></i>{% trans "Continue with GitHub" %}
+                            </a>
+                            <a href="{% url 'social:begin' 'linkedin-oauth2' %}" class="btn btn-primary btn-lg">
+                                <i class="fab fa-linkedin me-2"></i>{% trans "Continue with LinkedIn" %}
+                            </a>
+                            <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-info btn-lg">
+                                <i class="fab fa-twitter me-2"></i>{% trans "Continue with Twitter" %}
+                            </a>
+                        </div>
+
+                        <div class="text-center mb-3">
+                            <span class="text-muted">{% trans "or" %}</span>
+                        </div>
+
+                        <!-- Traditional Login Form -->
+                        <form method="post">
+                            {% csrf_token %}
+                            {% if form.errors %}
+                                <div class="alert alert-danger">
+                                    {% for field, errors in form.errors.items %}
+                                        {% for error in errors %}
+                                            <small>{{ error }}</small><br>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }}">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
+                            <div class="mb-3">
+                                <label for="{{ form.username.id_for_label }}" class="form-label">
+                                    {% trans "Username or Email" %}
+                                </label>
+                                {{ form.username }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="{{ form.password.id_for_label }}" class="form-label">
+                                    {% trans "Password" %}
+                                </label>
+                                {{ form.password }}
+                            </div>
+
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me">
+                                <label class="form-check-label" for="remember_me">
+                                    {% trans "Remember me" %}
+                                </label>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    {% trans "Sign In" %}
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="text-center mt-4">
+                            <p class="mb-1">
+                                <a href="#" class="text-decoration-none">{% trans "Forgot your password?" %}</a>
+                            </p>
+                            <p class="text-muted">
+                                {% trans "Don't have an account?" %} 
+                                <a href="{% url 'portfolio:register' %}" class="text-decoration-none fw-bold">
+                                    {% trans "Sign up" %}
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

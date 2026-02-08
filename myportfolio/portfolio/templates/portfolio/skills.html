@@ -1,0 +1,258 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}Skills - {{ about.name|default:"Charles Otwere" }}{% endblock %}
+
+{% block content %}
+<!-- Skills Hero -->
+<section class="hero-section">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-4 fw-bold mb-4">Skills & Technologies</h1>
+            <p class="lead">
+                A comprehensive overview of the technologies, tools, and frameworks I work with
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Filter -->
+<section class="py-4 bg-light">
+    <div class="container">
+        <div class="text-center">
+            <div class="btn-group flex-wrap" role="group" aria-label="Skill categories">
+                <a href="{% url 'portfolio:skills' %}" 
+                   class="btn {% if not current_category %}btn-primary{% else %}btn-outline-primary{% endif %}">
+                    All Skills
+                </a>
+                {% for category_code, category_name in categories %}
+                    <a href="{% url 'portfolio:skills' %}?category={{ category_code }}" 
+                       class="btn {% if current_category == category_code %}btn-primary{% else %}btn-outline-primary{% endif %}">
+                        {{ category_name }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Content -->
+<section class="section-padding">
+    <div class="container">
+        {% if skills_by_category %}
+            {% for category, skills in skills_by_category.items %}
+            <div class="mb-5">
+                <div class="row align-items-center mb-4">
+                    <div class="col">
+                        <h2 class="h3 mb-0">
+                            <i class="fas fa-{% if 'Programming' in category %}code{% elif 'Frontend' in category %}desktop{% elif 'Backend' in category %}server{% elif 'Database' in category %}database{% elif 'Cloud' in category %}cloud{% elif 'Tools' in category %}tools{% else %}cog{% endif %} text-primary me-2"></i>
+                            {{ category }}
+                        </h2>
+                    </div>
+                    <div class="col-auto">
+                        <span class="badge bg-secondary">{{ skills|length }} skill{{ skills|length|pluralize }}</span>
+                    </div>
+                </div>
+                
+                <div class="row g-4">
+                    {% for skill in skills %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div class="d-flex align-items-center">
+                                        {% if skill.icon %}
+                                            <i class="{{ skill.icon }} text-primary me-3" style="font-size: 2rem;"></i>
+                                        {% else %}
+                                            <i class="fas fa-code text-primary me-3" style="font-size: 2rem;"></i>
+                                        {% endif %}
+                                        <div>
+                                            <h5 class="card-title mb-0">{{ skill.name }}</h5>
+                                            {% if skill.is_featured %}
+                                                <small class="text-warning">
+                                                    <i class="fas fa-star me-1"></i>Featured
+                                                </small>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Proficiency Level -->
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <small class="text-muted">Proficiency</small>
+                                        <small class="fw-bold">{{ skill.get_proficiency_display }}</small>
+                                    </div>
+                                    <div class="proficiency-bar">
+                                        <div class="proficiency-fill" style="width: {% if skill.proficiency == 'expert' %}100{% elif skill.proficiency == 'advanced' %}85{% elif skill.proficiency == 'intermediate' %}60{% else %}35{% endif %}%;"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Experience -->
+                                {% if skill.years_experience > 0 %}
+                                <div class="mb-3">
+                                    <small class="text-muted d-block">Experience</small>
+                                    <span class="fw-bold">
+                                        {{ skill.years_experience }} year{{ skill.years_experience|pluralize }}
+                                    </span>
+                                </div>
+                                {% endif %}
+                                
+                                <!-- Description -->
+                                {% if skill.description %}
+                                <p class="card-text small text-muted">{{ skill.description }}</p>
+                                {% endif %}
+                                
+                                <!-- Skill Badge -->
+                                <div class="mt-auto">
+                                    <span class="badge bg-light text-dark border">
+                                        {{ skill.get_category_display }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+            
+            <!-- Skills Summary -->
+            <div class="mt-5 pt-5 border-top">
+                <div class="row text-center">
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="text-primary">{{ skills_by_category.values|length }}</h3>
+                                <small class="text-muted">Total Skills</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="text-success">
+                                    {% for skills in skills_by_category.values %}
+                                        {% for skill in skills %}
+                                            {% if skill.proficiency == 'expert' %}{{ forloop.counter0|add:1 }}{% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </h3>
+                                <small class="text-muted">Expert Level</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="text-warning">
+                                    {% for skills in skills_by_category.values %}
+                                        {% for skill in skills %}
+                                            {% if skill.is_featured %}{{ forloop.counter0|add:1 }}{% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </h3>
+                                <small class="text-muted">Featured Skills</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="text-info">{{ skills_by_category|length }}</h3>
+                                <small class="text-muted">Categories</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        {% else %}
+            <div class="text-center py-5">
+                {% if current_category %}
+                    <i class="fas fa-search text-muted" style="font-size: 4rem;"></i>
+                    <h4 class="mt-3 text-muted">No skills found in this category</h4>
+                    <p class="text-muted">Try selecting a different category or view all skills.</p>
+                    <a href="{% url 'portfolio:skills' %}" class="btn btn-outline-primary">
+                        <i class="fas fa-list me-2"></i>View All Skills
+                    </a>
+                {% else %}
+                    <i class="fas fa-cogs text-muted" style="font-size: 4rem;"></i>
+                    <h4 class="mt-3 text-muted">No skills added yet</h4>
+                    <p class="text-muted">Skills will appear here once you add them in the admin panel.</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Skill Learning Section -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Continuous Learning</h2>
+            <p class="lead text-muted">Technology evolves fast, and so do I</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-graduation-cap text-primary mb-3" style="font-size: 3rem;"></i>
+                        <h5 class="card-title">Always Learning</h5>
+                        <p class="card-text">
+                            I'm constantly updating my skills and learning new technologies to stay current with industry trends.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-project-diagram text-primary mb-3" style="font-size: 3rem;"></i>
+                        <h5 class="card-title">Hands-on Practice</h5>
+                        <p class="card-text">
+                            I believe in learning by doing. Each skill listed here has been applied in real-world projects.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-users text-primary mb-3" style="font-size: 3rem;"></i>
+                        <h5 class="card-title">Knowledge Sharing</h5>
+                        <p class="card-text">
+                            I enjoy sharing knowledge through mentoring, writing, and contributing to the developer community.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="section-padding">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h2 class="display-5 fw-bold mb-4">Let's Build Something Amazing</h2>
+                <p class="lead mb-4">
+                    These skills are tools in my toolkit. The real magic happens when we combine them 
+                    to solve real problems and create meaningful solutions.
+                </p>
+                <div class="d-flex gap-3 justify-content-center">
+                    <a href="{% url 'portfolio:projects' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-folder-open me-2"></i>See My Work
+                    </a>
+                    <a href="{% url 'portfolio:contact' %}" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-handshake me-2"></i>Work Together
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

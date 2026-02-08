@@ -1,0 +1,296 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}Contact - {{ about.name|default:"Charles Otwere" }}{% endblock %}
+
+{% block content %}
+<!-- Contact Hero -->
+<section class="hero-section">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-4 fw-bold mb-4">Get In Touch</h1>
+            <p class="lead">
+                I'd love to hear from you. Whether you have a project in mind, 
+                want to collaborate, or just want to say hello!
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Content -->
+<section class="section-padding">
+    <div class="container">
+        {% if about %}
+        <div class="row">
+            <!-- Contact Information -->
+            <div class="col-lg-6 mb-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">
+                            <i class="fas fa-address-card text-primary me-2"></i>
+                            Contact Information
+                        </h3>
+                        
+                        <div class="mb-4">
+                            <h5 class="fw-bold">{{ about.name }}</h5>
+                            <p class="text-muted">{{ about.title }}</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-envelope text-primary me-3" style="width: 20px;"></i>
+                                <div>
+                                    <strong>Email:</strong><br>
+                                    <a href="mailto:{{ about.email }}" class="text-decoration-none">
+                                        {{ about.email }}
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            {% if about.phone %}
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-phone text-primary me-3" style="width: 20px;"></i>
+                                <div>
+                                    <strong>Phone:</strong><br>
+                                    <a href="tel:{{ about.phone }}" class="text-decoration-none">
+                                        {{ about.phone }}
+                                    </a>
+                                </div>
+                            </div>
+                            {% endif %}
+                            
+                            {% if about.location %}
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-map-marker-alt text-primary me-3" style="width: 20px;"></i>
+                                <div>
+                                    <strong>Location:</strong><br>
+                                    <span class="text-muted">{{ about.location }}</span>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Social Media Links -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold mb-3">Follow Me</h6>
+                            <div class="d-flex gap-3">
+                                {% if about.linkedin_url %}
+                                <a href="{{ about.linkedin_url }}" target="_blank" 
+                                   class="btn btn-outline-primary btn-lg" title="LinkedIn">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                {% endif %}
+                                {% if about.github_url %}
+                                <a href="{{ about.github_url }}" target="_blank" 
+                                   class="btn btn-outline-dark btn-lg" title="GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                {% endif %}
+                                {% if about.twitter_url %}
+                                <a href="{{ about.twitter_url }}" target="_blank" 
+                                   class="btn btn-outline-info btn-lg" title="Twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                {% endif %}
+                                {% if about.website_url %}
+                                <a href="{{ about.website_url }}" target="_blank" 
+                                   class="btn btn-outline-secondary btn-lg" title="Website">
+                                    <i class="fas fa-globe"></i>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        {% if about.resume_file %}
+                        <div class="d-grid">
+                            <a href="{{ about.resume_file.url }}" target="_blank" class="btn btn-primary btn-lg">
+                                <i class="fas fa-download me-2"></i>Download My Resume
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Form -->
+            <div class="col-lg-6 mb-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">
+                            <i class="fas fa-paper-plane text-primary me-2"></i>
+                            Send Me a Message
+                        </h3>
+                        
+                        <!-- Note: This is a basic form that would need backend processing -->
+                        <form action="mailto:{{ about.email }}" method="get" enctype="text/plain">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Your Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="subject" name="subject" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" name="body" rows="5" required></textarea>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-paper-plane me-2"></i>Send Message
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div class="mt-3">
+                            <small class="text-muted">
+                                <i class="fas fa-info-circle me-1"></i>
+                                This will open your default email client with the message pre-filled.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <i class="fas fa-envelope text-muted" style="font-size: 4rem;"></i>
+            <h4 class="mt-3 text-muted">Contact information not available</h4>
+            <p class="text-muted">Contact information will appear here once you add it in the admin panel.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Additional Contact Options -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Other Ways to Connect</h2>
+            <p class="lead text-muted">Choose the method that works best for you</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-briefcase text-primary mb-3" style="font-size: 3rem;"></i>
+                        <h5 class="card-title">Work Together</h5>
+                        <p class="card-text">
+                            Looking for a developer for your next project? Let's discuss how I can help bring your ideas to life.
+                        </p>
+                        <a href="{% url 'portfolio:projects' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-folder-open me-2"></i>View My Work
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-handshake text-primary mb-3" style="font-size: 3rem;"></i>
+                        <h5 class="card-title">Collaboration</h5>
+                        <p class="card-text">
+                            Open to collaborating on interesting projects, contributing to open source, or mentoring opportunities.
+                        </p>
+                        {% if about.github_url %}
+                        <a href="{{ about.github_url }}" target="_blank" class="btn btn-outline-primary">
+                            <i class="fab fa-github me-2"></i>GitHub Profile
+                        </a>
+                        {% else %}
+                        <span class="btn btn-outline-secondary disabled">GitHub Profile</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-comments text-primary mb-3" style="font-size: 3rem;"></i>
+                        <h5 class="card-title">Just Say Hi</h5>
+                        <p class="card-text">
+                            Whether you have questions, want to discuss technology, or just want to connect, I'd love to hear from you!
+                        </p>
+                        {% if about.linkedin_url %}
+                        <a href="{{ about.linkedin_url }}" target="_blank" class="btn btn-outline-primary">
+                            <i class="fab fa-linkedin me-2"></i>LinkedIn
+                        </a>
+                        {% else %}
+                        <span class="btn btn-outline-secondary disabled">LinkedIn</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="section-padding">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Frequently Asked Questions</h2>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#faq1" aria-expanded="true">
+                                What's the best way to contact you about a project?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                The best way to reach me is through email at <a href="mailto:{{ about.email }}">{{ about.email }}</a>. 
+                                I typically respond within 24 hours and would love to discuss your project requirements.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#faq2">
+                                Do you work on freelance projects?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes, I'm open to freelance projects depending on my current availability and the project scope. 
+                                Feel free to reach out with your project details and timeline.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#faq3">
+                                What technologies do you specialize in?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                I specialize in web development with technologies like Django, Python, JavaScript, and modern frontend frameworks. 
+                                Check out my <a href="{% url 'portfolio:skills' %}">skills page</a> for a complete list.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

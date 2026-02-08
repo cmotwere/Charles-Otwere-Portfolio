@@ -1,0 +1,300 @@
+{% extends 'portfolio/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Certifications" %} - {{ about.name|default:"Charles Otwere" }}{% endblock %}
+
+{% block content %}
+<!-- Certifications Hero -->
+<section class="hero-section">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-4 fw-bold mb-4">
+                <i class="fas fa-certificate text-success me-3"></i>
+                {% trans "Certifications & Credentials" %}
+            </h1>
+            <p class="lead">
+                {% trans "Professional certifications and industry credentials" %}
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Certifications Content -->
+<section class="section-padding">
+    <div class="container">
+        <!-- Expiring Soon Alert -->
+        {% if expiring_certs %}
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="alert alert-warning" role="alert">
+                    <h5 class="alert-heading">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        {% trans "Expiring Soon" %}
+                    </h5>
+                    <p class="mb-2">{% trans "The following certifications are expiring within 60 days:" %}</p>
+                    <ul class="mb-0">
+                        {% for cert in expiring_certs %}
+                        <li>{{ cert.name }} - {% trans "Expires" %} {{ cert.expiry_date|date:"M d, Y" }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Featured Certifications -->
+        {% if featured_certs %}
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="section-title">
+                    <i class="fas fa-star text-warning me-2"></i>
+                    {% trans "Featured Certifications" %}
+                </h2>
+                <div class="row">
+                    {% for cert in featured_certs %}
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100 border-0 shadow-sm certification-card featured">
+                            {% if cert.badge_image %}
+                            <div class="text-center py-3">
+                                <img src="{{ cert.badge_image.url }}" alt="{{ cert.name }}" class="certification-badge">
+                            </div>
+                            {% endif %}
+                            
+                            <div class="card-body">
+                                <h5 class="card-title text-primary">{{ cert.name }}</h5>
+                                <h6 class="card-subtitle mb-3 text-muted">{{ cert.issuing_organization }}</h6>
+                                
+                                <div class="cert-meta mb-3">
+                                    <span class="badge bg-{{ cert.certification_type|cut:'_'|capfirst|default:'primary' }} me-2">
+                                        {{ cert.get_certification_type_display }}
+                                    </span>
+                                    <span class="badge bg-{% if cert.status == 'active' %}success{% elif cert.status == 'expired' %}danger{% else %}warning{% endif %}">
+                                        {{ cert.get_status_display }}
+                                    </span>
+                                </div>
+                                
+                                <div class="cert-dates mb-3">
+                                    <small class="text-muted">
+                                        <i class="fas fa-calendar-check me-1"></i>
+                                        {% trans "Issued:" %} {{ cert.issue_date|date:"M Y" }}
+                                        {% if cert.expiry_date %}
+                                        <br>
+                                        <i class="fas fa-calendar-times me-1"></i>
+                                        {% trans "Expires:" %} {{ cert.expiry_date|date:"M Y" }}
+                                        {% endif %}
+                                    </small>
+                                </div>
+                                
+                                {% if cert.credential_id %}
+                                <p class="credential-id">
+                                    <small><strong>{% trans "ID:" %}</strong> {{ cert.credential_id }}</small>
+                                </p>
+                                {% endif %}
+                                
+                                {% if cert.description %}
+                                <p class="card-text">{{ cert.description|truncatewords:15 }}</p>
+                                {% endif %}
+                                
+                                <div class="cert-actions">
+                                    {% if cert.verification_url %}
+                                    <a href="{{ cert.verification_url }}" target="_blank" class="btn btn-outline-success btn-sm me-2">
+                                        <i class="fas fa-external-link-alt me-1"></i>
+                                        {% trans "Verify" %}
+                                    </a>
+                                    {% endif %}
+                                    
+                                    {% if cert.skills_gained.exists %}
+                                    <button class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#skillsModal{{ cert.id }}">
+                                        <i class="fas fa-cogs me-1"></i>
+                                        {% trans "Skills" %} ({{ cert.skills_gained.count }})
+                                    </button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            {% if cert.is_expiring_soon %}
+                            <div class="card-footer bg-warning text-dark">
+                                <small>
+                                    <i class="fas fa-exclamation-triangle me-1"></i>
+                                    {% trans "Expiring soon!" %}
+                                </small>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- All Active Certifications -->
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section-title">
+                    <i class="fas fa-award text-primary me-2"></i>
+                    {% trans "All Certifications" %}
+                </h2>
+                
+                <div class="row">
+                    {% for cert in active_certs %}
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100 border-0 shadow-sm certification-card">
+                            {% if cert.badge_image %}
+                            <div class="text-center py-3">
+                                <img src="{{ cert.badge_image.url }}" alt="{{ cert.name }}" class="certification-badge">
+                            </div>
+                            {% endif %}
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">{{ cert.name }}</h5>
+                                <h6 class="card-subtitle mb-3 text-muted">{{ cert.issuing_organization }}</h6>
+                                
+                                <div class="cert-meta mb-3">
+                                    <span class="badge bg-secondary me-2">{{ cert.get_certification_type_display }}</span>
+                                    <span class="badge bg-{% if cert.status == 'active' %}success{% elif cert.status == 'expired' %}danger{% else %}warning{% endif %}">
+                                        {{ cert.get_status_display }}
+                                    </span>
+                                </div>
+                                
+                                <div class="cert-dates mb-3">
+                                    <small class="text-muted">
+                                        <i class="fas fa-calendar-check me-1"></i>
+                                        {{ cert.issue_date|date:"M Y" }}
+                                        {% if cert.expiry_date %}
+                                        - {{ cert.expiry_date|date:"M Y" }}
+                                        {% endif %}
+                                    </small>
+                                </div>
+                                
+                                {% if cert.description %}
+                                <p class="card-text">{{ cert.description|truncatewords:10 }}</p>
+                                {% endif %}
+                                
+                                <div class="cert-actions">
+                                    {% if cert.verification_url %}
+                                    <a href="{{ cert.verification_url }}" target="_blank" class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-external-link-alt me-1"></i>
+                                        {% trans "Verify" %}
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12">
+                        <div class="text-center py-5">
+                            <i class="fas fa-certificate fa-3x text-muted mb-3"></i>
+                            <h4 class="text-muted">{% trans "No certifications found" %}</h4>
+                            <p class="text-muted">{% trans "Check back later for updates!" %}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Certification Statistics -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card bg-light border-0">
+                    <div class="card-body text-center">
+                        <h4 class="card-title mb-4">{% trans "Certification Summary" %}</h4>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="stat-item">
+                                    <h3 class="text-primary">{{ certifications.count }}</h3>
+                                    <p class="text-muted">{% trans "Total Certifications" %}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-item">
+                                    <h3 class="text-success">{{ active_certs.count }}</h3>
+                                    <p class="text-muted">{% trans "Active Certifications" %}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-item">
+                                    <h3 class="text-warning">{{ expiring_certs.count }}</h3>
+                                    <p class="text-muted">{% trans "Expiring Soon" %}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-item">
+                                    <h3 class="text-info">{{ featured_certs.count }}</h3>
+                                    <p class="text-muted">{% trans "Featured" %}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Modal Template -->
+{% for cert in featured_certs %}
+{% if cert.skills_gained.exists %}
+<div class="modal fade" id="skillsModal{{ cert.id }}" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{% trans "Skills Gained" %} - {{ cert.name }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    {% for skill in cert.skills_gained.all %}
+                    <div class="col-md-6 mb-2">
+                        <span class="badge bg-primary">{{ skill.name }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+
+<style>
+.certification-card {
+    transition: all 0.3s ease;
+}
+
+.certification-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+}
+
+.certification-card.featured {
+    border-left: 4px solid var(--bs-success) !important;
+}
+
+.certification-badge {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: contain;
+}
+
+.stat-item h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.cert-actions .btn {
+    margin-bottom: 0.5rem;
+}
+
+.credential-id {
+    font-family: 'Courier New', monospace;
+    background: rgba(var(--bs-secondary-rgb), 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+}
+</style>
+{% endblock %}

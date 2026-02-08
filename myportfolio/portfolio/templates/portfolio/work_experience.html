@@ -1,0 +1,413 @@
+{% extends 'portfolio/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Work Experience" %} - {{ about.name|default:"Charles Otwere" }}{% endblock %}
+
+{% block content %}
+<!-- Experience Hero -->
+<section class="hero-section">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-4 fw-bold mb-4">
+                <i class="fas fa-briefcase text-info me-3"></i>
+                {% trans "Work Experience" %}
+            </h1>
+            <p class="lead">
+                {% trans "My professional journey and career progression" %}
+            </p>
+            {% if total_years %}
+            <div class="experience-summary">
+                <span class="badge bg-info fs-6">
+                    {{ total_years }} {% trans "years of professional experience" %}
+                </span>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Experience Content -->
+<section class="section-padding">
+    <div class="container">
+        <!-- Current Positions -->
+        {% if current_positions %}
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="section-title">
+                    <i class="fas fa-clock text-success me-2"></i>
+                    {% trans "Current Positions" %}
+                </h2>
+                <div class="row">
+                    {% for position in current_positions %}
+                    <div class="col-lg-6 mb-4">
+                        <div class="card h-100 border-0 shadow-sm experience-card current">
+                            {% if position.company_logo %}
+                            <div class="text-center py-3">
+                                <img src="{{ position.company_logo.url }}" alt="{{ position.company_name }}" class="company-logo">
+                            </div>
+                            {% endif %}
+                            
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="experience-icon current me-3">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="card-title mb-1">{{ position.job_title }}</h5>
+                                        <p class="card-subtitle text-muted mb-0">{{ position.company_name }}</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="position-meta mb-3">
+                                    <span class="badge bg-success me-2">{% trans "Current" %}</span>
+                                    <span class="badge bg-primary me-2">{{ position.get_employment_type_display }}</span>
+                                    {% if position.location %}
+                                    <span class="badge bg-secondary">{{ position.location }}</span>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="duration mb-3">
+                                    <small class="text-muted">
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        {{ position.start_date|date:"M Y" }} - {% trans "Present" %}
+                                        ({{ position.duration_display }})
+                                    </small>
+                                </div>
+                                
+                                <p class="job-description">{{ position.job_description|truncatewords:25 }}</p>
+                                
+                                {% if position.key_achievements %}
+                                <div class="achievements mb-3">
+                                    <h6 class="text-success">
+                                        <i class="fas fa-trophy me-1"></i>{% trans "Key Achievements:" %}
+                                    </h6>
+                                    <p class="small">{{ position.key_achievements|truncatewords:20 }}</p>
+                                </div>
+                                {% endif %}
+                                
+                                {% if position.technologies_used.exists %}
+                                <div class="technologies mb-3">
+                                    <h6 class="text-info">
+                                        <i class="fas fa-code me-1"></i>{% trans "Technologies:" %}
+                                    </h6>
+                                    <div class="d-flex flex-wrap gap-1">
+                                        {% for tech in position.technologies_used.all|slice:":5" %}
+                                        <span class="badge bg-outline-info">{{ tech.name }}</span>
+                                        {% endfor %}
+                                        {% if position.technologies_used.count > 5 %}
+                                        <span class="badge bg-outline-secondary">+{{ position.technologies_used.count|add:"-5" }} {% trans "more" %}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                
+                                {% if position.company_website %}
+                                <a href="{{ position.company_website }}" target="_blank" class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-external-link-alt me-1"></i>
+                                    {% trans "Company Website" %}
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Career Timeline -->
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section-title">
+                    <i class="fas fa-history text-primary me-2"></i>
+                    {% trans "Career Timeline" %}
+                </h2>
+                
+                <div class="timeline">
+                    {% for position in work_experience %}
+                    <div class="timeline-item">
+                        <div class="timeline-marker">
+                            {% if position.is_current_position %}
+                            <i class="fas fa-circle text-success"></i>
+                            {% else %}
+                            <i class="fas fa-circle text-primary"></i>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="timeline-content">
+                            <div class="row">
+                                <div class="col-md-3 timeline-date">
+                                    <div class="date-range">
+                                        <span class="start-date">{{ position.start_date|date:"M Y" }}</span>
+                                        <span class="separator"> - </span>
+                                        {% if position.end_date %}
+                                        <span class="end-date">{{ position.end_date|date:"M Y" }}</span>
+                                        {% else %}
+                                        <span class="current-badge">{% trans "Present" %}</span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="duration-badge mt-1">
+                                        <span class="badge bg-outline-secondary">{{ position.duration_display }}</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-9">
+                                    <div class="card border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-start justify-content-between mb-3">
+                                                <div>
+                                                    <h4 class="job-title text-primary mb-1">{{ position.job_title }}</h4>
+                                                    <h5 class="company-name text-muted mb-2">{{ position.company_name }}</h5>
+                                                </div>
+                                                {% if position.company_logo %}
+                                                <img src="{{ position.company_logo.url }}" alt="{{ position.company_name }}" class="company-logo-small">
+                                                {% endif %}
+                                            </div>
+                                            
+                                            <div class="position-details mb-3">
+                                                <span class="badge bg-primary me-2">{{ position.get_employment_type_display }}</span>
+                                                {% if position.location %}
+                                                <span class="badge bg-secondary me-2">{{ position.location }}</span>
+                                                {% endif %}
+                                                {% if position.is_current_position %}
+                                                <span class="badge bg-success">{% trans "Current Position" %}</span>
+                                                {% endif %}
+                                            </div>
+                                            
+                                            {% if position.company_description %}
+                                            <div class="company-description mb-3">
+                                                <h6 class="text-muted">{% trans "About the Company:" %}</h6>
+                                                <p class="small">{{ position.company_description }}</p>
+                                            </div>
+                                            {% endif %}
+                                            
+                                            <div class="job-description mb-3">
+                                                <h6 class="text-dark">{% trans "Role Description:" %}</h6>
+                                                <p>{{ position.job_description }}</p>
+                                            </div>
+                                            
+                                            {% if position.key_achievements %}
+                                            <div class="achievements mb-3">
+                                                <h6 class="text-success">
+                                                    <i class="fas fa-trophy me-1"></i>{% trans "Key Achievements:" %}
+                                                </h6>
+                                                <p>{{ position.key_achievements }}</p>
+                                            </div>
+                                            {% endif %}
+                                            
+                                            {% if position.technologies_used.exists %}
+                                            <div class="technologies mb-3">
+                                                <h6 class="text-info">
+                                                    <i class="fas fa-code me-1"></i>{% trans "Technologies Used:" %}
+                                                </h6>
+                                                <div class="d-flex flex-wrap gap-1">
+                                                    {% for tech in position.technologies_used.all %}
+                                                    <span class="badge bg-outline-info">{{ tech.name }}</span>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                {% if position.company_website %}
+                                                <a href="{{ position.company_website }}" target="_blank" class="btn btn-outline-primary btn-sm">
+                                                    <i class="fas fa-external-link-alt me-1"></i>
+                                                    {% trans "Company Website" %}
+                                                </a>
+                                                {% endif %}
+                                                
+                                                {% if position.reference_contact %}
+                                                <small class="text-muted">
+                                                    <i class="fas fa-user-check me-1"></i>
+                                                    {% trans "Reference available" %}
+                                                </small>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-briefcase fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">{% trans "No work experience found" %}</h4>
+                        <p class="text-muted">{% trans "Check back later for updates!" %}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Experience Statistics -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card bg-light border-0">
+                    <div class="card-body text-center">
+                        <h4 class="card-title mb-4">{% trans "Career Summary" %}</h4>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="stat-item">
+                                    <h3 class="text-primary">{{ work_experience.count }}</h3>
+                                    <p class="text-muted">{% trans "Total Positions" %}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-item">
+                                    <h3 class="text-success">{{ current_positions.count }}</h3>
+                                    <p class="text-muted">{% trans "Current Roles" %}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-item">
+                                    <h3 class="text-info">{{ total_years }}</h3>
+                                    <p class="text-muted">{% trans "Years Experience" %}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-item">
+                                    <h3 class="text-warning">{{ featured_experience.count }}</h3>
+                                    <p class="text-muted">{% trans "Featured Roles" %}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.experience-card {
+    transition: all 0.3s ease;
+}
+
+.experience-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+}
+
+.experience-card.current {
+    border-left: 4px solid var(--bs-success) !important;
+}
+
+.experience-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.experience-icon.current {
+    background: rgba(var(--bs-success-rgb), 0.1);
+    color: var(--bs-success);
+}
+
+.company-logo {
+    max-width: 100px;
+    max-height: 60px;
+    object-fit: contain;
+}
+
+.company-logo-small {
+    max-width: 60px;
+    max-height: 40px;
+    object-fit: contain;
+}
+
+.timeline {
+    position: relative;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--bs-primary), var(--bs-success));
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: 0;
+    top: 1rem;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.timeline-content {
+    margin-left: 50px;
+}
+
+.timeline-date {
+    text-align: right;
+}
+
+.date-range {
+    font-weight: 600;
+    color: var(--bs-primary);
+    font-size: 1rem;
+}
+
+.current-badge {
+    color: var(--bs-success);
+    font-weight: 600;
+}
+
+.duration-badge .badge {
+    font-size: 0.75rem;
+}
+
+.job-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.company-name {
+    font-size: 1rem;
+}
+
+.stat-item h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .timeline::before {
+        display: none;
+    }
+    
+    .timeline-marker {
+        display: none;
+    }
+    
+    .timeline-content {
+        margin-left: 0;
+    }
+    
+    .timeline-date {
+        text-align: left;
+        margin-bottom: 1rem;
+    }
+}
+</style>
+{% endblock %}

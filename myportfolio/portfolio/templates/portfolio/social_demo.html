@@ -1,0 +1,214 @@
+{% extends 'portfolio/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "GitHub Integration Demo" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<section class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="text-center mb-5">
+                    <h1 class="display-4 fw-bold">
+                        <i class="fab fa-github text-dark me-3"></i>
+                        {% trans "GitHub Authentication" %}
+                    </h1>
+                    <p class="lead text-muted">
+                        {% trans "Seamlessly connect with GitHub to showcase your repositories and contributions" %}
+                    </p>
+                </div>
+
+                <!-- Demo Authentication Card -->
+                <div class="card shadow-lg mb-5">
+                    <div class="card-header bg-dark text-white">
+                        <h4 class="mb-0">
+                            <i class="fab fa-github me-2"></i>
+                            {% trans "GitHub Social Authentication Demo" %}
+                        </h4>
+                    </div>
+                    <div class="card-body p-4">
+                        {% if user.is_authenticated %}
+                            <div class="alert alert-success">
+                                <h5 class="alert-heading">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    {% trans "Authentication Successful!" %}
+                                </h5>
+                                <p class="mb-0">
+                                    {% trans "Welcome" %} <strong>{{ user.first_name|default:user.username }}</strong>! 
+                                    {% trans "You are successfully authenticated." %}
+                                </p>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>{% trans "Account Details:" %}</h6>
+                                    <ul class="list-unstyled">
+                                        <li><strong>{% trans "Username:" %}</strong> {{ user.username }}</li>
+                                        <li><strong>{% trans "Email:" %}</strong> {{ user.email }}</li>
+                                        <li><strong>{% trans "Join Date:" %}</strong> {{ user.date_joined|date:"M d, Y" }}</li>
+                                        <li><strong>{% trans "Last Login:" %}</strong> {{ user.last_login|date:"M d, Y H:i" }}</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>{% trans "Connected Accounts:" %}</h6>
+                                    {% for social in user.social_auth.all %}
+                                        <div class="mb-2">
+                                            <span class="badge bg-{{ social.provider }} me-2">
+                                                {% if social.provider == 'github' %}
+                                                    <i class="fab fa-github me-1"></i>GitHub
+                                                {% elif social.provider == 'linkedin-oauth2' %}
+                                                    <i class="fab fa-linkedin me-1"></i>LinkedIn
+                                                {% elif social.provider == 'twitter' %}
+                                                    <i class="fab fa-twitter me-1"></i>Twitter
+                                                {% else %}
+                                                    {{ social.provider|title }}
+                                                {% endif %}
+                                            </span>
+                                        </div>
+                                    {% empty %}
+                                        <p class="text-muted">{% trans "No social accounts connected" %}</p>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            <div class="d-flex gap-3">
+                                <a href="{% url 'portfolio:profile' %}" class="btn btn-primary">
+                                    <i class="fas fa-user me-2"></i>{% trans "View Profile" %}
+                                </a>
+                                <a href="{% url 'portfolio:logout' %}" class="btn btn-outline-danger">
+                                    <i class="fas fa-sign-out-alt me-2"></i>{% trans "Logout" %}
+                                </a>
+                            </div>
+                        {% else %}
+                            <div class="text-center mb-4">
+                                <h5>{% trans "Try GitHub Authentication" %}</h5>
+                                <p class="text-muted">
+                                    {% trans "Click the button below to test GitHub OAuth integration" %}
+                                </p>
+                            </div>
+                            
+                            <div class="d-grid gap-3 mb-4">
+                                <a href="{% url 'social:begin' 'github' %}" class="btn btn-dark btn-lg">
+                                    <i class="fab fa-github me-2"></i>
+                                    {% trans "Connect with GitHub" %}
+                                </a>
+                                <a href="{% url 'social:begin' 'linkedin-oauth2' %}" class="btn btn-primary btn-lg">
+                                    <i class="fab fa-linkedin me-2"></i>
+                                    {% trans "Connect with LinkedIn" %}
+                                </a>
+                                <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-info btn-lg">
+                                    <i class="fab fa-twitter me-2"></i>
+                                    {% trans "Connect with Twitter" %}
+                                </a>
+                            </div>
+                            
+                            <div class="alert alert-info">
+                                <h6 class="alert-heading">{% trans "Setup Required" %}</h6>
+                                <p class="mb-0">
+                                    {% trans "To enable GitHub authentication, you need to configure OAuth credentials in your environment variables." %}
+                                </p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Setup Instructions -->
+                <div class="card shadow-lg">
+                    <div class="card-header">
+                        <h4 class="mb-0">
+                            <i class="fas fa-cog me-2"></i>
+                            {% trans "GitHub OAuth Setup Instructions" %}
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="setup-steps">
+                            <div class="step mb-4">
+                                <h5 class="text-primary">
+                                    <span class="badge bg-primary rounded-circle me-2">1</span>
+                                    {% trans "Create GitHub OAuth App" %}
+                                </h5>
+                                <ol>
+                                    <li>{% trans "Go to GitHub Settings > Developer settings > OAuth Apps" %}</li>
+                                    <li>{% trans "Click 'New OAuth App'" %}</li>
+                                    <li>{% trans "Fill in the application details:" %}
+                                        <ul>
+                                            <li><strong>{% trans "Application name:" %}</strong> Charles Otwere Portfolio</li>
+                                            <li><strong>{% trans "Homepage URL:" %}</strong> http://localhost:8000</li>
+                                            <li><strong>{% trans "Authorization callback URL:" %}</strong> http://localhost:8000/auth/complete/github/</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </div>
+
+                            <div class="step mb-4">
+                                <h5 class="text-success">
+                                    <span class="badge bg-success rounded-circle me-2">2</span>
+                                    {% trans "Configure Environment Variables" %}
+                                </h5>
+                                <p>{% trans "Add these to your settings.py or environment variables:" %}</p>
+                                <div class="bg-light p-3 rounded">
+                                    <pre><code>SOCIAL_AUTH_GITHUB_KEY = 'your_github_client_id'
+SOCIAL_AUTH_GITHUB_SECRET = 'your_github_client_secret'
+
+# For LinkedIn
+SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = 'your_linkedin_client_id'
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = 'your_linkedin_client_secret'
+
+# For Twitter  
+SOCIAL_AUTH_TWITTER_KEY = 'your_twitter_api_key'
+SOCIAL_AUTH_TWITTER_SECRET = 'your_twitter_api_secret'</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="step mb-4">
+                                <h5 class="text-info">
+                                    <span class="badge bg-info rounded-circle me-2">3</span>
+                                    {% trans "Test Authentication" %}
+                                </h5>
+                                <p>{% trans "Once configured, users can:" %}</p>
+                                <ul>
+                                    <li>{% trans "Login with their GitHub account" %}</li>
+                                    <li>{% trans "Connect multiple social accounts" %}</li>
+                                    <li>{% trans "View their profile and connected accounts" %}</li>
+                                    <li>{% trans "Access repository information (with additional API integration)" %}</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-warning">
+                            <h6 class="alert-heading">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                {% trans "Production Configuration" %}
+                            </h6>
+                            <p>{% trans "For production deployment, make sure to:" %}</p>
+                            <ul class="mb-0">
+                                <li>{% trans "Update callback URLs to your production domain" %}</li>
+                                <li>{% trans "Store secrets securely (environment variables, not in code)" %}</li>
+                                <li>{% trans "Enable HTTPS for secure authentication" %}</li>
+                                <li>{% trans "Configure proper CORS and security headers" %}</li>
+                            </ul>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <a href="{% url 'portfolio:login' %}" class="btn btn-primary me-3">
+                                {% trans "Go to Login Page" %}
+                            </a>
+                            <a href="{% url 'portfolio:home' %}" class="btn btn-outline-secondary">
+                                {% trans "Back to Portfolio" %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.badge.bg-github { background-color: #333 !important; }
+.badge.bg-linkedin-oauth2 { background-color: #0077b5 !important; }
+.badge.bg-twitter { background-color: #1da1f2 !important; }
+.step h5 .badge { width: 2rem; height: 2rem; display: inline-flex; align-items: center; justify-content: center; }
+</style>
+{% endblock %}

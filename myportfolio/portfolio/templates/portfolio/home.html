@@ -1,0 +1,183 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}Home - {{ about.name|default:"Charles Otwere" }}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">
+                    Hi, I'm {{ about.name|default:"Charles Otwere" }}
+                </h1>
+                <h2 class="h3 mb-4 text-light">
+                    {{ about.title|default:"Software Developer & Technology Enthusiast" }}
+                </h2>
+                <p class="lead mb-4">
+                    {{ about.bio|default:"Passionate about creating innovative solutions and building amazing digital experiences. I love turning complex problems into simple, beautiful and intuitive solutions." |truncatewords:30 }}
+                </p>
+                <div class="d-flex gap-3">
+                    <a href="{% url 'portfolio:projects' %}" class="btn btn-light btn-lg">
+                        <i class="fas fa-code me-2"></i>View My Work
+                    </a>
+                    <a href="{% url 'portfolio:contact' %}" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-envelope me-2"></i>Get In Touch
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                {% if about.profile_image %}
+                    <img src="{{ about.profile_image.url }}" alt="{{ about.name }}" 
+                         class="img-fluid rounded-circle shadow-lg" style="max-width: 350px;">
+                {% else %}
+                    <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center shadow-lg"
+                         style="width: 300px; height: 300px;">
+                        <i class="fas fa-user-circle text-secondary" style="font-size: 8rem;"></i>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Projects Section -->
+<section class="section-padding">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Featured Projects</h2>
+            <p class="lead text-muted">Some of my recent work that I'm proud to share</p>
+        </div>
+        
+        {% if featured_projects %}
+        <div class="row g-4">
+            {% for project in featured_projects %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card project-card">
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image">
+                    {% else %}
+                        <div class="project-image bg-light d-flex align-items-center justify-content-center">
+                            <i class="fas fa-image text-muted" style="font-size: 3rem;"></i>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="badge bg-primary">{{ project.get_project_type_display }}</span>
+                            <small class="text-muted">{{ project.start_date|date:"M Y" }}</small>
+                        </div>
+                        
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text text-muted">
+                            {{ project.short_description|default:project.description|truncatewords:20 }}
+                        </p>
+                        
+                        <div class="mb-3">
+                            {% for tech in project.technologies_used.all|slice:":3" %}
+                                <span class="skill-badge">{{ tech.name }}</span>
+                            {% endfor %}
+                            {% if project.technologies_used.count > 3 %}
+                                <span class="skill-badge">+{{ project.technologies_used.count|add:"-3" }} more</span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="d-flex gap-2">
+                            <a href="{% url 'portfolio:project_detail' project.slug %}" class="btn btn-primary btn-sm">
+                                <i class="fas fa-eye me-1"></i>View Details
+                            </a>
+                            {% if project.live_url %}
+                                <a href="{{ project.live_url }}" target="_blank" class="btn btn-outline-secondary btn-sm">
+                                    <i class="fas fa-external-link-alt me-1"></i>Live Demo
+                                </a>
+                            {% endif %}
+                            {% if project.github_url %}
+                                <a href="{{ project.github_url }}" target="_blank" class="btn btn-outline-secondary btn-sm">
+                                    <i class="fab fa-github me-1"></i>Code
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="{% url 'portfolio:projects' %}" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-folder-open me-2"></i>View All Projects
+            </a>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <i class="fas fa-folder-open text-muted" style="font-size: 4rem;"></i>
+            <h4 class="mt-3 text-muted">No featured projects yet</h4>
+            <p class="text-muted">Projects will appear here once you add them in the admin panel.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Skills Preview Section -->
+{% if featured_skills %}
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Core Skills</h2>
+            <p class="lead text-muted">Technologies and tools I work with</p>
+        </div>
+        
+        <div class="row justify-content-center">
+            {% for skill in featured_skills %}
+            <div class="col-lg-3 col-md-4 col-6 mb-4">
+                <div class="text-center">
+                    {% if skill.icon %}
+                        <i class="{{ skill.icon }} text-primary" style="font-size: 3rem;"></i>
+                    {% else %}
+                        <i class="fas fa-code text-primary" style="font-size: 3rem;"></i>
+                    {% endif %}
+                    <h6 class="mt-3">{{ skill.name }}</h6>
+                    <div class="proficiency-bar mt-2">
+                        <div class="proficiency-fill" style="width: {% if skill.proficiency == 'expert' %}100{% elif skill.proficiency == 'advanced' %}85{% elif skill.proficiency == 'intermediate' %}60{% else %}35{% endif %}%;"></div>
+                    </div>
+                    <small class="text-muted mt-1 d-block">{{ skill.get_proficiency_display }}</small>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="{% url 'portfolio:skills' %}" class="btn btn-outline-primary">
+                <i class="fas fa-cogs me-2"></i>View All Skills
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Call to Action Section -->
+<section class="section-padding">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h2 class="display-5 fw-bold mb-4">Let's Work Together</h2>
+                <p class="lead mb-4">
+                    I'm always interested in new opportunities and exciting projects. 
+                    Whether you're a company looking for a developer or you have a project in mind, 
+                    let's discuss how we can work together.
+                </p>
+                <div class="d-flex gap-3 justify-content-center">
+                    <a href="{% url 'portfolio:contact' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-handshake me-2"></i>Start a Conversation
+                    </a>
+                    {% if about.resume_file %}
+                        <a href="{{ about.resume_file.url }}" target="_blank" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-download me-2"></i>Download Resume
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,267 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}{{ project.title }} - Projects{% endblock %}
+
+{% block content %}
+<!-- Project Hero -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <nav aria-label="breadcrumb" class="mb-3">
+                    <ol class="breadcrumb text-white">
+                        <li class="breadcrumb-item"><a href="{% url 'portfolio:home' %}" class="text-white-50">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'portfolio:projects' %}" class="text-white-50">Projects</a></li>
+                        <li class="breadcrumb-item active text-white">{{ project.title }}</li>
+                    </ol>
+                </nav>
+                
+                <div class="d-flex gap-2 mb-3">
+                    <span class="badge bg-light text-dark">{{ project.get_project_type_display }}</span>
+                    <span class="badge bg-{% if project.status == 'completed' %}success{% elif project.status == 'development' %}warning{% else %}secondary{% endif %}">
+                        {{ project.get_status_display }}
+                    </span>
+                    <span class="badge bg-light text-dark">{% if project.is_personal %}Personal{% else %}Client Work{% endif %}</span>
+                </div>
+                
+                <h1 class="display-4 fw-bold mb-4">{{ project.title }}</h1>
+                <p class="lead mb-4">{{ project.short_description }}</p>
+                
+                <div class="d-flex gap-3 mb-4">
+                    {% if project.live_url %}
+                    <a href="{{ project.live_url }}" target="_blank" class="btn btn-light btn-lg">
+                        <i class="fas fa-external-link-alt me-2"></i>View Live
+                    </a>
+                    {% endif %}
+                    {% if project.github_url %}
+                    <a href="{{ project.github_url }}" target="_blank" class="btn btn-outline-light btn-lg">
+                        <i class="fab fa-github me-2"></i>View Code
+                    </a>
+                    {% endif %}
+                </div>
+                
+                <div class="row text-center text-white">
+                    <div class="col-4">
+                        <h6>Started</h6>
+                        <p class="mb-0">{{ project.start_date|date:"M Y" }}</p>
+                    </div>
+                    {% if project.end_date %}
+                    <div class="col-4">
+                        <h6>Completed</h6>
+                        <p class="mb-0">{{ project.end_date|date:"M Y" }}</p>
+                    </div>
+                    {% endif %}
+                    <div class="col-4">
+                        <h6>Team Size</h6>
+                        <p class="mb-0">{{ project.team_size }} member{{ project.team_size|pluralize }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 text-center">
+                {% if project.image %}
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" 
+                         class="img-fluid rounded shadow-lg" style="max-height: 400px;">
+                {% else %}
+                    <div class="bg-light rounded d-inline-flex align-items-center justify-content-center shadow-lg"
+                         style="width: 100%; height: 300px;">
+                        <i class="fas fa-image text-secondary" style="font-size: 4rem;"></i>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Project Details -->
+<section class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Project Description -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            <i class="fas fa-info-circle text-primary me-2"></i>
+                            About This Project
+                        </h3>
+                        <div class="card-text">
+                            {{ project.description|linebreaks }}
+                        </div>
+                    </div>
+                </div>
+                
+                {% if project.my_role %}
+                <!-- My Role -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <i class="fas fa-user-tie text-primary me-2"></i>
+                            My Role
+                        </h4>
+                        <p class="card-text">{{ project.my_role }}</p>
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if project.challenges %}
+                <!-- Challenges -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <i class="fas fa-mountain text-primary me-2"></i>
+                            Challenges & Solutions
+                        </h4>
+                        <div class="card-text">
+                            {{ project.challenges|linebreaks }}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if project.learned %}
+                <!-- What I Learned -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <i class="fas fa-lightbulb text-primary me-2"></i>
+                            What I Learned
+                        </h4>
+                        <div class="card-text">
+                            {{ project.learned|linebreaks }}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Gallery -->
+                {% if project.gallery_images %}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <i class="fas fa-images text-primary me-2"></i>
+                            Project Gallery
+                        </h4>
+                        <div class="row g-3">
+                            {% for image_url in project.gallery_images %}
+                            <div class="col-md-6">
+                                <img src="{{ image_url }}" alt="{{ project.title }} screenshot" 
+                                     class="img-fluid rounded shadow-sm">
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Technologies Used -->
+                <div class="card mb-4 sticky-top" style="top: 100px;">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-cogs text-primary me-2"></i>
+                            Technologies Used
+                        </h5>
+                        {% if project.technologies_used.all %}
+                            <div class="d-flex flex-wrap gap-2">
+                                {% for tech in project.technologies_used.all %}
+                                    <span class="skill-badge">
+                                        {% if tech.icon %}<i class="{{ tech.icon }} me-1"></i>{% endif %}
+                                        {{ tech.name }}
+                                    </span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p class="text-muted mb-0">No technologies specified</p>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Project Info -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-chart-line text-primary me-2"></i>
+                            Project Stats
+                        </h5>
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <strong>Type:</strong><br>
+                                <span class="text-muted">{{ project.get_project_type_display }}</span>
+                            </div>
+                            <div class="col-6">
+                                <strong>Status:</strong><br>
+                                <span class="badge bg-{% if project.status == 'completed' %}success{% elif project.status == 'development' %}warning{% else %}secondary{% endif %}">
+                                    {{ project.get_status_display }}
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <strong>Team Size:</strong><br>
+                                <span class="text-muted">{{ project.team_size }} member{{ project.team_size|pluralize }}</span>
+                            </div>
+                            {% if project.duration_months %}
+                            <div class="col-6">
+                                <strong>Duration:</strong><br>
+                                <span class="text-muted">{{ project.duration_months }} month{{ project.duration_months|pluralize }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <hr>
+                        
+                        <div class="d-grid gap-2">
+                            {% if project.live_url %}
+                            <a href="{{ project.live_url }}" target="_blank" class="btn btn-success">
+                                <i class="fas fa-external-link-alt me-2"></i>View Live Project
+                            </a>
+                            {% endif %}
+                            {% if project.github_url %}
+                            <a href="{{ project.github_url }}" target="_blank" class="btn btn-dark">
+                                <i class="fab fa-github me-2"></i>View Source Code
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Projects -->
+{% if related_projects %}
+<section class="section-padding bg-light">
+    <div class="container">
+        <h3 class="text-center mb-5">Related Projects</h3>
+        <div class="row g-4">
+            {% for related in related_projects %}
+            <div class="col-lg-4">
+                <div class="card project-card h-100">
+                    {% if related.image %}
+                        <img src="{{ related.image.url }}" alt="{{ related.title }}" class="project-image">
+                    {% else %}
+                        <div class="project-image bg-light d-flex align-items-center justify-content-center">
+                            <i class="fas fa-image text-muted" style="font-size: 3rem;"></i>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="card-body">
+                        <span class="badge bg-primary mb-2">{{ related.get_project_type_display }}</span>
+                        <h5 class="card-title">{{ related.title }}</h5>
+                        <p class="card-text text-muted">
+                            {{ related.short_description|default:related.description|truncatewords:15 }}
+                        </p>
+                        <a href="{% url 'portfolio:project_detail' related.slug %}" class="btn btn-primary btn-sm">
+                            <i class="fas fa-eye me-1"></i>View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}
