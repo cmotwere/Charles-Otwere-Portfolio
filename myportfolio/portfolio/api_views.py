@@ -371,7 +371,7 @@ class BlogCategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 class BlogPostViewSet(viewsets.ReadOnlyModelViewSet):
     """API ViewSet for Blog Posts"""
-    queryset = BlogPost.objects.filter(status='published')
+    queryset = BlogPost.objects.filter(status='published')  # Default queryset for router
     permission_classes = [AllowAny]
     lookup_field = 'slug'
     
@@ -381,7 +381,11 @@ class BlogPostViewSet(viewsets.ReadOnlyModelViewSet):
         return BlogPostListSerializer
     
     def get_queryset(self):
-        queryset = BlogPost.objects.filter(status='published')
+        # Import helper function from views
+        from .views import get_published_blog_posts
+        queryset = get_published_blog_posts()
+        
+        # Apply filters
         category = self.request.query_params.get('category', None)
         content_type = self.request.query_params.get('type', None)
         featured = self.request.query_params.get('featured', None)
@@ -394,7 +398,6 @@ class BlogPostViewSet(viewsets.ReadOnlyModelViewSet):
         if featured:
             queryset = queryset.filter(is_featured=featured.lower() == 'true')
         if tags:
-            # Simple tag search - can be enhanced with full-text search
             queryset = queryset.filter(tags__icontains=tags)
             
         return queryset.order_by('-published_date')
@@ -415,8 +418,8 @@ class BlogPostViewSet(viewsets.ReadOnlyModelViewSet):
     
     def retrieve(self, request, *args, **kwargs):
         """Override retrieve to increment view count"""
+        from .views import increment_blog_view_count
         instance = self.get_object()
-        instance.view_count += 1
-        instance.save(update_fields=['view_count'])
+        increment_blog_view_count(instance)
         serializer = self.get_serializer(instance)
         return Response(serializer.data)

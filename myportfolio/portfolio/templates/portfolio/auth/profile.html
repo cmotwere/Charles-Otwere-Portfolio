@@ -119,17 +119,19 @@
                         <hr>
                         
                         <div class="d-flex flex-column gap-2">
-                            {% if not user.social_auth.all|dictsort:"provider"|first.provider == 'github' %}
+                            {% if 'github' not in connected_providers %}
                                 <a href="{% url 'social:begin' 'github' %}" class="btn btn-outline-dark btn-sm">
                                     <i class="fab fa-github me-2"></i>{% trans "Connect GitHub" %}
                                 </a>
                             {% endif %}
-                            {% if not user.social_auth.all|dictsort:"provider"|first.provider == 'linkedin-oauth2' %}
+                            
+                            {% if 'linkedin-oauth2' not in connected_providers %}
                                 <a href="{% url 'social:begin' 'linkedin-oauth2' %}" class="btn btn-outline-primary btn-sm">
                                     <i class="fab fa-linkedin me-2"></i>{% trans "Connect LinkedIn" %}
                                 </a>
                             {% endif %}
-                            {% if not user.social_auth.all|dictsort:"provider"|first.provider == 'twitter' %}
+                            
+                            {% if 'twitter' not in connected_providers %}
                                 <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-outline-info btn-sm">
                                     <i class="fab fa-twitter me-2"></i>{% trans "Connect Twitter" %}
                                 </a>

@@ -17,6 +17,43 @@ from .models import (
     Education, Certification, WorkExperience, BlogCategory, BlogPost
 )
 
+# Blog helper functions to reduce repetition
+def get_published_blog_posts():
+    """Get published blog posts with optimized queries"""
+    return BlogPost.objects.filter(status='published').select_related('category').prefetch_related('related_projects')
+
+def increment_blog_view_count(blog_post):
+    """Centralized view count incrementing"""
+    if blog_post.status == 'published':
+        blog_post.view_count += 1
+        blog_post.save(update_fields=['view_count'])
+
+def get_blog_context_data(posts=None, **extra_context):
+    """Common context data for blog views"""
+    if posts is None:
+        posts = get_published_blog_posts()
+    
+    # Get all categories for filters
+    all_categories = BlogCategory.objects.all()
+    
+    # Get categories with published posts for "Browse by Category" section  
+    categories_with_posts = []
+    for category in all_categories:
+        published_count = get_published_blog_posts().filter(category=category).count()
+        if published_count > 0:
+            category.published_count = published_count
+            categories_with_posts.append(category)
+    
+    context = {
+        'posts': posts,
+        'categories': all_categories,  # For filters dropdown
+        'categories_with_posts': categories_with_posts,  # For browse section
+        'featured_posts': posts.filter(is_featured=True)[:3] if posts else [],
+        'recent_posts': posts[:10] if posts else [],
+    }
+    context.update(extra_context)
+    return context
+
 
 class CustomUserCreationForm(UserCreationForm):
     """Enhanced user registration form"""
@@ -69,7 +106,7 @@ class UserProfileForm(forms.ModelForm):
 def home_view(request):
     """Main portfolio home page"""
     about = About.objects.first()
-    featured_projects = Project.objects.filter(is_featured=True, status='completed')[:6]
+    featured_projects = Project.objects.filter(is_featured=True)[:6]
     featured_skills = Skill.objects.filter(is_featured=True)
     
     context = {
@@ -342,9 +379,13 @@ def profile_view(request):
     else:
         form = UserProfileForm(instance=request.user)
     
+    # Get connected social providers
+    connected_providers = list(request.user.social_auth.values_list('provider', flat=True))
+    
     context = {
         'form': form,
         'user': request.user,
+        'connected_providers': connected_providers,
     }
     return render(request, 'portfolio/auth/profile.html', context)
 
@@ -361,7 +402,7 @@ def social_demo_view(request):
 
 def education_view(request):
     """Education and academic background page"""
-    education = Education.objects.all().order_by('-end_date', '-start_date')
+    education = Education.objects.all().order_by('-start_date', '-end_date')
     featured_education = education.filter(is_featured=True)
     
     # Group education by degree type for better organization
@@ -423,20 +464,20 @@ def work_experience_view(request):
 
 def blog_view(request):
     """Blog and articles listing page"""
-    posts = BlogPost.objects.filter(status='published').select_related('category').order_by('-published_date')
-    featured_posts = posts.filter(is_featured=True)[:3]
-    recent_posts = posts[:10]
-    categories = BlogCategory.objects.all()
+    # Show all posts for debugging, or just published ones in production
+    if request.GET.get('debug') == 'true':
+        posts = BlogPost.objects.all().select_related('category').order_by('-created_at')
+        messages.info(request, 'Debug mode: Showing all blog posts regardless of status')
+    else:
+        posts = get_published_blog_posts().order_by('-published_date')
     
-    # Filter by category if provided
+    # Apply filters
     category_slug = request.GET.get('category')
+    current_category = None
     if category_slug:
         posts = posts.filter(category__slug=category_slug)
         current_category = get_object_or_404(BlogCategory, slug=category_slug)
-    else:
-        current_category = None
     
-    # Filter by content type if provided
     content_type = request.GET.get('type')
     if content_type:
         posts = posts.filter(content_type=content_type)
@@ -451,37 +492,85 @@ def blog_view(request):
             Q(tags__icontains=search_query)
         )
     
-    context = {
-        'posts': posts,
-        'featured_posts': featured_posts,
-        'recent_posts': recent_posts,
-        'categories': categories,
-        'current_category': current_category,
-        'search_query': search_query,
-    }
+    context = get_blog_context_data(
+        posts=posts,
+        current_category=current_category,
+        search_query=search_query,
+    )
     return render(request, 'portfolio/blog.html', context)
+
+
+def blog_debug_view(request):
+    """Debug view to show all blog posts with detailed information"""
+    from django.http import HttpResponse
+    
+    posts = BlogPost.objects.all().order_by('-created_at')
+    
+    html = """
+    <html>
+    <head><title>Blog Debug Information</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .post { border: 1px solid #ccc; margin: 10px 0; padding: 15px; }
+        .published { background-color: #d4edda; }
+        .draft { background-color: #f8d7da; }
+        .empty-content { color: red; font-weight: bold; }
+    </style>
+    </head>
+    <body>
+    <h1>Blog Posts Debug Information</h1>
+    <p><strong>Total blog posts:</strong> {}</p>
+    """.format(posts.count())
+    
+    for post in posts:
+        status_class = 'published' if post.status == 'published' else 'draft'
+        content_warning = '' if post.content else '<span class="empty-content">⚠️ NO CONTENT</span>'
+        
+        html += f"""
+        <div class="post {status_class}">
+            <h3>📝 {post.title or 'Untitled Post'}</h3>
+            <p><strong>Slug:</strong> {post.slug}</p>
+            <p><strong>Status:</strong> {post.status} {content_warning}</p>
+            <p><strong>Created:</strong> {post.created_at}</p>
+            <p><strong>Published:</strong> {post.published_date or 'Not published'}</p>
+            <p><strong>Excerpt:</strong> "{post.excerpt or 'No excerpt'}"</p>
+            <p><strong>Content Length:</strong> {len(post.content or '')} characters</p>
+            {f'<p><strong>Content Preview:</strong> {post.content[:200]}...</p>' if post.content else '<p><strong>Content:</strong> Empty</p>'}
+            <p><strong>Admin Link:</strong> <a href="/admin/portfolio/blogpost/{post.id}/change/">Edit in Admin</a></p>
+        </div>
+        """
+    
+    html += """
+    </body>
+    </html>
+    """
+    
+    return HttpResponse(html)
 
 
 def blog_post_detail_view(request, slug):
     """Individual blog post detail page"""
-    post = get_object_or_404(
-        BlogPost.objects.select_related('category').prefetch_related('related_projects'),
-        slug=slug,
-        status='published'
-    )
+    # First try to find published posts
+    try:
+        post = get_published_blog_posts().get(slug=slug)
+    except BlogPost.DoesNotExist:
+        # If no published post found, try any status (for debugging/preview)
+        post = get_object_or_404(
+            BlogPost.objects.select_related('category').prefetch_related('related_projects'),
+            slug=slug
+        )
+        
+        # Add a warning message for non-published posts
+        if post.status != 'published':
+            messages.warning(request, f'This blog post has status "{post.get_status_display()}" and may not be fully ready.')
     
     # Increment view count
-    post.view_count += 1
-    post.save(update_fields=['view_count'])
+    increment_blog_view_count(post)
     
-    # Get related posts (same category or tags)
-    related_posts = BlogPost.objects.filter(
-        status='published'
-    ).exclude(id=post.id)
-    
+    # Get related posts (same category)
+    related_posts = get_published_blog_posts().exclude(id=post.id)
     if post.category:
         related_posts = related_posts.filter(category=post.category)
-    
     related_posts = related_posts.order_by('-published_date')[:4]
     
     context = {
@@ -494,13 +583,11 @@ def blog_post_detail_view(request, slug):
 def blog_category_view(request, slug):
     """Blog posts by category"""
     category = get_object_or_404(BlogCategory, slug=slug)
-    posts = BlogPost.objects.filter(
-        category=category,
-        status='published'
-    ).order_by('-published_date')
+    posts = get_published_blog_posts().filter(category=category).order_by('-published_date')
     
-    context = {
-        'category': category,
-        'posts': posts,
-    }
+    context = get_blog_context_data(
+        posts=posts,
+        category=category,
+        current_category=category,
+    )
     return render(request, 'portfolio/blog_category.html', context)

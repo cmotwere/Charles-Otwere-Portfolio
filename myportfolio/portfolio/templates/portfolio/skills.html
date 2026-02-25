@@ -116,56 +116,6 @@
             </div>
             {% endfor %}
             
-            <!-- Skills Summary -->
-            <div class="mt-5 pt-5 border-top">
-                <div class="row text-center">
-                    <div class="col-md-3 col-6 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h3 class="text-primary">{{ skills_by_category.values|length }}</h3>
-                                <small class="text-muted">Total Skills</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h3 class="text-success">
-                                    {% for skills in skills_by_category.values %}
-                                        {% for skill in skills %}
-                                            {% if skill.proficiency == 'expert' %}{{ forloop.counter0|add:1 }}{% endif %}
-                                        {% endfor %}
-                                    {% endfor %}
-                                </h3>
-                                <small class="text-muted">Expert Level</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h3 class="text-warning">
-                                    {% for skills in skills_by_category.values %}
-                                        {% for skill in skills %}
-                                            {% if skill.is_featured %}{{ forloop.counter0|add:1 }}{% endif %}
-                                        {% endfor %}
-                                    {% endfor %}
-                                </h3>
-                                <small class="text-muted">Featured Skills</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h3 class="text-info">{{ skills_by_category|length }}</h3>
-                                <small class="text-muted">Categories</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
         {% else %}
             <div class="text-center py-5">
                 {% if current_category %}

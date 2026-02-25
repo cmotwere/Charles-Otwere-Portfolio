@@ -15,16 +15,10 @@
             <p class="lead">
                 {% trans "My professional journey and career progression" %}
             </p>
-            {% if total_years %}
-            <div class="experience-summary">
-                <span class="badge bg-info fs-6">
-                    {{ total_years }} {% trans "years of professional experience" %}
-                </span>
-            </div>
-            {% endif %}
         </div>
     </div>
 </section>
+
 
 <!-- Experience Content -->
 <section class="section-padding">
@@ -241,42 +235,25 @@
             </div>
         </div>
 
-        <!-- Experience Statistics -->
+        <!-- Ready to Work Together Section -->
         <div class="row mt-5">
             <div class="col-12">
-                <div class="card bg-light border-0">
-                    <div class="card-body text-center">
-                        <h4 class="card-title mb-4">{% trans "Career Summary" %}</h4>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="stat-item">
-                                    <h3 class="text-primary">{{ work_experience.count }}</h3>
-                                    <p class="text-muted">{% trans "Total Positions" %}</p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="stat-item">
-                                    <h3 class="text-success">{{ current_positions.count }}</h3>
-                                    <p class="text-muted">{% trans "Current Roles" %}</p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="stat-item">
-                                    <h3 class="text-info">{{ total_years }}</h3>
-                                    <p class="text-muted">{% trans "Years Experience" %}</p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="stat-item">
-                                    <h3 class="text-warning">{{ featured_experience.count }}</h3>
-                                    <p class="text-muted">{% trans "Featured Roles" %}</p>
-                                </div>
-                            </div>
-                        </div>
+                <div class="card bg-primary text-white border-0">
+                    <div class="card-body text-center py-5">
+                        <h3 class="card-title fw-bold mb-4">{% trans "Ready to Work Together?" %}</h3>
+                        <p class="card-text lead mb-4">
+                            {% trans "I'm always excited to take on new challenges and collaborate on interesting projects. Let's discuss how we can bring your ideas to life." %}
+                        </p>
+                        <a href="{% url 'portfolio:contact' %}" class="btn btn-light btn-lg">
+                            <i class="fas fa-envelope me-2"></i>
+                            {% trans "Get In Touch" %}
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
+
+
     </div>
 </section>
 

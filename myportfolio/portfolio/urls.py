@@ -17,6 +17,7 @@ urlpatterns = [
     path('certifications/', views.certifications_view, name='certifications'),
     path('experience/', views.work_experience_view, name='experience'),
     path('blog/', views.blog_view, name='blog'),
+    path('blog/debug/', views.blog_debug_view, name='blog_debug'),
     path('blog/post/<slug:slug>/', views.blog_post_detail_view, name='blog_detail'),
     path('blog/category/<slug:slug>/', views.blog_category_view, name='blog_category'),
     path('download/<str:file_type>/<str:filename>/', views.track_file_download, name='track_download'),

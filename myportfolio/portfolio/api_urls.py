@@ -12,7 +12,7 @@ router.register(r'education', api_views.EducationViewSet)
 router.register(r'certifications', api_views.CertificationViewSet)
 router.register(r'work-experience', api_views.WorkExperienceViewSet)
 router.register(r'blog-categories', api_views.BlogCategoryViewSet)
-router.register(r'blog-posts', api_views.BlogPostViewSet)
+router.register(r'blog-posts', api_views.BlogPostViewSet, basename='blogpost')
 
 urlpatterns = [
     # Router URLs

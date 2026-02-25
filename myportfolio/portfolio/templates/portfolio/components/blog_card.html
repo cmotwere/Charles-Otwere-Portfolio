@@ -1,0 +1,84 @@
+{% comment %}
+Reusable blog post card component
+Usage: {% include 'portfolio/components/blog_card.html' with post=post size='large'|'small' %}
+{% endcomment %}
+
+{% load i18n %}
+
+<article class="card h-100 border-0 shadow-sm blog-card {% if size == 'large' %}featured{% endif %}">
+    {% if post.featured_image %}
+    <div class="{% if size == 'large' %}blog-image{% else %}blog-image-small{% endif %}">
+        <img src="{{ post.featured_image.url }}" class="card-img-top" alt="{{ post.title }}" 
+             {% if size != 'large' %}style="height: 200px; object-fit: cover;"{% endif %}>
+        {% if size == 'large' %}
+        <div class="blog-overlay">
+            <a href="{% url 'portfolio:blog_detail' post.slug %}" class="btn btn-light btn-sm">
+                <i class="fas fa-eye me-1"></i>{% trans "Read More" %}
+            </a>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+    
+    <div class="card-body">
+        <!-- Blog Meta -->
+        <div class="blog-meta mb-2">
+            {% if post.category %}
+            <span class="badge me-1" style="background-color: {{ post.category.color }}">
+                {% if post.category.icon %}<i class="{{ post.category.icon }} me-1"></i>{% endif %}
+                {{ post.category.name }}
+            </span>
+            {% endif %}
+            <span class="badge {% if size == 'large' %}bg-secondary{% else %}bg-outline-secondary{% endif %} me-1">{{ post.get_content_type_display }}</span>
+            {% if post.is_featured %}
+            <span class="badge bg-warning text-dark">
+                <i class="fas fa-star me-1"></i>{% trans "Featured" %}
+            </span>
+            {% endif %}
+        </div>
+        
+        <!-- Title -->
+        <h5 class="card-title">
+            <a href="{% url 'portfolio:blog_detail' post.slug %}" class="text-decoration-none">
+                {{ post.title }}
+            </a>
+        </h5>
+        
+        <!-- Excerpt -->
+        <p class="card-text text-muted">{{ post.excerpt }}</p>
+        
+        <!-- Tags (for small cards) -->
+        {% if post.tags and size != 'large' %}
+        <div class="blog-tags mb-2">
+            {% for tag in post.get_tags_as_list|slice:":3" %}
+            <span class="badge bg-outline-info me-1">#{{ tag }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <!-- Blog Stats -->
+        <div class="blog-stats d-flex justify-content-between align-items-center {% if size != 'large' %}mb-3{% endif %}">
+            <small class="text-muted">
+                <i class="fas fa-calendar-alt me-1"></i>
+                {{ post.published_date|date:"M d, Y" }}
+            </small>
+            <div class="blog-metrics">
+                <small class="text-muted me-{% if size == 'large' %}3{% else %}2{% endif %}">
+                    <i class="fas fa-clock me-1"></i>{{ post.reading_time }}{% if size != 'large' %}m{% else %} {% trans 'min read' %}{% endif %}
+                </small>
+                <small class="text-muted">
+                    <i class="fas fa-eye me-1"></i>{{ post.view_count }}
+                </small>
+            </div>
+        </div>
+        
+        <!-- Read More Button (for small cards) -->
+        {% if size != 'large' %}
+        <div class="mt-3">
+            <a href="{% url 'portfolio:blog_detail' post.slug %}" class="btn btn-primary btn-sm">
+                {% trans "Read More" %} <i class="fas fa-arrow-right ms-1"></i>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</article>

@@ -42,11 +42,16 @@
                 </div>
 
                 <!-- Post Title -->
-                <h1 class="display-5 fw-bold mb-3">{{ post.title }}</h1>
+                <h1 class="display-5 fw-bold mb-3">{{ post.title|default:"Untitled Blog Post" }}</h1>
 
                 <!-- Post Excerpt -->
                 {% if post.excerpt %}
                 <p class="lead text-muted mb-4">{{ post.excerpt }}</p>
+                {% else %}
+                <p class="lead text-warning mb-4">
+                    <i class="fas fa-exclamation-triangle me-1"></i>
+                    No excerpt provided for this blog post.
+                </p>
                 {% endif %}
 
                 <!-- Post Details -->
@@ -98,7 +103,27 @@
             <div class="col-lg-8 mx-auto">
                 <!-- Article Content -->
                 <article class="blog-content">
-                    {{ post.content|linebreaksbr }}
+                    {% if post.content %}
+                        {{ post.content|linebreaksbr }}
+                    {% else %}
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>{% trans "Content Missing" %}</strong><br>
+                            {% trans "This blog post doesn't have content yet. Please add content in the admin panel." %}
+                        </div>
+                        
+                        <!-- Debug Information (remove in production) -->
+                        <div class="alert alert-info mt-3">
+                            <h6><i class="fas fa-bug me-2"></i>Debug Info:</h6>
+                            <ul class="mb-0">
+                                <li><strong>Title:</strong> "{{ post.title|default:'No title' }}"</li>
+                                <li><strong>Status:</strong> {{ post.status }}</li>
+                                <li><strong>Excerpt:</strong> "{{ post.excerpt|default:'No excerpt' }}"</li>
+                                <li><strong>Content Length:</strong> {{ post.content|length }} characters</li>
+                                <li><strong>Published:</strong> {{ post.published_date|default:'Not published' }}</li>
+                            </ul>
+                        </div>
+                    {% endif %}
                 </article>
 
                 <!-- Tags -->

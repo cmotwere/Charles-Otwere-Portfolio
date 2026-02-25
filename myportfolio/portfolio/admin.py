@@ -236,7 +236,8 @@ class BlogPostAdmin(admin.ModelAdmin):
     
     fieldsets = (
         ('Post Content', {
-            'fields': ('title', 'slug', 'excerpt', 'content', 'featured_image')
+            'fields': ('title', 'slug', 'excerpt', 'content', 'featured_image'),
+            'description': 'REQUIRED: Fill in Title and Content. Excerpt is recommended for previews. Status must be "Published" to show on website.'
         }),
         ('Categorization', {
             'fields': ('category', 'content_type', 'tags')
@@ -262,6 +263,14 @@ class BlogPostAdmin(admin.ModelAdmin):
         return qs.select_related('category').prefetch_related('related_projects')
     
     def save_model(self, request, obj, form, change):
+        # Ensure title is set if not provided
+        if not obj.title:
+            obj.title = f"Untitled Post - {timezone.now().strftime('%Y-%m-%d %H:%M')}"
+        
+        # Auto-publish if content is provided and no status set
+        if obj.content and obj.status == 'draft':
+            obj.status = 'published'
+            
         if obj.status == 'published' and not obj.published_date:
             obj.published_date = timezone.now()
         super().save_model(request, obj, form, change)
