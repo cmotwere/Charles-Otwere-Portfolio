@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 from django.views.generic import TemplateView
+from portfolio.views import twitter_coming_soon
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,7 +39,9 @@ urlpatterns = [
     
     # API endpoints (not translated)
     path('api/', include('portfolio.api_urls')),
+    path('auth/login/twitter/', twitter_coming_soon, name='twitter_coming_soon'),
 ]
+    # removed duplicate import
 
 # Add i18n patterns for translated URLs
 urlpatterns += i18n_patterns(

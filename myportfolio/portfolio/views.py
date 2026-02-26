@@ -1,3 +1,5 @@
+def twitter_coming_soon(request):
+    return render(request, 'coming_soon.html')
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from django.http import JsonResponse, HttpResponse, Http404
