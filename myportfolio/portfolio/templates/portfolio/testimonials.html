@@ -137,8 +137,8 @@
                             <span class="testi-date"><i class="fas fa-calendar me-1"></i>{{ testimonial.date_given|date:"F Y" }}</span>
                         </div>
                         <div class="testi-links">
-                            {% if testimonial.linkedin_url %}<a href="{{ testimonial.linkedin_url }}" target="_blank" class="testi-link testi-link-linkedin" title="LinkedIn"><i class="fab fa-linkedin"></i></a>{% endif %}
-                            {% if testimonial.website_url %}<a href="{{ testimonial.website_url }}" target="_blank" class="testi-link testi-link-website" title="Website"><i class="fas fa-external-link-alt"></i></a>{% endif %}
+                            {% if testimonial.linkedin_url %}<a href="{{ testimonial.linkedin_url }}" target="_blank" rel="noopener noreferrer" class="testi-link testi-link-linkedin" title="LinkedIn"><i class="fab fa-linkedin"></i></a>{% endif %}
+                            {% if testimonial.website_url %}<a href="{{ testimonial.website_url }}" target="_blank" rel="noopener noreferrer" class="testi-link testi-link-website" title="Website"><i class="fas fa-external-link-alt"></i></a>{% endif %}
                         </div>
                     </div>
                 </div>

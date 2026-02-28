@@ -123,7 +123,7 @@
                             {% if cert.credential_id %}<div class="credential-id"><strong>{% trans "ID:" %}</strong> {{ cert.credential_id }}</div>{% endif %}
                             {% if cert.description %}<p class="cert-desc">{{ cert.description|truncatewords:18 }}</p>{% endif %}
                             <div class="cert-actions">
-                                {% if cert.verification_url %}<a href="{{ cert.verification_url }}" target="_blank" class="btn-cert-verify"><i class="fas fa-external-link-alt"></i> {% trans "Verify" %}</a>{% endif %}
+                                {% if cert.verification_url %}<a href="{{ cert.verification_url }}" target="_blank" rel="noopener noreferrer" class="btn-cert-verify"><i class="fas fa-external-link-alt"></i> {% trans "Verify" %}</a>{% endif %}
                                 {% if cert.skills_gained.exists %}<button class="btn-cert-skills" data-bs-toggle="modal" data-bs-target="#skillsModal{{ cert.id }}"><i class="fas fa-cogs"></i> {% trans "Skills" %} ({{ cert.skills_gained.count }})</button>{% endif %}
                             </div>
                         </div>
@@ -159,7 +159,7 @@
                             </div>
                             {% if cert.description %}<p class="cert-desc">{{ cert.description|truncatewords:12 }}</p>{% endif %}
                             <div class="cert-actions">
-                                {% if cert.verification_url %}<a href="{{ cert.verification_url }}" target="_blank" class="btn-cert-verify"><i class="fas fa-external-link-alt"></i> {% trans "Verify" %}</a>{% endif %}
+                                {% if cert.verification_url %}<a href="{{ cert.verification_url }}" target="_blank" rel="noopener noreferrer" class="btn-cert-verify"><i class="fas fa-external-link-alt"></i> {% trans "Verify" %}</a>{% endif %}
                             </div>
                         </div>
                     </div>

@@ -588,22 +588,22 @@
                         <span class="info-label">Connect</span>
                         <div class="mt-2">
                             {% if about.linkedin_url %}
-                                <a href="{{ about.linkedin_url }}" target="_blank" class="connect-btn connect-btn-linkedin">
+                                <a href="{{ about.linkedin_url }}" target="_blank" rel="noopener noreferrer" class="connect-btn connect-btn-linkedin">
                                     <i class="fab fa-linkedin"></i> LinkedIn
                                 </a>
                             {% endif %}
                             {% if about.github_url %}
-                                <a href="{{ about.github_url }}" target="_blank" class="connect-btn connect-btn-github">
+                                <a href="{{ about.github_url }}" target="_blank" rel="noopener noreferrer" class="connect-btn connect-btn-github">
                                     <i class="fab fa-github"></i> GitHub
                                 </a>
                             {% endif %}
                             {% if about.twitter_url %}
-                                <a href="{{ about.twitter_url }}" target="_blank" class="connect-btn connect-btn-twitter">
+                                <a href="{{ about.twitter_url }}" target="_blank" rel="noopener noreferrer" class="connect-btn connect-btn-twitter">
                                     <i class="fab fa-twitter"></i> Twitter
                                 </a>
                             {% endif %}
                             {% if about.website_url %}
-                                <a href="{{ about.website_url }}" target="_blank" class="connect-btn connect-btn-website">
+                                <a href="{{ about.website_url }}" target="_blank" rel="noopener noreferrer" class="connect-btn connect-btn-website">
                                     <i class="fas fa-globe"></i> Website
                                 </a>
                             {% endif %}
@@ -611,7 +611,7 @@
                     </div>
 
                     {% if about.resume_file %}
-                    <a href="{{ about.resume_file.url }}" target="_blank" class="btn-resume">
+                    <a href="{{ about.resume_file.url }}" target="_blank" rel="noopener noreferrer" class="btn-resume">
                         <i class="fas fa-download"></i> Download Resume
                     </a>
                     {% endif %}

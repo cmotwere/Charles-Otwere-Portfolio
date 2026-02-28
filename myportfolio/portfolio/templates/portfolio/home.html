@@ -612,12 +612,12 @@
                                 <i class="fas fa-eye"></i> View Details
                             </a>
                             {% if project.live_url %}
-                                <a href="{{ project.live_url }}" target="_blank" class="btn-project btn-project-outline">
+                                <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer" class="btn-project btn-project-outline">
                                     <i class="fas fa-external-link-alt"></i> Live
                                 </a>
                             {% endif %}
                             {% if project.github_url %}
-                                <a href="{{ project.github_url }}" target="_blank" class="btn-project btn-project-outline">
+                                <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="btn-project btn-project-outline">
                                     <i class="fab fa-github"></i> Code
                                 </a>
                             {% endif %}
@@ -703,7 +703,7 @@
                     <i class="fas fa-handshake"></i> Start a Conversation
                 </a>
                 {% if about.resume_file %}
-                    <a href="{{ about.resume_file.url }}" target="_blank" class="btn-cta-outline">
+                    <a href="{{ about.resume_file.url }}" target="_blank" rel="noopener noreferrer" class="btn-cta-outline">
                         <i class="fas fa-download"></i> Download Resume
                     </a>
                 {% endif %}

@@ -211,6 +211,31 @@ def skills_view(request):
 def contact_view(request):
     """Contact information page"""
     about = About.objects.first()
+
+    if request.method == 'POST':
+        name = request.POST.get('name', '').strip()
+        email = request.POST.get('email', '').strip()
+        subject = request.POST.get('subject', '').strip()
+        message = request.POST.get('message', '').strip()
+
+        if name and email and subject and message:
+            try:
+                recipient = [about.email] if about and about.email else [settings.DEFAULT_FROM_EMAIL]
+                send_mail(
+                    subject=f"[Portfolio Contact] {subject}",
+                    message=f"From: {name} <{email}>\n\n{message}",
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=recipient,
+                    fail_silently=False,
+                )
+                messages.success(request, "Your message has been sent! I'll get back to you soon.")
+            except Exception:
+                messages.error(request, 'There was an error sending your message. Please try again or contact me directly via email.')
+        else:
+            messages.error(request, 'Please fill in all required fields.')
+
+        return redirect('portfolio:contact')
+
     context = {
         'about': about,
     }

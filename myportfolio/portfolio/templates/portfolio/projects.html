@@ -451,12 +451,12 @@
                                 <i class="fas fa-eye"></i> Details
                             </a>
                             {% if project.live_url %}
-                                <a href="{{ project.live_url }}" target="_blank" class="btn-proj btn-proj-outline">
+                                <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer" class="btn-proj btn-proj-outline">
                                     <i class="fas fa-external-link-alt"></i> Live
                                 </a>
                             {% endif %}
                             {% if project.github_url %}
-                                <a href="{{ project.github_url }}" target="_blank" class="btn-proj btn-proj-outline">
+                                <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="btn-proj btn-proj-outline">
                                     <i class="fab fa-github"></i> Code
                                 </a>
                             {% endif %}

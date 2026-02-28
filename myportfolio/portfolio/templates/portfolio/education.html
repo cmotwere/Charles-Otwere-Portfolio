@@ -120,7 +120,7 @@
                         {% if edu.gpa %}<div class="gpa-pill"><i class="fas fa-award"></i> {% trans "GPA:" %} {{ edu.gpa }}/4.0</div>{% endif %}
                         {% if edu.description %}<p class="edu-desc">{{ edu.description|truncatewords:22 }}</p>{% endif %}
                         {% if edu.location %}<div class="edu-location"><i class="fas fa-map-marker-alt"></i> {{ edu.location }}</div>{% endif %}
-                        {% if edu.website_url %}<a href="{{ edu.website_url }}" target="_blank" class="btn-institution"><i class="fas fa-external-link-alt"></i> {% trans "Visit Institution" %}</a>{% endif %}
+                        {% if edu.website_url %}<a href="{{ edu.website_url }}" target="_blank" rel="noopener noreferrer" class="btn-institution"><i class="fas fa-external-link-alt"></i> {% trans "Visit Institution" %}</a>{% endif %}
                     </div>
                 </div>
                 {% endfor %}
@@ -152,7 +152,7 @@
                             {% if edu.location %}<span class="edu-location" style="margin-bottom:0;"><i class="fas fa-map-marker-alt"></i> {{ edu.location }}</span>{% endif %}
                         </div>
                         {% if edu.description %}<p class="edu-desc">{{ edu.description }}</p>{% endif %}
-                        {% if edu.website_url %}<a href="{{ edu.website_url }}" target="_blank" class="btn-institution"><i class="fas fa-external-link-alt"></i> {% trans "Institution Website" %}</a>{% endif %}
+                        {% if edu.website_url %}<a href="{{ edu.website_url }}" target="_blank" rel="noopener noreferrer" class="btn-institution"><i class="fas fa-external-link-alt"></i> {% trans "Institution Website" %}</a>{% endif %}
                     </div>
                 </div>
                 {% empty %}
