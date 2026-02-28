@@ -3,244 +3,235 @@
 
 {% block title %}{% trans "Blog" %} - {{ about.name|default:"Charles Otwere" }}{% endblock %}
 
+{% block extra_css %}
+<style>
+    .hero-section { padding: 100px 0 80px; position: relative; overflow: hidden; }
+    .hero-label { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22); color: rgba(255,255,255,0.9); font-size: 0.78rem; font-weight: 500; padding: 6px 14px; border-radius: 20px; margin-bottom: 18px; letter-spacing: 0.05em; text-transform: uppercase; }
+    .hero-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; letter-spacing: -0.03em; color: white; margin-bottom: 14px; }
+    .hero-lead { font-size: 1rem; color: rgba(255,255,255,0.72); line-height: 1.75; }
+
+    .blog-filter-bar { background: #fff; border-bottom: 1px solid rgba(127,168,143,0.18); padding: 20px 0; position: sticky; top: 68px; z-index: 100; box-shadow: 0 4px 20px rgba(13,75,75,0.06); }
+    .form-control { border: 1.5px solid rgba(127,168,143,0.25); border-radius: 10px; padding: 9px 14px; font-size: 0.875rem; color: var(--text-dark); background: var(--bg-light); transition: border-color 0.22s ease, box-shadow 0.22s ease; }
+    .form-control:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(13,75,75,0.1); outline: none; background: #fff; }
+    .form-control::placeholder { color: var(--text-light); opacity: 0.7; }
+    .btn-search { background: var(--primary-color); color: white; border: none; padding: 9px 16px; border-radius: 10px; transition: all 0.22s ease; cursor: pointer; }
+    .btn-search:hover { background: #0a3b3b; transform: translateY(-1px); }
+
+    .dropdown-toggle-custom { display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; font-weight: 600; padding: 9px 16px; border-radius: 10px; border: 1.5px solid rgba(127,168,143,0.3); color: var(--text-dark); background: transparent; cursor: pointer; transition: all 0.22s ease; text-decoration: none; white-space: nowrap; }
+    .dropdown-toggle-custom:hover { background: rgba(13,75,75,0.06); border-color: var(--secondary-color); color: var(--primary-color); }
+    .dropdown-menu { border: 1px solid rgba(127,168,143,0.2); border-radius: 12px; box-shadow: 0 8px 28px rgba(13,75,75,0.12); padding: 6px; }
+    .dropdown-item { border-radius: 8px; font-size: 0.875rem; color: var(--text-dark); padding: 8px 12px; transition: all 0.18s ease; }
+    .dropdown-item:hover { background: rgba(13,75,75,0.07); color: var(--primary-color); }
+
+    .section-label { font-size: 0.72rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+    .section-label i { color: var(--secondary-color); }
+    .section-title-text { font-size: clamp(1.3rem, 2.5vw, 1.7rem); font-weight: 800; letter-spacing: -0.03em; color: var(--text-dark); margin-bottom: 6px; }
+    .section-title-divider { width: 40px; height: 3px; background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); border-radius: 2px; margin-bottom: 28px; }
+
+    .blog-card { background: #fff; border: 1px solid rgba(127,168,143,0.15); border-radius: 16px; overflow: hidden; height: 100%; transition: transform 0.28s cubic-bezier(0.4,0,0.2,1), box-shadow 0.28s ease, border-color 0.28s ease; display: flex; flex-direction: column; }
+    .blog-card:hover { transform: translateY(-6px); box-shadow: 0 18px 44px rgba(13,75,75,0.12); border-color: rgba(13,75,75,0.2); }
+    .blog-card.featured { border-top: 3px solid var(--accent-color); }
+
+    .blog-thumb-wrap { overflow: hidden; flex-shrink: 0; }
+    .blog-thumb { width: 100%; height: 200px; object-fit: cover; display: block; transition: transform 0.4s ease, filter 0.4s ease; }
+    .blog-card:hover .blog-thumb { transform: scale(1.04); filter: brightness(1.05); }
+    .blog-thumb-placeholder { width: 100%; height: 200px; background: linear-gradient(135deg, var(--bg-light), rgba(127,168,143,0.14)); display: flex; align-items: center; justify-content: center; }
+
+    .blog-card-body { padding: 1.3rem 1.4rem 1.4rem; display: flex; flex-direction: column; flex: 1; }
+    .blog-card-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; gap: 8px; }
+    .blog-cat-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 0.68rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid; white-space: nowrap; }
+    .blog-date { font-size: 0.75rem; color: var(--text-light); }
+    .blog-card-title { font-size: 1rem; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; letter-spacing: -0.01em; line-height: 1.4; }
+    .blog-card-title a { color: inherit; text-decoration: none; transition: color 0.2s ease; }
+    .blog-card-title a:hover { color: var(--primary-color); }
+    .blog-card-excerpt { font-size: 0.85rem; color: #5a6e6e; line-height: 1.65; margin-bottom: 14px; flex-grow: 1; }
+    .blog-card-footer { border-top: 1px solid rgba(127,168,143,0.12); padding-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .blog-stat { display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; color: var(--text-light); }
+    .blog-stat i { color: var(--secondary-color); font-size: 0.7rem; }
+    .btn-read-more { display: inline-flex; align-items: center; gap: 5px; background: var(--primary-color); color: white; border: none; font-size: 0.75rem; font-weight: 600; padding: 5px 13px; border-radius: 8px; text-decoration: none; transition: all 0.22s ease; white-space: nowrap; }
+    .btn-read-more:hover { background: #0a3b3b; color: white; transform: translateY(-1px); }
+
+    .category-card { background: #fff; border: 1px solid rgba(127,168,143,0.15); border-radius: 14px; padding: 22px 18px; text-align: center; height: 100%; transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease; text-decoration: none; display: block; }
+    .category-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(13,75,75,0.1); border-color: rgba(13,75,75,0.2); }
+    .category-icon { font-size: 1.8rem; margin-bottom: 10px; display: block; }
+    .category-card-name { font-size: 0.92rem; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
+    .category-card-desc { font-size: 0.78rem; color: #5a6e6e; line-height: 1.55; margin-bottom: 8px; }
+    .category-card-count { font-size: 0.72rem; color: var(--text-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; }
+
+    .empty-state { padding: 80px 20px; text-align: center; }
+
+    @media (max-width: 767px) { .blog-filter-bar { position: static; } .hero-section { padding: 72px 0 56px; } }
+</style>
+{% endblock %}
+
 {% block content %}
-<!-- Blog Hero -->
+
 <section class="hero-section">
-    <div class="container">
-        <div class="text-center">
-            <h1 class="display-4 fw-bold mb-4">
-                <i class="fas fa-blog text-warning me-3"></i>
-                {% trans "Blog & Articles" %}
-            </h1>
-            <p class="lead">
-                {% trans "Thoughts, tutorials, and insights on technology and development" %}
-            </p>
-        </div>
+    <div class="container text-center animate-in">
+        <div class="hero-label d-inline-flex"><i class="fas fa-blog"></i> Writing</div>
+        <h1 class="hero-title">{% trans "Blog & Articles" %}</h1>
+        <p class="hero-lead">{% trans "Thoughts, tutorials, and insights on technology and development" %}</p>
     </div>
 </section>
 
-<!-- Blog Content -->
-<section class="section-padding">
+<div class="blog-filter-bar">
     <div class="container">
-        <!-- Search and Filters -->
-        <div class="row mb-4">
-            <div class="col-md-6">
-                <form method="get" class="search-form">
-                    <div class="input-group">
-                        <input type="text" name="search" class="form-control" 
-                               placeholder="{% trans 'Search articles...' %}" 
-                               value="{{ search_query|default:'' }}">
-                        <button class="btn btn-primary" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+        <div class="row g-3 align-items-center">
+            <div class="col-md-7">
+                <form method="get" class="d-flex gap-2">
+                    <input type="text" name="search" class="form-control" placeholder="{% trans 'Search articles...' %}" value="{{ search_query|default:'' }}">
+                    <button class="btn-search" type="submit"><i class="fas fa-search"></i></button>
                 </form>
             </div>
-            <div class="col-md-6">
-                <div class="d-flex justify-content-end">
-                    <div class="dropdown me-2">
-                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-filter me-1"></i>
-                            {% if current_category %}{{ current_category.name }}{% else %}{% trans "All Categories" %}{% endif %}
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'portfolio:blog' %}">{% trans "All Categories" %}</a></li>
-                            {% for category in categories %}
-                            <li><a class="dropdown-item" href="{% url 'portfolio:blog' %}?category={{ category.slug }}">
-                                {% if category.icon %}<i class="{{ category.icon }} me-2"></i>{% endif %}
-                                {{ category.name }}
-                            </a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+            <div class="col-md-5 d-flex justify-content-md-end">
+                <div class="dropdown">
+                    <button class="dropdown-toggle-custom dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-filter" style="color:var(--secondary-color);"></i>
+                        {% if current_category %}{{ current_category.name }}{% else %}{% trans "All Categories" %}{% endif %}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="{% url 'portfolio:blog' %}">{% trans "All Categories" %}</a></li>
+                        {% for category in categories %}
+                        <li>
+                            <a class="dropdown-item" href="{% url 'portfolio:blog' %}?category={{ category.slug }}">
+                                {% if category.icon %}<i class="{{ category.icon }} me-2" style="color:var(--secondary-color);"></i>{% endif %}{{ category.name }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-        <!-- Featured Posts -->
+<section class="section-padding">
+    <div class="container">
+
         {% if featured_posts and not search_query and not current_category %}
-        <div class="row mb-5">
-            <div class="col-12">
-                <h2 class="section-title">
-                    <i class="fas fa-star text-warning me-2"></i>
-                    {% trans "Featured Articles" %}
-                </h2>
-                <div class="row">
-                    {% for post in featured_posts %}
-                    <div class="col-lg-4 mb-4">
-                        {% include 'portfolio/components/blog_card.html' with post=post size='large' %}
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        {% endif %}
-
-        <!-- Blog Posts Grid -->
-        <div class="row">
-            <div class="col-12">
-                {% if search_query %}
-                <h2 class="section-title">
-                    <i class="fas fa-search me-2"></i>
-                    {% trans "Search Results for" %} "{{ search_query }}"
-                </h2>
-                {% elif current_category %}
-                <h2 class="section-title">
-                    {% if current_category.icon %}<i class="{{ current_category.icon }} me-2"></i>{% endif %}
-                    {{ current_category.name }}
-                </h2>
-                {% else %}
-                <h2 class="section-title">
-                    <i class="fas fa-newspaper text-primary me-2"></i>
-                    {% trans "All Articles" %}
-                </h2>
-                {% endif %}
-                
-                <div class="row">
-                    {% for post in posts %}
-                    <div class="col-lg-6 mb-4">
-                        {% include 'portfolio/components/blog_card.html' with post=post size='small' %}
-                    </div>
-                    {% empty %}
-                    <div class="col-12">
-                        <div class="text-center py-5">
-                            {% if search_query %}
-                            <i class="fas fa-search fa-3x text-muted mb-3"></i>
-                            <h4 class="text-muted">{% trans "No articles found" %}</h4>
-                            <p class="text-muted">{% trans "Try adjusting your search terms" %}</p>
+        <div class="mb-5 animate-in">
+            <div class="section-label"><i class="fas fa-star"></i> Editor's Pick</div>
+            <h2 class="section-title-text">{% trans "Featured Articles" %}</h2>
+            <div class="section-title-divider"></div>
+            <div class="row g-4">
+                {% for post in featured_posts %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="blog-card featured">
+                        <div class="blog-thumb-wrap">
+                            {% if post.featured_image %}
+                                <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="blog-thumb">
                             {% else %}
-                            <i class="fas fa-blog fa-3x text-muted mb-3"></i>
-                            <h4 class="text-muted">{% trans "No articles published yet" %}</h4>
-                            <p class="text-muted">{% trans "Check back later for new content!" %}</p>
+                                <div class="blog-thumb-placeholder"><i class="fas fa-newspaper" style="font-size:2.5rem; color:var(--secondary-color); opacity:0.4;"></i></div>
                             {% endif %}
                         </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-
-        <!-- Categories Overview -->
-        {% if not current_category and not search_query and categories_with_posts %}
-        <div class="row mt-5">
-            <div class="col-12">
-                <h3 class="section-title">
-                    <i class="fas fa-tags text-info me-2"></i>
-                    {% trans "Browse by Category" %}
-                </h3>
-                <div class="row">
-                    {% for category in categories_with_posts %}
-                    <div class="col-md-4 col-sm-6 mb-3">
-                        <a href="{% url 'portfolio:blog' %}?category={{ category.slug }}" class="text-decoration-none">
-                            <div class="card border-0 shadow-sm category-card" style="border-left: 4px solid {{ category.color }} !important;">
-                                <div class="card-body text-center">
-                                    {% if category.icon %}
-                                    <i class="{{ category.icon }} fa-2x mb-2" style="color: {{ category.color }};"></i>
-                                    {% endif %}
-                                    <h5 class="card-title">{{ category.name }}</h5>
-                                    <p class="card-text text-muted">{{ category.description|truncatewords:10 }}</p>
-                                    <small class="text-muted">
-                                        {{ category.published_count }} {% trans "article" %}{{ category.published_count|pluralize }}
-                                    </small>
-                                </div>
+                        <div class="blog-card-body">
+                            <div class="blog-card-meta">
+                                {% if post.category %}
+                                <span class="blog-cat-badge" style="color:{{ post.category.color }}; border-color:{{ post.category.color }}; background:{{ post.category.color }}18;">
+                                    {% if post.category.icon %}<i class="{{ post.category.icon }}"></i>{% endif %}{{ post.category.name }}
+                                </span>
+                                {% endif %}
+                                <span class="blog-date">{{ post.published_date|date:"M d, Y" }}</span>
                             </div>
-                        </a>
+                            <h5 class="blog-card-title"><a href="{% url 'portfolio:blog_detail' post.slug %}">{{ post.title }}</a></h5>
+                            {% if post.excerpt %}<p class="blog-card-excerpt">{{ post.excerpt|truncatewords:20 }}</p>{% endif %}
+                            <div class="blog-card-footer">
+                                <div class="d-flex gap-3">
+                                    <span class="blog-stat"><i class="fas fa-clock"></i>{{ post.reading_time }}m read</span>
+                                    <span class="blog-stat"><i class="fas fa-eye"></i>{{ post.view_count }}</span>
+                                </div>
+                                <a href="{% url 'portfolio:blog_detail' post.slug %}" class="btn-read-more">Read <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
                     </div>
-                    {% endfor %}
                 </div>
+                {% endfor %}
             </div>
         </div>
         {% endif %}
+
+        <div class="animate-in">
+            <div class="section-label">
+                {% if search_query %}<i class="fas fa-search"></i> Results
+                {% elif current_category %}{% if current_category.icon %}<i class="{{ current_category.icon }}"></i>{% endif %}
+                {% else %}<i class="fas fa-newspaper"></i> Latest{% endif %}
+            </div>
+            <h2 class="section-title-text">
+                {% if search_query %}{% trans "Results for" %} "{{ search_query }}"
+                {% elif current_category %}{{ current_category.name }}
+                {% else %}{% trans "All Articles" %}{% endif %}
+            </h2>
+            <div class="section-title-divider"></div>
+
+            <div class="row g-4">
+                {% for post in posts %}
+                <div class="col-lg-6">
+                    <div class="blog-card">
+                        <div class="blog-thumb-wrap">
+                            {% if post.featured_image %}
+                                <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="blog-thumb" style="height:170px;">
+                            {% else %}
+                                <div class="blog-thumb-placeholder" style="height:170px;"><i class="fas fa-newspaper" style="font-size:2rem; color:var(--secondary-color); opacity:0.4;"></i></div>
+                            {% endif %}
+                        </div>
+                        <div class="blog-card-body">
+                            <div class="blog-card-meta">
+                                {% if post.category %}
+                                <span class="blog-cat-badge" style="color:{{ post.category.color }}; border-color:{{ post.category.color }}; background:{{ post.category.color }}18;">{{ post.category.name }}</span>
+                                {% endif %}
+                                <span class="blog-date">{{ post.published_date|date:"M d, Y" }}</span>
+                            </div>
+                            <h5 class="blog-card-title"><a href="{% url 'portfolio:blog_detail' post.slug %}">{{ post.title|truncatechars:60 }}</a></h5>
+                            {% if post.excerpt %}<p class="blog-card-excerpt">{{ post.excerpt|truncatewords:18 }}</p>{% endif %}
+                            <div class="blog-card-footer">
+                                <div class="d-flex gap-3">
+                                    <span class="blog-stat"><i class="fas fa-clock"></i>{{ post.reading_time }}m</span>
+                                    <span class="blog-stat"><i class="fas fa-eye"></i>{{ post.view_count }}</span>
+                                </div>
+                                <a href="{% url 'portfolio:blog_detail' post.slug %}" class="btn-read-more">Read <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <div class="empty-state">
+                        {% if search_query %}
+                        <i class="fas fa-search text-muted" style="font-size:4rem; opacity:0.4; display:block; margin-bottom:16px;"></i>
+                        <h4 class="text-muted fw-semibold">{% trans "No articles found" %}</h4>
+                        <p class="text-muted">{% trans "Try adjusting your search terms" %}</p>
+                        {% else %}
+                        <i class="fas fa-blog text-muted" style="font-size:4rem; opacity:0.4; display:block; margin-bottom:16px;"></i>
+                        <h4 class="text-muted fw-semibold">{% trans "No articles published yet" %}</h4>
+                        <p class="text-muted">{% trans "Check back later for new content!" %}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% if not current_category and not search_query and categories_with_posts %}
+        <div class="mt-5 animate-in">
+            <div class="section-label"><i class="fas fa-tags"></i> Explore</div>
+            <h2 class="section-title-text">{% trans "Browse by Category" %}</h2>
+            <div class="section-title-divider"></div>
+            <div class="row g-3">
+                {% for category in categories_with_posts %}
+                <div class="col-md-4 col-sm-6">
+                    <a href="{% url 'portfolio:blog' %}?category={{ category.slug }}" class="category-card">
+                        {% if category.icon %}<span class="category-icon" style="color:{{ category.color }};"><i class="{{ category.icon }}"></i></span>{% endif %}
+                        <div class="category-card-name">{{ category.name }}</div>
+                        <p class="category-card-desc">{{ category.description|truncatewords:10 }}</p>
+                        <span class="category-card-count">{{ category.published_count }} article{{ category.published_count|pluralize }}</span>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
     </div>
 </section>
 
-<style>
-.blog-card {
-    transition: all 0.3s ease;
-}
-
-.blog-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
-}
-
-.blog-card.featured {
-    border-left: 4px solid var(--bs-warning) !important;
-}
-
-.blog-image {
-    position: relative;
-    overflow: hidden;
-    height: 200px;
-}
-
-.blog-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.blog-image:hover img {
-    transform: scale(1.05);
-}
-
-.blog-image-small {
-    height: 150px;
-    overflow: hidden;
-}
-
-.blog-image-small img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.blog-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.blog-image:hover .blog-overlay {
-    opacity: 1;
-}
-
-.blog-meta .badge {
-    font-size: 0.7rem;
-    margin-right: 0.5rem;
-}
-
-.blog-tags .badge {
-    font-size: 0.65rem;
-}
-
-.category-card {
-    transition: all 0.3s ease;
-}
-
-.category-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
-}
-
-.search-form {
-    margin-bottom: 1rem;
-}
-
-@media (max-width: 768px) {
-    .blog-metrics {
-        flex-direction: column;
-        align-items: flex-end;
-    }
-}
-</style>
 {% endblock %}

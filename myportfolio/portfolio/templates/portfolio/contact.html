@@ -2,231 +2,271 @@
 
 {% block title %}Contact - {{ about.name|default:"Charles Otwere" }}{% endblock %}
 
+{% block extra_css %}
+<style>
+    .hero-section { padding: 100px 0 80px; position: relative; overflow: hidden; }
+    .hero-label { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22); color: rgba(255,255,255,0.9); font-size: 0.78rem; font-weight: 500; padding: 6px 14px; border-radius: 20px; margin-bottom: 18px; letter-spacing: 0.05em; text-transform: uppercase; }
+    .hero-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; letter-spacing: -0.03em; color: white; margin-bottom: 14px; }
+    .hero-lead { font-size: 1rem; color: rgba(255,255,255,0.72); line-height: 1.75; }
+
+    .contact-card { background: #fff; border: 1px solid rgba(127,168,143,0.15); border-radius: 18px; padding: 36px; box-shadow: 0 4px 20px rgba(13,75,75,0.07); height: 100%; transition: box-shadow 0.3s ease; }
+    .contact-card:hover { box-shadow: 0 10px 36px rgba(13,75,75,0.11); }
+
+    .card-section-title { font-size: 1.05rem; font-weight: 700; color: var(--text-dark); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; padding-bottom: 14px; border-bottom: 1px solid rgba(127,168,143,0.15); }
+    .card-section-icon { width: 30px; height: 30px; background: rgba(127,168,143,0.12); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--secondary-color); font-size: 0.85rem; flex-shrink: 0; }
+
+    .contact-name { font-size: 1.15rem; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
+    .contact-role { font-size: 0.875rem; color: var(--text-light); margin-bottom: 24px; }
+
+    .info-row { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid rgba(127,168,143,0.1); }
+    .info-row:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .info-icon { width: 36px; height: 36px; background: rgba(13,75,75,0.07); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--primary-color); font-size: 0.85rem; flex-shrink: 0; margin-top: 2px; }
+    .info-label { font-size: 0.68rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px; display: block; }
+    .info-value { font-size: 0.9rem; color: var(--text-dark); font-weight: 500; }
+    .info-value a { color: var(--primary-color); text-decoration: none; transition: color 0.2s ease; }
+    .info-value a:hover { color: var(--accent-color); }
+
+    .follow-label { font-size: 0.72rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; display: block; }
+    .social-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
+    .social-btn { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; text-decoration: none; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); border: 1.5px solid; }
+    .social-btn-linkedin { color: #0a66c2; border-color: rgba(10,102,194,0.3); background: rgba(10,102,194,0.05); }
+    .social-btn-linkedin:hover { background: #0a66c2; color: white; border-color: #0a66c2; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(10,102,194,0.3); }
+    .social-btn-github { color: #24292e; border-color: rgba(36,41,46,0.25); background: rgba(36,41,46,0.04); }
+    .social-btn-github:hover { background: #24292e; color: white; border-color: #24292e; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.18); }
+    .social-btn-twitter { color: #1da1f2; border-color: rgba(29,161,242,0.3); background: rgba(29,161,242,0.05); }
+    .social-btn-twitter:hover { background: #1da1f2; color: white; border-color: #1da1f2; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(29,161,242,0.3); }
+    .social-btn-website { color: var(--primary-color); border-color: rgba(13,75,75,0.25); background: rgba(13,75,75,0.04); }
+    .social-btn-website:hover { background: var(--primary-color); color: white; border-color: var(--primary-color); transform: translateY(-2px); box-shadow: 0 4px 14px rgba(13,75,75,0.25); }
+
+    .btn-resume { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--primary-color); color: white; border: none; font-weight: 600; font-size: 0.92rem; padding: 12px 20px; border-radius: 11px; text-decoration: none; transition: all 0.28s cubic-bezier(0.4,0,0.2,1); width: 100%; }
+    .btn-resume:hover { background: #0a3b3b; color: white; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(13,75,75,0.28); }
+
+    .form-label { font-size: 0.72rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; display: block; }
+    .form-control { border: 1.5px solid rgba(127,168,143,0.25); border-radius: 10px; padding: 10px 14px; font-size: 0.9rem; color: var(--text-dark); background: var(--bg-light); transition: border-color 0.22s ease, box-shadow 0.22s ease; width: 100%; }
+    .form-control:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(13,75,75,0.1); background: #fff; outline: none; }
+    .form-control::placeholder { color: var(--text-light); opacity: 0.7; }
+    textarea.form-control { resize: vertical; min-height: 130px; }
+
+    .btn-send { background: var(--primary-color); color: white; border: none; font-weight: 700; font-size: 0.92rem; padding: 13px 28px; border-radius: 11px; transition: all 0.28s cubic-bezier(0.4,0,0.2,1); display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; cursor: pointer; }
+    .btn-send:hover { background: #0a3b3b; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(13,75,75,0.28); }
+
+    .form-note { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--text-light); margin-top: 12px; }
+    .form-note i { color: var(--secondary-color); }
+
+    .connect-section { background: var(--bg-light); position: relative; overflow: hidden; }
+    .connect-section::before { content: ''; position: absolute; top: -60px; right: -60px; width: 300px; height: 300px; background: radial-gradient(ellipse, rgba(246,171,21,0.07) 0%, transparent 70%); pointer-events: none; }
+
+    .section-heading { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.03em; color: var(--text-dark); margin-bottom: 6px; }
+    .section-sub { font-size: 0.97rem; color: var(--text-light); }
+    .section-divider { width: 48px; height: 4px; background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); border-radius: 2px; margin: 10px auto 36px; }
+
+    .connect-card { background: #fff; border: 1px solid rgba(127,168,143,0.15); border-radius: 18px; padding: 32px 24px; text-align: center; height: 100%; transition: transform 0.28s cubic-bezier(0.4,0,0.2,1), box-shadow 0.28s ease, border-color 0.28s ease; }
+    .connect-card:hover { transform: translateY(-5px); box-shadow: 0 14px 36px rgba(13,75,75,0.1); border-color: rgba(13,75,75,0.18); }
+    .connect-icon-wrap { width: 64px; height: 64px; background: rgba(13,75,75,0.07); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; transition: background 0.28s ease, transform 0.28s ease; }
+    .connect-card:hover .connect-icon-wrap { background: rgba(13,75,75,0.12); transform: scale(1.08); }
+    .connect-icon { font-size: 1.7rem; color: var(--primary-color); }
+    .connect-card-title { font-size: 1.05rem; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; }
+    .connect-card-desc { font-size: 0.875rem; color: #5a6e6e; line-height: 1.7; margin-bottom: 18px; }
+
+    .btn-connect { display: inline-flex; align-items: center; gap: 7px; border: 1.5px solid rgba(127,168,143,0.3); color: var(--primary-color); background: transparent; font-weight: 600; font-size: 0.82rem; padding: 8px 18px; border-radius: 20px; text-decoration: none; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); }
+    .btn-connect:hover { background: var(--primary-color); border-color: var(--primary-color); color: white; transform: translateY(-1px); }
+    .btn-connect.disabled { opacity: 0.45; pointer-events: none; }
+
+    .accordion-item { border: 1px solid rgba(127,168,143,0.18) !important; border-radius: 12px !important; margin-bottom: 10px; overflow: hidden; background: #fff; box-shadow: 0 2px 10px rgba(13,75,75,0.05); }
+    .accordion-button { font-weight: 600; font-size: 0.92rem; color: var(--text-dark); background: #fff; padding: 18px 22px; border-radius: 12px !important; }
+    .accordion-button:not(.collapsed) { background: rgba(13,75,75,0.04); color: var(--primary-color); box-shadow: none; }
+    .accordion-button:focus { box-shadow: none; outline: none; }
+    .accordion-body { font-size: 0.9rem; color: #3a5252; line-height: 1.75; padding: 0 22px 20px; background: rgba(13,75,75,0.02); }
+    .accordion-body a { color: var(--primary-color); text-decoration: none; font-weight: 500; }
+    .accordion-body a:hover { color: var(--accent-color); }
+
+    .empty-state { padding: 80px 20px; text-align: center; }
+
+    @media (max-width: 991px) { .hero-section { padding: 72px 0 56px; } .contact-card { padding: 24px 20px; } }
+</style>
+{% endblock %}
+
 {% block content %}
-<!-- Contact Hero -->
+
 <section class="hero-section">
-    <div class="container">
-        <div class="text-center">
-            <h1 class="display-4 fw-bold mb-4">Get In Touch</h1>
-            <p class="lead">
-                I'd love to hear from you. Whether you have a project in mind, 
-                want to collaborate, or just want to say hello!
-            </p>
-        </div>
+    <div class="container text-center animate-in">
+        <div class="hero-label d-inline-flex"><i class="fas fa-paper-plane"></i> Contact</div>
+        <h1 class="hero-title">Get In Touch</h1>
+        <p class="hero-lead">I'd love to hear from you. Whether you have a project in mind,<br class="d-none d-md-block"> want to collaborate, or just want to say hello!</p>
     </div>
 </section>
 
-<!-- Contact Content -->
 <section class="section-padding">
     <div class="container">
         {% if about %}
-        <div class="row">
-            <!-- Contact Information -->
-            <div class="col-lg-6 mb-5">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h3 class="card-title mb-4">
-                            <i class="fas fa-address-card text-primary me-2"></i>
-                            Contact Information
-                        </h3>
-                        
-                        <div class="mb-4">
-                            <h5 class="fw-bold">{{ about.name }}</h5>
-                            <p class="text-muted">{{ about.title }}</p>
+        <div class="row g-4">
+
+            <div class="col-lg-5 animate-in">
+                <div class="contact-card">
+                    <div class="card-section-title">
+                        <div class="card-section-icon"><i class="fas fa-address-card"></i></div>
+                        Contact Information
+                    </div>
+                    <p class="contact-name">{{ about.name }}</p>
+                    <p class="contact-role">{{ about.title }}</p>
+                    <div class="info-row">
+                        <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <span class="info-label">Email</span>
+                            <span class="info-value"><a href="mailto:{{ about.email }}">{{ about.email }}</a></span>
                         </div>
-                        
-                        <div class="mb-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-envelope text-primary me-3" style="width: 20px;"></i>
-                                <div>
-                                    <strong>Email:</strong><br>
-                                    <a href="mailto:{{ about.email }}" class="text-decoration-none">
-                                        {{ about.email }}
-                                    </a>
-                                </div>
-                            </div>
-                            
-                            {% if about.phone %}
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-phone text-primary me-3" style="width: 20px;"></i>
-                                <div>
-                                    <strong>Phone:</strong><br>
-                                    <a href="tel:{{ about.phone }}" class="text-decoration-none">
-                                        {{ about.phone }}
-                                    </a>
-                                </div>
-                            </div>
-                            {% endif %}
-                            
-                            {% if about.location %}
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-map-marker-alt text-primary me-3" style="width: 20px;"></i>
-                                <div>
-                                    <strong>Location:</strong><br>
-                                    <span class="text-muted">{{ about.location }}</span>
-                                </div>
-                            </div>
-                            {% endif %}
+                    </div>
+                    {% if about.phone %}
+                    <div class="info-row">
+                        <div class="info-icon"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <span class="info-label">Phone</span>
+                            <span class="info-value"><a href="tel:{{ about.phone }}">{{ about.phone }}</a></span>
                         </div>
-                        
-                        <!-- Social Media Links -->
-                        <div class="mb-4">
-                            <h6 class="fw-bold mb-3">Follow Me</h6>
-                            <div class="d-flex gap-3">
-                                {% if about.linkedin_url %}
-                                <a href="{{ about.linkedin_url }}" target="_blank" 
-                                   class="btn btn-outline-primary btn-lg" title="LinkedIn">
-                                    <i class="fab fa-linkedin"></i>
-                                </a>
-                                {% endif %}
-                                {% if about.github_url %}
-                                <a href="{{ about.github_url }}" target="_blank" 
-                                   class="btn btn-outline-dark btn-lg" title="GitHub">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                                {% endif %}
-                                {% if about.twitter_url %}
-                                <a href="{{ about.twitter_url }}" target="_blank" 
-                                   class="btn btn-outline-info btn-lg" title="Twitter">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                {% endif %}
-                                {% if about.website_url %}
-                                <a href="{{ about.website_url }}" target="_blank" 
-                                   class="btn btn-outline-secondary btn-lg" title="Website">
-                                    <i class="fas fa-globe"></i>
-                                </a>
-                                {% endif %}
-                            </div>
+                    </div>
+                    {% endif %}
+                    {% if about.location %}
+                    <div class="info-row">
+                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <span class="info-label">Location</span>
+                            <span class="info-value">{{ about.location }}</span>
                         </div>
-                        
+                    </div>
+                    {% endif %}
+                    <div style="margin-top: 22px;">
+                        <span class="follow-label">Follow Me</span>
+                        <div class="social-btns">
+                            {% if about.linkedin_url %}<a href="{{ about.linkedin_url }}" target="_blank" class="social-btn social-btn-linkedin" title="LinkedIn"><i class="fab fa-linkedin"></i></a>{% endif %}
+                            {% if about.github_url %}<a href="{{ about.github_url }}" target="_blank" class="social-btn social-btn-github" title="GitHub"><i class="fab fa-github"></i></a>{% endif %}
+                            {% if about.twitter_url %}<a href="{{ about.twitter_url }}" target="_blank" class="social-btn social-btn-twitter" title="Twitter"><i class="fab fa-twitter"></i></a>{% endif %}
+                            {% if about.website_url %}<a href="{{ about.website_url }}" target="_blank" class="social-btn social-btn-website" title="Website"><i class="fas fa-globe"></i></a>{% endif %}
+                        </div>
                         {% if about.resume_file %}
-                        <div class="d-grid">
-                            <a href="{{ about.resume_file.url }}" target="_blank" class="btn btn-primary btn-lg">
-                                <i class="fas fa-download me-2"></i>Download My Resume
-                            </a>
-                        </div>
+                        <a href="{{ about.resume_file.url }}" target="_blank" class="btn-resume"><i class="fas fa-download"></i> Download My Resume</a>
                         {% endif %}
                     </div>
                 </div>
             </div>
-            
-            <!-- Contact Form -->
-            <div class="col-lg-6 mb-5">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h3 class="card-title mb-4">
-                            <i class="fas fa-paper-plane text-primary me-2"></i>
-                            Send Me a Message
-                        </h3>
-                        
-                        <!-- Note: This is a basic form that would need backend processing -->
-                        <form action="mailto:{{ about.email }}" method="get" enctype="text/plain">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Your Name</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Your Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="subject" class="form-label">Subject</label>
-                                <input type="text" class="form-control" id="subject" name="subject" required>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="message" class="form-label">Message</label>
-                                <textarea class="form-control" id="message" name="body" rows="5" required></textarea>
-                            </div>
-                            
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary btn-lg">
-                                    <i class="fas fa-paper-plane me-2"></i>Send Message
-                                </button>
-                            </div>
-                        </form>
-                        
-                        <div class="mt-3">
-                            <small class="text-muted">
-                                <i class="fas fa-info-circle me-1"></i>
-                                This will open your default email client with the message pre-filled.
-                            </small>
-                        </div>
+
+            <div class="col-lg-7 animate-in delay-1">
+                <div class="contact-card">
+                    <div class="card-section-title">
+                        <div class="card-section-icon"><i class="fas fa-paper-plane"></i></div>
+                        Send Me a Message
                     </div>
+                    <form action="mailto:{{ about.email }}" method="get" enctype="text/plain">
+                        <div class="row g-3 mb-3">
+                            <div class="col-sm-6">
+                                <label class="form-label" for="name">Your Name</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="John Doe" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-label" for="email">Your Email</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="john@email.com" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="subject">Subject</label>
+                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Project inquiry..." required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label" for="message">Message</label>
+                            <textarea class="form-control" id="message" name="body" rows="5" placeholder="Tell me about your project or idea..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-send"><i class="fas fa-paper-plane"></i> Send Message</button>
+                    </form>
+                    <div class="form-note"><i class="fas fa-info-circle"></i> This will open your default email client with the message pre-filled.</div>
                 </div>
             </div>
+
         </div>
         {% else %}
-        <div class="text-center py-5">
-            <i class="fas fa-envelope text-muted" style="font-size: 4rem;"></i>
-            <h4 class="mt-3 text-muted">Contact information not available</h4>
+        <div class="empty-state animate-in">
+            <i class="fas fa-envelope text-muted" style="font-size:4rem; opacity:0.4; display:block; margin-bottom:16px;"></i>
+            <h4 class="text-muted fw-semibold">Contact information not available</h4>
             <p class="text-muted">Contact information will appear here once you add it in the admin panel.</p>
         </div>
         {% endif %}
     </div>
 </section>
 
-<!-- Additional Contact Options -->
-<section class="section-padding bg-light">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold">Other Ways to Connect</h2>
-            <p class="lead text-muted">Choose the method that works best for you</p>
+<section class="section-padding connect-section">
+    <div class="container" style="position: relative; z-index: 1;">
+        <div class="text-center mb-2 animate-in">
+            <h2 class="section-heading">Other Ways to Connect</h2>
+            <p class="section-sub">Choose the method that works best for you</p>
+            <div class="section-divider"></div>
         </div>
-        
         <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card text-center h-100">
-                    <div class="card-body">
-                        <i class="fas fa-briefcase text-primary mb-3" style="font-size: 3rem;"></i>
-                        <h5 class="card-title">Work Together</h5>
-                        <p class="card-text">
-                            Looking for a developer for your next project? Let's discuss how I can help bring your ideas to life.
-                        </p>
-                        <a href="{% url 'portfolio:projects' %}" class="btn btn-outline-primary">
-                            <i class="fas fa-folder-open me-2"></i>View My Work
-                        </a>
-                    </div>
+            <div class="col-md-4 animate-in delay-1">
+                <div class="connect-card">
+                    <div class="connect-icon-wrap"><i class="fas fa-briefcase connect-icon"></i></div>
+                    <h5 class="connect-card-title">Work Together</h5>
+                    <p class="connect-card-desc">Looking for a developer for your next project? Let's discuss how I can help bring your ideas to life.</p>
+                    <a href="{% url 'portfolio:projects' %}" class="btn-connect"><i class="fas fa-folder-open"></i> View My Work</a>
                 </div>
             </div>
-            
-            <div class="col-md-4">
-                <div class="card text-center h-100">
-                    <div class="card-body">
-                        <i class="fas fa-handshake text-primary mb-3" style="font-size: 3rem;"></i>
-                        <h5 class="card-title">Collaboration</h5>
-                        <p class="card-text">
-                            Open to collaborating on interesting projects, contributing to open source, or mentoring opportunities.
-                        </p>
-                        {% if about.github_url %}
-                        <a href="{{ about.github_url }}" target="_blank" class="btn btn-outline-primary">
-                            <i class="fab fa-github me-2"></i>GitHub Profile
-                        </a>
-                        {% else %}
-                        <span class="btn btn-outline-secondary disabled">GitHub Profile</span>
-                        {% endif %}
-                    </div>
+            <div class="col-md-4 animate-in delay-2">
+                <div class="connect-card">
+                    <div class="connect-icon-wrap"><i class="fas fa-handshake connect-icon"></i></div>
+                    <h5 class="connect-card-title">Collaboration</h5>
+                    <p class="connect-card-desc">Open to collaborating on interesting projects, contributing to open source, or mentoring opportunities.</p>
+                    {% if about.github_url %}
+                    <a href="{{ about.github_url }}" target="_blank" class="btn-connect"><i class="fab fa-github"></i> GitHub Profile</a>
+                    {% else %}
+                    <span class="btn-connect disabled"><i class="fab fa-github"></i> GitHub Profile</span>
+                    {% endif %}
                 </div>
             </div>
-            
-            <div class="col-md-4">
-                <div class="card text-center h-100">
-                    <div class="card-body">
-                        <i class="fas fa-comments text-primary mb-3" style="font-size: 3rem;"></i>
-                        <h5 class="card-title">Just Say Hi</h5>
-                        <p class="card-text">
-                            Whether you have questions, want to discuss technology, or just want to connect, I'd love to hear from you!
-                        </p>
-                        {% if about.linkedin_url %}
-                        <a href="{{ about.linkedin_url }}" target="_blank" class="btn btn-outline-primary">
-                            <i class="fab fa-linkedin me-2"></i>LinkedIn
-                        </a>
-                        {% else %}
-                        <span class="btn btn-outline-secondary disabled">LinkedIn</span>
-                        {% endif %}
+            <div class="col-md-4 animate-in delay-3">
+                <div class="connect-card">
+                    <div class="connect-icon-wrap"><i class="fas fa-comments connect-icon"></i></div>
+                    <h5 class="connect-card-title">Just Say Hi</h5>
+                    <p class="connect-card-desc">Whether you have questions, want to discuss technology, or just want to connect, I'd love to hear from you!</p>
+                    {% if about.linkedin_url %}
+                    <a href="{{ about.linkedin_url }}" target="_blank" class="btn-connect"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    {% else %}
+                    <span class="btn-connect disabled"><i class="fab fa-linkedin"></i> LinkedIn</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-padding">
+    <div class="container">
+        <div class="text-center mb-2 animate-in">
+            <h2 class="section-heading">Frequently Asked Questions</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 animate-in">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">What's the best way to contact you about a project?</button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">The best way to reach me is through email at <a href="mailto:{{ about.email }}">{{ about.email }}</a>. I typically respond within 24 hours and would love to discuss your project requirements.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">Do you work on freelance projects?</button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">Yes, I'm open to freelance projects depending on my current availability and the project scope. Feel free to reach out with your project details and timeline.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">What technologies do you specialize in?</button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">I specialize in web development with technologies like Django, Python, JavaScript, and modern frontend frameworks. Check out my <a href="{% url 'portfolio:skills' %}">skills page</a> for a complete list.</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -234,63 +274,4 @@
     </div>
 </section>
 
-<!-- FAQ Section -->
-<section class="section-padding">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold">Frequently Asked Questions</h2>
-        </div>
-        
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="accordion" id="faqAccordion">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" 
-                                    data-bs-target="#faq1" aria-expanded="true">
-                                What's the best way to contact you about a project?
-                            </button>
-                        </h2>
-                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                The best way to reach me is through email at <a href="mailto:{{ about.email }}">{{ about.email }}</a>. 
-                                I typically respond within 24 hours and would love to discuss your project requirements.
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
-                                    data-bs-target="#faq2">
-                                Do you work on freelance projects?
-                            </button>
-                        </h2>
-                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                Yes, I'm open to freelance projects depending on my current availability and the project scope. 
-                                Feel free to reach out with your project details and timeline.
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
-                                    data-bs-target="#faq3">
-                                What technologies do you specialize in?
-                            </button>
-                        </h2>
-                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                I specialize in web development with technologies like Django, Python, JavaScript, and modern frontend frameworks. 
-                                Check out my <a href="{% url 'portfolio:skills' %}">skills page</a> for a complete list.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 {% endblock %}

@@ -3,271 +3,175 @@
 
 {% block title %}{% trans "Education" %} - {{ about.name|default:"Charles Otwere" }}{% endblock %}
 
+{% block extra_css %}
+<style>
+    .hero-section { padding: 100px 0 80px; position: relative; overflow: hidden; }
+    .hero-label { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22); color: rgba(255,255,255,0.9); font-size: 0.78rem; font-weight: 500; padding: 6px 14px; border-radius: 20px; margin-bottom: 18px; letter-spacing: 0.05em; text-transform: uppercase; }
+    .hero-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; letter-spacing: -0.03em; color: white; margin-bottom: 14px; }
+    .hero-lead { font-size: 1rem; color: rgba(255,255,255,0.72); line-height: 1.75; }
+
+    .section-label { font-size: 0.72rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .section-label i { color: var(--secondary-color); }
+    .section-title-text { font-size: clamp(1.3rem, 2.5vw, 1.7rem); font-weight: 800; letter-spacing: -0.03em; color: var(--text-dark); margin-bottom: 6px; }
+    .section-title-divider { width: 40px; height: 3px; background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); border-radius: 2px; margin-bottom: 32px; }
+
+    .featured-edu-card { background: #fff; border: 1px solid rgba(127,168,143,0.18); border-top: 4px solid var(--primary-color); border-radius: 16px; padding: 28px; height: 100%; transition: transform 0.28s cubic-bezier(0.4,0,0.2,1), box-shadow 0.28s ease; box-shadow: 0 4px 20px rgba(13,75,75,0.07); position: relative; overflow: hidden; }
+    .featured-edu-card::before { content: ''; position: absolute; top: -40px; right: -40px; width: 180px; height: 180px; background: radial-gradient(ellipse, rgba(13,75,75,0.05) 0%, transparent 70%); pointer-events: none; }
+    .featured-edu-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(13,75,75,0.12); }
+
+    .edu-icon-wrap { width: 44px; height: 44px; background: rgba(13,75,75,0.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--primary-color); font-size: 1rem; flex-shrink: 0; }
+    .edu-program { font-size: 1.05rem; font-weight: 700; color: var(--text-dark); margin: 0 0 2px; letter-spacing: -0.01em; }
+    .edu-institution { font-size: 0.875rem; color: var(--text-light); margin: 0; }
+
+    .meta-badges { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+    .mbadge { font-size: 0.7rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; letter-spacing: 0.03em; text-transform: uppercase; }
+    .mbadge-primary { background: rgba(13,75,75,0.08);   color: var(--primary-color); border: 1px solid rgba(13,75,75,0.18); }
+    .mbadge-gray    { background: rgba(127,168,143,0.1); color: var(--text-light);    border: 1px solid rgba(127,168,143,0.22); }
+    .mbadge-blue    { background: rgba(59,130,246,0.08); color: #2563eb;              border: 1px solid rgba(59,130,246,0.2); }
+    .mbadge-green   { background: rgba(34,197,94,0.1);   color: #16a34a;              border: 1px solid rgba(34,197,94,0.25); }
+    .mbadge-amber   { background: rgba(246,171,21,0.12); color: #b45309;              border: 1px solid rgba(246,171,21,0.3); }
+
+    .edu-timeline-text { font-size: 0.8rem; color: var(--text-light); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .edu-timeline-text i { color: var(--secondary-color); }
+
+    .gpa-pill { display: inline-flex; align-items: center; gap: 5px; background: rgba(246,171,21,0.1); border: 1px solid rgba(246,171,21,0.25); color: #92400e; font-size: 0.78rem; font-weight: 700; padding: 4px 12px; border-radius: 10px; margin-bottom: 10px; }
+    .edu-desc { font-size: 0.875rem; color: #3a5252; line-height: 1.7; margin-bottom: 10px; }
+    .edu-location { font-size: 0.78rem; color: var(--text-light); margin-bottom: 12px; display: flex; align-items: center; gap: 5px; }
+    .edu-location i { color: var(--secondary-color); }
+
+    .btn-institution { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 600; padding: 6px 14px; border-radius: 8px; border: 1.5px solid rgba(127,168,143,0.3); color: var(--primary-color); background: transparent; text-decoration: none; transition: all 0.22s ease; }
+    .btn-institution:hover { background: var(--primary-color); border-color: var(--primary-color); color: white; transform: translateY(-1px); }
+
+    .edu-timeline { position: relative; padding-left: 32px; }
+    .edu-timeline::before { content: ''; position: absolute; left: 10px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color), rgba(127,168,143,0.2)); border-radius: 2px; }
+    .edu-timeline-item { position: relative; margin-bottom: 32px; }
+    .edu-timeline-item:last-child { margin-bottom: 0; }
+    .edu-dot { position: absolute; left: -28px; top: 20px; width: 18px; height: 18px; border-radius: 50%; background: var(--secondary-color); border: 3px solid white; box-shadow: 0 0 0 2px var(--secondary-color); z-index: 2; transition: all 0.3s ease; }
+    .edu-dot.current { background: var(--primary-color); box-shadow: 0 0 0 2px var(--primary-color), 0 0 12px rgba(13,75,75,0.3); }
+
+    .edu-card { background: #fff; border: 1px solid rgba(127,168,143,0.15); border-radius: 16px; padding: 26px; box-shadow: 0 4px 18px rgba(13,75,75,0.07); transition: transform 0.28s cubic-bezier(0.4,0,0.2,1), box-shadow 0.28s ease, border-color 0.28s ease; }
+    .edu-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(13,75,75,0.11); border-color: rgba(13,75,75,0.18); }
+
+    .edu-date-chip { display: inline-flex; align-items: center; gap: 6px; background: rgba(13,75,75,0.07); border: 1px solid rgba(13,75,75,0.14); color: var(--primary-color); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; white-space: nowrap; margin-bottom: 14px; }
+    .edu-date-chip i { color: var(--secondary-color); }
+    .edu-card-program { font-size: 1.05rem; font-weight: 700; color: var(--primary-color); margin-bottom: 4px; letter-spacing: -0.01em; }
+    .edu-card-institution { font-size: 0.9rem; font-weight: 500; color: var(--text-light); margin-bottom: 10px; }
+    .field-study-row { font-size: 0.84rem; color: #3a5252; margin-bottom: 12px; }
+    .field-study-row strong { color: var(--text-dark); }
+
+    .edu-meta-row { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+    .status-pill { display: inline-block; font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 10px; }
+    .status-completed { background: rgba(34,197,94,0.1);   color: #16a34a; }
+    .status-progress  { background: rgba(246,171,21,0.12);  color: #b45309; }
+    .status-other     { background: rgba(127,168,143,0.12); color: var(--text-light); }
+
+    .cta-band { background: linear-gradient(135deg, var(--primary-color) 0%, #155f5f 100%); border-radius: 20px; padding: 52px 40px; text-align: center; color: white; position: relative; overflow: hidden; box-shadow: 0 20px 56px rgba(13,75,75,0.22); margin-top: 56px; }
+    .cta-band::before { content: ''; position: absolute; top: -70px; right: -70px; width: 300px; height: 300px; background: radial-gradient(ellipse, rgba(246,171,21,0.14) 0%, transparent 70%); pointer-events: none; }
+    .cta-band-title { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 800; letter-spacing: -0.03em; color: white; margin-bottom: 12px; }
+    .cta-band-text { font-size: 0.95rem; color: rgba(255,255,255,0.72); line-height: 1.75; margin-bottom: 28px; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .btn-cta-amber { background: var(--accent-color); color: #0d4b4b; border: none; font-weight: 700; font-size: 0.92rem; padding: 13px 28px; border-radius: 10px; transition: all 0.28s cubic-bezier(0.4,0,0.2,1); display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+    .btn-cta-amber:hover { background: #f8b930; color: #0d4b4b; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(246,171,21,0.38); }
+
+    .empty-state { padding: 60px 20px; text-align: center; }
+
+    @media (max-width: 768px) { .hero-section { padding: 72px 0 56px; } .edu-timeline { padding-left: 20px; } .edu-timeline::before { left: 6px; } .edu-dot { left: -18px; } .cta-band { padding: 36px 20px; } .featured-edu-card { padding: 22px 18px; } }
+</style>
+{% endblock %}
+
 {% block content %}
-<!-- Education Hero -->
+
 <section class="hero-section">
-    <div class="container">
-        <div class="text-center">
-            <h1 class="display-4 fw-bold mb-4">
-                <i class="fas fa-graduation-cap text-primary me-3"></i>
-                {% trans "Education & Learning" %}
-            </h1>
-            <p class="lead">
-                {% trans "My academic journey and continuous learning path" %}
-            </p>
-        </div>
+    <div class="container text-center animate-in">
+        <div class="hero-label d-inline-flex"><i class="fas fa-graduation-cap"></i> Academic</div>
+        <h1 class="hero-title">{% trans "Education & Learning" %}</h1>
+        <p class="hero-lead">{% trans "My academic journey and continuous learning path" %}</p>
     </div>
 </section>
 
-<!-- Education Content -->
 <section class="section-padding">
     <div class="container">
-        <!-- Featured Education -->
+
         {% if featured_education %}
-        <div class="row mb-5">
-            <div class="col-12">
-                <h2 class="section-title">
-                    <i class="fas fa-star text-warning me-2"></i>
-                    {% trans "Featured Education" %}
-                </h2>
-                <div class="row">
-                    {% for edu in featured_education %}
-                    <div class="col-md-6 mb-4">
-                        <div class="card h-100 border-0 shadow-sm education-card featured">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="education-icon me-3">
-                                        <i class="fas fa-university text-primary"></i>
-                                    </div>
-                                    <div>
-                                        <h5 class="card-title mb-1">{{ edu.program_name }}</h5>
-                                        <p class="card-subtitle text-muted mb-0">{{ edu.institution }}</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="education-details mb-3">
-                                    <span class="badge bg-primary me-2">{{ edu.get_degree_type_display }}</span>
-                                    <span class="badge bg-secondary me-2">{{ edu.get_status_display }}</span>
-                                    {% if edu.field_of_study %}
-                                        <span class="badge bg-info">{{ edu.field_of_study }}</span>
-                                    {% endif %}
-                                </div>
-                                
-                                <div class="education-timeline mb-3">
-                                    <small class="text-muted">
-                                        <i class="fas fa-calendar-alt me-1"></i>
-                                        {{ edu.start_date|date:"M Y" }} - 
-                                        {% if edu.end_date %}
-                                            {{ edu.end_date|date:"M Y" }}
-                                        {% else %}
-                                            {% trans "Present" %}
-                                        {% endif %}
-                                        {% if edu.duration_years %}
-                                            ({{ edu.duration_years }} {% trans "years" %})
-                                        {% endif %}
-                                    </small>
-                                </div>
-                                
-                                {% if edu.gpa %}
-                                <div class="gpa-display mb-3">
-                                    <strong>{% trans "GPA:" %}</strong> {{ edu.gpa }}/4.0
-                                </div>
-                                {% endif %}
-                                
-                                {% if edu.description %}
-                                <p class="card-text">{{ edu.description|truncatewords:20 }}</p>
-                                {% endif %}
-                                
-                                {% if edu.location %}
-                                <div class="location mb-2">
-                                    <small class="text-muted">
-                                        <i class="fas fa-map-marker-alt me-1"></i>
-                                        {{ edu.location }}
-                                    </small>
-                                </div>
-                                {% endif %}
-                                
-                                {% if edu.website_url %}
-                                <a href="{{ edu.website_url }}" target="_blank" class="btn btn-outline-primary btn-sm">
-                                    <i class="fas fa-external-link-alt me-1"></i>
-                                    {% trans "Visit Institution" %}
-                                </a>
-                                {% endif %}
+        <div class="mb-5 animate-in">
+            <div class="section-label"><i class="fas fa-star"></i> Highlighted</div>
+            <h2 class="section-title-text">{% trans "Featured Education" %}</h2>
+            <div class="section-title-divider"></div>
+            <div class="row g-4">
+                {% for edu in featured_education %}
+                <div class="col-md-6">
+                    <div class="featured-edu-card">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="edu-icon-wrap"><i class="fas fa-university"></i></div>
+                            <div>
+                                <h5 class="edu-program">{{ edu.program_name }}</h5>
+                                <p class="edu-institution">{{ edu.institution }}</p>
                             </div>
                         </div>
+                        <div class="meta-badges">
+                            <span class="mbadge mbadge-primary">{{ edu.get_degree_type_display }}</span>
+                            <span class="mbadge {% if edu.status == 'completed' %}mbadge-green{% elif edu.status == 'ongoing' %}mbadge-amber{% else %}mbadge-gray{% endif %}">{{ edu.get_status_display }}</span>
+                            {% if edu.field_of_study %}<span class="mbadge mbadge-blue">{{ edu.field_of_study }}</span>{% endif %}
+                        </div>
+                        <div class="edu-timeline-text">
+                            <i class="fas fa-calendar-alt"></i>
+                            {{ edu.start_date|date:"M Y" }} — {% if edu.end_date %}{{ edu.end_date|date:"M Y" }}{% else %}{% trans "Present" %}{% endif %}
+                            {% if edu.duration_years %}&middot; {{ edu.duration_years }} {% trans "years" %}{% endif %}
+                        </div>
+                        {% if edu.gpa %}<div class="gpa-pill"><i class="fas fa-award"></i> {% trans "GPA:" %} {{ edu.gpa }}/4.0</div>{% endif %}
+                        {% if edu.description %}<p class="edu-desc">{{ edu.description|truncatewords:22 }}</p>{% endif %}
+                        {% if edu.location %}<div class="edu-location"><i class="fas fa-map-marker-alt"></i> {{ edu.location }}</div>{% endif %}
+                        {% if edu.website_url %}<a href="{{ edu.website_url }}" target="_blank" class="btn-institution"><i class="fas fa-external-link-alt"></i> {% trans "Visit Institution" %}</a>{% endif %}
                     </div>
-                    {% endfor %}
                 </div>
+                {% endfor %}
             </div>
         </div>
         {% endif %}
 
-        <!-- All Education -->
-        <div class="row">
-            <div class="col-12">
-                <h2 class="section-title">
-                    <i class="fas fa-book-open text-info me-2"></i>
-                    {% trans "Academic Background" %}
-                </h2>
-                
-                <!-- Education Timeline -->
-                <div class="education-timeline-container">
-                    {% for edu in education %}
-                    <div class="education-item row mb-4">
-                        <div class="col-md-3 text-md-end">
-                            <div class="timeline-date">
-                                <span class="timeline-year">{{ edu.start_date|date:"Y" }}</span>
-                                {% if edu.end_date %}
-                                    <span class="timeline-separator">-</span>
-                                    <span class="timeline-year">{{ edu.end_date|date:"Y" }}</span>
-                                {% else %}
-                                    <span class="timeline-separator">-</span>
-                                    <span class="timeline-current">{% trans "Present" %}</span>
-                                {% endif %}
-                            </div>
-                            
-                            <div class="degree-type mt-2">
-                                <span class="badge bg-outline-primary">{{ edu.get_degree_type_display }}</span>
-                            </div>
+        <div class="animate-in">
+            <div class="section-label"><i class="fas fa-book-open"></i> Full History</div>
+            <h2 class="section-title-text">{% trans "Academic Background" %}</h2>
+            <div class="section-title-divider"></div>
+
+            <div class="edu-timeline">
+                {% for edu in education %}
+                <div class="edu-timeline-item">
+                    <div class="edu-dot {% if not edu.end_date %}current{% endif %}"></div>
+                    <div class="edu-card">
+                        <div class="edu-date-chip">
+                            <i class="fas fa-calendar-alt"></i>
+                            {{ edu.start_date|date:"Y" }} — {% if edu.end_date %}{{ edu.end_date|date:"Y" }}{% else %}{% trans "Present" %}{% endif %}
+                            &nbsp;&middot;&nbsp; {{ edu.get_degree_type_display }}
                         </div>
-                        
-                        <div class="col-md-9">
-                            <div class="card border-0 shadow-sm">
-                                <div class="card-body">
-                                    <h5 class="card-title text-primary">{{ edu.program_name }}</h5>
-                                    <h6 class="card-subtitle mb-3 text-muted">{{ edu.institution }}</h6>
-                                    
-                                    {% if edu.field_of_study %}
-                                    <p class="field-of-study mb-2">
-                                        <strong>{% trans "Field of Study:" %}</strong> {{ edu.field_of_study }}
-                                    </p>
-                                    {% endif %}
-                                    
-                                    <div class="education-meta mb-3">
-                                        <span class="status-badge badge bg-{{ edu.status|yesno:'success,warning,secondary' }}">
-                                            {{ edu.get_status_display }}
-                                        </span>
-                                        
-                                        {% if edu.gpa %}
-                                        <span class="gpa ms-2">
-                                            <strong>{% trans "GPA:" %}</strong> {{ edu.gpa }}/4.0
-                                        </span>
-                                        {% endif %}
-                                        
-                                        {% if edu.location %}
-                                        <span class="location ms-2">
-                                            <i class="fas fa-map-marker-alt text-muted me-1"></i>
-                                            {{ edu.location }}
-                                        </span>
-                                        {% endif %}
-                                    </div>
-                                    
-                                    {% if edu.description %}
-                                    <p class="card-text">{{ edu.description }}</p>
-                                    {% endif %}
-                                    
-                                    {% if edu.website_url %}
-                                    <a href="{{ edu.website_url }}" target="_blank" class="btn btn-outline-primary btn-sm">
-                                        <i class="fas fa-external-link-alt me-1"></i>
-                                        {% trans "Institution Website" %}
-                                    </a>
-                                    {% endif %}
-                                </div>
-                            </div>
+                        <h5 class="edu-card-program">{{ edu.program_name }}</h5>
+                        <p class="edu-card-institution">{{ edu.institution }}</p>
+                        {% if edu.field_of_study %}<p class="field-study-row"><strong>{% trans "Field of Study:" %}</strong> {{ edu.field_of_study }}</p>{% endif %}
+                        <div class="edu-meta-row">
+                            <span class="status-pill {% if edu.status == 'completed' %}status-completed{% elif edu.status == 'ongoing' %}status-progress{% else %}status-other{% endif %}">{{ edu.get_status_display }}</span>
+                            {% if edu.gpa %}<span class="gpa-pill" style="margin-bottom:0;"><i class="fas fa-award"></i> {% trans "GPA:" %} {{ edu.gpa }}/4.0</span>{% endif %}
+                            {% if edu.location %}<span class="edu-location" style="margin-bottom:0;"><i class="fas fa-map-marker-alt"></i> {{ edu.location }}</span>{% endif %}
                         </div>
+                        {% if edu.description %}<p class="edu-desc">{{ edu.description }}</p>{% endif %}
+                        {% if edu.website_url %}<a href="{{ edu.website_url }}" target="_blank" class="btn-institution"><i class="fas fa-external-link-alt"></i> {% trans "Institution Website" %}</a>{% endif %}
                     </div>
-                    {% empty %}
-                    <div class="col-12">
-                        <div class="text-center py-5">
-                            <i class="fas fa-graduation-cap fa-3x text-muted mb-3"></i>
-                            <h4 class="text-muted">{% trans "No education records found" %}</h4>
-                            <p class="text-muted">{% trans "Check back later for updates!" %}</p>
-                        </div>
-                    </div>
-                    {% endfor %}
                 </div>
+                {% empty %}
+                <div class="empty-state">
+                    <i class="fas fa-graduation-cap text-muted" style="font-size: 4rem; opacity: 0.4;"></i>
+                    <h4 class="text-muted fw-semibold mt-3">{% trans "No education records found" %}</h4>
+                    <p class="text-muted">{% trans "Check back later for updates!" %}</p>
+                </div>
+                {% endfor %}
             </div>
         </div>
 
-        <!-- Ready to Work Together Section -->
-        <div class="row mt-5">
-            <div class="col-12">
-                <div class="card bg-primary text-white border-0">
-                    <div class="card-body text-center py-5">
-                        <h3 class="card-title fw-bold mb-4">{% trans "Ready to Work Together?" %}</h3>
-                        <p class="card-text lead mb-4">
-                            {% trans "I'm always excited to take on new challenges and collaborate on interesting projects. Let's discuss how we can bring your ideas to life." %}
-                        </p>
-                        <a href="{% url 'portfolio:contact' %}" class="btn btn-light btn-lg">
-                            <i class="fas fa-envelope me-2"></i>
-                            {% trans "Get In Touch" %}
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <div class="cta-band animate-in" style="position: relative; z-index: 1;">
+            <h3 class="cta-band-title">{% trans "Ready to Work Together?" %}</h3>
+            <p class="cta-band-text">{% trans "I'm always excited to take on new challenges and collaborate on interesting projects. Let's discuss how we can bring your ideas to life." %}</p>
+            <a href="{% url 'portfolio:contact' %}" class="btn-cta-amber" style="position: relative; z-index: 1;"><i class="fas fa-envelope"></i> {% trans "Get In Touch" %}</a>
         </div>
+
     </div>
 </section>
 
-<style>
-.education-card {
-    transition: all 0.3s ease;
-}
-
-.education-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
-}
-
-.education-card.featured {
-    border-left: 4px solid var(--bs-primary) !important;
-}
-
-.education-icon {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(var(--bs-primary-rgb), 0.1);
-    border-radius: 50%;
-}
-
-.education-timeline-container {
-    position: relative;
-}
-
-.education-timeline-container::before {
-    content: '';
-    position: absolute;
-    left: 25%;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--bs-primary);
-    opacity: 0.3;
-}
-
-.timeline-date {
-    font-weight: 600;
-    color: var(--bs-primary);
-}
-
-.timeline-current {
-    color: var(--bs-success);
-    font-weight: 600;
-}
-
-.stat-item h3 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-@media (max-width: 768px) {
-    .education-timeline-container::before {
-        display: none;
-    }
-}
-</style>
 {% endblock %}

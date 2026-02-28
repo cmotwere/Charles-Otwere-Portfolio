@@ -2,264 +2,523 @@
 
 {% block title %}Projects - {{ about.name|default:"Charles Otwere" }}{% endblock %}
 
+{% block extra_css %}
+<style>
+    /* ─── Hero ─── */
+    .hero-section {
+        padding: 100px 0 80px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.22);
+        color: rgba(255,255,255,0.9);
+        font-size: 0.78rem;
+        font-weight: 500;
+        padding: 6px 14px;
+        border-radius: 20px;
+        margin-bottom: 18px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+
+    .hero-title {
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        color: white;
+        margin-bottom: 14px;
+    }
+
+    .hero-lead {
+        font-size: 1rem;
+        color: rgba(255,255,255,0.7);
+        line-height: 1.75;
+    }
+
+    /* ─── Filters ─── */
+    .filters-section {
+        background: #fff;
+        border-bottom: 1px solid rgba(127,168,143,0.18);
+        padding: 28px 0;
+        position: sticky;
+        top: 68px;
+        z-index: 100;
+        box-shadow: 0 4px 20px rgba(13,75,75,0.06);
+    }
+
+    .filter-label {
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: var(--text-light);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 6px;
+        display: block;
+    }
+
+    .form-control,
+    .form-select {
+        border: 1.5px solid rgba(127,168,143,0.25);
+        border-radius: 10px;
+        padding: 9px 14px;
+        font-size: 0.875rem;
+        color: var(--text-dark);
+        background: var(--bg-light);
+        transition: border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(13,75,75,0.1);
+        outline: none;
+        background: #fff;
+    }
+
+    .form-control::placeholder { color: var(--text-light); }
+
+    .btn-filter {
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        font-weight: 600;
+        font-size: 0.875rem;
+        padding: 9px 20px;
+        border-radius: 10px;
+        transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+    }
+
+    .btn-filter:hover {
+        background: #0a3b3b;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 14px rgba(13,75,75,0.25);
+    }
+
+    .btn-filter-clear {
+        background: transparent;
+        color: var(--text-dark);
+        border: 1.5px solid rgba(127,168,143,0.3);
+        font-weight: 500;
+        font-size: 0.875rem;
+        padding: 9px 18px;
+        border-radius: 10px;
+        transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+    }
+
+    .btn-filter-clear:hover {
+        background: rgba(13,75,75,0.06);
+        border-color: var(--secondary-color);
+        color: var(--primary-color);
+    }
+
+    /* ─── Section headings ─── */
+    .section-heading {
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--text-dark);
+    }
+
+    .section-divider {
+        width: 48px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        border-radius: 2px;
+        margin: 10px 0 36px;
+    }
+
+    /* ─── Project Cards ─── */
+    .project-card {
+        background: #fff;
+        border: 1px solid rgba(127,168,143,0.15);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: transform 0.3s cubic-bezier(0.4,0,0.2,1),
+                    box-shadow 0.3s ease,
+                    border-color 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .project-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 48px rgba(13,75,75,0.12);
+        border-color: rgba(13,75,75,0.2);
+    }
+
+    .project-thumb-wrap { overflow: hidden; flex-shrink: 0; }
+
+    .project-thumb {
+        width: 100%;
+        height: 210px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), filter 0.4s ease;
+    }
+
+    .project-card:hover .project-thumb {
+        transform: scale(1.04);
+        filter: brightness(1.05);
+    }
+
+    .project-thumb-placeholder {
+        width: 100%;
+        height: 210px;
+        background: linear-gradient(135deg, var(--bg-light), rgba(127,168,143,0.14));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .project-card .card-body {
+        padding: 1.4rem 1.5rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .project-meta {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        gap: 8px;
+    }
+
+    .project-type-badge {
+        display: inline-flex;
+        align-items: center;
+        background: rgba(13,75,75,0.08);
+        color: var(--primary-color);
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        border: 1px solid rgba(13,75,75,0.15);
+        white-space: nowrap;
+    }
+
+    .project-status-badge {
+        font-size: 0.68rem;
+        font-weight: 600;
+        padding: 3px 9px;
+        border-radius: 12px;
+        white-space: nowrap;
+    }
+
+    .status-completed  { background: rgba(34,197,94,0.1);   color: #16a34a; border: 1px solid rgba(34,197,94,0.25); }
+    .status-progress   { background: rgba(246,171,21,0.12);  color: #b45309; border: 1px solid rgba(246,171,21,0.3); }
+    .status-other      { background: rgba(127,168,143,0.12); color: var(--text-light); border: 1px solid rgba(127,168,143,0.25); }
+
+    .project-date { font-size: 0.75rem; color: var(--text-light); text-align: right; }
+
+    .project-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 6px;
+        letter-spacing: -0.01em;
+    }
+
+    .project-desc {
+        font-size: 0.875rem;
+        color: #5a6e6e;
+        line-height: 1.65;
+        margin-bottom: 14px;
+        flex-grow: 1;
+    }
+
+    .project-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
+
+    .project-tag {
+        background: var(--bg-light);
+        color: var(--text-dark);
+        border: 1px solid rgba(127,168,143,0.22);
+        font-size: 0.73rem;
+        padding: 3px 9px;
+        border-radius: 10px;
+        transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .project-tag:hover { background: rgba(13,75,75,0.07); color: var(--primary-color); }
+
+    .project-actions { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 14px; }
+
+    .btn-proj {
+        font-size: 0.78rem;
+        font-weight: 500;
+        padding: 6px 13px;
+        border-radius: 8px;
+        transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        text-decoration: none;
+        border: 1.5px solid;
+    }
+
+    .btn-proj-primary { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+    .btn-proj-primary:hover { background: #0a3b3b; color: white; border-color: #0a3b3b; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(13,75,75,0.22); }
+
+    .btn-proj-outline { background: transparent; color: var(--text-dark); border-color: rgba(127,168,143,0.35); }
+    .btn-proj-outline:hover { background: rgba(13,75,75,0.05); border-color: var(--secondary-color); color: var(--primary-color); transform: translateY(-1px); }
+
+    .project-stats { border-top: 1px solid rgba(127,168,143,0.14); padding-top: 12px; margin-top: 4px; }
+
+    .stat-item { text-align: center; }
+    .stat-label { font-size: 0.68rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.07em; display: block; margin-bottom: 2px; }
+    .stat-value { font-size: 0.8rem; font-weight: 600; color: var(--text-dark); }
+
+    /* ─── Results bar ─── */
+    .results-bar {
+        background: rgba(13,75,75,0.05);
+        border: 1px solid rgba(127,168,143,0.2);
+        border-radius: 10px;
+        padding: 12px 20px;
+        font-size: 0.875rem;
+        color: var(--text-dark);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 40px;
+    }
+
+    .results-bar i { color: var(--secondary-color); }
+
+    /* ─── Empty state ─── */
+    .empty-state { padding: 80px 20px; text-align: center; }
+    .empty-state-icon { font-size: 4rem; color: var(--secondary-color); opacity: 0.4; margin-bottom: 16px; display: block; }
+
+    .btn-view-all {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1.5px solid var(--primary-color);
+        color: var(--primary-color);
+        background: transparent;
+        font-weight: 600;
+        font-size: 0.875rem;
+        padding: 10px 24px;
+        border-radius: 10px;
+        transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
+        text-decoration: none;
+    }
+
+    .btn-view-all:hover { background: var(--primary-color); color: white; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(13,75,75,0.22); }
+
+    @media (max-width: 767px) {
+        .filters-section { position: static; }
+        .hero-section { padding: 72px 0 56px; }
+        .project-thumb, .project-thumb-placeholder { height: 180px; }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<!-- Page Header -->
+
+<!-- HERO -->
 <section class="hero-section">
-    <div class="container">
-        <div class="text-center">
-            <h1 class="display-4 fw-bold mb-4">My Projects</h1>
-            <p class="lead">A collection of work that showcases my skills and passion for development</p>
+    <div class="container text-center">
+        <div class="animate-in">
+            <div class="hero-label d-inline-flex">
+                <i class="fas fa-folder-open"></i> Portfolio
+            </div>
+            <h1 class="hero-title">My Projects</h1>
+            <p class="hero-lead">A collection of work that showcases my skills and passion for development</p>
         </div>
     </div>
 </section>
 
-<!-- Filters Section -->
-<section class="py-4 bg-light filters-section">
+
+<!-- FILTERS -->
+<section class="filters-section">
     <div class="container">
         <form method="get">
-            <div class="row g-3">
-                <!-- Search Field -->
+            <div class="row g-3 align-items-end">
+
                 <div class="col-lg-4 col-md-6 col-12">
-                    <label for="search" class="form-label">Search Projects</label>
-                    <input type="text" class="form-control" id="search" name="search" 
-                           value="{{ search_query }}" placeholder="Search by title, description...">
+                    <label class="filter-label" for="search">Search Projects</label>
+                    <div style="position: relative;">
+                        <i class="fas fa-search" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--text-light); font-size:0.8rem;"></i>
+                        <input type="text" class="form-control" id="search" name="search"
+                               value="{{ search_query }}" placeholder="Search by title, description..."
+                               style="padding-left: 34px;">
+                    </div>
                 </div>
-                
-                <!-- Project Type Filter -->
+
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <label for="type" class="form-label">Project Type</label>
+                    <label class="filter-label" for="type">Project Type</label>
                     <select class="form-select" id="type" name="type">
                         <option value="">All Types</option>
                         {% for type_code, type_name in project_types %}
-                            <option value="{{ type_code }}" {% if current_type == type_code %}selected{% endif %}>
-                                {{ type_name }}
-                            </option>
+                            <option value="{{ type_code }}" {% if current_type == type_code %}selected{% endif %}>{{ type_name }}</option>
                         {% endfor %}
                     </select>
                 </div>
-                
-                <!-- Status Filter -->
+
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <label for="status" class="form-label">Status</label>
+                    <label class="filter-label" for="status">Status</label>
                     <select class="form-select" id="status" name="status">
                         <option value="">All Statuses</option>
                         {% for status_code, status_name in project_statuses %}
-                            <option value="{{ status_code }}" {% if current_status == status_code %}selected{% endif %}>
-                                {{ status_name }}
-                            </option>
+                            <option value="{{ status_code }}" {% if current_status == status_code %}selected{% endif %}>{{ status_name }}</option>
                         {% endfor %}
                     </select>
                 </div>
-                
-                <!-- Filter Actions -->
+
                 <div class="col-lg-2 col-md-6 col-12">
-                    <label class="form-label d-none d-lg-block">&nbsp;</label>
-                    <div class="d-flex flex-column flex-sm-row gap-2 mt-2 mt-lg-0">
-                        <button type="submit" class="btn btn-primary flex-fill">
-                            <i class="fas fa-filter me-2 d-none d-sm-inline"></i>Filter
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn-filter flex-fill">
+                            <i class="fas fa-filter"></i> Filter
                         </button>
-                        <a href="{% url 'portfolio:projects' %}" class="btn btn-outline-secondary flex-fill">
-                            <i class="fas fa-times me-2 d-none d-sm-inline"></i>Clear
+                        <a href="{% url 'portfolio:projects' %}" class="btn-filter-clear flex-fill justify-content-center">
+                            <i class="fas fa-times"></i>
                         </a>
                     </div>
                 </div>
+
             </div>
         </form>
     </div>
 </section>
 
-<!-- Projects Grid -->
+
+<!-- PROJECTS GRID -->
 <section class="section-padding">
     <div class="container">
+
         {% if projects %}
-            <div class="row g-4">
-                {% for project in projects %}
-                <div class="col-lg-4 col-md-6">
-                    <div class="card project-card h-100">
+        <div class="row g-4">
+            {% for project in projects %}
+            <div class="col-lg-4 col-md-6 animate-in" style="animation-delay: {{ forloop.counter0 }}00ms;">
+                <div class="project-card">
+
+                    <div class="project-thumb-wrap">
                         {% if project.image %}
-                            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image">
+                            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-thumb">
                         {% else %}
-                            <div class="project-image bg-light d-flex align-items-center justify-content-center">
-                                <i class="fas fa-image text-muted" style="font-size: 3rem;"></i>
+                            <div class="project-thumb-placeholder">
+                                <i class="fas fa-image" style="font-size: 2.8rem; color: var(--secondary-color); opacity:0.4;"></i>
                             </div>
                         {% endif %}
-                        
-                        <div class="card-body d-flex flex-column">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <span class="badge bg-primary">{{ project.get_project_type_display }}</span>
-                                <div class="text-end">
-                                    <small class="text-muted d-block">{{ project.start_date|date:"M Y" }}</small>
-                                    {% if project.status != 'completed' %}
-                                        <span class="badge bg-warning text-dark">{{ project.get_status_display }}</span>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            
-                            <h5 class="card-title">{{ project.title }}</h5>
-                            <p class="card-text text-muted flex-grow-1">
-                                {{ project.short_description|default:project.description|truncatewords:20 }}
-                            </p>
-                            
-                            <!-- Technologies Used -->
-                            <div class="mb-3">
-                                {% for tech in project.technologies_used.all|slice:":4" %}
-                                    <span class="skill-badge">{{ tech.name }}</span>
-                                {% endfor %}
-                                {% if project.technologies_used.count > 4 %}
-                                    <span class="skill-badge">+{{ project.technologies_used.count|add:"-4" }} more</span>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="project-meta">
+                            <span class="project-type-badge">{{ project.get_project_type_display }}</span>
+                            <div class="text-end">
+                                <div class="project-date mb-1">{{ project.start_date|date:"M Y" }}</div>
+                                {% if project.status != 'completed' %}
+                                    <span class="project-status-badge status-progress">{{ project.get_status_display }}</span>
                                 {% endif %}
                             </div>
-                            
-                            <!-- Project Links -->
-                            <div class="d-flex gap-2 flex-wrap">
-                                <a href="{% url 'portfolio:project_detail' project.slug %}" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-eye me-1"></i>Details
+                        </div>
+
+                        <h5 class="project-title">{{ project.title }}</h5>
+                        <p class="project-desc">
+                            {{ project.short_description|default:project.description|truncatewords:22 }}
+                        </p>
+
+                        <div class="project-tags">
+                            {% for tech in project.technologies_used.all|slice:":4" %}
+                                <span class="project-tag">{{ tech.name }}</span>
+                            {% endfor %}
+                            {% if project.technologies_used.count > 4 %}
+                                <span class="project-tag">+{{ project.technologies_used.count|add:"-4" }} more</span>
+                            {% endif %}
+                        </div>
+
+                        <div class="project-actions">
+                            <a href="{% url 'portfolio:project_detail' project.slug %}" class="btn-proj btn-proj-primary">
+                                <i class="fas fa-eye"></i> Details
+                            </a>
+                            {% if project.live_url %}
+                                <a href="{{ project.live_url }}" target="_blank" class="btn-proj btn-proj-outline">
+                                    <i class="fas fa-external-link-alt"></i> Live
                                 </a>
-                                {% if project.live_url %}
-                                    <a href="{{ project.live_url }}" target="_blank" class="btn btn-outline-success btn-sm">
-                                        <i class="fas fa-external-link-alt me-1"></i>Live
-                                    </a>
-                                {% endif %}
-                                {% if project.github_url %}
-                                    <a href="{{ project.github_url }}" target="_blank" class="btn btn-outline-dark btn-sm">
-                                        <i class="fab fa-github me-1"></i>Code
-                                    </a>
-                                {% endif %}
-                            </div>
-                            
-                            <!-- Additional Info -->
-                            <div class="mt-3 pt-3 border-top">
-                                <div class="row text-center">
-                                    {% if project.team_size > 1 %}
-                                    <div class="col-4">
-                                        <small class="text-muted d-block">Team</small>
-                                        <small class="fw-bold">{{ project.team_size }} member{{ project.team_size|pluralize }}</small>
+                            {% endif %}
+                            {% if project.github_url %}
+                                <a href="{{ project.github_url }}" target="_blank" class="btn-proj btn-proj-outline">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            {% endif %}
+                        </div>
+
+                        <div class="project-stats">
+                            <div class="row g-0">
+                                {% if project.team_size > 1 %}
+                                <div class="col">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Team</span>
+                                        <span class="stat-value">{{ project.team_size }} member{{ project.team_size|pluralize }}</span>
                                     </div>
-                                    {% endif %}
-                                    {% if project.duration_months %}
-                                    <div class="col-4">
-                                        <small class="text-muted d-block">Duration</small>
-                                        <small class="fw-bold">{{ project.duration_months }} month{{ project.duration_months|pluralize }}</small>
+                                </div>
+                                {% endif %}
+                                {% if project.duration_months %}
+                                <div class="col">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Duration</span>
+                                        <span class="stat-value">{{ project.duration_months }} mo{{ project.duration_months|pluralize }}</span>
                                     </div>
-                                    {% endif %}
-                                    <div class="col-4">
-                                        <small class="text-muted d-block">Type</small>
-                                        <small class="fw-bold">{% if project.is_personal %}Personal{% else %}Client{% endif %}</small>
+                                </div>
+                                {% endif %}
+                                <div class="col">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Type</span>
+                                        <span class="stat-value">{% if project.is_personal %}Personal{% else %}Client{% endif %}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
-                {% endfor %}
             </div>
-            
-            <!-- Results Summary -->
-            <div class="mt-5">
-                <div class="alert alert-info">
-                    <i class="fas fa-info-circle me-2"></i>
-                    Showing {{ projects|length }} project{{ projects|length|pluralize }}
-                    {% if search_query %} matching "{{ search_query }}"{% endif %}
-                    {% if current_type %} in {{ current_type|title }}{% endif %}
-                    {% if current_status %} with status {{ current_status|title }}{% endif %}
-                </div>
-            </div>
+            {% endfor %}
+        </div>
+
+        <div class="results-bar animate-in">
+            <i class="fas fa-check-circle"></i>
+            Showing <strong>{{ projects|length }}</strong> project{{ projects|length|pluralize }}
+            {% if search_query %} matching <em>"{{ search_query }}"</em>{% endif %}
+            {% if current_type %} &middot; Type: <em>{{ current_type|title }}</em>{% endif %}
+            {% if current_status %} &middot; Status: <em>{{ current_status|title }}</em>{% endif %}
+        </div>
+
         {% else %}
-            <div class="text-center py-5">
-                <i class="fas fa-search text-muted" style="font-size: 4rem;"></i>
-                <h4 class="mt-3 text-muted">No projects found</h4>
-                {% if search_query or current_type or current_status %}
-                    <p class="text-muted">Try adjusting your filters or search terms.</p>
-                    <a href="{% url 'portfolio:projects' %}" class="btn btn-outline-primary">
-                        <i class="fas fa-times me-2"></i>Clear Filters
-                    </a>
-                {% else %}
-                    <p class="text-muted">Projects will appear here once you add them in the admin panel.</p>
-                {% endif %}
-            </div>
+        <div class="empty-state animate-in">
+            <span class="empty-state-icon"><i class="fas fa-search"></i></span>
+            <h4 class="text-muted fw-semibold">No projects found</h4>
+            {% if search_query or current_type or current_status %}
+                <p class="text-muted">Try adjusting your filters or search terms.</p>
+                <a href="{% url 'portfolio:projects' %}" class="btn-view-all mt-2">
+                    <i class="fas fa-times"></i> Clear Filters
+                </a>
+            {% else %}
+                <p class="text-muted">Projects will appear here once you add them in the admin panel.</p>
+            {% endif %}
+        </div>
         {% endif %}
+
     </div>
 </section>
-
-<style>
-/* Enhanced responsive styles for projects filter */
-@media (max-width: 575.98px) {
-    .filters-section .row {
-        margin-bottom: 1rem;
-    }
-    
-    .btn {
-        font-size: 0.9rem;
-        padding: 0.6rem 1rem;
-    }
-    
-    .form-control, .form-select {
-        font-size: 0.9rem;
-    }
-    
-    .form-label {
-        font-size: 0.85rem;
-        font-weight: 600;
-        margin-bottom: 0.3rem;
-    }
-}
-
-@media (max-width: 991.98px) {
-    .project-card .card-body {
-        padding: 1rem 0.8rem;
-    }
-    
-    .project-card .card-title {
-        font-size: 1.1rem;
-    }
-}
-
-/* Filter section enhancements */
-.filters-section {
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-
-.filters-section .btn {
-    transition: all 0.2s ease;
-    border-radius: 6px;
-}
-
-.filters-section .btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.filters-section .form-control:focus,
-.filters-section .form-select:focus {
-    border-color: var(--bs-primary);
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
-}
-
-/* Project cards responsive enhancements */
-.project-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-@media (max-width: 767.98px) {
-    .project-card {
-        margin-bottom: 1.5rem;
-    }
-    
-    .project-image {
-        height: 180px;
-    }
-    
-    .skill-badge {
-        font-size: 0.7rem;
-        padding: 0.25rem 0.5rem;
-        margin: 0.1rem;
-    }
-}
-</style>
 
 {% endblock %}

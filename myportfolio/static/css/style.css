@@ -1,8 +1,8 @@
 /* Basic portfolio styles */
 body {
     font-family: Arial, sans-serif;
-    background: #f9f9f9;
-    color: #222;
+    background: #f5fdff;
+    color: #0d4b4b;
     margin: 0;
     padding: 0;
 }
@@ -11,4 +11,25 @@ img {
     max-width: 100%;
     height: auto;
     display: block;
+}
+
+/* Custom color palette */
+:root {
+    --primary-color: #0d4b4b;
+    --secondary-color: #7fa88f;
+    --accent-color: #f6ab15;
+    --bg-light: #f5fdff;
+    --bg-dark: #3f2a1a;
+    --text-dark: #0d4b4b;
+    --text-light: #7fa88f;
+}
+
+[data-theme="dark"] {
+    --primary-color: #0d4b4b;
+    --secondary-color: #3f2a1a;
+    --accent-color: #f6ab15;
+    --bg-light: #0d4b4b;
+    --bg-dark: #3f2a1a;
+    --text-dark: #f5fdff;
+    --text-light: #7fa88f;
 }

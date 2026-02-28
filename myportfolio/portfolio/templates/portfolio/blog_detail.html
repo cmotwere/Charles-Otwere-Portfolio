@@ -2,78 +2,138 @@
 {% load i18n %}
 
 {% block title %}{{ post.seo_title|default:post.title }} - {{ about.name|default:"Charles Otwere" }}{% endblock %}
-
 {% block meta_description %}{{ post.meta_description|default:post.excerpt }}{% endblock %}
 
+{% block extra_css %}
+<style>
+    .blog-header { padding: 80px 0 60px; position: relative; overflow: hidden; }
+
+    .breadcrumb-nav ol { background: none; padding: 0; margin: 0 0 22px; list-style: none; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .breadcrumb-nav li { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; }
+    .breadcrumb-nav li + li::before { content: '/'; color: rgba(255,255,255,0.35); }
+    .breadcrumb-nav a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s ease; }
+    .breadcrumb-nav a:hover { color: rgba(255,255,255,0.95); }
+    .breadcrumb-nav .active { color: rgba(255,255,255,0.88); font-weight: 500; }
+
+    .post-badges { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+    .post-badge { font-size: 0.72rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .pbadge-type { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.25); }
+    .pbadge-feat { background: rgba(246,171,21,0.2); color: #fcd34d; border: 1px solid rgba(246,171,21,0.3); }
+
+    .post-title { font-size: clamp(1.8rem, 4.5vw, 2.8rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; color: white; margin-bottom: 14px; }
+    .post-excerpt { font-size: 1.05rem; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 22px; }
+    .post-stats-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.14); }
+    .post-stat-item { display: flex; align-items: center; gap: 5px; font-size: 0.8rem; color: rgba(255,255,255,0.65); }
+    .post-stat-item i { color: rgba(255,255,255,0.4); }
+
+    .featured-img-section { margin-bottom: 48px; }
+    .featured-img-wrap { border-radius: 18px; overflow: hidden; box-shadow: 0 20px 56px rgba(13,75,75,0.15); }
+    .featured-img-wrap img { width: 100%; display: block; transition: transform 0.4s ease; }
+    .featured-img-wrap:hover img { transform: scale(1.02); }
+
+    .article-content { font-size: 1.05rem; line-height: 1.85; color: #2a3d3d; }
+    .article-content h2 { font-size: 1.5rem; font-weight: 700; color: var(--text-dark); margin: 2rem 0 1rem; letter-spacing: -0.02em; }
+    .article-content h3 { font-size: 1.2rem; font-weight: 700; color: var(--primary-color); margin: 1.5rem 0 0.75rem; }
+    .article-content p { margin-bottom: 1.2rem; }
+    .article-content a { color: var(--primary-color); text-decoration: none; border-bottom: 1px solid rgba(13,75,75,0.25); transition: color 0.2s ease, border-color 0.2s ease; }
+    .article-content a:hover { color: var(--accent-color); border-color: var(--accent-color); }
+    .article-content blockquote { border-left: 4px solid var(--accent-color); padding: 12px 16px 12px 20px; margin: 1.5rem 0; background: rgba(246,171,21,0.05); border-radius: 0 10px 10px 0; font-style: italic; color: #3a5252; }
+    .article-content code { background: rgba(13,75,75,0.07); padding: 2px 6px; border-radius: 5px; font-size: 0.9rem; color: var(--primary-color); }
+    .article-content pre { background: rgba(13,75,75,0.05); border: 1px solid rgba(127,168,143,0.2); padding: 16px; border-radius: 10px; overflow-x: auto; margin: 1.5rem 0; }
+    .content-alert { background: rgba(246,171,21,0.08); border: 1px solid rgba(246,171,21,0.25); border-radius: 12px; padding: 18px; }
+
+    .tags-section { margin: 28px 0; }
+    .tags-label { font-size: 0.72rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; display: block; }
+    .tag-pill { display: inline-flex; align-items: center; background: var(--bg-light); border: 1px solid rgba(127,168,143,0.22); color: var(--text-dark); font-size: 0.78rem; font-weight: 500; padding: 4px 11px; border-radius: 20px; margin: 3px; text-decoration: none; transition: all 0.2s ease; }
+    .tag-pill:hover { background: rgba(13,75,75,0.07); color: var(--primary-color); border-color: var(--secondary-color); transform: translateY(-1px); }
+
+    .sub-section-title { font-size: 1rem; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+    .sub-section-title i { color: var(--secondary-color); }
+    .section-divider-sm { width: 36px; height: 3px; background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); border-radius: 2px; margin-bottom: 20px; }
+
+    .rel-project-card { background: #fff; border: 1px solid rgba(127,168,143,0.15); border-radius: 14px; overflow: hidden; transition: transform 0.28s ease, box-shadow 0.28s ease; height: 100%; }
+    .rel-project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(13,75,75,0.1); }
+    .rel-project-img { width: 100%; height: 140px; object-fit: cover; display: block; }
+    .rel-project-body { padding: 14px 16px 16px; }
+    .rel-project-title { font-size: 0.92rem; font-weight: 700; color: var(--text-dark); margin-bottom: 5px; }
+    .rel-project-desc { font-size: 0.8rem; color: #5a6e6e; line-height: 1.55; margin-bottom: 10px; }
+    .btn-rel-project { display: inline-flex; align-items: center; gap: 5px; background: var(--primary-color); color: white; border: none; font-size: 0.75rem; font-weight: 600; padding: 5px 13px; border-radius: 7px; text-decoration: none; transition: all 0.2s ease; }
+    .btn-rel-project:hover { background: #0a3b3b; color: white; }
+
+    .share-section { margin: 32px 0; padding: 22px; background: var(--bg-light); border: 1px solid rgba(127,168,143,0.18); border-radius: 14px; }
+    .share-label { font-size: 0.72rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; display: block; }
+    .share-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+    .share-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 600; padding: 7px 14px; border-radius: 8px; text-decoration: none; transition: all 0.22s cubic-bezier(0.4,0,0.2,1); border: 1.5px solid; }
+    .share-btn-twitter  { color: #1da1f2; border-color: rgba(29,161,242,0.3);   background: rgba(29,161,242,0.05); }
+    .share-btn-twitter:hover  { background: #1da1f2;  color: white; border-color: #1da1f2;  transform: translateY(-1px); }
+    .share-btn-linkedin { color: #0a66c2; border-color: rgba(10,102,194,0.3);   background: rgba(10,102,194,0.05); }
+    .share-btn-linkedin:hover { background: #0a66c2; color: white; border-color: #0a66c2; transform: translateY(-1px); }
+    .share-btn-facebook { color: #1877f2; border-color: rgba(24,119,242,0.3);   background: rgba(24,119,242,0.05); }
+    .share-btn-facebook:hover { background: #1877f2; color: white; border-color: #1877f2; transform: translateY(-1px); }
+    .share-btn-reddit   { color: #ff4500; border-color: rgba(255,69,0,0.3);     background: rgba(255,69,0,0.05); }
+    .share-btn-reddit:hover   { background: #ff4500;  color: white; border-color: #ff4500;  transform: translateY(-1px); }
+    .share-btn-copy { color: var(--text-dark); border-color: rgba(127,168,143,0.3); background: transparent; cursor: pointer; }
+    .share-btn-copy:hover { background: rgba(13,75,75,0.07); border-color: var(--secondary-color); color: var(--primary-color); transform: translateY(-1px); }
+
+    .post-nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 32px 0; padding-top: 24px; border-top: 1px solid rgba(127,168,143,0.15); }
+    .btn-nav { display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; font-weight: 600; padding: 9px 18px; border-radius: 10px; border: 1.5px solid rgba(127,168,143,0.3); color: var(--text-dark); background: transparent; text-decoration: none; transition: all 0.22s ease; cursor: pointer; }
+    .btn-nav:hover { background: rgba(13,75,75,0.06); border-color: var(--secondary-color); color: var(--primary-color); }
+
+    .related-section { background: var(--bg-light); }
+    .section-heading { font-size: clamp(1.5rem, 3vw, 1.9rem); font-weight: 800; letter-spacing: -0.03em; color: var(--text-dark); }
+    .section-divider-center { width: 48px; height: 4px; background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); border-radius: 2px; margin: 10px auto 32px; }
+
+    .rel-post-card { background: #fff; border: 1px solid rgba(127,168,143,0.15); border-radius: 14px; overflow: hidden; height: 100%; transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease; }
+    .rel-post-card:hover { transform: translateY(-5px); box-shadow: 0 14px 36px rgba(13,75,75,0.11); border-color: rgba(13,75,75,0.2); }
+    .rel-post-img { width: 100%; height: 140px; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .rel-post-card:hover .rel-post-img { transform: scale(1.04); }
+    .rel-post-body { padding: 14px 16px 16px; }
+    .rel-post-cat { display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; color: white; }
+    .rel-post-title { font-size: 0.9rem; font-weight: 700; line-height: 1.4; margin-bottom: 5px; }
+    .rel-post-title a { color: var(--text-dark); text-decoration: none; transition: color 0.2s ease; }
+    .rel-post-title a:hover { color: var(--primary-color); }
+    .rel-post-excerpt { font-size: 0.78rem; color: #5a6e6e; line-height: 1.55; margin-bottom: 8px; }
+    .rel-post-meta { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-light); }
+
+    @media (max-width: 768px) { .blog-header { padding: 60px 0 44px; } .post-nav { flex-direction: column; align-items: stretch; } }
+    @media print { .share-section, .post-nav, .related-section { display: none !important; } .article-content { font-size: 12pt; color: black !important; } }
+</style>
+{% endblock %}
+
 {% block content %}
-<!-- Blog Header -->
+
 <section class="blog-header">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <!-- Breadcrumb -->
-                <nav aria-label="breadcrumb" class="mb-4">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{% url 'portfolio:home' %}">{% trans "Home" %}</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'portfolio:blog' %}">{% trans "Blog" %}</a></li>
-                        {% if post.category %}
-                        <li class="breadcrumb-item">
-                            <a href="{% url 'portfolio:blog' %}?category={{ post.category.slug }}">{{ post.category.name }}</a>
-                        </li>
-                        {% endif %}
-                        <li class="breadcrumb-item active" aria-current="page">{{ post.title|truncatechars:30 }}</li>
+            <div class="col-lg-8 mx-auto animate-in">
+                <nav class="breadcrumb-nav" aria-label="breadcrumb">
+                    <ol>
+                        <li><a href="{% url 'portfolio:home' %}"><i class="fas fa-home me-1"></i>{% trans "Home" %}</a></li>
+                        <li><a href="{% url 'portfolio:blog' %}">{% trans "Blog" %}</a></li>
+                        {% if post.category %}<li><a href="{% url 'portfolio:blog' %}?category={{ post.category.slug }}">{{ post.category.name }}</a></li>{% endif %}
+                        <li class="active">{{ post.title|truncatechars:30 }}</li>
                     </ol>
                 </nav>
 
-                <!-- Post Meta -->
-                <div class="post-meta mb-3">
+                <div class="post-badges">
                     {% if post.category %}
-                    <span class="badge me-2" style="background-color: {{ post.category.color }}">
-                        {% if post.category.icon %}<i class="{{ post.category.icon }} me-1"></i>{% endif %}
-                        {{ post.category.name }}
+                    <span class="post-badge" style="background-color: {{ post.category.color }}; color: white;">
+                        {% if post.category.icon %}<i class="{{ post.category.icon }} me-1"></i>{% endif %}{{ post.category.name }}
                     </span>
                     {% endif %}
-                    <span class="badge bg-secondary me-2">{{ post.get_content_type_display }}</span>
-                    {% if post.is_featured %}
-                    <span class="badge bg-warning text-dark">
-                        <i class="fas fa-star me-1"></i>{% trans "Featured" %}
-                    </span>
-                    {% endif %}
+                    <span class="post-badge pbadge-type">{{ post.get_content_type_display }}</span>
+                    {% if post.is_featured %}<span class="post-badge pbadge-feat"><i class="fas fa-star me-1"></i>{% trans "Featured" %}</span>{% endif %}
                 </div>
 
-                <!-- Post Title -->
-                <h1 class="display-5 fw-bold mb-3">{{ post.title|default:"Untitled Blog Post" }}</h1>
+                <h1 class="post-title">{{ post.title|default:"Untitled Blog Post" }}</h1>
+                {% if post.excerpt %}<p class="post-excerpt">{{ post.excerpt }}</p>{% endif %}
 
-                <!-- Post Excerpt -->
-                {% if post.excerpt %}
-                <p class="lead text-muted mb-4">{{ post.excerpt }}</p>
-                {% else %}
-                <p class="lead text-warning mb-4">
-                    <i class="fas fa-exclamation-triangle me-1"></i>
-                    No excerpt provided for this blog post.
-                </p>
-                {% endif %}
-
-                <!-- Post Details -->
-                <div class="post-details d-flex flex-wrap align-items-center justify-content-between mb-4">
-                    <div class="post-date">
-                        <small class="text-muted">
-                            <i class="fas fa-calendar-alt me-1"></i>
-                            {% trans "Published on" %} {{ post.published_date|date:"F d, Y" }}
-                        </small>
-                    </div>
-                    <div class="post-stats">
-                        <small class="text-muted me-3">
-                            <i class="fas fa-clock me-1"></i>{{ post.reading_time }} {% trans "minute read" %}
-                        </small>
-                        <small class="text-muted me-3">
-                            <i class="fas fa-eye me-1"></i>{{ post.view_count }} {% trans "views" %}
-                        </small>
-                        {% if post.like_count > 0 %}
-                        <small class="text-muted">
-                            <i class="fas fa-heart me-1"></i>{{ post.like_count }}
-                        </small>
-                        {% endif %}
+                <div class="post-stats-row">
+                    <div class="d-flex flex-wrap gap-3">
+                        <span class="post-stat-item"><i class="fas fa-calendar-alt"></i>{{ post.published_date|date:"F d, Y" }}</span>
+                        <span class="post-stat-item"><i class="fas fa-clock"></i>{{ post.reading_time }} {% trans "min read" %}</span>
+                        <span class="post-stat-item"><i class="fas fa-eye"></i>{{ post.view_count }} {% trans "views" %}</span>
+                        {% if post.like_count > 0 %}<span class="post-stat-item"><i class="fas fa-heart"></i>{{ post.like_count }}</span>{% endif %}
                     </div>
                 </div>
             </div>
@@ -81,83 +141,58 @@
     </div>
 </section>
 
-<!-- Featured Image -->
 {% if post.featured_image %}
-<section class="featured-image mb-5">
+<div class="featured-img-section">
     <div class="container">
         <div class="row">
             <div class="col-lg-10 mx-auto">
-                <div class="featured-image-container">
-                    <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="img-fluid rounded shadow">
+                <div class="featured-img-wrap animate-in">
+                    <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 {% endif %}
 
-<!-- Post Content -->
-<section class="post-content mb-5">
+<section class="section-padding">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <!-- Article Content -->
-                <article class="blog-content">
+
+                <article class="article-content animate-in">
                     {% if post.content %}
                         {{ post.content|linebreaksbr }}
                     {% else %}
-                        <div class="alert alert-warning">
-                            <i class="fas fa-exclamation-triangle me-2"></i>
-                            <strong>{% trans "Content Missing" %}</strong><br>
-                            {% trans "This blog post doesn't have content yet. Please add content in the admin panel." %}
-                        </div>
-                        
-                        <!-- Debug Information (remove in production) -->
-                        <div class="alert alert-info mt-3">
-                            <h6><i class="fas fa-bug me-2"></i>Debug Info:</h6>
-                            <ul class="mb-0">
-                                <li><strong>Title:</strong> "{{ post.title|default:'No title' }}"</li>
-                                <li><strong>Status:</strong> {{ post.status }}</li>
-                                <li><strong>Excerpt:</strong> "{{ post.excerpt|default:'No excerpt' }}"</li>
-                                <li><strong>Content Length:</strong> {{ post.content|length }} characters</li>
-                                <li><strong>Published:</strong> {{ post.published_date|default:'Not published' }}</li>
-                            </ul>
+                        <div class="content-alert">
+                            <i class="fas fa-exclamation-triangle me-2" style="color:var(--accent-color);"></i>
+                            <strong>{% trans "Content Missing" %}</strong> — {% trans "This blog post doesn't have content yet. Please add content in the admin panel." %}
                         </div>
                     {% endif %}
                 </article>
 
-                <!-- Tags -->
                 {% if post.tags %}
-                <div class="post-tags my-4">
-                    <h6 class="mb-2">{% trans "Tags:" %}</h6>
+                <div class="tags-section animate-in">
+                    <span class="tags-label">Tags</span>
                     {% for tag in post.get_tags_as_list %}
-                    <a href="{% url 'portfolio:blog' %}?search={{ tag }}" class="badge bg-outline-primary text-decoration-none me-2 mb-2">
-                        #{{ tag }}
-                    </a>
+                    <a href="{% url 'portfolio:blog' %}?search={{ tag }}" class="tag-pill">#{{ tag }}</a>
                     {% endfor %}
                 </div>
                 {% endif %}
 
-                <!-- Related Projects -->
                 {% if post.related_projects.exists %}
-                <div class="related-projects my-5">
-                    <h5 class="mb-3">
-                        <i class="fas fa-project-diagram text-primary me-2"></i>
-                        {% trans "Related Projects" %}
-                    </h5>
-                    <div class="row">
+                <div class="my-4 animate-in">
+                    <div class="sub-section-title"><i class="fas fa-project-diagram"></i> {% trans "Related Projects" %}</div>
+                    <div class="section-divider-sm"></div>
+                    <div class="row g-3">
                         {% for project in post.related_projects.all %}
-                        <div class="col-md-6 mb-3">
-                            <div class="card border-0 shadow-sm">
-                                {% if project.image %}
-                                <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}" style="height: 150px; object-fit: cover;">
-                                {% endif %}
-                                <div class="card-body">
-                                    <h6 class="card-title">{{ project.title }}</h6>
-                                    <p class="card-text small text-muted">{{ project.short_description }}</p>
-                                    <a href="{% url 'portfolio:project_detail' project.slug %}" class="btn btn-outline-primary btn-sm">
-                                        {% trans "View Project" %} <i class="fas fa-arrow-right ms-1"></i>
-                                    </a>
+                        <div class="col-md-6">
+                            <div class="rel-project-card">
+                                {% if project.image %}<img src="{{ project.image.url }}" class="rel-project-img" alt="{{ project.title }}">{% endif %}
+                                <div class="rel-project-body">
+                                    <h6 class="rel-project-title">{{ project.title }}</h6>
+                                    <p class="rel-project-desc">{{ project.short_description }}</p>
+                                    <a href="{% url 'portfolio:project_detail' project.slug %}" class="btn-rel-project">{% trans "View Project" %} <i class="fas fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -166,212 +201,65 @@
                 </div>
                 {% endif %}
 
-                <!-- Social Sharing -->
-                <div class="social-sharing my-5">
-                    <h6 class="mb-3">{% trans "Share this article:" %}</h6>
-                    <div class="d-flex flex-wrap gap-2">
-                        <a href="https://twitter.com/intent/tweet?text={{ post.title|urlencode }}&url={{ request.build_absolute_uri }}" 
-                           target="_blank" class="btn btn-outline-info btn-sm">
-                            <i class="fab fa-twitter me-1"></i>{% trans "Twitter" %}
-                        </a>
-                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}" 
-                           target="_blank" class="btn btn-outline-primary btn-sm">
-                            <i class="fab fa-linkedin me-1"></i>{% trans "LinkedIn" %}
-                        </a>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" 
-                           target="_blank" class="btn btn-outline-primary btn-sm">
-                            <i class="fab fa-facebook me-1"></i>{% trans "Facebook" %}
-                        </a>
-                        <a href="https://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ post.title|urlencode }}" 
-                           target="_blank" class="btn btn-outline-warning btn-sm">
-                            <i class="fab fa-reddit me-1"></i>{% trans "Reddit" %}
-                        </a>
-                        <button onclick="copyToClipboard('{{ request.build_absolute_uri }}')" class="btn btn-outline-secondary btn-sm">
-                            <i class="fas fa-link me-1"></i>{% trans "Copy Link" %}
-                        </button>
+                <div class="share-section animate-in">
+                    <span class="share-label">{% trans "Share this article" %}</span>
+                    <div class="share-btns">
+                        <a href="https://twitter.com/intent/tweet?text={{ post.title|urlencode }}&url={{ request.build_absolute_uri }}" target="_blank" class="share-btn share-btn-twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}" target="_blank" class="share-btn share-btn-linkedin"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" class="share-btn share-btn-facebook"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="https://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ post.title|urlencode }}" target="_blank" class="share-btn share-btn-reddit"><i class="fab fa-reddit"></i> Reddit</a>
+                        <button onclick="copyToClipboard('{{ request.build_absolute_uri }}')" class="share-btn share-btn-copy"><i class="fas fa-link"></i> {% trans "Copy Link" %}</button>
                     </div>
                 </div>
 
-                <!-- Navigation -->
-                <div class="post-navigation my-5">
-                    <div class="row">
-                        <div class="col-6">
-                            <a href="{% url 'portfolio:blog' %}" class="btn btn-outline-secondary">
-                                <i class="fas fa-arrow-left me-1"></i>{% trans "Back to Blog" %}
-                            </a>
-                        </div>
-                        <div class="col-6 text-end">
-                            <button onclick="window.print()" class="btn btn-outline-info">
-                                <i class="fas fa-print me-1"></i>{% trans "Print Article" %}
-                            </button>
-                        </div>
-                    </div>
+                <div class="post-nav animate-in">
+                    <a href="{% url 'portfolio:blog' %}" class="btn-nav"><i class="fas fa-arrow-left"></i> {% trans "Back to Blog" %}</a>
+                    <button onclick="window.print()" class="btn-nav"><i class="fas fa-print"></i> {% trans "Print Article" %}</button>
                 </div>
+
             </div>
         </div>
     </div>
 </section>
 
-<!-- Related Posts -->
 {% if related_posts %}
-<section class="related-posts bg-light py-5">
+<section class="section-padding related-section">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h3 class="text-center mb-4">
-                    <i class="fas fa-newspaper text-primary me-2"></i>
-                    {% trans "Related Articles" %}
-                </h3>
-                <div class="row">
-                    {% for related_post in related_posts %}
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="card h-100 border-0 shadow-sm">
-                            {% if related_post.featured_image %}
-                            <img src="{{ related_post.featured_image.url }}" class="card-img-top" alt="{{ related_post.title }}" style="height: 150px; object-fit: cover;">
-                            {% endif %}
-                            <div class="card-body">
-                                {% if related_post.category %}
-                                <span class="badge mb-2" style="background-color: {{ related_post.category.color }}; font-size: 0.7rem;">
-                                    {{ related_post.category.name }}
-                                </span>
-                                {% endif %}
-                                <h6 class="card-title">
-                                    <a href="{% url 'portfolio:blog_detail' related_post.slug %}" class="text-decoration-none">
-                                        {{ related_post.title|truncatechars:50 }}
-                                    </a>
-                                </h6>
-                                <p class="card-text small text-muted">{{ related_post.excerpt|truncatechars:80 }}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">{{ related_post.published_date|date:"M d" }}</small>
-                                    <small class="text-muted">{{ related_post.reading_time }}m</small>
-                                </div>
-                            </div>
+        <div class="text-center mb-2 animate-in">
+            <h2 class="section-heading">{% trans "Related Articles" %}</h2>
+            <div class="section-divider-center"></div>
+        </div>
+        <div class="row g-4">
+            {% for related_post in related_posts %}
+            <div class="col-lg-3 col-md-6 animate-in" style="animation-delay: {{ forloop.counter0 }}00ms;">
+                <div class="rel-post-card">
+                    <div style="overflow:hidden;">
+                        {% if related_post.featured_image %}<img src="{{ related_post.featured_image.url }}" class="rel-post-img" alt="{{ related_post.title }}">{% endif %}
+                    </div>
+                    <div class="rel-post-body">
+                        {% if related_post.category %}<span class="rel-post-cat" style="background-color:{{ related_post.category.color }};">{{ related_post.category.name }}</span>{% endif %}
+                        <h6 class="rel-post-title"><a href="{% url 'portfolio:blog_detail' related_post.slug %}">{{ related_post.title|truncatechars:50 }}</a></h6>
+                        <p class="rel-post-excerpt">{{ related_post.excerpt|truncatechars:80 }}</p>
+                        <div class="rel-post-meta">
+                            <span>{{ related_post.published_date|date:"M d" }}</span>
+                            <span>{{ related_post.reading_time }}m read</span>
                         </div>
                     </div>
-                    {% endfor %}
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 </section>
 {% endif %}
 
-<style>
-.blog-header {
-    padding: 2rem 0;
-    background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.1), rgba(var(--bs-success-rgb), 0.1));
-}
-
-.featured-image-container {
-    position: relative;
-    overflow: hidden;
-}
-
-.featured-image-container img {
-    transition: transform 0.3s ease;
-}
-
-.featured-image-container:hover img {
-    transform: scale(1.02);
-}
-
-.blog-content {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--bs-gray-800);
-}
-
-.blog-content h2 {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    color: var(--bs-primary);
-}
-
-.blog-content h3 {
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
-    color: var(--bs-secondary);
-}
-
-.blog-content p {
-    margin-bottom: 1.2rem;
-}
-
-.blog-content blockquote {
-    border-left: 4px solid var(--bs-primary);
-    padding-left: 1rem;
-    margin: 1.5rem 0;
-    font-style: italic;
-    color: var(--bs-gray-600);
-}
-
-.blog-content code {
-    background-color: rgba(var(--bs-gray-200-rgb), 0.5);
-    padding: 0.2rem 0.4rem;
-    border-radius: 0.25rem;
-    font-size: 0.9rem;
-}
-
-.blog-content pre {
-    background-color: rgba(var(--bs-dark-rgb), 0.05);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    overflow-x: auto;
-    margin: 1.5rem 0;
-}
-
-.post-tags .badge {
-    transition: all 0.3s ease;
-}
-
-.post-tags .badge:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.social-sharing .btn {
-    transition: all 0.3s ease;
-}
-
-.social-sharing .btn:hover {
-    transform: translateY(-2px);
-}
-
-.related-posts .card {
-    transition: all 0.3s ease;
-}
-
-.related-posts .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
-}
-
-@media print {
-    .social-sharing,
-    .post-navigation,
-    .related-posts {
-        display: none !important;
-    }
-    
-    .blog-content {
-        font-size: 12pt;
-        color: black !important;
-    }
-}
-</style>
-
 <script>
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(
-        function() {
-            // Success
-            alert('{% trans "Link copied to clipboard!" %}');
-        },
-        function(err) {
-            // Error
-            console.error('Could not copy text: ', err);
-        }
+        function() { alert('{% trans "Link copied to clipboard!" %}'); },
+        function(err) { console.error('Could not copy text: ', err); }
     );
 }
 </script>
+
 {% endblock %}

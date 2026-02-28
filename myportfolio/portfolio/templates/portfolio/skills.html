@@ -2,207 +2,285 @@
 
 {% block title %}Skills - {{ about.name|default:"Charles Otwere" }}{% endblock %}
 
+{% block extra_css %}
+<style>
+    .hero-section { padding: 100px 0 80px; position: relative; overflow: hidden; }
+
+    .hero-label {
+        display: inline-flex; align-items: center; gap: 8px;
+        background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22);
+        color: rgba(255,255,255,0.9); font-size: 0.78rem; font-weight: 500;
+        padding: 6px 14px; border-radius: 20px; margin-bottom: 18px;
+        letter-spacing: 0.05em; text-transform: uppercase;
+    }
+
+    .hero-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; letter-spacing: -0.03em; color: white; margin-bottom: 14px; }
+    .hero-lead { font-size: 1rem; color: rgba(255,255,255,0.72); line-height: 1.75; }
+
+    .filter-bar {
+        background: #fff; border-bottom: 1px solid rgba(127,168,143,0.18);
+        padding: 20px 0; position: sticky; top: 68px; z-index: 100;
+        box-shadow: 0 4px 20px rgba(13,75,75,0.06);
+    }
+
+    .filter-scroll { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+
+    .filter-btn {
+        font-size: 0.82rem; font-weight: 600; padding: 7px 18px; border-radius: 20px;
+        text-decoration: none; transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+        border: 1.5px solid rgba(127,168,143,0.3); color: var(--text-dark);
+        background: transparent; white-space: nowrap;
+    }
+    .filter-btn:hover { background: rgba(13,75,75,0.06); border-color: var(--secondary-color); color: var(--primary-color); transform: translateY(-1px); }
+    .filter-btn.active { background: var(--primary-color); border-color: var(--primary-color); color: white; box-shadow: 0 4px 14px rgba(13,75,75,0.22); }
+
+    .section-heading { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.03em; color: var(--text-dark); margin-bottom: 8px; }
+    .section-divider { width: 48px; height: 4px; background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); border-radius: 2px; margin: 10px auto 36px; }
+
+    .category-block { margin-bottom: 56px; }
+    .category-block:last-child { margin-bottom: 0; }
+
+    .category-header {
+        display: flex; align-items: center; justify-content: space-between;
+        margin-bottom: 24px; padding-bottom: 14px;
+        border-bottom: 2px solid rgba(127,168,143,0.15);
+    }
+
+    .category-title-wrap { display: flex; align-items: center; gap: 12px; }
+
+    .category-icon-box {
+        width: 36px; height: 36px; background: rgba(127,168,143,0.12);
+        border-radius: 10px; display: flex; align-items: center; justify-content: center;
+        color: var(--secondary-color); font-size: 1rem; flex-shrink: 0;
+    }
+
+    .category-name { font-size: 1.15rem; font-weight: 700; color: var(--text-dark); margin: 0; }
+
+    .category-count {
+        display: inline-flex; align-items: center;
+        background: rgba(13,75,75,0.07); color: var(--primary-color);
+        font-size: 0.72rem; font-weight: 600; padding: 3px 10px;
+        border-radius: 12px; border: 1px solid rgba(13,75,75,0.14); letter-spacing: 0.04em;
+    }
+
+    .skill-card {
+        background: #fff; border: 1px solid rgba(127,168,143,0.15);
+        border-radius: 16px; padding: 22px 20px 20px; height: 100%;
+        transition: transform 0.28s cubic-bezier(0.4,0,0.2,1), box-shadow 0.28s ease, border-color 0.28s ease;
+        position: relative; overflow: hidden;
+    }
+
+    .skill-card::before {
+        content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        opacity: 0; transition: opacity 0.28s ease;
+    }
+
+    .skill-card:hover { transform: translateY(-5px); box-shadow: 0 14px 36px rgba(13,75,75,0.11); border-color: rgba(13,75,75,0.18); }
+    .skill-card:hover::before { opacity: 1; }
+
+    .skill-card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
+    .skill-icon-name { display: flex; align-items: center; gap: 12px; }
+
+    .skill-icon { font-size: 1.9rem; color: var(--secondary-color); transition: color 0.28s ease, transform 0.28s ease; flex-shrink: 0; }
+    .skill-card:hover .skill-icon { color: var(--primary-color); transform: scale(1.1); }
+
+    .skill-name { font-size: 1rem; font-weight: 700; color: var(--text-dark); margin: 0 0 2px; letter-spacing: -0.01em; }
+    .skill-featured { display: inline-flex; align-items: center; gap: 4px; font-size: 0.68rem; font-weight: 600; color: var(--accent-color); text-transform: uppercase; letter-spacing: 0.06em; }
+
+    .skill-proficiency { margin-bottom: 12px; }
+    .proficiency-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .proficiency-label { font-size: 0.7rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+    .proficiency-value { font-size: 0.78rem; font-weight: 700; color: var(--text-dark); }
+
+    .skill-exp {
+        display: inline-flex; align-items: center; gap: 5px;
+        background: var(--bg-light); border: 1px solid rgba(127,168,143,0.2);
+        color: var(--text-dark); font-size: 0.75rem; font-weight: 500;
+        padding: 4px 10px; border-radius: 10px; margin-bottom: 10px;
+    }
+    .skill-exp i { color: var(--secondary-color); font-size: 0.7rem; }
+
+    .skill-desc { font-size: 0.82rem; color: #5a6e6e; line-height: 1.6; margin-bottom: 12px; }
+
+    .skill-category-tag {
+        display: inline-flex; background: rgba(13,75,75,0.06); color: var(--primary-color);
+        font-size: 0.68rem; font-weight: 600; padding: 3px 9px; border-radius: 8px;
+        letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid rgba(13,75,75,0.12);
+    }
+
+    .learning-section { background: var(--bg-light); position: relative; overflow: hidden; }
+    .learning-section::before { content: ''; position: absolute; top: -60px; right: -60px; width: 320px; height: 320px; background: radial-gradient(ellipse, rgba(246,171,21,0.07) 0%, transparent 70%); pointer-events: none; }
+
+    .learning-card {
+        background: #fff; border: 1px solid rgba(127,168,143,0.15); border-radius: 18px;
+        padding: 32px 24px; text-align: center; height: 100%;
+        transition: transform 0.28s cubic-bezier(0.4,0,0.2,1), box-shadow 0.28s ease, border-color 0.28s ease;
+    }
+    .learning-card:hover { transform: translateY(-5px); box-shadow: 0 14px 36px rgba(13,75,75,0.1); border-color: rgba(13,75,75,0.18); }
+
+    .learning-icon-wrap {
+        width: 64px; height: 64px; background: rgba(13,75,75,0.07); border-radius: 16px;
+        display: flex; align-items: center; justify-content: center; margin: 0 auto 18px;
+        transition: background 0.28s ease, transform 0.28s ease;
+    }
+    .learning-card:hover .learning-icon-wrap { background: rgba(13,75,75,0.12); transform: scale(1.08); }
+    .learning-icon { font-size: 1.7rem; color: var(--primary-color); }
+    .learning-title { font-size: 1.05rem; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; letter-spacing: -0.01em; }
+    .learning-desc { font-size: 0.875rem; color: #5a6e6e; line-height: 1.7; }
+
+    .cta-section { position: relative; overflow: hidden; }
+    .cta-card { background: linear-gradient(135deg, var(--primary-color) 0%, #155f5f 100%); border-radius: 24px; padding: 60px 40px; color: white; position: relative; overflow: hidden; box-shadow: 0 24px 64px rgba(13,75,75,0.25); }
+    .cta-card::before { content: ''; position: absolute; top: -80px; right: -80px; width: 340px; height: 340px; background: radial-gradient(ellipse, rgba(246,171,21,0.14) 0%, transparent 70%); pointer-events: none; }
+    .cta-card::after { content: ''; position: absolute; bottom: -60px; left: -60px; width: 260px; height: 260px; background: radial-gradient(ellipse, rgba(255,255,255,0.05) 0%, transparent 70%); pointer-events: none; }
+    .cta-title { font-size: clamp(1.6rem, 3.5vw, 2.3rem); font-weight: 800; letter-spacing: -0.03em; color: white; margin-bottom: 14px; }
+    .cta-text { font-size: 0.97rem; color: rgba(255,255,255,0.72); line-height: 1.78; margin-bottom: 30px; max-width: 560px; margin-left: auto; margin-right: auto; }
+
+    .btn-cta-primary { background: var(--accent-color); color: #0d4b4b; border: none; font-weight: 700; font-size: 0.92rem; padding: 13px 28px; border-radius: 10px; transition: all 0.28s cubic-bezier(0.4,0,0.2,1); display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+    .btn-cta-primary:hover { background: #f8b930; color: #0d4b4b; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(246,171,21,0.38); }
+
+    .btn-cta-outline { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.38); font-weight: 600; font-size: 0.92rem; padding: 13px 28px; border-radius: 10px; transition: all 0.28s cubic-bezier(0.4,0,0.2,1); display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+    .btn-cta-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.65); color: white; transform: translateY(-2px); }
+
+    .empty-state { padding: 80px 20px; text-align: center; }
+    .empty-state-icon { font-size: 4rem; color: var(--secondary-color); opacity: 0.4; margin-bottom: 16px; display: block; }
+
+    .btn-view-all { display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid var(--primary-color); color: var(--primary-color); background: transparent; font-weight: 600; font-size: 0.875rem; padding: 10px 24px; border-radius: 10px; transition: all 0.28s cubic-bezier(0.4,0,0.2,1); text-decoration: none; }
+    .btn-view-all:hover { background: var(--primary-color); color: white; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(13,75,75,0.22); }
+
+    @media (max-width: 767px) { .filter-bar { position: static; } .hero-section { padding: 72px 0 56px; } .cta-card { padding: 40px 24px; } }
+</style>
+{% endblock %}
+
 {% block content %}
-<!-- Skills Hero -->
+
 <section class="hero-section">
-    <div class="container">
-        <div class="text-center">
-            <h1 class="display-4 fw-bold mb-4">Skills & Technologies</h1>
-            <p class="lead">
-                A comprehensive overview of the technologies, tools, and frameworks I work with
-            </p>
-        </div>
+    <div class="container text-center animate-in">
+        <div class="hero-label d-inline-flex"><i class="fas fa-cogs"></i> Toolkit</div>
+        <h1 class="hero-title">Skills & Technologies</h1>
+        <p class="hero-lead">A comprehensive overview of the technologies, tools, and frameworks I work with</p>
     </div>
 </section>
 
-<!-- Skills Filter -->
-<section class="py-4 bg-light">
+<div class="filter-bar">
     <div class="container">
-        <div class="text-center">
-            <div class="btn-group flex-wrap" role="group" aria-label="Skill categories">
-                <a href="{% url 'portfolio:skills' %}" 
-                   class="btn {% if not current_category %}btn-primary{% else %}btn-outline-primary{% endif %}">
-                    All Skills
-                </a>
-                {% for category_code, category_name in categories %}
-                    <a href="{% url 'portfolio:skills' %}?category={{ category_code }}" 
-                       class="btn {% if current_category == category_code %}btn-primary{% else %}btn-outline-primary{% endif %}">
-                        {{ category_name }}
-                    </a>
-                {% endfor %}
-            </div>
+        <div class="filter-scroll">
+            <a href="{% url 'portfolio:skills' %}" class="filter-btn {% if not current_category %}active{% endif %}">All Skills</a>
+            {% for category_code, category_name in categories %}
+                <a href="{% url 'portfolio:skills' %}?category={{ category_code }}" class="filter-btn {% if current_category == category_code %}active{% endif %}">{{ category_name }}</a>
+            {% endfor %}
         </div>
     </div>
-</section>
+</div>
 
-<!-- Skills Content -->
 <section class="section-padding">
     <div class="container">
         {% if skills_by_category %}
             {% for category, skills in skills_by_category.items %}
-            <div class="mb-5">
-                <div class="row align-items-center mb-4">
-                    <div class="col">
-                        <h2 class="h3 mb-0">
-                            <i class="fas fa-{% if 'Programming' in category %}code{% elif 'Frontend' in category %}desktop{% elif 'Backend' in category %}server{% elif 'Database' in category %}database{% elif 'Cloud' in category %}cloud{% elif 'Tools' in category %}tools{% else %}cog{% endif %} text-primary me-2"></i>
-                            {{ category }}
-                        </h2>
+            <div class="category-block animate-in">
+                <div class="category-header">
+                    <div class="category-title-wrap">
+                        <div class="category-icon-box">
+                            <i class="fas fa-{% if 'Programming' in category %}code{% elif 'Frontend' in category %}desktop{% elif 'Backend' in category %}server{% elif 'Database' in category %}database{% elif 'Cloud' in category %}cloud{% elif 'Tools' in category %}tools{% else %}cog{% endif %}"></i>
+                        </div>
+                        <h2 class="category-name">{{ category }}</h2>
                     </div>
-                    <div class="col-auto">
-                        <span class="badge bg-secondary">{{ skills|length }} skill{{ skills|length|pluralize }}</span>
-                    </div>
+                    <span class="category-count">{{ skills|length }} skill{{ skills|length|pluralize }}</span>
                 </div>
-                
                 <div class="row g-4">
                     {% for skill in skills %}
                     <div class="col-lg-4 col-md-6">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <div class="d-flex align-items-center">
-                                        {% if skill.icon %}
-                                            <i class="{{ skill.icon }} text-primary me-3" style="font-size: 2rem;"></i>
-                                        {% else %}
-                                            <i class="fas fa-code text-primary me-3" style="font-size: 2rem;"></i>
-                                        {% endif %}
-                                        <div>
-                                            <h5 class="card-title mb-0">{{ skill.name }}</h5>
-                                            {% if skill.is_featured %}
-                                                <small class="text-warning">
-                                                    <i class="fas fa-star me-1"></i>Featured
-                                                </small>
-                                            {% endif %}
-                                        </div>
+                        <div class="skill-card">
+                            <div class="skill-card-header">
+                                <div class="skill-icon-name">
+                                    {% if skill.icon %}<i class="{{ skill.icon }} skill-icon"></i>{% else %}<i class="fas fa-code skill-icon"></i>{% endif %}
+                                    <div>
+                                        <h5 class="skill-name">{{ skill.name }}</h5>
+                                        {% if skill.is_featured %}<span class="skill-featured"><i class="fas fa-star"></i> Featured</span>{% endif %}
                                     </div>
-                                </div>
-                                
-                                <!-- Proficiency Level -->
-                                <div class="mb-3">
-                                    <div class="d-flex justify-content-between align-items-center mb-1">
-                                        <small class="text-muted">Proficiency</small>
-                                        <small class="fw-bold">{{ skill.get_proficiency_display }}</small>
-                                    </div>
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" style="width: {% if skill.proficiency == 'expert' %}100{% elif skill.proficiency == 'advanced' %}85{% elif skill.proficiency == 'intermediate' %}60{% else %}35{% endif %}%;"></div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Experience -->
-                                {% if skill.years_experience > 0 %}
-                                <div class="mb-3">
-                                    <small class="text-muted d-block">Experience</small>
-                                    <span class="fw-bold">
-                                        {{ skill.years_experience }} year{{ skill.years_experience|pluralize }}
-                                    </span>
-                                </div>
-                                {% endif %}
-                                
-                                <!-- Description -->
-                                {% if skill.description %}
-                                <p class="card-text small text-muted">{{ skill.description }}</p>
-                                {% endif %}
-                                
-                                <!-- Skill Badge -->
-                                <div class="mt-auto">
-                                    <span class="badge bg-light text-dark border">
-                                        {{ skill.get_category_display }}
-                                    </span>
                                 </div>
                             </div>
+                            <div class="skill-proficiency">
+                                <div class="proficiency-meta">
+                                    <span class="proficiency-label">Proficiency</span>
+                                    <span class="proficiency-value">{{ skill.get_proficiency_display }}</span>
+                                </div>
+                                <div class="proficiency-bar">
+                                    <div class="proficiency-fill" style="width: {% if skill.proficiency == 'expert' %}100{% elif skill.proficiency == 'advanced' %}85{% elif skill.proficiency == 'intermediate' %}60{% else %}35{% endif %}%;"></div>
+                                </div>
+                            </div>
+                            {% if skill.years_experience > 0 %}
+                            <div class="skill-exp"><i class="fas fa-clock"></i>{{ skill.years_experience }} year{{ skill.years_experience|pluralize }} experience</div>
+                            {% endif %}
+                            {% if skill.description %}<p class="skill-desc">{{ skill.description }}</p>{% endif %}
+                            <span class="skill-category-tag">{{ skill.get_category_display }}</span>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
             </div>
             {% endfor %}
-            
         {% else %}
-            <div class="text-center py-5">
-                {% if current_category %}
-                    <i class="fas fa-search text-muted" style="font-size: 4rem;"></i>
-                    <h4 class="mt-3 text-muted">No skills found in this category</h4>
-                    <p class="text-muted">Try selecting a different category or view all skills.</p>
-                    <a href="{% url 'portfolio:skills' %}" class="btn btn-outline-primary">
-                        <i class="fas fa-list me-2"></i>View All Skills
-                    </a>
-                {% else %}
-                    <i class="fas fa-cogs text-muted" style="font-size: 4rem;"></i>
-                    <h4 class="mt-3 text-muted">No skills added yet</h4>
-                    <p class="text-muted">Skills will appear here once you add them in the admin panel.</p>
-                {% endif %}
-            </div>
+        <div class="empty-state animate-in">
+            {% if current_category %}
+                <span class="empty-state-icon"><i class="fas fa-search"></i></span>
+                <h4 class="text-muted fw-semibold">No skills found in this category</h4>
+                <p class="text-muted">Try selecting a different category or view all skills.</p>
+                <a href="{% url 'portfolio:skills' %}" class="btn-view-all mt-2"><i class="fas fa-list"></i> View All Skills</a>
+            {% else %}
+                <span class="empty-state-icon"><i class="fas fa-cogs"></i></span>
+                <h4 class="text-muted fw-semibold">No skills added yet</h4>
+                <p class="text-muted">Skills will appear here once you add them in the admin panel.</p>
+            {% endif %}
+        </div>
         {% endif %}
     </div>
 </section>
 
-<!-- Skill Learning Section -->
-<section class="section-padding bg-light">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold">Continuous Learning</h2>
-            <p class="lead text-muted">Technology evolves fast, and so do I</p>
+<section class="section-padding learning-section">
+    <div class="container" style="position: relative; z-index: 1;">
+        <div class="text-center mb-2 animate-in">
+            <h2 class="section-heading">Continuous Learning</h2>
+            <p style="font-size:0.97rem; color:var(--text-light);">Technology evolves fast, and so do I</p>
+            <div class="section-divider"></div>
         </div>
-        
-        <div class="row">
-            <div class="col-lg-4 mb-4">
-                <div class="card text-center h-100">
-                    <div class="card-body">
-                        <i class="fas fa-graduation-cap text-primary mb-3" style="font-size: 3rem;"></i>
-                        <h5 class="card-title">Always Learning</h5>
-                        <p class="card-text">
-                            I'm constantly updating my skills and learning new technologies to stay current with industry trends.
-                        </p>
-                    </div>
+        <div class="row g-4">
+            <div class="col-lg-4 animate-in delay-1">
+                <div class="learning-card">
+                    <div class="learning-icon-wrap"><i class="fas fa-graduation-cap learning-icon"></i></div>
+                    <h5 class="learning-title">Always Learning</h5>
+                    <p class="learning-desc">I'm constantly updating my skills and learning new technologies to stay current with industry trends.</p>
                 </div>
             </div>
-            
-            <div class="col-lg-4 mb-4">
-                <div class="card text-center h-100">
-                    <div class="card-body">
-                        <i class="fas fa-project-diagram text-primary mb-3" style="font-size: 3rem;"></i>
-                        <h5 class="card-title">Hands-on Practice</h5>
-                        <p class="card-text">
-                            I believe in learning by doing. Each skill listed here has been applied in real-world projects.
-                        </p>
-                    </div>
+            <div class="col-lg-4 animate-in delay-2">
+                <div class="learning-card">
+                    <div class="learning-icon-wrap"><i class="fas fa-project-diagram learning-icon"></i></div>
+                    <h5 class="learning-title">Hands-on Practice</h5>
+                    <p class="learning-desc">I believe in learning by doing. Each skill listed here has been applied in real-world projects.</p>
                 </div>
             </div>
-            
-            <div class="col-lg-4 mb-4">
-                <div class="card text-center h-100">
-                    <div class="card-body">
-                        <i class="fas fa-users text-primary mb-3" style="font-size: 3rem;"></i>
-                        <h5 class="card-title">Knowledge Sharing</h5>
-                        <p class="card-text">
-                            I enjoy sharing knowledge through mentoring, writing, and contributing to the developer community.
-                        </p>
-                    </div>
+            <div class="col-lg-4 animate-in delay-3">
+                <div class="learning-card">
+                    <div class="learning-icon-wrap"><i class="fas fa-users learning-icon"></i></div>
+                    <h5 class="learning-title">Knowledge Sharing</h5>
+                    <p class="learning-desc">I enjoy sharing knowledge through mentoring, writing, and contributing to the developer community.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Call to Action -->
-<section class="section-padding">
+<section class="section-padding cta-section">
     <div class="container">
-        <div class="row justify-content-center text-center">
-            <div class="col-lg-8">
-                <h2 class="display-5 fw-bold mb-4">Let's Build Something Amazing</h2>
-                <p class="lead mb-4">
-                    These skills are tools in my toolkit. The real magic happens when we combine them 
-                    to solve real problems and create meaningful solutions.
-                </p>
-                <div class="d-flex gap-3 justify-content-center">
-                    <a href="{% url 'portfolio:projects' %}" class="btn btn-primary btn-lg">
-                        <i class="fas fa-folder-open me-2"></i>See My Work
-                    </a>
-                    <a href="{% url 'portfolio:contact' %}" class="btn btn-outline-primary btn-lg">
-                        <i class="fas fa-handshake me-2"></i>Work Together
-                    </a>
-                </div>
+        <div class="cta-card text-center animate-in" style="position: relative; z-index: 1;">
+            <h2 class="cta-title">Let's Build Something Amazing</h2>
+            <p class="cta-text">These skills are tools in my toolkit. The real magic happens when we combine them to solve real problems and create meaningful solutions.</p>
+            <div class="d-flex flex-wrap gap-3 justify-content-center" style="position: relative; z-index: 1;">
+                <a href="{% url 'portfolio:projects' %}" class="btn-cta-primary"><i class="fas fa-folder-open"></i> See My Work</a>
+                <a href="{% url 'portfolio:contact' %}" class="btn-cta-outline"><i class="fas fa-handshake"></i> Work Together</a>
             </div>
         </div>
     </div>
 </section>
+
 {% endblock %}

@@ -3,236 +3,199 @@
 
 {% block title %}{% trans "Certifications" %} - {{ about.name|default:"Charles Otwere" }}{% endblock %}
 
+{% block extra_css %}
+<style>
+    .hero-section { padding: 100px 0 80px; position: relative; overflow: hidden; }
+    .hero-label { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22); color: rgba(255,255,255,0.9); font-size: 0.78rem; font-weight: 500; padding: 6px 14px; border-radius: 20px; margin-bottom: 18px; letter-spacing: 0.05em; text-transform: uppercase; }
+    .hero-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; letter-spacing: -0.03em; color: white; margin-bottom: 14px; }
+    .hero-lead { font-size: 1rem; color: rgba(255,255,255,0.72); line-height: 1.75; }
+
+    .expiry-alert { background: rgba(246,171,21,0.08); border: 1px solid rgba(246,171,21,0.28); border-left: 4px solid var(--accent-color); border-radius: 12px; padding: 18px 22px; margin-bottom: 32px; }
+    .expiry-alert-title { font-size: 0.9rem; font-weight: 700; color: #92400e; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .expiry-list { margin: 0; padding-left: 16px; font-size: 0.84rem; color: #92400e; }
+    .expiry-list li { margin-bottom: 4px; }
+
+    .section-label { font-size: 0.72rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .section-label i { color: var(--secondary-color); }
+    .section-title-text { font-size: clamp(1.3rem, 2.5vw, 1.7rem); font-weight: 800; letter-spacing: -0.03em; color: var(--text-dark); margin-bottom: 6px; }
+    .section-title-divider { width: 40px; height: 3px; background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); border-radius: 2px; margin-bottom: 28px; }
+
+    .cert-card { background: #fff; border: 1px solid rgba(127,168,143,0.15); border-radius: 16px; overflow: hidden; height: 100%; transition: transform 0.28s cubic-bezier(0.4,0,0.2,1), box-shadow 0.28s ease, border-color 0.28s ease; box-shadow: 0 4px 18px rgba(13,75,75,0.07); display: flex; flex-direction: column; }
+    .cert-card:hover { transform: translateY(-5px); box-shadow: 0 16px 42px rgba(13,75,75,0.12); border-color: rgba(13,75,75,0.2); }
+    .cert-card.featured { border-top: 4px solid #22c55e; }
+
+    .cert-badge-wrap { padding: 24px; text-align: center; background: rgba(13,75,75,0.03); border-bottom: 1px solid rgba(127,168,143,0.1); }
+    .cert-badge-img { max-width: 90px; max-height: 90px; object-fit: contain; }
+    .cert-badge-placeholder { width: 72px; height: 72px; margin: 0 auto; background: rgba(13,75,75,0.07); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--secondary-color); font-size: 1.8rem; }
+
+    .cert-body { padding: 22px 22px 20px; display: flex; flex-direction: column; flex: 1; }
+    .cert-name { font-size: 1rem; font-weight: 700; color: var(--primary-color); margin-bottom: 4px; letter-spacing: -0.01em; }
+    .cert-org { font-size: 0.875rem; color: var(--text-light); font-weight: 500; margin-bottom: 12px; }
+
+    .cert-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .cbadge { font-size: 0.68rem; font-weight: 700; padding: 3px 9px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.03em; }
+    .cbadge-primary { background: rgba(13,75,75,0.08);   color: var(--primary-color); border: 1px solid rgba(13,75,75,0.18); }
+    .cbadge-green   { background: rgba(34,197,94,0.1);   color: #16a34a;  border: 1px solid rgba(34,197,94,0.25); }
+    .cbadge-red     { background: rgba(239,68,68,0.1);   color: #dc2626;  border: 1px solid rgba(239,68,68,0.25); }
+    .cbadge-amber   { background: rgba(246,171,21,0.12); color: #b45309;  border: 1px solid rgba(246,171,21,0.3); }
+    .cbadge-gray    { background: rgba(127,168,143,0.1); color: var(--text-light); border: 1px solid rgba(127,168,143,0.22); }
+
+    .cert-dates { font-size: 0.78rem; color: var(--text-light); margin-bottom: 12px; display: flex; flex-direction: column; gap: 3px; }
+    .cert-dates i { color: var(--secondary-color); margin-right: 4px; }
+    .credential-id { font-family: 'Courier New', monospace; background: rgba(13,75,75,0.05); border: 1px solid rgba(127,168,143,0.2); padding: 5px 10px; border-radius: 8px; font-size: 0.78rem; color: var(--text-dark); margin-bottom: 10px; }
+    .cert-desc { font-size: 0.84rem; color: #5a6e6e; line-height: 1.6; margin-bottom: 14px; flex-grow: 1; }
+
+    .cert-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+    .btn-cert-verify { display: inline-flex; align-items: center; gap: 5px; font-size: 0.78rem; font-weight: 600; padding: 6px 14px; border-radius: 8px; border: 1.5px solid rgba(34,197,94,0.4); color: #16a34a; background: rgba(34,197,94,0.06); text-decoration: none; transition: all 0.22s ease; }
+    .btn-cert-verify:hover { background: #22c55e; color: white; border-color: #22c55e; transform: translateY(-1px); }
+    .btn-cert-skills { display: inline-flex; align-items: center; gap: 5px; font-size: 0.78rem; font-weight: 600; padding: 6px 14px; border-radius: 8px; border: 1.5px solid rgba(127,168,143,0.3); color: var(--primary-color); background: transparent; cursor: pointer; transition: all 0.22s ease; }
+    .btn-cert-skills:hover { background: rgba(13,75,75,0.07); border-color: var(--secondary-color); transform: translateY(-1px); }
+    .cert-expiring-footer { padding: 10px 22px; background: rgba(246,171,21,0.08); border-top: 1px solid rgba(246,171,21,0.2); font-size: 0.78rem; color: #92400e; display: flex; align-items: center; gap: 6px; font-weight: 600; }
+
+    .modal-content { border-radius: 16px; border: 1px solid rgba(127,168,143,0.2); }
+    .modal-header { border-bottom: 1px solid rgba(127,168,143,0.18); padding: 18px 22px; }
+    .modal-title { font-size: 0.95rem; font-weight: 700; color: var(--text-dark); }
+    .modal-body { padding: 20px 22px; }
+    .skill-tag { display: inline-flex; background: rgba(13,75,75,0.07); color: var(--primary-color); font-size: 0.8rem; font-weight: 600; padding: 5px 12px; border-radius: 10px; margin: 3px; border: 1px solid rgba(13,75,75,0.15); }
+
+    .cta-band { background: linear-gradient(135deg, var(--primary-color) 0%, #155f5f 100%); border-radius: 20px; padding: 52px 40px; text-align: center; color: white; position: relative; overflow: hidden; box-shadow: 0 20px 56px rgba(13,75,75,0.22); margin-top: 56px; }
+    .cta-band::before { content: ''; position: absolute; top: -70px; right: -70px; width: 300px; height: 300px; background: radial-gradient(ellipse, rgba(246,171,21,0.14) 0%, transparent 70%); pointer-events: none; }
+    .cta-band-title { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 800; letter-spacing: -0.03em; color: white; margin-bottom: 12px; }
+    .cta-band-text { font-size: 0.95rem; color: rgba(255,255,255,0.72); line-height: 1.75; margin-bottom: 28px; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .btn-cta-amber { background: var(--accent-color); color: #0d4b4b; border: none; font-weight: 700; font-size: 0.92rem; padding: 13px 28px; border-radius: 10px; transition: all 0.28s cubic-bezier(0.4,0,0.2,1); display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+    .btn-cta-amber:hover { background: #f8b930; color: #0d4b4b; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(246,171,21,0.38); }
+
+    .empty-state { padding: 60px 20px; text-align: center; }
+
+    @media (max-width: 768px) { .hero-section { padding: 72px 0 56px; } .cta-band { padding: 36px 20px; } }
+</style>
+{% endblock %}
+
 {% block content %}
-<!-- Certifications Hero -->
+
 <section class="hero-section">
-    <div class="container">
-        <div class="text-center">
-            <h1 class="display-4 fw-bold mb-4">
-                <i class="fas fa-certificate text-success me-3"></i>
-                {% trans "Certifications & Credentials" %}
-            </h1>
-            <p class="lead">
-                {% trans "Professional certifications and industry credentials" %}
-            </p>
-        </div>
+    <div class="container text-center animate-in">
+        <div class="hero-label d-inline-flex"><i class="fas fa-certificate"></i> Credentials</div>
+        <h1 class="hero-title">{% trans "Certifications & Credentials" %}</h1>
+        <p class="hero-lead">{% trans "Professional certifications and industry credentials" %}</p>
     </div>
 </section>
 
-<!-- Certifications Content -->
 <section class="section-padding">
     <div class="container">
-        <!-- Expiring Soon Alert -->
+
         {% if expiring_certs %}
-        <div class="row mb-4">
-            <div class="col-12">
-                <div class="alert alert-warning" role="alert">
-                    <h5 class="alert-heading">
-                        <i class="fas fa-exclamation-triangle me-2"></i>
-                        {% trans "Expiring Soon" %}
-                    </h5>
-                    <p class="mb-2">{% trans "The following certifications are expiring within 60 days:" %}</p>
-                    <ul class="mb-0">
-                        {% for cert in expiring_certs %}
-                        <li>{{ cert.name }} - {% trans "Expires" %} {{ cert.expiry_date|date:"M d, Y" }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
+        <div class="expiry-alert animate-in">
+            <div class="expiry-alert-title"><i class="fas fa-exclamation-triangle"></i> {% trans "Expiring Soon" %}</div>
+            <p style="font-size:0.84rem; color:#92400e; margin-bottom:8px;">{% trans "The following certifications are expiring within 60 days:" %}</p>
+            <ul class="expiry-list">
+                {% for cert in expiring_certs %}
+                <li>{{ cert.name }} — {% trans "Expires" %} {{ cert.expiry_date|date:"M d, Y" }}</li>
+                {% endfor %}
+            </ul>
         </div>
         {% endif %}
 
-        <!-- Featured Certifications -->
         {% if featured_certs %}
-        <div class="row mb-5">
-            <div class="col-12">
-                <h2 class="section-title">
-                    <i class="fas fa-star text-warning me-2"></i>
-                    {% trans "Featured Certifications" %}
-                </h2>
-                <div class="row">
-                    {% for cert in featured_certs %}
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100 border-0 shadow-sm certification-card featured">
-                            {% if cert.badge_image %}
-                            <div class="text-center py-3">
-                                <img src="{{ cert.badge_image.url }}" alt="{{ cert.name }}" class="certification-badge">
-                            </div>
-                            {% endif %}
-                            
-                            <div class="card-body">
-                                <h5 class="card-title text-primary">{{ cert.name }}</h5>
-                                <h6 class="card-subtitle mb-3 text-muted">{{ cert.issuing_organization }}</h6>
-                                
-                                <div class="cert-meta mb-3">
-                                    <span class="badge bg-{{ cert.certification_type|cut:'_'|capfirst|default:'primary' }} me-2">
-                                        {{ cert.get_certification_type_display }}
-                                    </span>
-                                    <span class="badge bg-{% if cert.status == 'active' %}success{% elif cert.status == 'expired' %}danger{% else %}warning{% endif %}">
-                                        {{ cert.get_status_display }}
-                                    </span>
-                                </div>
-                                
-                                <div class="cert-dates mb-3">
-                                    <small class="text-muted">
-                                        <i class="fas fa-calendar-check me-1"></i>
-                                        {% trans "Issued:" %} {{ cert.issue_date|date:"M Y" }}
-                                        {% if cert.expiry_date %}
-                                        <br>
-                                        <i class="fas fa-calendar-times me-1"></i>
-                                        {% trans "Expires:" %} {{ cert.expiry_date|date:"M Y" }}
-                                        {% endif %}
-                                    </small>
-                                </div>
-                                
-                                {% if cert.credential_id %}
-                                <p class="credential-id">
-                                    <small><strong>{% trans "ID:" %}</strong> {{ cert.credential_id }}</small>
-                                </p>
-                                {% endif %}
-                                
-                                {% if cert.description %}
-                                <p class="card-text">{{ cert.description|truncatewords:15 }}</p>
-                                {% endif %}
-                                
-                                <div class="cert-actions">
-                                    {% if cert.verification_url %}
-                                    <a href="{{ cert.verification_url }}" target="_blank" class="btn btn-outline-success btn-sm me-2">
-                                        <i class="fas fa-external-link-alt me-1"></i>
-                                        {% trans "Verify" %}
-                                    </a>
-                                    {% endif %}
-                                    
-                                    {% if cert.skills_gained.exists %}
-                                    <button class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#skillsModal{{ cert.id }}">
-                                        <i class="fas fa-cogs me-1"></i>
-                                        {% trans "Skills" %} ({{ cert.skills_gained.count }})
-                                    </button>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            
-                            {% if cert.is_expiring_soon %}
-                            <div class="card-footer bg-warning text-dark">
-                                <small>
-                                    <i class="fas fa-exclamation-triangle me-1"></i>
-                                    {% trans "Expiring soon!" %}
-                                </small>
-                            </div>
-                            {% endif %}
+        <div class="mb-5 animate-in">
+            <div class="section-label"><i class="fas fa-star"></i> Top Credentials</div>
+            <h2 class="section-title-text">{% trans "Featured Certifications" %}</h2>
+            <div class="section-title-divider"></div>
+            <div class="row g-4">
+                {% for cert in featured_certs %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="cert-card featured">
+                        <div class="cert-badge-wrap">
+                            {% if cert.badge_image %}<img src="{{ cert.badge_image.url }}" alt="{{ cert.name }}" class="cert-badge-img">
+                            {% else %}<div class="cert-badge-placeholder"><i class="fas fa-certificate"></i></div>{% endif %}
                         </div>
+                        <div class="cert-body">
+                            <p class="cert-name">{{ cert.name }}</p>
+                            <p class="cert-org">{{ cert.issuing_organization }}</p>
+                            <div class="cert-meta">
+                                <span class="cbadge cbadge-primary">{{ cert.get_certification_type_display }}</span>
+                                <span class="cbadge {% if cert.status == 'active' %}cbadge-green{% elif cert.status == 'expired' %}cbadge-red{% else %}cbadge-amber{% endif %}">{{ cert.get_status_display }}</span>
+                            </div>
+                            <div class="cert-dates">
+                                <span><i class="fas fa-calendar-check"></i>{% trans "Issued:" %} {{ cert.issue_date|date:"M Y" }}</span>
+                                {% if cert.expiry_date %}<span><i class="fas fa-calendar-times"></i>{% trans "Expires:" %} {{ cert.expiry_date|date:"M Y" }}</span>{% endif %}
+                            </div>
+                            {% if cert.credential_id %}<div class="credential-id"><strong>{% trans "ID:" %}</strong> {{ cert.credential_id }}</div>{% endif %}
+                            {% if cert.description %}<p class="cert-desc">{{ cert.description|truncatewords:18 }}</p>{% endif %}
+                            <div class="cert-actions">
+                                {% if cert.verification_url %}<a href="{{ cert.verification_url }}" target="_blank" class="btn-cert-verify"><i class="fas fa-external-link-alt"></i> {% trans "Verify" %}</a>{% endif %}
+                                {% if cert.skills_gained.exists %}<button class="btn-cert-skills" data-bs-toggle="modal" data-bs-target="#skillsModal{{ cert.id }}"><i class="fas fa-cogs"></i> {% trans "Skills" %} ({{ cert.skills_gained.count }})</button>{% endif %}
+                            </div>
+                        </div>
+                        {% if cert.is_expiring_soon %}<div class="cert-expiring-footer"><i class="fas fa-exclamation-triangle"></i> {% trans "Expiring soon!" %}</div>{% endif %}
                     </div>
-                    {% endfor %}
                 </div>
+                {% endfor %}
             </div>
         </div>
         {% endif %}
 
-        <!-- All Active Certifications -->
-        <div class="row">
-            <div class="col-12">
-                <h2 class="section-title">
-                    <i class="fas fa-award text-primary me-2"></i>
-                    {% trans "All Certifications" %}
-                </h2>
-                
-                <div class="row">
-                    {% for cert in active_certs %}
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100 border-0 shadow-sm certification-card">
-                            {% if cert.badge_image %}
-                            <div class="text-center py-3">
-                                <img src="{{ cert.badge_image.url }}" alt="{{ cert.name }}" class="certification-badge">
+        <div class="animate-in">
+            <div class="section-label"><i class="fas fa-award"></i> All Credentials</div>
+            <h2 class="section-title-text">{% trans "All Certifications" %}</h2>
+            <div class="section-title-divider"></div>
+            <div class="row g-4">
+                {% for cert in active_certs %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="cert-card">
+                        <div class="cert-badge-wrap">
+                            {% if cert.badge_image %}<img src="{{ cert.badge_image.url }}" alt="{{ cert.name }}" class="cert-badge-img">
+                            {% else %}<div class="cert-badge-placeholder"><i class="fas fa-certificate"></i></div>{% endif %}
+                        </div>
+                        <div class="cert-body">
+                            <p class="cert-name">{{ cert.name }}</p>
+                            <p class="cert-org">{{ cert.issuing_organization }}</p>
+                            <div class="cert-meta">
+                                <span class="cbadge cbadge-gray">{{ cert.get_certification_type_display }}</span>
+                                <span class="cbadge {% if cert.status == 'active' %}cbadge-green{% elif cert.status == 'expired' %}cbadge-red{% else %}cbadge-amber{% endif %}">{{ cert.get_status_display }}</span>
                             </div>
-                            {% endif %}
-                            
-                            <div class="card-body">
-                                <h5 class="card-title">{{ cert.name }}</h5>
-                                <h6 class="card-subtitle mb-3 text-muted">{{ cert.issuing_organization }}</h6>
-                                
-                                <div class="cert-meta mb-3">
-                                    <span class="badge bg-secondary me-2">{{ cert.get_certification_type_display }}</span>
-                                    <span class="badge bg-{% if cert.status == 'active' %}success{% elif cert.status == 'expired' %}danger{% else %}warning{% endif %}">
-                                        {{ cert.get_status_display }}
-                                    </span>
-                                </div>
-                                
-                                <div class="cert-dates mb-3">
-                                    <small class="text-muted">
-                                        <i class="fas fa-calendar-check me-1"></i>
-                                        {{ cert.issue_date|date:"M Y" }}
-                                        {% if cert.expiry_date %}
-                                        - {{ cert.expiry_date|date:"M Y" }}
-                                        {% endif %}
-                                    </small>
-                                </div>
-                                
-                                {% if cert.description %}
-                                <p class="card-text">{{ cert.description|truncatewords:10 }}</p>
-                                {% endif %}
-                                
-                                <div class="cert-actions">
-                                    {% if cert.verification_url %}
-                                    <a href="{{ cert.verification_url }}" target="_blank" class="btn btn-outline-primary btn-sm">
-                                        <i class="fas fa-external-link-alt me-1"></i>
-                                        {% trans "Verify" %}
-                                    </a>
-                                    {% endif %}
-                                </div>
+                            <div class="cert-dates">
+                                <span><i class="fas fa-calendar-check"></i>{{ cert.issue_date|date:"M Y" }}{% if cert.expiry_date %} — {{ cert.expiry_date|date:"M Y" }}{% endif %}</span>
+                            </div>
+                            {% if cert.description %}<p class="cert-desc">{{ cert.description|truncatewords:12 }}</p>{% endif %}
+                            <div class="cert-actions">
+                                {% if cert.verification_url %}<a href="{{ cert.verification_url }}" target="_blank" class="btn-cert-verify"><i class="fas fa-external-link-alt"></i> {% trans "Verify" %}</a>{% endif %}
                             </div>
                         </div>
                     </div>
-                    {% empty %}
-                    <div class="col-12">
-                        <div class="text-center py-5">
-                            <i class="fas fa-certificate fa-3x text-muted mb-3"></i>
-                            <h4 class="text-muted">{% trans "No certifications found" %}</h4>
-                            <p class="text-muted">{% trans "Check back later for updates!" %}</p>
-                        </div>
-                    </div>
-                    {% endfor %}
                 </div>
+                {% empty %}
+                <div class="col-12">
+                    <div class="empty-state">
+                        <i class="fas fa-certificate text-muted" style="font-size:4rem; opacity:0.4; display:block; margin-bottom:16px;"></i>
+                        <h4 class="text-muted fw-semibold">{% trans "No certifications found" %}</h4>
+                        <p class="text-muted">{% trans "Check back later for updates!" %}</p>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
 
-        <!-- Ready to Work Together Section -->
-        <div class="row mt-5">
-            <div class="col-12">
-                <div class="card bg-primary text-white border-0">
-                    <div class="card-body text-center py-5">
-                        <h3 class="card-title fw-bold mb-4">{% trans "Ready to Work Together?" %}</h3>
-                        <p class="card-text lead mb-4">
-                            {% trans "I'm always excited to take on new challenges and collaborate on interesting projects. Let's discuss how we can bring your ideas to life." %}
-                        </p>
-                        <a href="{% url 'portfolio:contact' %}" class="btn btn-light btn-lg">
-                            <i class="fas fa-envelope me-2"></i>
-                            {% trans "Get In Touch" %}
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <div class="cta-band animate-in" style="position: relative; z-index: 1;">
+            <h3 class="cta-band-title">{% trans "Ready to Work Together?" %}</h3>
+            <p class="cta-band-text">{% trans "I'm always excited to take on new challenges and collaborate on interesting projects. Let's discuss how we can bring your ideas to life." %}</p>
+            <a href="{% url 'portfolio:contact' %}" class="btn-cta-amber" style="position: relative; z-index: 1;"><i class="fas fa-envelope"></i> {% trans "Get In Touch" %}</a>
         </div>
+
     </div>
 </section>
 
-<!-- Skills Modal Template -->
 {% for cert in featured_certs %}
 {% if cert.skills_gained.exists %}
 <div class="modal fade" id="skillsModal{{ cert.id }}" tabindex="-1">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{% trans "Skills Gained" %} - {{ cert.name }}</h5>
+                <h5 class="modal-title"><i class="fas fa-cogs me-2" style="color:var(--secondary-color);"></i>{% trans "Skills Gained" %} — {{ cert.name }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    {% for skill in cert.skills_gained.all %}
-                    <div class="col-md-6 mb-2">
-                        <span class="badge bg-primary">{{ skill.name }}</span>
-                    </div>
-                    {% endfor %}
-                </div>
+                {% for skill in cert.skills_gained.all %}<span class="skill-tag">{{ skill.name }}</span>{% endfor %}
             </div>
         </div>
     </div>
@@ -240,42 +203,4 @@
 {% endif %}
 {% endfor %}
 
-<style>
-.certification-card {
-    transition: all 0.3s ease;
-}
-
-.certification-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
-}
-
-.certification-card.featured {
-    border-left: 4px solid var(--bs-success) !important;
-}
-
-.certification-badge {
-    max-width: 100px;
-    max-height: 100px;
-    object-fit: contain;
-}
-
-.stat-item h3 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.cert-actions .btn {
-    margin-bottom: 0.5rem;
-}
-
-.credential-id {
-    font-family: 'Courier New', monospace;
-    background: rgba(var(--bs-secondary-rgb), 0.1);
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-    margin-bottom: 1rem;
-}
-</style>
 {% endblock %}
