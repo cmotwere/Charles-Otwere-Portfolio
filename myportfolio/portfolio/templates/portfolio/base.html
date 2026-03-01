@@ -850,27 +850,31 @@
                     </li>
 
                     <!-- Language Switcher -->
-                    {% if available_languages %}
-                        <li class="nav-item dropdown language-switcher">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-globe"></i> {{ LANGUAGE_CODE|upper }}
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                {% get_available_languages as languages %}
-                                {% for lang_code, lang_name in languages %}
-                                    <li>
-                                        <form action="/i18n/setlang/" method="post" style="display:inline;">
-                                            {% csrf_token %}
-                                            <input name="language" type="hidden" value="{{ lang_code }}">
-                                            <button type="submit" class="dropdown-item {% if LANGUAGE_CODE == lang_code %}active{% endif %}">
-                                                {{ lang_name }}
-                                            </button>
-                                        </form>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                    {% endif %}
+                    <li class="nav-item dropdown language-switcher">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-globe"></i> {{ LANGUAGE_CODE|upper }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <form action="/i18n/setlang/" method="post" style="display:inline;">
+                                    {% csrf_token %}
+                                    <input name="language" type="hidden" value="en">
+                                    <button type="submit" class="dropdown-item {% if LANGUAGE_CODE == 'en' %}active{% endif %}">
+                                        English
+                                    </button>
+                                </form>
+                            </li>
+                            <li>
+                                <form action="/i18n/setlang/" method="post" style="display:inline;">
+                                    {% csrf_token %}
+                                    <input name="language" type="hidden" value="es">
+                                    <button type="submit" class="dropdown-item {% if LANGUAGE_CODE == 'es' %}active{% endif %}">
+                                        Español
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
