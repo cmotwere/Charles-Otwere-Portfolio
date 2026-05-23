@@ -215,6 +215,10 @@ def contact_view(request):
     about = About.objects.first()
 
     if request.method == 'POST':
+        # Honeypot check — bots fill this field; silently discard their submission
+        if request.POST.get('hp_url', ''):
+            return redirect('portfolio:contact')
+
         name = request.POST.get('name', '').strip()
         email = request.POST.get('email', '').strip()
         subject = request.POST.get('subject', '').strip()
