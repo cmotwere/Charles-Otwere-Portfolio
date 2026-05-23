@@ -37,30 +37,44 @@
     .section-heading { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.03em; color: var(--text-dark); margin-bottom: 8px; }
     .section-divider { width: 48px; height: 4px; background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); border-radius: 2px; margin: 10px auto 36px; }
 
-    .category-block { margin-bottom: 56px; }
+    .category-block { margin-bottom: 60px; }
     .category-block:last-child { margin-bottom: 0; }
 
     .category-header {
         display: flex; align-items: center; justify-content: space-between;
-        margin-bottom: 24px; padding-bottom: 14px;
-        border-bottom: 2px solid rgba(127,168,143,0.15);
+        margin-bottom: 28px;
+        background: linear-gradient(135deg, var(--primary-color) 0%, #155f5f 100%);
+        border-radius: 16px;
+        padding: 20px 24px;
+        box-shadow: 0 6px 24px rgba(13,75,75,0.18);
+        position: relative; overflow: hidden;
     }
 
-    .category-title-wrap { display: flex; align-items: center; gap: 12px; }
+    .category-header::after {
+        content: ''; position: absolute; top: -40px; right: -40px;
+        width: 160px; height: 160px;
+        background: radial-gradient(ellipse, rgba(246,171,21,0.18) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .category-title-wrap { display: flex; align-items: center; gap: 14px; position: relative; z-index: 1; }
 
     .category-icon-box {
-        width: 36px; height: 36px; background: rgba(127,168,143,0.12);
-        border-radius: 10px; display: flex; align-items: center; justify-content: center;
-        color: var(--secondary-color); font-size: 1rem; flex-shrink: 0;
+        width: 46px; height: 46px;
+        background: rgba(255,255,255,0.15);
+        border: 1px solid rgba(255,255,255,0.22);
+        border-radius: 12px; display: flex; align-items: center; justify-content: center;
+        color: #fff; font-size: 1.2rem; flex-shrink: 0;
     }
 
-    .category-name { font-size: 1.15rem; font-weight: 700; color: var(--text-dark); margin: 0; }
+    .category-name { font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0; letter-spacing: -0.01em; }
 
     .category-count {
         display: inline-flex; align-items: center;
-        background: rgba(13,75,75,0.07); color: var(--primary-color);
-        font-size: 0.72rem; font-weight: 600; padding: 3px 10px;
-        border-radius: 12px; border: 1px solid rgba(13,75,75,0.14); letter-spacing: 0.04em;
+        background: rgba(255,255,255,0.18); color: #fff;
+        font-size: 0.72rem; font-weight: 600; padding: 4px 12px;
+        border-radius: 20px; border: 1px solid rgba(255,255,255,0.28);
+        letter-spacing: 0.04em; position: relative; z-index: 1;
     }
 
     .skill-card {

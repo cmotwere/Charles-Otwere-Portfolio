@@ -32,9 +32,10 @@ class Skill(models.Model):
         ('programming', 'Programming Languages'),
         ('frontend', 'Frontend Technologies'),
         ('backend', 'Backend Technologies'),
-        ('database', 'Databases'),
+        ('data', 'Data & Analytics'),
         ('tools', 'Tools & Frameworks'),
         ('cloud', 'Cloud & DevOps'),
+        ('productivity', 'Productivity & Office Tools'),
         ('other', 'Other Skills'),
     ]
     

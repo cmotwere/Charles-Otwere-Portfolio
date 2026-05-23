@@ -151,11 +151,13 @@ def projects_view(request):
         projects = projects.filter(status=status)
     if search:
         projects = projects.filter(
-            Q(title__icontains=search) | 
+            Q(title__icontains=search) |
             Q(description__icontains=search) |
             Q(technologies_used__name__icontains=search)
         ).distinct()
-    
+
+    projects = projects.order_by('-start_date')
+
     # Get filter options
     project_types = Project.PROJECT_TYPES
     project_statuses = Project.PROJECT_STATUS

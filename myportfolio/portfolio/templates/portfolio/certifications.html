@@ -24,9 +24,18 @@
     .cert-card:hover { transform: translateY(-5px); box-shadow: 0 16px 42px rgba(13,75,75,0.12); border-color: rgba(13,75,75,0.2); }
     .cert-card.featured { border-top: 4px solid #22c55e; }
 
-    .cert-badge-wrap { padding: 24px; text-align: center; background: rgba(13,75,75,0.03); border-bottom: 1px solid rgba(127,168,143,0.1); }
-    .cert-badge-img { max-width: 90px; max-height: 90px; object-fit: contain; }
+    .cert-badge-wrap { padding: 24px; text-align: center; background: rgba(13,75,75,0.03); border-bottom: 1px solid rgba(127,168,143,0.1); position: relative; cursor: zoom-in; }
+    .cert-badge-img { max-width: 130px; max-height: 130px; object-fit: contain; cursor: zoom-in; transition: transform 0.25s ease, filter 0.25s ease; }
+    .cert-badge-img:hover { transform: scale(1.1); filter: drop-shadow(0 4px 14px rgba(13,75,75,0.28)); }
+    .cert-badge-zoom-hint { position: absolute; bottom: 8px; right: 10px; font-size: 0.65rem; color: var(--text-light); opacity: 0; transition: opacity 0.2s; display: flex; align-items: center; gap: 4px; pointer-events: none; }
+    .cert-badge-wrap:hover .cert-badge-zoom-hint { opacity: 1; }
     .cert-badge-placeholder { width: 72px; height: 72px; margin: 0 auto; background: rgba(13,75,75,0.07); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--secondary-color); font-size: 1.8rem; }
+    .img-zoom-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.82); z-index: 9999; align-items: center; justify-content: center; cursor: zoom-out; }
+    .img-zoom-overlay.active { display: flex; }
+    .img-zoom-overlay img { max-width: 88vw; max-height: 88vh; object-fit: contain; border-radius: 14px; box-shadow: 0 24px 80px rgba(0,0,0,0.55); animation: certZoomIn 0.22s cubic-bezier(0.4,0,0.2,1); }
+    .img-zoom-close { position: fixed; top: 18px; right: 22px; color: white; font-size: 1.8rem; cursor: pointer; opacity: 0.8; transition: opacity 0.15s; line-height: 1; }
+    .img-zoom-close:hover { opacity: 1; }
+    @keyframes certZoomIn { from { transform: scale(0.72); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
     .cert-body { padding: 22px 22px 20px; display: flex; flex-direction: column; flex: 1; }
     .cert-name { font-size: 1rem; font-weight: 700; color: var(--primary-color); margin-bottom: 4px; letter-spacing: -0.01em; }
@@ -106,7 +115,8 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="cert-card featured">
                         <div class="cert-badge-wrap">
-                            {% if cert.badge_image %}<img src="{{ cert.badge_image.url }}" alt="{{ cert.name }}" class="cert-badge-img">
+                            {% if cert.badge_image %}<img src="{{ cert.badge_image.url }}" alt="{{ cert.name }}" class="cert-badge-img cert-zoomable">
+                            <span class="cert-badge-zoom-hint"><i class="fas fa-search-plus"></i> click to expand</span>
                             {% else %}<div class="cert-badge-placeholder"><i class="fas fa-certificate"></i></div>{% endif %}
                         </div>
                         <div class="cert-body">
@@ -144,7 +154,8 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="cert-card">
                         <div class="cert-badge-wrap">
-                            {% if cert.badge_image %}<img src="{{ cert.badge_image.url }}" alt="{{ cert.name }}" class="cert-badge-img">
+                            {% if cert.badge_image %}<img src="{{ cert.badge_image.url }}" alt="{{ cert.name }}" class="cert-badge-img cert-zoomable">
+                            <span class="cert-badge-zoom-hint"><i class="fas fa-search-plus"></i> click to expand</span>
                             {% else %}<div class="cert-badge-placeholder"><i class="fas fa-certificate"></i></div>{% endif %}
                         </div>
                         <div class="cert-body">
@@ -202,5 +213,43 @@
 </div>
 {% endif %}
 {% endfor %}
+
+<div class="img-zoom-overlay" id="certZoomOverlay">
+    <span class="img-zoom-close" id="certZoomClose">&times;</span>
+    <img src="" alt="" id="certZoomImg">
+</div>
+
+<script>
+(function () {
+    // Bootstrap modals must be direct children of <body> to render above the
+    // stacking context created by <main style="z-index:1"> in base.html.
+    document.querySelectorAll('.modal[id^="skillsModal"]').forEach(function(m) {
+        document.body.appendChild(m);
+    });
+
+    const overlay = document.getElementById('certZoomOverlay');
+    const zoomImg = document.getElementById('certZoomImg');
+    const closeBtn = document.getElementById('certZoomClose');
+
+    document.querySelectorAll('.cert-zoomable').forEach(img => {
+        img.addEventListener('click', () => {
+            zoomImg.src = img.src;
+            zoomImg.alt = img.alt;
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    function close() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    overlay.addEventListener('click', close);
+    closeBtn.addEventListener('click', close);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    zoomImg.addEventListener('click', e => e.stopPropagation());
+})();
+</script>
 
 {% endblock %}
