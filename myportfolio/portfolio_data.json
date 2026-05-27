@@ -1,0 +1,4074 @@
+[
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$syUsSXo6xcGvoJM5D9ZZV2$2hlrwf8pJopgD2o8yjguiyW8zN+ro9kIToE7QglQp1k=",
+    "last_login": "2026-02-23T09:26:49.002Z",
+    "is_superuser": true,
+    "username": "cmotw",
+    "first_name": "",
+    "last_name": "",
+    "email": "cmotwere@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-01-30T10:21:34.279Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$tAgY8BwczSrc51AL0wEHDl$SsHkFZCKlsWtuIT8DCkPXkh5F6cgWJsv/6gfV9sH6NI=",
+    "last_login": "2026-05-27T11:34:33.720Z",
+    "is_superuser": true,
+    "username": "cmotwere",
+    "first_name": "",
+    "last_name": "",
+    "email": "cmotwere@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-02-26T22:03:46.348Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "300jv4um4473isk9uvy2166k3fsevq6f",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAURP-FtSHA5SEu3fsN5AIXqRpISrsy_rtt0oWuJplzZt4s4LrUsA6aw5TZhSl2-u0ipie1HeQHtnvnqbdlniLfFX7QwW890-t6uH8HFUfd1nC2qLUWMktpyIJQMfpiPGBBQ-ildFuC8skVUsKAzdIIr0nZROAE-3wBwqg3BQ:1wSAS5:vuff2QdNVfcFtmOCNzn4oCah7c0n4oHreTLKt8deLKQ",
+    "expire_date": "2026-06-10T09:21:25.620Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "8klbh20zveze4fzw79tgag4jtislq9d8",
+  "fields": {
+    "session_data": "eyJ0aGVtZSI6ImxpZ2h0In0:1wS9Fm:vrDjAM6qI4N2MlomCmAYfyzSGagVRir20Bfe2wRtwT4",
+    "expire_date": "2026-06-10T08:04:38.425Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "95bvh9jgcj9mk14kkb4c9in39yy9an42",
+  "fields": {
+    "session_data": ".eJyrVsrJzMtOTcnM081PLC3JMIovLkksSVWyUvLJjaxKLw0yCo7IzSv2MU_zcPZytkgrNalKyQwqMnQJUtJRSs8syShNguvwCkgOyIsoNyuvDMtzD60wCUqLdHFyLcswDHFKDjRMDwDqKMlIzQUpzclMzyhRqgUA6DQq6w:1vwSCl:bfJHOnKMXOqDqFlAtvOqLD84rcsMd71QwtCLvh_j9Pk",
+    "expire_date": "2026-03-14T21:50:31.867Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "9zb2wsj4s8to5lt4l6v0kxqect58iqcs",
+  "fields": {
+    "session_data": "eyJ0aGVtZSI6ImxpZ2h0In0:1wS9h0:UTIPhurAikVqp2VD3ieEdOEDLLTWLpQAw6yG94lhlhM",
+    "expire_date": "2026-06-10T08:32:46.703Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "cgqxnqekcowfhml91gnlz8jw7n7h948l",
+  "fields": {
+    "session_data": "eyJ0aGVtZSI6ImxpZ2h0IiwiZ2l0aHViX3N0YXRlIjoiM0NoNXA3d3ZWVG04ZjhBZUtVQ2w3ckpkYmVlWVlJdkEifQ:1vwAFz:ivML_PLSJtSBrr7IKSXG8YbD_WQ4OSNydQLlSwDpFFM",
+    "expire_date": "2026-03-14T02:40:39.469Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "e22ery6kigll70o154zxzuy81lld9gfp",
+  "fields": {
+    "session_data": ".eJxVjEEOgyAQRe_CuiEwjKhddt8zEGRGobWaCK6a3r2YuGi3_73_3sL5vUS3Z95cInEVIC6_2-DDk5cD0MMv0yrDupQtDfJQ5EmzvK_E8-10_wLR51jf2hAQYmO7XkMw7BXaRtveqACgxxFDS0PLzMhsRrBkkGwLGqBTGgzWaIn84pqa0xSL-HwBVt077A:1wQuEF:tlEU9Z_6-tAgJY0i3gtCIjZbwagPJ-yjrSDeHv4ciIY",
+    "expire_date": "2026-06-06T21:49:55.160Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "f0oruxohhuyearg8f1t9fhzfctkb1nas",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGll4119Kes5g2bsODiBHipMKcXcSKQW0b2beW8S0LjWuvcxxZHERSpx-t5zoWdoO-JHafZI0tWUes9wVedAubxOX1_Vw_w5q6nWrQQdihxb8YFVOln3wHtGR1c66AImNIpeNBtgkLIwDEFpC0JiLOYvPF7m4Nr4:1vuNRD:lPXLu2LRcYzPIE097jSZOBoeLD34JGzrLNM9m0sLly4",
+    "expire_date": "2026-03-09T04:20:51.292Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "gkgu0oo8o0mjnyb0i29m20ny41ntryde",
+  "fields": {
+    "session_data": "eyJnaXRodWJfc3RhdGUiOiI3cEE3M3BPV3pMQTRVUVJCdHVDNzZIM25ZMFE3U05mcCIsImxpbmtlZGluLW9hdXRoMl9zdGF0ZSI6IldRVXp1TkZBQzhibEhhN2tiUmpaWnpsbERLbXgwNUc2In0:1vvPkL:n5S552qw8PuihP_m0lUwOCin6QKMm_Qk_RxCSxsNXHQ",
+    "expire_date": "2026-03-12T01:00:53.069Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "hzyrli7mkq73y9h7u05h9ci101cjfusc",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAURP-FtSHA5SEu3fsN5AIXqRpISrsy_rtt0oWuJplzZt4s4LrUsA6aw5TZhSl2-u0ipie1HeQHtnvnqbdlniLfFX7QwW890-t6uH8HFUfd1nC2qLUWMktpyIJQMfpiPGBBQ-ildFuC8skVUsKAzdIIr0nZROAE-3wBwqg3BQ:1wSCWv:GCCHIjHYqK9HG2DpduKSbVv5_v8Z5gSX6qUZTcvsYns",
+    "expire_date": "2026-06-10T11:34:33.731Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "puz8iv51d0werz1l9z2ajzirqprn9dx6",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGll4119Kes5g2bsODiBHipMKcXcSKQW0b2beW8S0LjWuvcxxZHERSpx-t5zoWdoO-JHafZI0tWUes9wVedAubxOX1_Vw_w5q6nWrQQdihxb8YFVOln3wHtGR1c66AImNIpeNBtgkLIwDEFpC0JiLOYvPF7m4Nr4:1vlwKj:wAK4rw5PlxrpEGtYnbZ8ZOX_RJOhpMgSjc3MhyqsHjI",
+    "expire_date": "2026-02-13T21:47:17.041Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "qi4no73a75yhp7ftfst7ja3kh75mpnw5",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAURP-FtSHA5SEu3fsN5AIXqRpISrsy_rtt0oWuJplzZt4s4LrUsA6aw5TZhSl2-u0ipie1HeQHtnvnqbdlniLfFX7QwW890-t6uH8HFUfd1nC2qLUWMktpyIJQMfpiPGBBQ-ildFuC8skVUsKAzdIIr0nZROAE-3wBwqg3BQ:1wSANJ:796zTS_ir8SFdckHcLLEsWoDR3UicXf5lOItEtO9jxM",
+    "expire_date": "2026-06-10T09:16:29.759Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "rza79sm6k1qyeh8h9s4hdllijqele6ra",
+  "fields": {
+    "session_data": "eyJ0aGVtZSI6ImxpZ2h0In0:1vqUPm:Rvhqgx9snJYzOLn0K2BnS-PYJ8z2C6grLsQsO77lU5M",
+    "expire_date": "2026-02-26T10:59:18.751Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "usypwvrfw3b0dlw7klqmaqkuqyv1st07",
+  "fields": {
+    "session_data": ".eJxVjEEOgjAQRe_StWlkprTFpXvOQNqZgaIICZSV8e6WhIVu_3v_vVUX9py6fZO1G1ndVKUuv1sM9JT5APwI87BoWua8jlEfij7pptuFZbqf7l8ghS2VN5iG2KEF39sqBsu-8R7RkTXOugYC1xW5WBuAIqEw9kBoCcFglPpaojnJS0pqGoeU1ecLTTs71w:1vufm8:A9LzQgK9MzpTkG2f-mV4kNYs3eoo9qvBxlciu8OA3e4",
+    "expire_date": "2026-03-09T23:55:40.051Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "vohcx6v24y4z4wpl28mbvhmgucoz8b05",
+  "fields": {
+    "session_data": "eyJnaXRodWJfc3RhdGUiOiJKZllnSUNTRzlHSlFjOU5HVE1ZOUhxZzVMdGtxTWtoMyJ9:1wS9Nc:vMZteL2IQ52glQNJzVnpc2vjRK6Gvcw_JrNQOAhAId8",
+    "expire_date": "2026-06-10T08:12:44.043Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "w4bzyklhg8ozrl7i7aptzopxg06l8hqw",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGln-bRxT0nMGa3dt4wBypDipEHeHSCmgfTPzXiLitta49bzEKYmzMOL0uxHyI7cdpDu22yx5busykdwVedAur3PKz8vh_h1U7PVbsxkACEaniyVS1ltEQ-yCgewRMpjgeSQsCQYHzGQtZq-U9ho5lCLeH9-kOCU:1vvjUP:zuHG4abWVN2_R9raU6ZW5ECDMzKWMIS5L3hHKGP8a_U",
+    "expire_date": "2026-03-12T22:05:45.255Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ycn1ftjr0pbnnygdgu21eni0vhrx69gu",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hDKwJS4dO8ZCAMzUjU0Ke3KeHdt0oVu_3vvv1RM21rj1nmJU1FnZdXpd6OUH9x2UO6p3Wad57YuE-ld0Qft-joXfl4O9--gpl6_dQhAFgySgDUIJTgJgV1xzE5Gb2XgbJygOAFCEGRKI1kvAyIY8ur9Adn7N9s:1wQqel:vpA4DHMyTI644unwQz8haXmjagKBR8FqzbSVP0M3Q-s",
+    "expire_date": "2026-06-06T18:01:03.630Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "zo5at87isiq474f1xnxi61kzxkecd3mt",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAURP-FtSHA5SEu3fsN5AIXqRpISrsy_rtt0oWuJplzZt4s4LrUsA6aw5TZhSl2-u0ipie1HeQHtnvnqbdlniLfFX7QwW890-t6uH8HFUfd1nC2qLUWMktpyIJQMfpiPGBBQ-ildFuC8skVUsKAzdIIr0nZROAE-3wBwqg3BQ:1wS9rY:1mfReUW9tBcsLMCvLnRGXaZ8nfpO3-OfbWRHWJCqDDs",
+    "expire_date": "2026-06-10T08:43:40.219Z"
+  }
+},
+{
+  "model": "portfolio.about",
+  "pk": 1,
+  "fields": {
+    "name": "Charles Otwere",
+    "title": "",
+    "bio": "I am a graduate student in the MSc. Computer Information Systems & Business Analytics program at West Texas A&M University. My academic journey and professional experience reflect a consistent commitment to problem solving, strategic thinking, and organizational growth.\r\n\r\nBefore beginning my graduate studies, I built a solid career across marketing, sales, and product development roles in Ghana. I have served as a Marketing Manager, Sales & Product Development Manager, and Territory Supervisor in leading companies such as Kitea Ghana Limited, Assa Abloy, Sunda International, Wilmar Africa, and Unilever Ghana. Across these roles, I developed and executed data driven marketing strategies, managed distributors and wholesalers, optimized sales pipelines, and used market insights to improve product visibility and performance. These experiences strengthened my analytical mindset and my ability to translate data into actionable business decisions—skills that now support my transition into business analytics.\r\n\r\nAlongside my professional experience, I have actively participated in research assistance, academic projects, and community leadership, including serving as a research assistant on multiple academic and professional projects, and as a youth leader involved in training and capacity development. My technical skills include data analysis (SPSS), Microsoft Office tools, and emerging information systems, which directly support my current academic focus.\r\n\r\nAcademically, I hold an MBA, and a Postgraduate Diploma in Marketing Management from Kwame Nkrumah University of Science and Technology, and a Bachelor of Science in Laboratory Technology from the University of Cape Coast, where my undergraduate research was published in the Asian Journal of Plant Science and Research (https://ir.ucc.edu.gh/xmlui/handle/123456789/5944 ). My research background has shaped my interest in evidence based decision making and structured analysis.\r\n\r\nAs my first project in WT, I designed and implemented an open-source Mailroom Management System, a secure and AI-featured package tracking platform designed for local community housing environments. I presented this work at our student research poster session in December 2025 and upgraded version in March 2026, where it was recognized by both faculty and peers. This project demonstrated my ability to utilize knowledge gained in the classroom to address real operational challenges within business scenarios.\r\n\r\nThrough my graduate studies, I have developed a blend of professional discipline, analytical curiosity, and a passion for continuous learning. My goal is to leverage my background in marketing, sales, and research—together with advanced training in CIS and Business Analytics—to contribute meaningfully to data driven decision making in organizations. \r\n\r\nI am particularly motivated by opportunities that allow me to apply creativity, problem solving, and technology to real world business challenges, particularly in areas such as inventory and project management, operational efficiency, and institutional decision support.",
+    "profile_image": "about/1761846607438.jpg",
+    "resume_file": "",
+    "email": "cmotwere@gmail.com",
+    "phone": "+1 (806) 858 8770",
+    "location": "USA",
+    "linkedin_url": "https://www.linkedin.com/in/charles-mensah-otwere",
+    "github_url": "https://github.com/cmotwere",
+    "twitter_url": "",
+    "website_url": "https://www.charlesotwere.com",
+    "created_at": "2026-02-08T00:03:04.778Z",
+    "updated_at": "2026-05-27T08:45:14.996Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 1,
+  "fields": {
+    "name": "Python",
+    "category": "programming",
+    "proficiency": "intermediate",
+    "icon": "fab fa-python",
+    "description": "",
+    "years_experience": 2,
+    "is_featured": true,
+    "created_at": "2026-02-14T19:38:47Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 2,
+  "fields": {
+    "name": "Django",
+    "category": "backend",
+    "proficiency": "intermediate",
+    "icon": "fas fa-layer-group",
+    "description": "",
+    "years_experience": 2,
+    "is_featured": true,
+    "created_at": "2026-02-14T22:07:44Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 3,
+  "fields": {
+    "name": "Tableau",
+    "category": "data",
+    "proficiency": "intermediate",
+    "icon": "fas fa-chart-bar",
+    "description": "",
+    "years_experience": 1,
+    "is_featured": true,
+    "created_at": "2026-02-14T22:08:45Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 4,
+  "fields": {
+    "name": "postgreSQL",
+    "category": "data",
+    "proficiency": "intermediate",
+    "icon": "fas fa-database",
+    "description": "",
+    "years_experience": 1,
+    "is_featured": true,
+    "created_at": "2026-02-14T22:09:30Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 5,
+  "fields": {
+    "name": "MS Excel",
+    "category": "productivity",
+    "proficiency": "advanced",
+    "icon": "fas fa-file-excel",
+    "description": "",
+    "years_experience": 8,
+    "is_featured": true,
+    "created_at": "2026-02-14T22:12:08Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 6,
+  "fields": {
+    "name": "Power BI",
+    "category": "data",
+    "proficiency": "intermediate",
+    "icon": "fas fa-chart-pie",
+    "description": "",
+    "years_experience": 1,
+    "is_featured": true,
+    "created_at": "2026-02-14T22:13:00Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 8,
+  "fields": {
+    "name": "Streamlit",
+    "category": "backend",
+    "proficiency": "intermediate",
+    "icon": "fas fa-chart-line",
+    "description": "",
+    "years_experience": 1,
+    "is_featured": true,
+    "created_at": "2026-02-14T22:17:33Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 9,
+  "fields": {
+    "name": "Flask",
+    "category": "backend",
+    "proficiency": "beginner",
+    "icon": "fas fa-flask",
+    "description": "",
+    "years_experience": 1,
+    "is_featured": true,
+    "created_at": "2026-02-14T22:19:21Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 10,
+  "fields": {
+    "name": "FastAPI",
+    "category": "backend",
+    "proficiency": "beginner",
+    "icon": "fas fa-bolt",
+    "description": "",
+    "years_experience": 1,
+    "is_featured": true,
+    "created_at": "2026-02-14T22:19:41Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 11,
+  "fields": {
+    "name": "JavaScript",
+    "category": "frontend",
+    "proficiency": "beginner",
+    "icon": "fab fa-js",
+    "description": "",
+    "years_experience": 1,
+    "is_featured": true,
+    "created_at": "2026-02-14T22:30:36Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 12,
+  "fields": {
+    "name": "MS PowerPoint",
+    "category": "productivity",
+    "proficiency": "advanced",
+    "icon": "fas fa-file-powerpoint",
+    "description": "",
+    "years_experience": 0,
+    "is_featured": false,
+    "created_at": "2026-05-23T19:45:36Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 13,
+  "fields": {
+    "name": "MS Word",
+    "category": "productivity",
+    "proficiency": "advanced",
+    "icon": "fas fa-file-word",
+    "description": "",
+    "years_experience": 0,
+    "is_featured": false,
+    "created_at": "2026-05-23T19:46:35Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 14,
+  "fields": {
+    "name": "HTML",
+    "category": "frontend",
+    "proficiency": "intermediate",
+    "icon": "fab fa-html5",
+    "description": "",
+    "years_experience": 0,
+    "is_featured": false,
+    "created_at": "2026-05-23T20:13:34Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 15,
+  "fields": {
+    "name": "React",
+    "category": "frontend",
+    "proficiency": "beginner",
+    "icon": "fab fa-react",
+    "description": "",
+    "years_experience": 0,
+    "is_featured": false,
+    "created_at": "2026-05-23T20:14:41Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 16,
+  "fields": {
+    "name": "Cloud (Azure)",
+    "category": "cloud",
+    "proficiency": "beginner",
+    "icon": "fab fa-microsoft",
+    "description": "",
+    "years_experience": 0,
+    "is_featured": true,
+    "created_at": "2026-05-23T20:16:29Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 17,
+  "fields": {
+    "name": "Linux",
+    "category": "cloud",
+    "proficiency": "beginner",
+    "icon": "fab fa-linux",
+    "description": "",
+    "years_experience": 0,
+    "is_featured": false,
+    "created_at": "2026-05-23T20:17:17Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 18,
+  "fields": {
+    "name": "Caddy & Gunicorn",
+    "category": "cloud",
+    "proficiency": "intermediate",
+    "icon": "fas fa-server",
+    "description": "",
+    "years_experience": 0,
+    "is_featured": true,
+    "created_at": "2026-05-23T20:17:52Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 19,
+  "fields": {
+    "name": "GitHub Actions",
+    "category": "cloud",
+    "proficiency": "intermediate",
+    "icon": "fab fa-github",
+    "description": "",
+    "years_experience": 0,
+    "is_featured": false,
+    "created_at": "2026-05-23T20:18:21Z"
+  }
+},
+{
+  "model": "portfolio.project",
+  "pk": 1,
+  "fields": {
+    "title": "Mailroom Management System",
+    "slug": "mailroom-management-system",
+    "short_description": "SaaS Interface for Package Management",
+    "description": "This project involved designing and deploying a fully functional Mailroom Dashboard for managing package deliveries and pickups in a residential setting. Built as part of the CIDM 4360 coursework at West Texas A&M University, the dashboard is a practical SaaS solution that streamlines mailroom operations, improves accountability, and enhances resident communication.\r\n\r\nProject Overview\r\nThe Mailroom Dashboard was developed to address common challenges in residential package handling: tracking deliveries, identifying unknown recipients, and ensuring timely pickups. The system provides a centralized interface for mailroom staff to manage package status, log carrier details, and monitor resident interactions.\r\n\r\nKey Features\r\n\r\n1. Real-Time Package Tracking\r\nPackages are categorized into:\r\n- Pending Packages: Arrived but not yet picked up\r\n- Unknown Packages: No matching resident found\r\n- Received Packages: Successfully picked up and logged\r\nEach entry includes carrier info, tracking number, arrival/pickup time, and actionable buttons (e.g., “Mark as Picked Up” or “Return Package”).\r\n\r\n2. Summary Statistics\r\nAt the top of the dashboard, key metrics are displayed:\r\n- Pending: 5\r\n- Unknown: 2\r\n- Received Today: 0\r\n- Returned: 6\r\n- Total Packages: 29\r\nThis gives staff a quick overview of mailroom activity and workload.\r\n\r\n3. User-Friendly Navigation\r\nThe interface includes intuitive navigation for:\r\n- Adding new packages\r\n- Viewing unknown or returned items\r\n- Accessing history and email notifications\r\nThe system is designed for speed and clarity, minimizing training time and maximizing operational efficiency.\r\n\r\n4. Resident-Level Detail\r\nEach package is tied to a specific resident and unit number, ensuring traceability and reducing the risk of mis-delivery. Unknown packages are flagged for resolution or return.\r\n\r\nImpact\r\nThe Mailroom Dashboard delivers a clean, efficient, and scalable solution for residential package management. It demonstrates my ability to build production-grade interfaces, manage backend logic, and deploy real-world SaaS tools that solve operational problems. This project reflects my strengths in Django development, user experience design, and workflow optimization.",
+    "image": "portfolio_images/Screenshot_16.png",
+    "gallery_images": [],
+    "project_type": "web",
+    "status": "completed",
+    "live_url": "https://mailroom.charlesotwere.com",
+    "github_url": "https://github.com/cmotwere",
+    "start_date": "2025-12-01",
+    "end_date": "2026-03-05",
+    "is_featured": true,
+    "is_personal": true,
+    "team_size": 2,
+    "my_role": "Developer",
+    "challenges": "",
+    "learned": "",
+    "created_at": "2026-02-14T19:37:34.964Z",
+    "updated_at": "2026-05-23T21:43:39.662Z",
+    "technologies_used": [
+      2,
+      4,
+      11,
+      1
+    ]
+  }
+},
+{
+  "model": "portfolio.project",
+  "pk": 2,
+  "fields": {
+    "title": "CNAPY IMMS",
+    "slug": "inventory-monitoring-and-management-system",
+    "short_description": "Instructional Materials Management System",
+    "description": "The CNAPY Inventory Management System is a full‑featured administrative dashboard designed to streamline inventory tracking, purchasing workflows, and district‑level resource management. This project demonstrates my ability to build practical, data‑driven systems that support operational efficiency and real‑time decision‑making.\r\n\r\nProject Overview\r\nThe goal of CNAPY was to create a centralized platform where administrators could monitor inventory levels, manage purchase records, track district requests, and maintain vendor relationships. The dashboard provides a clean, structured interface that makes it easy for users to navigate complex data and perform essential tasks with minimal friction.\r\n\r\nKey Features\r\n\r\n1. High‑Level System Summary\r\nThe dashboard opens with a snapshot of key metrics:\r\n- 8 Total Districts\r\n- 7 Inventory Items\r\n- 6 Total Users\r\nThis gives administrators immediate visibility into the scale of operations.\r\n\r\n2. Quick Action Controls\r\nTo support fast workflows, the system includes direct access to:\r\n- Django Admin Panel\r\n- View All Inventory\r\n- Add New Item\r\n- Manage Requests\r\n- Add Storage Location\r\nThese shortcuts reduce navigation time and improve productivity.\r\n\r\n3. Purchasing Management Module\r\nA dedicated purchasing panel allows administrators to:\r\n- Manage vendors\r\n- Record purchases\r\n- View purchase reports\r\n- Add new vendors\r\nThis module centralizes procurement activities and ensures accurate record‑keeping.\r\n\r\n4. Activity Monitoring\r\nThe dashboard highlights operational insights such as:\r\n- Low stock alerts\r\n- Today’s requests\r\n- Weekly fulfillments\r\n- Storage location count\r\nThese indicators help administrators anticipate needs and respond quickly.\r\n\r\n5. Recent Activity Log\r\nA real‑time activity table displays fulfilled requests across districts, including:\r\n- District name\r\n- Item requested\r\n- Quantity\r\n- Status\r\n- Date\r\nThis ensures transparency and traceability across the entire inventory lifecycle.\r\n\r\n🔑 Key Highlights:\r\nSmart Workflow: Automated request processing with real-time stock updates\r\nMulti-District Support: Centralized management with district-specific dashboards\r\nRESTful API: Full integration capabilities for external systems\r\nRole-Based Security: Admin, District, and Staff user permissions\r\nAnalytics Dashboard: KPI tracking and performance metrics\r\nMobile-Ready: Responsive design with API support\r\n\r\nImpact\r\nThe CNAPY Inventory Management System provides a robust, scalable solution for managing educational district resources. It showcases my strengths in backend development, dashboard design, workflow optimization, and building systems that support real‑world administrative operations. This project reflects my ability to translate operational needs into intuitive, functional software.",
+    "image": "portfolio_images/338F4875-D8EA-4EAA-BC2D-5F26014E655A.png",
+    "gallery_images": [],
+    "project_type": "web",
+    "status": "development",
+    "live_url": "https://imms.charlesotwere.com",
+    "github_url": "https://github.com/cmotwere",
+    "start_date": "2026-01-01",
+    "end_date": null,
+    "is_featured": true,
+    "is_personal": true,
+    "team_size": 1,
+    "my_role": "Developer",
+    "challenges": "",
+    "learned": "",
+    "created_at": "2026-02-14T21:55:56.494Z",
+    "updated_at": "2026-05-27T11:34:58.494Z",
+    "technologies_used": [
+      2,
+      4,
+      11,
+      1
+    ]
+  }
+},
+{
+  "model": "portfolio.project",
+  "pk": 3,
+  "fields": {
+    "title": "Monaak Services",
+    "slug": "monaak-services",
+    "short_description": "Website Design & Brand Experience",
+    "description": "For this project, I designed and developed the official website for Monaak Services, a marketing and brand‑activation agency specializing in experiential marketing, promotions, and creative branding solutions. The goal was to create a modern, visually engaging digital presence that clearly communicates the company’s value, capabilities, and service offerings.\r\n\r\nProject Overview\r\nMonaak Services needed a website that could position the brand as a high‑impact marketing partner while showcasing its diverse portfolio of experiential campaigns, promotional activations, and branding solutions. I focused on building a clean, intuitive interface supported by bold visuals, strong typography, and a vibrant color palette that reflects the company’s creative identity.\r\nKey Features\r\n\r\n1. Hero Section & Brand Messaging\r\nThe homepage opens with a strong headline — “We Create Unforgettable Brand Experiences” — supported by a dynamic gradient background. This instantly communicates the company’s mission and sets the tone for the rest of the site.\r\n\r\n2. Clear Service Categories\r\nI structured the service offerings into three core areas:\r\n- Experiential Marketing: Roadshows, campus tours, mall activations, and consumer engagement events.\r\n- Promotions & Activations: In‑store promotions, sampling, giveaways, and product launch campaigns.\r\n- Branding & Prints: Creative design, advertising materials, banners, stickers, brochures, and corporate branding.\r\nEach section includes concise descriptions to help visitors quickly understand what Monaak Services delivers.\r\n\r\n3. “Why Choose Us” Value Proposition\r\nTo strengthen credibility, I added a dedicated section highlighting the company’s strengths:\r\n- High‑impact brand activations\r\n- Nationwide promotional execution\r\n- Creative branding & advertising\r\n- Accurate research & field data collection\r\nThis helps potential clients immediately see what sets the company apart.\r\n\r\n4. Strong Calls to Action\r\nButtons like “Explore Services” and “Request a Quote” guide visitors toward taking action, improving lead generation and user engagement.\r\n\r\n5. Visual‑Driven Layout\r\nThe site uses clean spacing, modern gradients, and service‑specific imagery to create a professional and memorable user experience.\r\n\r\nImpact\r\nThe final website gives Monaak Services a polished digital identity that aligns with its mission: delivering creative, results‑driven marketing experiences. It enhances brand credibility, improves client engagement, and provides a strong foundation for future digital marketing efforts.",
+    "image": "portfolio_images/6361391C-EF50-4EB9-9549-08B1EE38F76A.png",
+    "gallery_images": [],
+    "project_type": "web",
+    "status": "development",
+    "live_url": "https://monaakservices.charlesotwere.com",
+    "github_url": "https://github.com/cmotwere",
+    "start_date": "2025-11-23",
+    "end_date": null,
+    "is_featured": false,
+    "is_personal": true,
+    "team_size": 1,
+    "my_role": "",
+    "challenges": "",
+    "learned": "",
+    "created_at": "2026-02-23T04:34:50.356Z",
+    "updated_at": "2026-05-23T21:40:25.369Z",
+    "technologies_used": [
+      2,
+      11,
+      1
+    ]
+  }
+},
+{
+  "model": "portfolio.project",
+  "pk": 4,
+  "fields": {
+    "title": "CHARLES OTWERE",
+    "slug": "charles-otwere",
+    "short_description": "Personal Portfolio Website – Design & Development",
+    "description": "For this project, I designed and developed my personal portfolio website to serve as a central hub for showcasing my professional identity, technical skills, and completed work. The goal was to create a modern, engaging, and easy‑to‑navigate platform that reflects my experience as a Software Developer and Technology Enthusiast.\r\n\r\nProject Overview\r\nThe portfolio was built to highlight my strengths across software development, business operations, and data‑driven problem‑solving. I wanted a digital space that not only presents my projects but also communicates my personality, work ethic, and the value I bring to organizations.\r\nThe homepage features a clean, bold layout with a professional portrait, a concise introduction, and clear calls to action. Visitors can quickly understand who I am, what I do, and how to connect with me.\r\n\r\nKey Features\r\n1. Strong Personal Branding\r\nThe landing section introduces me with a clear headline — “Hi, I’m Charles Otwere – Software Developer & Technology Enthusiast.”\r\nThis sets the tone for the entire site and positions me as a results‑driven professional who thrives at the intersection of technology and business.\r\n\r\n2. Intuitive Navigation\r\nThe top navigation bar includes links to:\r\n- About\r\n- Projects\r\n- Skills\r\n- Experience\r\n- Education\r\n- Certifications\r\n- Blog\r\n- Testimonials\r\n- Contact\r\nThis structure ensures that visitors can easily explore my background and work.\r\n\r\n3. Professional Introduction\r\nThe homepage includes a short, compelling summary of my career focus — solving real‑world problems through technology, improving business operations, and delivering measurable results. This helps potential employers or clients quickly understand my value.\r\n\r\n4. Clear Calls to Action\r\nButtons such as “View My Work” and “Get In Touch” guide visitors toward exploring my projects or contacting me directly. This improves engagement and supports networking or job‑search goals.\r\n\r\n5. Integrated Social Presence\r\nSocial media icons (Facebook, Twitter, LinkedIn, Reddit) are placed prominently to make it easy for visitors to connect with me across platforms.\r\n\r\nImpact\r\nThis portfolio website has become a central part of my professional identity. It allows me to present my work in a polished, organized, and visually appealing way while reinforcing my credibility as a developer and technology professional. It also serves as a living document of my growth, updated regularly with new projects, skills, and achievements.",
+    "image": "portfolio_images/DC930E87-557B-49D3-BDFA-4F0E84EFAC29.png",
+    "gallery_images": [],
+    "project_type": "web",
+    "status": "completed",
+    "live_url": "https://charlesotwere.com",
+    "github_url": "https://github.com/cmotwere",
+    "start_date": "2025-10-08",
+    "end_date": "2026-03-05",
+    "is_featured": true,
+    "is_personal": true,
+    "team_size": 1,
+    "my_role": "",
+    "challenges": "",
+    "learned": "",
+    "created_at": "2026-02-23T04:40:31.184Z",
+    "updated_at": "2026-05-23T21:42:07.556Z",
+    "technologies_used": [
+      2,
+      11,
+      1
+    ]
+  }
+},
+{
+  "model": "portfolio.project",
+  "pk": 5,
+  "fields": {
+    "title": "Agentic AI for Rural Hospital Financial Survival",
+    "slug": "agentic-ai-for-rural-hospital-financial-survival",
+    "short_description": "A Multi-Signal Agentic AI",
+    "description": "An Autonomous Financial Early Warning Agent for Rural Hospital Survival in the Texas Panhandle: A Multi-Signal Agentic AI Approach to Predicting and Preventing Healthcare Access Collapse",
+    "image": "portfolio_images/58800322-9383-4369-84D1-E4DF89B03E4E.png",
+    "gallery_images": [],
+    "project_type": "ml",
+    "status": "planning",
+    "live_url": "",
+    "github_url": "",
+    "start_date": "2027-01-01",
+    "end_date": null,
+    "is_featured": true,
+    "is_personal": true,
+    "team_size": 1,
+    "my_role": "",
+    "challenges": "",
+    "learned": "",
+    "created_at": "2026-05-23T21:29:11.196Z",
+    "updated_at": "2026-05-27T11:35:21.221Z",
+    "technologies_used": []
+  }
+},
+{
+  "model": "portfolio.education",
+  "pk": 1,
+  "fields": {
+    "institution": "West Texas A&M University",
+    "degree_type": "master",
+    "program_name": "MS Computer Information Systems & Business Analytics",
+    "field_of_study": "Information Systems and Data Analytics",
+    "status": "in_progress",
+    "start_date": "2025-08-25",
+    "end_date": null,
+    "gpa": null,
+    "description": "",
+    "location": "Canyon TX",
+    "website_url": "https://www.wtamu.edu",
+    "is_featured": true,
+    "created_at": "2026-02-14T19:42:10.427Z",
+    "updated_at": "2026-05-23T19:44:42.843Z"
+  }
+},
+{
+  "model": "portfolio.education",
+  "pk": 2,
+  "fields": {
+    "institution": "University of Cape Coast",
+    "degree_type": "bachelor",
+    "program_name": "BSc Laboratory Technology",
+    "field_of_study": "Physical Sciences",
+    "status": "completed",
+    "start_date": "2008-08-01",
+    "end_date": "2012-08-01",
+    "gpa": null,
+    "description": "",
+    "location": "Cape Coast, Ghana",
+    "website_url": "",
+    "is_featured": false,
+    "created_at": "2026-02-25T01:43:54.934Z",
+    "updated_at": "2026-05-23T21:46:52.098Z"
+  }
+},
+{
+  "model": "portfolio.education",
+  "pk": 3,
+  "fields": {
+    "institution": "Kwame Nkrumah University of Science & Technology",
+    "degree_type": "associate",
+    "program_name": "Postgraduate Diploma in Marketing Management",
+    "field_of_study": "Marketing Management",
+    "status": "completed",
+    "start_date": "2018-01-01",
+    "end_date": "2018-12-25",
+    "gpa": null,
+    "description": "",
+    "location": "Accra, Ghana",
+    "website_url": "",
+    "is_featured": false,
+    "created_at": "2026-05-23T19:39:59.597Z",
+    "updated_at": "2026-05-23T19:39:59.600Z"
+  }
+},
+{
+  "model": "portfolio.education",
+  "pk": 4,
+  "fields": {
+    "institution": "Kwame Nkrumah University of Science & Technology",
+    "degree_type": "master",
+    "program_name": "Master in Business Administration",
+    "field_of_study": "Business Management",
+    "status": "completed",
+    "start_date": "2019-01-01",
+    "end_date": "2019-12-30",
+    "gpa": null,
+    "description": "",
+    "location": "Accra, Ghana",
+    "website_url": "",
+    "is_featured": true,
+    "created_at": "2026-05-23T19:42:47.015Z",
+    "updated_at": "2026-05-23T19:42:53.373Z"
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 1,
+  "fields": {
+    "name": "Data Science for Business",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-08-24",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/E5AA56CC-2976-451C-AE49-EB8D133641F9.png",
+    "is_featured": false,
+    "created_at": "2026-05-23T17:55:54.698Z",
+    "updated_at": "2026-05-23T18:35:10.382Z",
+    "skills_gained": []
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 2,
+  "fields": {
+    "name": "Introduction to SQL",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-08-26",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/Introduction_to_SQL.png",
+    "is_featured": false,
+    "created_at": "2026-05-23T18:10:25.891Z",
+    "updated_at": "2026-05-23T19:26:28.016Z",
+    "skills_gained": []
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 3,
+  "fields": {
+    "name": "Intermediate SQL",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-09-02",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/Intermediate_SQL.png",
+    "is_featured": true,
+    "created_at": "2026-05-23T18:13:05.874Z",
+    "updated_at": "2026-05-23T18:22:27.110Z",
+    "skills_gained": [
+      4
+    ]
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 4,
+  "fields": {
+    "name": "Joining Data In SQL",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-09-07",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/certificate_3-_Joining_Data_In_SQL.png",
+    "is_featured": false,
+    "created_at": "2026-05-23T18:23:08.148Z",
+    "updated_at": "2026-05-23T18:23:08.157Z",
+    "skills_gained": [
+      4
+    ]
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 5,
+  "fields": {
+    "name": "Introduction to Python",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-09-29",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/certificate_4-_Introduction_to_Python.png",
+    "is_featured": false,
+    "created_at": "2026-05-23T18:26:32.039Z",
+    "updated_at": "2026-05-23T18:26:32.049Z",
+    "skills_gained": [
+      1
+    ]
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 6,
+  "fields": {
+    "name": "Introduction to Functions in Python",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-10-05",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/certificate_5-_Intro_to_Functions_in_Python.png",
+    "is_featured": false,
+    "created_at": "2026-05-23T18:32:05.887Z",
+    "updated_at": "2026-05-23T18:32:05.895Z",
+    "skills_gained": []
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 7,
+  "fields": {
+    "name": "Intermediate Python",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-10-04",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/certificate_6-_Intermediate_Python.png",
+    "is_featured": false,
+    "created_at": "2026-05-23T18:34:52.809Z",
+    "updated_at": "2026-05-23T19:26:51.403Z",
+    "skills_gained": [
+      1
+    ]
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 8,
+  "fields": {
+    "name": "Data Manipulation with pandas",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-10-05",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/certificate_7-_Data_Manipulation_with_pandas.png",
+    "is_featured": false,
+    "created_at": "2026-05-23T18:38:19.644Z",
+    "updated_at": "2026-05-23T18:38:19.655Z",
+    "skills_gained": []
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 9,
+  "fields": {
+    "name": "Introduction to Data Visualization with Seaborn",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-10-07",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/certificate_8-_Intro_to_Data_Visualization_with_Seaborn.png",
+    "is_featured": false,
+    "created_at": "2026-05-23T18:43:02.595Z",
+    "updated_at": "2026-05-23T18:43:02.605Z",
+    "skills_gained": []
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 10,
+  "fields": {
+    "name": "Data Types in Python",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-10-12",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/certificate-_Data_Types_in_Python.png",
+    "is_featured": false,
+    "created_at": "2026-05-23T18:56:19.167Z",
+    "updated_at": "2026-05-23T18:56:19.173Z",
+    "skills_gained": []
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 11,
+  "fields": {
+    "name": "Intermediate Python for Developers",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-10-10",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/certificate-_Intermediate_Python_for_Developers.png",
+    "is_featured": false,
+    "created_at": "2026-05-23T18:59:10.643Z",
+    "updated_at": "2026-05-23T18:59:10.649Z",
+    "skills_gained": []
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 12,
+  "fields": {
+    "name": "Introduction to Python for Developers",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-10-08",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/certificate-_Introduction_to_Python_for_Developers.png",
+    "is_featured": false,
+    "created_at": "2026-05-23T19:01:26.452Z",
+    "updated_at": "2026-05-23T19:01:26.459Z",
+    "skills_gained": []
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 13,
+  "fields": {
+    "name": "Python Programming Fundamentals",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-10-12",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/certificate-_Python_Programming_Fundamentals.png",
+    "is_featured": false,
+    "created_at": "2026-05-23T19:04:12.154Z",
+    "updated_at": "2026-05-23T19:04:12.164Z",
+    "skills_gained": []
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 14,
+  "fields": {
+    "name": "Python Toolbox",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-10-11",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/Python_Toolbox.png",
+    "is_featured": false,
+    "created_at": "2026-05-23T19:06:09.129Z",
+    "updated_at": "2026-05-23T19:06:09.138Z",
+    "skills_gained": []
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 15,
+  "fields": {
+    "name": "Software Engineering Principles in Python",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-10-18",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/certificate-_Software_Engineering_Principles_in_Python.png",
+    "is_featured": false,
+    "created_at": "2026-05-23T19:07:51.644Z",
+    "updated_at": "2026-05-23T19:07:51.653Z",
+    "skills_gained": []
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 16,
+  "fields": {
+    "name": "Writing Efficient Python Code",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-10-16",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/certificate-_Writing_Efficient_Python_Code.png",
+    "is_featured": false,
+    "created_at": "2026-05-23T19:10:54.737Z",
+    "updated_at": "2026-05-23T19:10:54.746Z",
+    "skills_gained": []
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 17,
+  "fields": {
+    "name": "Writing Functions in Python",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-10-12",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/certificate-_Writing_Functions_in_Python.png",
+    "is_featured": false,
+    "created_at": "2026-05-23T19:12:39.881Z",
+    "updated_at": "2026-05-23T19:27:51.239Z",
+    "skills_gained": []
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 18,
+  "fields": {
+    "name": "Introduction to Object-Oriented Programming",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-10-19",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/certificate-Introduction_to_Object-Oriented_Programming.png",
+    "is_featured": true,
+    "created_at": "2026-05-23T19:18:22.929Z",
+    "updated_at": "2026-05-23T19:26:58.985Z",
+    "skills_gained": []
+  }
+},
+{
+  "model": "portfolio.certification",
+  "pk": 19,
+  "fields": {
+    "name": "Python Programming",
+    "issuing_organization": "Datacamp",
+    "certification_type": "online",
+    "status": "active",
+    "credential_id": "",
+    "issue_date": "2025-10-19",
+    "expiry_date": null,
+    "description": "",
+    "verification_url": "",
+    "badge_image": "certifications/certificate-Python_Programming.png",
+    "is_featured": true,
+    "created_at": "2026-05-23T19:25:53.142Z",
+    "updated_at": "2026-05-23T19:27:40.121Z",
+    "skills_gained": [
+      1
+    ]
+  }
+},
+{
+  "model": "portfolio.workexperience",
+  "pk": 1,
+  "fields": {
+    "job_title": "Marketing Manager",
+    "company_name": "Kitea Ghana Limited",
+    "employment_type": "full_time",
+    "status": "completed",
+    "start_date": "2024-11-01",
+    "end_date": "2025-07-31",
+    "location": "Accra, Ghana",
+    "company_description": "",
+    "job_description": "Marketing campaigns\r\nCustomer relationship management\r\nSocial media advertising",
+    "key_achievements": "Developed and executed comprehensive marketing plans to improve campaign performance through data insights and competitor analysis.\r\nLaunched engagement programs that increased loyal customers and enhanced efficiency in pipeline conversion.",
+    "company_website": "",
+    "company_logo": "",
+    "reference_contact": "",
+    "is_featured": true,
+    "created_at": "2026-02-23T09:11:43.664Z",
+    "updated_at": "2026-02-24T21:32:13.206Z",
+    "technologies_used": []
+  }
+},
+{
+  "model": "portfolio.workexperience",
+  "pk": 2,
+  "fields": {
+    "job_title": "Sales and Market Development",
+    "company_name": "Asa Abloy Ghana Limited",
+    "employment_type": "full_time",
+    "status": "completed",
+    "start_date": "2024-02-01",
+    "end_date": "2024-11-30",
+    "location": "Accra, Ghana",
+    "company_description": "",
+    "job_description": "Sales and Distributions",
+    "key_achievements": "Managed distributors and wholesalers, ensuring growth through problem solving and building relationship.\r\nImproved product coverage by promoting product penetration, visibility and availability across various markets.",
+    "company_website": "",
+    "company_logo": "",
+    "reference_contact": "",
+    "is_featured": true,
+    "created_at": "2026-02-24T21:29:47.970Z",
+    "updated_at": "2026-02-24T21:29:48.101Z",
+    "technologies_used": []
+  }
+},
+{
+  "model": "portfolio.workexperience",
+  "pk": 3,
+  "fields": {
+    "job_title": "Marketing Manager",
+    "company_name": "Sunda (Keda) International Ghana Limited",
+    "employment_type": "full_time",
+    "status": "completed",
+    "start_date": "2022-09-01",
+    "end_date": "2024-01-31",
+    "location": "Accra, Ghana",
+    "company_description": "",
+    "job_description": "Experiential Marketing\r\nProduct launching\r\nLoyal programs management",
+    "key_achievements": "Evaluated and optimized marketing campaigns and branding strategies, which resulted in increased sales.\r\nAnalyzed market trends and prepared forecasts to stay ahead of competition.",
+    "company_website": "",
+    "company_logo": "",
+    "reference_contact": "",
+    "is_featured": true,
+    "created_at": "2026-02-24T21:38:47.178Z",
+    "updated_at": "2026-02-24T21:38:47.185Z",
+    "technologies_used": [
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "portfolio.workexperience",
+  "pk": 4,
+  "fields": {
+    "job_title": "Sales Manager",
+    "company_name": "Banana Home (Digitallmall Ghana Limited)",
+    "employment_type": "full_time",
+    "status": "completed",
+    "start_date": "2018-10-01",
+    "end_date": "2022-08-31",
+    "location": "Accra, Ghana",
+    "company_description": "",
+    "job_description": "Retail chain-store management\r\nBulk sales and Distribution\r\nFranchise management\r\nPromotions and campaigns",
+    "key_achievements": "Developed sales and distribution strategies and reinforced management model to achieve annual, monthly sales targets.\r\nPerformed in-store inventory and developed loss control measures according to business development need which resulted in monthly net profit.",
+    "company_website": "",
+    "company_logo": "",
+    "reference_contact": "",
+    "is_featured": true,
+    "created_at": "2026-02-24T21:43:26.237Z",
+    "updated_at": "2026-02-24T21:43:26.246Z",
+    "technologies_used": [
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "portfolio.blogcategory",
+  "pk": 1,
+  "fields": {
+    "name": "Data, AI, and the Next Wave of Innovation",
+    "slug": "data-ai-and-the-next-wave-of-innovation",
+    "description": "Technology is moving faster than ever, and the biggest shifts today are happening at the intersection of data and artificial intelligence. Every week brings a new breakthrough - smarter models, more powerful tools, and fresh ways businesses can turn information into impact.\r\n\r\nOne of the most exciting trends is the rise of AI‑driven automation. Companies are no longer just collecting data; they’re using AI to analyze it, predict outcomes, and automate decisions in real time. From customer insights to supply‑chain optimization, AI is becoming the engine behind smarter operations.\r\n\r\nAt the same time, data quality and governance are becoming critical. As organizations adopt more AI tools, they’re realizing that models are only as good as the data feeding them. This has pushed data engineering, analytics, and responsible AI practices to the center of modern tech strategy.\r\n\r\nWe’re also seeing rapid growth in AI‑assisted development — tools that help developers write code faster, debug more efficiently, and build applications with fewer barriers. This shift is reshaping what it means to be a developer and accelerating innovation across the industry.\r\n\r\nOverall, the momentum in tech is clear:\r\nAI is becoming more accessible, data is becoming more valuable, and the companies that embrace both are pulling ahead. This is an exciting time to be in the field — and the next wave of innovation is only just beginning.",
+    "color": "#007bff",
+    "icon": "",
+    "created_at": "2026-02-14T19:31:49.149Z"
+  }
+},
+{
+  "model": "portfolio.event",
+  "pk": 1,
+  "fields": {
+    "title": "Faculty and Student Research Poster Session and Research Fair",
+    "slug": "faculty-and-student-research-poster-session-and-re",
+    "category": "workshop",
+    "date": "2026-03-05",
+    "location": "West Texas A&M University",
+    "description": "Traditional mailroom operations in residential settings often rely on manual logging, paper-based tracking, and inconsistent communication. These inefficiencies can lead to lost packages, delayed pickups, and poor tenant satisfaction. This project leverages modern web technologies, AI, and middleware design to address these gaps through automation, observability, and secure data handling.\r\nWe aim to transform routine administrative processes into a data-driven, efficient model by developing an affordable, scalable, and customizable open-source Mailroom Management System. Our Django-based solution will empower smaller residential operators with modern digital tools to enhance speed, traceability, and resident satisfaction.\r\n\r\nCore Technology:\r\nDjango web framework (MVT architecture) and relational database and chatbot assistance services.\r\n\r\nKey Features:\r\nAI-assisted package intake and automated email notifications with secure QR-based pickup.\r\nBasic AI chatbot support to check package status.\r\nRole-based dashboards for residents and staff.\r\nAudit logging and robust error handling for reliability.\r\nSupport for known and unknown recipients (flexibility).\r\n\r\nDesign Principles:\r\nUsability: Simple, user-centered interfaces requiring minimal training.\r\nSecurity: CSRF protection, secure sessions, input validation to protect resident data.\r\nScalability: Supports large databases, multiple users, and future integrations (mobile apps, carrier APIs).\r\nReliability: Ensures accurate recordkeeping and prevents data loss.\r\nFlexibility: Adapts to incomplete resident information.\r\nObject-Oriented Design: Applied OOP principles for maintainability, modularity, and future enhancements.",
+    "cover_image": "events/image4_X5rVBnp.jpeg",
+    "is_featured": true,
+    "created_at": "2026-05-27T08:57:53.762Z",
+    "updated_at": "2026-05-27T09:33:41.707Z"
+  }
+},
+{
+  "model": "portfolio.event",
+  "pk": 2,
+  "fields": {
+    "title": "COB First Student Research Poster Session",
+    "slug": "cob-first-student-research-poster-session",
+    "category": "workshop",
+    "date": "2025-12-05",
+    "location": "West Texas A&M University",
+    "description": "This project presents a secure, scalable Django-based Mailroom Management System for university housing and leasing offices. The system automates package workflows using OCR for label scanning and chatbot assistance while maintaining reliability through audit logging and robust security controls. This project practically demonstrates how modern web technologies can be effectively applied to solve real-world operational challenges and improve mailroom efficiency",
+    "cover_image": "events/Dec_5_2025_Research_Poster_Session1.jpg",
+    "is_featured": true,
+    "created_at": "2026-05-27T09:20:32.087Z",
+    "updated_at": "2026-05-27T09:22:10.922Z"
+  }
+},
+{
+  "model": "portfolio.event",
+  "pk": 3,
+  "fields": {
+    "title": "2026 Student & Community Symposium",
+    "slug": "2026-student-community-symposium",
+    "category": "conference",
+    "date": "2026-04-22",
+    "location": "West Texas A&M University",
+    "description": "I’m honored that my project is being recognized at the 2026 Student & Community Symposium, and I appreciate the continued support from the Paul & Virginia Engler College of Business.\r\n\r\nOpen-Source Mailroom Management System\r\nAdvisor: Dr. Cheng (Carl) Zhang",
+    "cover_image": "events/20260422_171202.jpg",
+    "is_featured": true,
+    "created_at": "2026-05-27T09:30:57.551Z",
+    "updated_at": "2026-05-27T09:37:20.940Z"
+  }
+},
+{
+  "model": "portfolio.eventphoto",
+  "pk": 1,
+  "fields": {
+    "event": 1,
+    "image": "events/image4.jpeg",
+    "caption": "",
+    "order": 0
+  }
+},
+{
+  "model": "portfolio.eventphoto",
+  "pk": 2,
+  "fields": {
+    "event": 1,
+    "image": "events/image2.jpeg",
+    "caption": "",
+    "order": 0
+  }
+},
+{
+  "model": "portfolio.eventphoto",
+  "pk": 3,
+  "fields": {
+    "event": 1,
+    "image": "events/image0.jpeg",
+    "caption": "",
+    "order": 0
+  }
+},
+{
+  "model": "portfolio.eventphoto",
+  "pk": 4,
+  "fields": {
+    "event": 2,
+    "image": "events/Dec_5_2025_Research_Poster_Session2.jpg",
+    "caption": "",
+    "order": 0
+  }
+},
+{
+  "model": "portfolio.eventphoto",
+  "pk": 5,
+  "fields": {
+    "event": 3,
+    "image": "events/image2_KOc0n94.jpeg",
+    "caption": "",
+    "order": 0
+  }
+},
+{
+  "model": "portfolio.eventphoto",
+  "pk": 6,
+  "fields": {
+    "event": 3,
+    "image": "events/image0_UCfoXM6.jpeg",
+    "caption": "",
+    "order": 0
+  }
+},
+{
+  "model": "portfolio.eventphoto",
+  "pk": 7,
+  "fields": {
+    "event": 1,
+    "image": "events/1000105814.jpg",
+    "caption": "",
+    "order": 0
+  }
+},
+{
+  "model": "portfolio.blogpost",
+  "pk": 1,
+  "fields": {
+    "title": "Data, AI, and the Next Wave of Innovation",
+    "slug": "data-ai-and-the-next-wave-of-innovation",
+    "excerpt": "",
+    "content": "Technology is moving faster than ever, and the biggest shifts today are happening at the intersection of data and artificial intelligence. Every week brings a new breakthrough — smarter models, more powerful tools, and fresh ways businesses can turn information into impact.\r\n\r\nOne of the most exciting trends is the rise of AI‑driven automation. Companies are no longer just collecting data; they’re using AI to analyze it, predict outcomes, and automate decisions in real time. From customer insights to supply‑chain optimization, AI is becoming the engine behind smarter operations.\r\n\r\nAt the same time, data quality and governance are becoming critical. As organizations adopt more AI tools, they’re realizing that models are only as good as the data feeding them. This has pushed data engineering, analytics, and responsible AI practices to the center of modern tech strategy.\r\nWe’re also seeing rapid growth in AI‑assisted development — tools that help developers write code faster, debug more efficiently, and build applications with fewer barriers. This shift is reshaping what it means to be a developer and accelerating innovation across the industry.\r\n\r\nOverall, the momentum in tech is clear:\r\nAI is becoming more accessible, data is becoming more valuable, and the companies that embrace both are pulling ahead.\r\nThis is an exciting time to be in the field — and the next wave of innovation is only just beginning.",
+    "featured_image": "blog/1452604857_ai.png",
+    "category": null,
+    "content_type": "technical",
+    "status": "published",
+    "tags": "",
+    "reading_time": 5,
+    "view_count": 11,
+    "like_count": 0,
+    "seo_title": "Data, AI, and the Next Wave of Innovation",
+    "meta_description": "",
+    "is_featured": true,
+    "published_date": "2026-02-14T20:39:41.628Z",
+    "created_at": "2026-02-14T20:03:42.662Z",
+    "updated_at": "2026-02-14T20:39:41.642Z",
+    "related_projects": []
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2026-02-08T00:03:05.787Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "about"
+    ],
+    "object_id": "1",
+    "object_repr": "Charles Mensah Otwere - Mr.",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2026-02-08T00:04:10.902Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "about"
+    ],
+    "object_id": "1",
+    "object_repr": "Charles Mensah Otwere - Mr.",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Bio\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2026-02-08T00:14:40.845Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "about"
+    ],
+    "object_id": "1",
+    "object_repr": "Charles Mensah Otwere - (No title)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Title\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2026-02-08T00:14:44.835Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "about"
+    ],
+    "object_id": "1",
+    "object_repr": "Charles Mensah Otwere - (No title)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2026-02-08T00:18:07.822Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "about"
+    ],
+    "object_id": "1",
+    "object_repr": "Charles Otwere - (No title)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2026-02-14T19:31:49.156Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "blogcategory"
+    ],
+    "object_id": "1",
+    "object_repr": "Data, AI, and the Next Wave of Innovation",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2026-02-14T19:37:35.468Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "1",
+    "object_repr": "Mailroom Management System",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2026-02-14T19:39:42.269Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "1",
+    "object_repr": "Python (Intermediate)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2026-02-14T19:42:10.436Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "education"
+    ],
+    "object_id": "1",
+    "object_repr": "Master in CIS & Business Analytics - West Texas A&M University",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2026-02-14T19:42:38.265Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "education"
+    ],
+    "object_id": "1",
+    "object_repr": "Master in CIS & Business Analytics - West Texas A&M University",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Gpa\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2026-02-14T19:45:46.321Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "1",
+    "object_repr": "Mailroom Management System",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2026-02-14T20:03:42.685Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "blogpost"
+    ],
+    "object_id": "1",
+    "object_repr": "Data, AI, and the Next Wave of Innovation",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2026-02-14T20:04:08.465Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "blogpost"
+    ],
+    "object_id": "1",
+    "object_repr": "Data, AI, and the Next Wave of Innovation",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2026-02-14T20:39:41.655Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "blogpost"
+    ],
+    "object_id": "1",
+    "object_repr": "Data, AI, and the Next Wave of Innovation",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Featured image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2026-02-14T21:55:57.458Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "2",
+    "object_repr": "Inventory Monitoring and Management system",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2026-02-14T22:05:56.428Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "1",
+    "object_repr": "Mailroom Management System",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2026-02-14T22:06:00.195Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "2",
+    "object_repr": "Inventory Monitoring and Management system",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2026-02-14T22:08:36.257Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "2",
+    "object_repr": "Django (Intermediate)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2026-02-14T22:08:43.670Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "2",
+    "object_repr": "Django (Intermediate)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2026-02-14T22:09:19.135Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "3",
+    "object_repr": "Tableau (Intermediate)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2026-02-14T22:09:28.461Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "2",
+    "object_repr": "Django (Intermediate)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Years experience\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2026-02-14T22:11:42.915Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "4",
+    "object_repr": "SQL (Intermediate)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2026-02-14T22:12:49.306Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "5",
+    "object_repr": "Excel (Advanced)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2026-02-14T22:13:32.825Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "6",
+    "object_repr": "Power BI (Intermediate)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2026-02-14T22:14:08.896Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "7",
+    "object_repr": "R (Beginner)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2026-02-14T22:18:24.602Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "8",
+    "object_repr": "Streamlit (Intermediate)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2026-02-14T22:19:39.781Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "9",
+    "object_repr": "Flask (Beginner)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2026-02-14T22:20:06.061Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "10",
+    "object_repr": "FastAPI (Beginner)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2026-02-14T22:20:39.785Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "10",
+    "object_repr": "FastAPI (Beginner)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2026-02-14T22:26:11.102Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "2",
+    "object_repr": "Django (Intermediate)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2026-02-14T22:26:20.814Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "8",
+    "object_repr": "Streamlit (Intermediate)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2026-02-14T22:26:26.972Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "10",
+    "object_repr": "FastAPI (Beginner)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2026-02-14T22:26:33.430Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "9",
+    "object_repr": "Flask (Beginner)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2026-02-14T22:31:10.757Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "11",
+    "object_repr": "JavaScript (Beginner)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2026-02-14T22:53:49.418Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "about"
+    ],
+    "object_id": "1",
+    "object_repr": "Charles Otwere - (No title)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Bio\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2026-02-15T01:31:57.903Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "1",
+    "object_repr": "Mailroom Management System",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Technologies used\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2026-02-15T01:34:41.014Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "2",
+    "object_repr": "Inventory Monitoring and Management system",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Technologies used\", \"Live url\", \"Github url\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2026-02-15T01:35:06.224Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "1",
+    "object_repr": "Mailroom Management System",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Technologies used\", \"Github url\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 39,
+  "fields": {
+    "action_time": "2026-02-15T01:36:43.710Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "2",
+    "object_repr": "Inventory Monitoring and Management system",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"My role\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 40,
+  "fields": {
+    "action_time": "2026-02-15T02:00:39.638Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "2",
+    "object_repr": "Inventory Monitoring and Management System",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Title\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 41,
+  "fields": {
+    "action_time": "2026-02-23T04:23:35.964Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "2",
+    "object_repr": "Inventory Monitoring and Management System",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 42,
+  "fields": {
+    "action_time": "2026-02-23T04:25:29.888Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "2",
+    "object_repr": "Inventory Monitoring and Mgt System",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Title\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2026-02-23T04:34:50.375Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "3",
+    "object_repr": "Monaak Services",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2026-02-23T04:35:07.333Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "2",
+    "object_repr": "Inventory Monitoring and Mgt System",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2026-02-23T04:35:12.043Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "3",
+    "object_repr": "Monaak Services",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 46,
+  "fields": {
+    "action_time": "2026-02-23T04:35:15.557Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "1",
+    "object_repr": "Mailroom Management System",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 47,
+  "fields": {
+    "action_time": "2026-02-23T04:40:31.213Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "4",
+    "object_repr": "CHARLES OTWERE",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 48,
+  "fields": {
+    "action_time": "2026-02-23T04:45:16.329Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "1",
+    "object_repr": "Mailroom Management System",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Short description\", \"Description\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 49,
+  "fields": {
+    "action_time": "2026-02-23T04:50:18.890Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "2",
+    "object_repr": "CNAPY IMMS",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Title\", \"Short description\", \"Description\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 50,
+  "fields": {
+    "action_time": "2026-02-23T09:11:43.686Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "workexperience"
+    ],
+    "object_id": "1",
+    "object_repr": "MARKETING MANAGER at Kitea Ghana Limited",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 51,
+  "fields": {
+    "action_time": "2026-02-24T21:29:48.138Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "workexperience"
+    ],
+    "object_id": "2",
+    "object_repr": "Sales and Market Development at Asa Abloy Ghana Limited",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 52,
+  "fields": {
+    "action_time": "2026-02-24T21:32:13.218Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "workexperience"
+    ],
+    "object_id": "1",
+    "object_repr": "Marketing Manager at Kitea Ghana Limited",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Job title\", \"Job description\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 53,
+  "fields": {
+    "action_time": "2026-02-24T21:38:47.214Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "workexperience"
+    ],
+    "object_id": "3",
+    "object_repr": "Marketing Manager at Sunda (Keda) International Ghana Limited",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 54,
+  "fields": {
+    "action_time": "2026-02-24T21:43:26.258Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "workexperience"
+    ],
+    "object_id": "4",
+    "object_repr": "Sales Manager at Banana Home (Digitallmall Ghana Limited)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 55,
+  "fields": {
+    "action_time": "2026-02-24T21:53:32.736Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "about"
+    ],
+    "object_id": "1",
+    "object_repr": "Charles Otwere - (No title)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Bio\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 56,
+  "fields": {
+    "action_time": "2026-02-25T01:43:54.951Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "education"
+    ],
+    "object_id": "2",
+    "object_repr": "Bachelor in BSc Laboratory Technology - University of Cape Coast",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 57,
+  "fields": {
+    "action_time": "2026-02-25T01:44:42.666Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "education"
+    ],
+    "object_id": "2",
+    "object_repr": "Bachelor in BSc Laboratory Technology - University of Cape Coast",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"End date\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 58,
+  "fields": {
+    "action_time": "2026-02-25T01:45:03.064Z",
+    "user": [
+      "cmotw"
+    ],
+    "content_type": [
+      "portfolio",
+      "education"
+    ],
+    "object_id": "2",
+    "object_repr": "Bachelor in BSc Laboratory Technology - University of Cape Coast",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"End date\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 59,
+  "fields": {
+    "action_time": "2026-02-26T22:10:22.791Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "about"
+    ],
+    "object_id": "1",
+    "object_repr": "Charles Otwere - (No title)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Bio\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 60,
+  "fields": {
+    "action_time": "2026-02-26T22:37:16.542Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "1",
+    "object_repr": "Mailroom Management System",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Team size\", \"My role\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 61,
+  "fields": {
+    "action_time": "2026-05-23T17:55:54.736Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "1",
+    "object_repr": "Data Science for Business - DataCamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 62,
+  "fields": {
+    "action_time": "2026-05-23T18:01:22.202Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "1",
+    "object_repr": "Data Science for Business - DataCamp",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Badge image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 63,
+  "fields": {
+    "action_time": "2026-05-23T18:10:25.913Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "2",
+    "object_repr": "Introduction to SQL - Datacamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 64,
+  "fields": {
+    "action_time": "2026-05-23T18:10:34.798Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "1",
+    "object_repr": "Data Science for Business - Datacamp",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Issuing organization\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 65,
+  "fields": {
+    "action_time": "2026-05-23T18:13:05.905Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "3",
+    "object_repr": "Intermediate SQL - Datacamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 66,
+  "fields": {
+    "action_time": "2026-05-23T18:22:27.116Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "3",
+    "object_repr": "Intermediate SQL - Datacamp",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 67,
+  "fields": {
+    "action_time": "2026-05-23T18:23:08.167Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "4",
+    "object_repr": "Joining Data In SQL - Datacamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 68,
+  "fields": {
+    "action_time": "2026-05-23T18:26:32.056Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "5",
+    "object_repr": "Introduction to Python - Datacamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 69,
+  "fields": {
+    "action_time": "2026-05-23T18:32:05.906Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "6",
+    "object_repr": "Introduction to Functions in Python - Datacamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 70,
+  "fields": {
+    "action_time": "2026-05-23T18:34:52.829Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "7",
+    "object_repr": "Intermediate Python - Datacamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 71,
+  "fields": {
+    "action_time": "2026-05-23T18:35:10.391Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "1",
+    "object_repr": "Data Science for Business - Datacamp",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 72,
+  "fields": {
+    "action_time": "2026-05-23T18:35:17.336Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "7",
+    "object_repr": "Intermediate Python - Datacamp",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 73,
+  "fields": {
+    "action_time": "2026-05-23T18:38:19.667Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "8",
+    "object_repr": "Data Manipulation with pandas - Datacamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 74,
+  "fields": {
+    "action_time": "2026-05-23T18:43:02.612Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "9",
+    "object_repr": "Introduction to Data Visualization with Seaborn - Datacamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 75,
+  "fields": {
+    "action_time": "2026-05-23T18:56:19.179Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "10",
+    "object_repr": "Data Types in Python - Datacamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 76,
+  "fields": {
+    "action_time": "2026-05-23T18:59:10.655Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "11",
+    "object_repr": "Intermediate Python for Developers - Datacamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 77,
+  "fields": {
+    "action_time": "2026-05-23T19:01:26.468Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "12",
+    "object_repr": "Introduction to Python for Developers - Datacamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 78,
+  "fields": {
+    "action_time": "2026-05-23T19:04:12.172Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "13",
+    "object_repr": "Python Programming Fundamentals - Datacamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 79,
+  "fields": {
+    "action_time": "2026-05-23T19:06:09.148Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "14",
+    "object_repr": "Python Toolbox - Datacamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 80,
+  "fields": {
+    "action_time": "2026-05-23T19:07:51.663Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "15",
+    "object_repr": "Software Engineering Principles in Python - Datacamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 81,
+  "fields": {
+    "action_time": "2026-05-23T19:10:54.754Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "16",
+    "object_repr": "Writing Efficient Python Code - Datacamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 82,
+  "fields": {
+    "action_time": "2026-05-23T19:12:39.897Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "17",
+    "object_repr": "certificate- Writing Functions in Python - Datacamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 83,
+  "fields": {
+    "action_time": "2026-05-23T19:18:22.942Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "18",
+    "object_repr": "Introduction to Object-Oriented Programming - Datacamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 84,
+  "fields": {
+    "action_time": "2026-05-23T19:25:53.160Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "19",
+    "object_repr": "certificate-Python Programming - Datacamp",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 85,
+  "fields": {
+    "action_time": "2026-05-23T19:26:17.698Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "19",
+    "object_repr": "certificate-Python Programming - Datacamp",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 86,
+  "fields": {
+    "action_time": "2026-05-23T19:26:28.023Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "2",
+    "object_repr": "Introduction to SQL - Datacamp",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 87,
+  "fields": {
+    "action_time": "2026-05-23T19:26:51.410Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "7",
+    "object_repr": "Intermediate Python - Datacamp",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 88,
+  "fields": {
+    "action_time": "2026-05-23T19:26:58.992Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "18",
+    "object_repr": "Introduction to Object-Oriented Programming - Datacamp",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 89,
+  "fields": {
+    "action_time": "2026-05-23T19:27:40.129Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "19",
+    "object_repr": "Python Programming - Datacamp",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 90,
+  "fields": {
+    "action_time": "2026-05-23T19:27:51.246Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "certification"
+    ],
+    "object_id": "17",
+    "object_repr": "Writing Functions in Python - Datacamp",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 91,
+  "fields": {
+    "action_time": "2026-05-23T19:28:46.160Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "blogcategory"
+    ],
+    "object_id": "1",
+    "object_repr": "Data, AI, and the Next Wave of Innovation",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 92,
+  "fields": {
+    "action_time": "2026-05-23T19:32:40.696Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "about"
+    ],
+    "object_id": "1",
+    "object_repr": "Charles Otwere - (No title)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Profile image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 93,
+  "fields": {
+    "action_time": "2026-05-23T19:39:59.603Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "education"
+    ],
+    "object_id": "3",
+    "object_repr": "Associate in Postgraduate Diploma in Marketing Management - Kwame Nkrumah University of Science & Technology",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 94,
+  "fields": {
+    "action_time": "2026-05-23T19:40:55.133Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "education"
+    ],
+    "object_id": "2",
+    "object_repr": "Bachelor in BSc Laboratory Technology - University of Cape Coast",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 95,
+  "fields": {
+    "action_time": "2026-05-23T19:42:47.022Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "education"
+    ],
+    "object_id": "4",
+    "object_repr": "Master in Master in Business Administration - Kwame Nkrumah University of Science & Technology",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 96,
+  "fields": {
+    "action_time": "2026-05-23T19:42:53.377Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "education"
+    ],
+    "object_id": "4",
+    "object_repr": "Master in Master in Business Administration - Kwame Nkrumah University of Science & Technology",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 97,
+  "fields": {
+    "action_time": "2026-05-23T19:44:42.847Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "education"
+    ],
+    "object_id": "1",
+    "object_repr": "Master in MS Computer Information Systems & Business Analytics - West Texas A&M University",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Program name\", \"Field of study\", \"Start date\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 98,
+  "fields": {
+    "action_time": "2026-05-23T19:46:01.035Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "12",
+    "object_repr": "MS PowerPoint (Advanced)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 99,
+  "fields": {
+    "action_time": "2026-05-23T19:46:32.546Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "5",
+    "object_repr": "MS Excel (Advanced)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 100,
+  "fields": {
+    "action_time": "2026-05-23T19:47:09.348Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "13",
+    "object_repr": "MS Word (Advanced)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 101,
+  "fields": {
+    "action_time": "2026-05-23T19:56:06.522Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "4",
+    "object_repr": "postgreSQL (Intermediate)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 102,
+  "fields": {
+    "action_time": "2026-05-23T19:57:13.271Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "3",
+    "object_repr": "Tableau (Intermediate)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 103,
+  "fields": {
+    "action_time": "2026-05-23T20:08:57.228Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "6",
+    "object_repr": "Power BI (Intermediate)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 104,
+  "fields": {
+    "action_time": "2026-05-23T20:09:06.850Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "3",
+    "object_repr": "Tableau (Intermediate)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 105,
+  "fields": {
+    "action_time": "2026-05-23T20:09:15.104Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "4",
+    "object_repr": "postgreSQL (Intermediate)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 106,
+  "fields": {
+    "action_time": "2026-05-23T20:09:34.938Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "7",
+    "object_repr": "R (Beginner)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 107,
+  "fields": {
+    "action_time": "2026-05-23T20:09:52.758Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "5",
+    "object_repr": "MS Excel (Advanced)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 108,
+  "fields": {
+    "action_time": "2026-05-23T20:10:00.616Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "13",
+    "object_repr": "MS Word (Advanced)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 109,
+  "fields": {
+    "action_time": "2026-05-23T20:10:11.176Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "12",
+    "object_repr": "MS PowerPoint (Advanced)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 110,
+  "fields": {
+    "action_time": "2026-05-23T20:11:08.154Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "11",
+    "object_repr": "JavaScript (Beginner)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 111,
+  "fields": {
+    "action_time": "2026-05-23T20:14:37.870Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "14",
+    "object_repr": "HTML (Intermediate)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 112,
+  "fields": {
+    "action_time": "2026-05-23T20:14:55.476Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "15",
+    "object_repr": "React (Beginner)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 113,
+  "fields": {
+    "action_time": "2026-05-23T20:15:35.407Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "7",
+    "object_repr": "R (Beginner)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 114,
+  "fields": {
+    "action_time": "2026-05-23T20:17:16.124Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "16",
+    "object_repr": "Cloud (Azure) (Beginner)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 115,
+  "fields": {
+    "action_time": "2026-05-23T20:17:50.819Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "17",
+    "object_repr": "Linux (Beginner)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 116,
+  "fields": {
+    "action_time": "2026-05-23T20:18:19.428Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "18",
+    "object_repr": "Caddy & Gunicorn (Intermediate)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 117,
+  "fields": {
+    "action_time": "2026-05-23T20:18:38.334Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "19",
+    "object_repr": "GitHub Actions (Intermediate)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 118,
+  "fields": {
+    "action_time": "2026-05-23T20:33:15.266Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "4",
+    "object_repr": "CHARLES OTWERE",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 119,
+  "fields": {
+    "action_time": "2026-05-23T20:33:39.823Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "3",
+    "object_repr": "Monaak Services",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 120,
+  "fields": {
+    "action_time": "2026-05-23T20:34:51.809Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "18",
+    "object_repr": "Caddy & Gunicorn (Intermediate)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 121,
+  "fields": {
+    "action_time": "2026-05-23T20:35:16.404Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "skill"
+    ],
+    "object_id": "16",
+    "object_repr": "Cloud (Azure) (Beginner)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 122,
+  "fields": {
+    "action_time": "2026-05-23T21:29:11.238Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "5",
+    "object_repr": "Agentic AI for Rural Hospital Financial Survival",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 123,
+  "fields": {
+    "action_time": "2026-05-23T21:30:47.543Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "5",
+    "object_repr": "Agentic AI for Rural Hospital Financial Survival",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Start date\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 124,
+  "fields": {
+    "action_time": "2026-05-23T21:32:41.906Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "1",
+    "object_repr": "Mailroom Management System",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 125,
+  "fields": {
+    "action_time": "2026-05-23T21:33:53.921Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "1",
+    "object_repr": "Mailroom Management System",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"End date\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 126,
+  "fields": {
+    "action_time": "2026-05-23T21:34:51.409Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "4",
+    "object_repr": "CHARLES OTWERE",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Start date\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 127,
+  "fields": {
+    "action_time": "2026-05-23T21:40:25.373Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "3",
+    "object_repr": "Monaak Services",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Start date\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 128,
+  "fields": {
+    "action_time": "2026-05-23T21:41:25.170Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "4",
+    "object_repr": "CHARLES OTWERE",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Status\", \"Start date\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 129,
+  "fields": {
+    "action_time": "2026-05-23T21:42:07.561Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "4",
+    "object_repr": "CHARLES OTWERE",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"End date\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 130,
+  "fields": {
+    "action_time": "2026-05-23T21:43:39.668Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "1",
+    "object_repr": "Mailroom Management System",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 131,
+  "fields": {
+    "action_time": "2026-05-23T21:45:11.875Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "education"
+    ],
+    "object_id": "2",
+    "object_repr": "Bachelor in BSc Laboratory Technology - University of Cape Coast",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 132,
+  "fields": {
+    "action_time": "2026-05-23T21:46:52.101Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "education"
+    ],
+    "object_id": "2",
+    "object_repr": "Bachelor in BSc Laboratory Technology - University of Cape Coast",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Field of study\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 133,
+  "fields": {
+    "action_time": "2026-05-27T07:52:56.449Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "about"
+    ],
+    "object_id": "1",
+    "object_repr": "Charles Otwere - (No title)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Bio\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 134,
+  "fields": {
+    "action_time": "2026-05-27T08:44:14.871Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "about"
+    ],
+    "object_id": "1",
+    "object_repr": "Charles Otwere - (No title)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Phone\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 135,
+  "fields": {
+    "action_time": "2026-05-27T08:45:14.998Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "about"
+    ],
+    "object_id": "1",
+    "object_repr": "Charles Otwere - (No title)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 136,
+  "fields": {
+    "action_time": "2026-05-27T08:57:55.050Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "event"
+    ],
+    "object_id": "1",
+    "object_repr": "Faculty and Student Research Poster Session and Research Fair (2026-03-05)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"Event Photo\", \"object\": \"Faculty and Student Research Poster Session and Research Fair \\u2013 photo 1\"}}, {\"added\": {\"name\": \"Event Photo\", \"object\": \"Faculty and Student Research Poster Session and Research Fair \\u2013 photo 2\"}}, {\"added\": {\"name\": \"Event Photo\", \"object\": \"Faculty and Student Research Poster Session and Research Fair \\u2013 photo 3\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 137,
+  "fields": {
+    "action_time": "2026-05-27T08:58:55.530Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "event"
+    ],
+    "object_id": "1",
+    "object_repr": "Faculty and Student Research Poster Session and Research Fair (2026-03-05)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\", \"Cover image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 138,
+  "fields": {
+    "action_time": "2026-05-27T09:00:01.162Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "event"
+    ],
+    "object_id": "1",
+    "object_repr": "Faculty and Student Research Poster Session and Research Fair (2026-03-05)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 139,
+  "fields": {
+    "action_time": "2026-05-27T09:02:12.667Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "event"
+    ],
+    "object_id": "1",
+    "object_repr": "Faculty and Student Research Poster Session and Research Fair (2026-03-05)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Description\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 140,
+  "fields": {
+    "action_time": "2026-05-27T09:05:40.161Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "event"
+    ],
+    "object_id": "1",
+    "object_repr": "Faculty and Student Research Poster Session and Research Fair (2026-03-05)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Description\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 141,
+  "fields": {
+    "action_time": "2026-05-27T09:06:20.462Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "event"
+    ],
+    "object_id": "1",
+    "object_repr": "Faculty and Student Research Poster Session and Research Fair (2026-03-05)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Description\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 142,
+  "fields": {
+    "action_time": "2026-05-27T09:11:23.028Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "event"
+    ],
+    "object_id": "1",
+    "object_repr": "Faculty and Student Research Poster Session and Research Fair (2026-03-05)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Description\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 143,
+  "fields": {
+    "action_time": "2026-05-27T09:12:32.440Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "event"
+    ],
+    "object_id": "1",
+    "object_repr": "Faculty and Student Research Poster Session and Research Fair (2026-03-05)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Description\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 144,
+  "fields": {
+    "action_time": "2026-05-27T09:13:27.629Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "event"
+    ],
+    "object_id": "1",
+    "object_repr": "Faculty and Student Research Poster Session and Research Fair (2026-03-05)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Description\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 145,
+  "fields": {
+    "action_time": "2026-05-27T09:14:16.006Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "event"
+    ],
+    "object_id": "1",
+    "object_repr": "Faculty and Student Research Poster Session and Research Fair (2026-03-05)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 146,
+  "fields": {
+    "action_time": "2026-05-27T09:20:32.164Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "event"
+    ],
+    "object_id": "2",
+    "object_repr": "COB First Student Research Poster Session (2025-12-05)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"Event Photo\", \"object\": \"COB First Student Research Poster Session \\u2013 photo 4\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 147,
+  "fields": {
+    "action_time": "2026-05-27T09:22:10.929Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "event"
+    ],
+    "object_id": "2",
+    "object_repr": "COB First Student Research Poster Session (2025-12-05)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Description\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 148,
+  "fields": {
+    "action_time": "2026-05-27T09:30:58.130Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "event"
+    ],
+    "object_id": "3",
+    "object_repr": "2026 Student & Community Symposium (2026-04-22)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"Event Photo\", \"object\": \"2026 Student & Community Symposium \\u2013 photo 5\"}}, {\"added\": {\"name\": \"Event Photo\", \"object\": \"2026 Student & Community Symposium \\u2013 photo 6\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 149,
+  "fields": {
+    "action_time": "2026-05-27T09:32:28.435Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "event"
+    ],
+    "object_id": "3",
+    "object_repr": "2026 Student & Community Symposium (2026-04-22)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"name\": \"Event Photo\", \"object\": \"2026 Student & Community Symposium \\u2013 photo 6\", \"fields\": [\"Image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 150,
+  "fields": {
+    "action_time": "2026-05-27T09:33:41.727Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "event"
+    ],
+    "object_id": "1",
+    "object_repr": "Faculty and Student Research Poster Session and Research Fair (2026-03-05)",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Event Photo\", \"object\": \"Faculty and Student Research Poster Session and Research Fair \\u2013 photo 7\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 151,
+  "fields": {
+    "action_time": "2026-05-27T09:37:20.946Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "event"
+    ],
+    "object_id": "3",
+    "object_repr": "2026 Student & Community Symposium (2026-04-22)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 152,
+  "fields": {
+    "action_time": "2026-05-27T11:34:58.501Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "2",
+    "object_repr": "CNAPY IMMS",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Live url\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 153,
+  "fields": {
+    "action_time": "2026-05-27T11:35:21.225Z",
+    "user": [
+      "cmotwere"
+    ],
+    "content_type": [
+      "portfolio",
+      "project"
+    ],
+    "object_id": "5",
+    "object_repr": "Agentic AI for Rural Hospital Financial Survival",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+  }
+}
+]

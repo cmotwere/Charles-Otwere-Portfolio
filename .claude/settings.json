@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python manage.py migrate)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\cmotw\\.claude\\projects\\c--Users-cmotw-Documents-PERSONAL-DEV--PROJECTS-CHARLES-OTWERE-PORTFOLIO\\memory"
+    ]
+  }
+}
