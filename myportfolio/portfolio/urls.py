@@ -35,6 +35,10 @@ urlpatterns = [
     # API URLs
     path('api/v1/', include('portfolio.api_urls')),
     
+    # Events gallery
+    path('events/', views.events_view, name='events'),
+    path('events/<slug:slug>/', views.event_detail_view, name='event_detail'),
+
     # Keep original portfolio URL for backward compatibility
     path('portfolio/', views.portfolio_view, name='portfolio_old'),
 ]

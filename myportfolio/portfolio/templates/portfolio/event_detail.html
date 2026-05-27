@@ -1,0 +1,451 @@
+{% extends 'portfolio/base.html' %}
+{% load i18n %}
+
+{% block title %}{{ event.title }} - Events{% endblock %}
+{% block description %}{{ event.description|truncatewords:20 }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* ─── Hero ─── */
+    .event-hero {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        color: white;
+        padding: 72px 0 56px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .event-hero::before {
+        content: '';
+        position: absolute;
+        top: -60px; right: -60px;
+        width: 360px; height: 360px;
+        background: radial-gradient(ellipse, rgba(246,171,21,0.12) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .event-category-badge {
+        display: inline-flex;
+        align-items: center;
+        background: rgba(255,255,255,0.15);
+        border: 1px solid rgba(255,255,255,0.25);
+        color: rgba(255,255,255,0.95);
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 5px 14px;
+        border-radius: 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        margin-bottom: 16px;
+    }
+
+    /* ─── Gallery grid ─── */
+    .gallery-grid {
+        columns: 3;
+        column-gap: 14px;
+    }
+
+    @media (max-width: 991px) { .gallery-grid { columns: 2; } }
+    @media (max-width: 575px) { .gallery-grid { columns: 1; } }
+
+    .gallery-item {
+        break-inside: avoid;
+        margin-bottom: 14px;
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        cursor: pointer;
+        position: relative;
+        display: block;
+    }
+
+    .gallery-item img {
+        width: 100%;
+        display: block;
+        border-radius: var(--radius-md);
+        transition: transform var(--transition), filter var(--transition);
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.03);
+        filter: brightness(0.88);
+    }
+
+    .gallery-item-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(13,75,75,0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius-md);
+        transition: background var(--transition);
+    }
+
+    .gallery-item:hover .gallery-item-overlay {
+        background: rgba(13,75,75,0.35);
+    }
+
+    .gallery-item-overlay i {
+        color: white;
+        font-size: 1.6rem;
+        opacity: 0;
+        transform: scale(0.7);
+        transition: opacity var(--transition), transform var(--transition);
+    }
+
+    .gallery-item:hover .gallery-item-overlay i {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .gallery-caption {
+        font-size: 0.78rem;
+        color: var(--text-light);
+        padding: 6px 4px 0;
+        line-height: 1.4;
+    }
+
+    /* ─── Lightbox ─── */
+    .lightbox-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.92);
+        z-index: 2000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        animation: fadeIn 0.2s ease;
+    }
+
+    .lightbox-backdrop.open { display: flex; }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
+    .lightbox-inner {
+        position: relative;
+        max-width: 1100px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .lightbox-img {
+        max-height: 80vh;
+        max-width: 100%;
+        border-radius: var(--radius-md);
+        box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+        object-fit: contain;
+        animation: zoomIn 0.22s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    @keyframes zoomIn {
+        from { transform: scale(0.92); opacity: 0; }
+        to   { transform: scale(1);    opacity: 1; }
+    }
+
+    .lightbox-caption {
+        color: rgba(255,255,255,0.75);
+        font-size: 0.9rem;
+        margin-top: 14px;
+        text-align: center;
+    }
+
+    .lightbox-counter {
+        color: rgba(255,255,255,0.4);
+        font-size: 0.78rem;
+        margin-top: 6px;
+    }
+
+    .lightbox-close {
+        position: absolute;
+        top: -12px;
+        right: -12px;
+        width: 40px; height: 40px;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 50%;
+        color: white;
+        font-size: 1.1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background var(--transition);
+        z-index: 10;
+    }
+
+    .lightbox-close:hover { background: rgba(255,255,255,0.22); }
+
+    .lightbox-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 44px; height: 44px;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 50%;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background var(--transition), transform var(--transition);
+        z-index: 10;
+    }
+
+    .lightbox-nav:hover { background: rgba(255,255,255,0.22); }
+    .lightbox-nav.prev { left: -60px; }
+    .lightbox-nav.next { right: -60px; }
+
+    @media (max-width: 768px) {
+        .lightbox-nav.prev { left: -4px; }
+        .lightbox-nav.next { right: -4px; }
+    }
+
+    /* ─── Info card ─── */
+    .info-card {
+        background: var(--bg-light);
+        border: 1px solid rgba(127,168,143,0.18);
+        border-radius: var(--radius-md);
+        padding: 1.4rem 1.6rem;
+        margin-bottom: 2rem;
+    }
+
+    [data-theme="dark"] .info-card {
+        background: #162828;
+        border-color: rgba(127,168,143,0.15);
+    }
+
+    .info-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.9rem;
+        color: var(--text-dark);
+        margin-bottom: 8px;
+    }
+
+    .info-row:last-child { margin-bottom: 0; }
+
+    .info-row i { color: var(--secondary-color); width: 18px; text-align: center; }
+
+    /* ─── Section heading ─── */
+    .section-heading {
+        font-size: clamp(1.4rem, 3vw, 1.9rem);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        color: var(--text-dark);
+        margin-bottom: 8px;
+    }
+
+    .section-divider {
+        width: 40px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        border-radius: 2px;
+        margin-bottom: 32px;
+    }
+
+    /* ─── Empty state ─── */
+    .empty-state { padding: 60px 20px; text-align: center; }
+    .empty-state-icon { font-size: 3.5rem; color: var(--secondary-color); opacity: 0.45; margin-bottom: 14px; display: block; }
+
+    /* ─── Back link ─── */
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: rgba(255,255,255,0.7);
+        font-size: 0.85rem;
+        text-decoration: none;
+        margin-bottom: 20px;
+        transition: color var(--transition);
+    }
+
+    .back-link:hover { color: white; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="event-hero">
+    <div class="container" style="position:relative;z-index:1;">
+        <a href="{% url 'portfolio:events' %}" class="back-link animate-in">
+            <i class="fas fa-arrow-left"></i> {% trans "Back to Events" %}
+        </a>
+        <div class="animate-in delay-1">
+            <span class="event-category-badge">
+                <i class="fas fa-tag me-2"></i>{{ event.get_category_display }}
+            </span>
+            <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-0.03em;color:#fff;margin-bottom:14px;">
+                {{ event.title }}
+            </h1>
+            <div class="d-flex flex-wrap gap-4" style="color:rgba(255,255,255,0.72);font-size:0.9rem;">
+                <span><i class="fas fa-calendar me-2"></i>{{ event.date|date:"F j, Y" }}</span>
+                {% if event.location %}
+                <span><i class="fas fa-map-marker-alt me-2"></i>{{ event.location }}</span>
+                {% endif %}
+                <span><i class="fas fa-images me-2"></i>{{ event.photo_count }} {% trans "photo" %}{{ event.photo_count|pluralize }}</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTENT -->
+<section class="section-padding">
+    <div class="container">
+        <div class="row g-5">
+
+            <!-- Gallery (left / main column) -->
+            <div class="col-lg-9">
+
+                {% if event.description %}
+                <div style="font-size:1rem;line-height:1.8;color:var(--text-dark);margin-bottom:2rem;">
+                    {{ event.description|linebreaksbr|safe }}
+                </div>
+                {% endif %}
+
+                {% if photos %}
+                <h2 class="section-heading animate-in">{% trans "Photo Gallery" %}</h2>
+                <div class="section-divider"></div>
+
+                <div class="gallery-grid" id="gallery-grid">
+                    {% for photo in photos %}
+                    <div class="gallery-item animate-in"
+                         data-index="{{ forloop.counter0 }}"
+                         data-src="{{ photo.image.url }}"
+                         data-caption="{{ photo.caption }}">
+                        <img src="{{ photo.image.url }}"
+                             alt="{{ photo.caption|default:event.title }}"
+                             loading="lazy">
+                        <div class="gallery-item-overlay">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                        {% if photo.caption %}
+                        <p class="gallery-caption">{{ photo.caption }}</p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {% else %}
+                <div class="empty-state animate-in">
+                    <span class="empty-state-icon"><i class="fas fa-images"></i></span>
+                    <h5 class="text-muted fw-semibold">{% trans "No photos uploaded yet" %}</h5>
+                </div>
+                {% endif %}
+
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3">
+                <div class="info-card animate-in delay-1">
+                    <h6 style="font-weight:700;color:var(--primary-color);text-transform:uppercase;font-size:0.72rem;letter-spacing:0.1em;margin-bottom:14px;">
+                        {% trans "Event Details" %}
+                    </h6>
+
+                    <div class="info-row">
+                        <i class="fas fa-tag"></i>
+                        <span>{{ event.get_category_display }}</span>
+                    </div>
+
+                    <div class="info-row">
+                        <i class="fas fa-calendar-day"></i>
+                        <span>{{ event.date|date:"F j, Y" }}</span>
+                    </div>
+
+                    {% if event.location %}
+                    <div class="info-row">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>{{ event.location }}</span>
+                    </div>
+                    {% endif %}
+
+                    <div class="info-row">
+                        <i class="fas fa-images"></i>
+                        <span>{{ event.photo_count }} {% trans "photo" %}{{ event.photo_count|pluralize }}</span>
+                    </div>
+                </div>
+
+                <a href="{% url 'portfolio:events' %}" class="btn btn-outline-primary w-100">
+                    <i class="fas fa-arrow-left me-2"></i>{% trans "All Events" %}
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-backdrop" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox">
+    <div class="lightbox-inner">
+        <button class="lightbox-close" id="lb-close" aria-label="Close"><i class="fas fa-times"></i></button>
+        <button class="lightbox-nav prev" id="lb-prev" aria-label="Previous photo"><i class="fas fa-chevron-left"></i></button>
+        <button class="lightbox-nav next" id="lb-next" aria-label="Next photo"><i class="fas fa-chevron-right"></i></button>
+        <img src="" alt="" class="lightbox-img" id="lb-img">
+        <p class="lightbox-caption" id="lb-caption"></p>
+        <p class="lightbox-counter" id="lb-counter"></p>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+    const items = Array.from(document.querySelectorAll('.gallery-item'));
+    const lb      = document.getElementById('lightbox');
+    const lbImg   = document.getElementById('lb-img');
+    const lbCap   = document.getElementById('lb-caption');
+    const lbCount = document.getElementById('lb-counter');
+    let current = 0;
+
+    function open(index) {
+        current = ((index % items.length) + items.length) % items.length;
+        const item = items[current];
+        lbImg.src        = item.dataset.src;
+        lbImg.alt        = item.dataset.caption || '';
+        lbCap.textContent  = item.dataset.caption || '';
+        lbCount.textContent = `${current + 1} / ${items.length}`;
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+        lb.classList.remove('open');
+        document.body.style.overflow = '';
+        lbImg.src = '';
+    }
+
+    items.forEach((item, i) => item.addEventListener('click', () => open(i)));
+
+    document.getElementById('lb-close').addEventListener('click', close);
+    document.getElementById('lb-prev').addEventListener('click', () => open(current - 1));
+    document.getElementById('lb-next').addEventListener('click', () => open(current + 1));
+
+    lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+
+    document.addEventListener('keydown', (e) => {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape')     close();
+        if (e.key === 'ArrowLeft')  open(current - 1);
+        if (e.key === 'ArrowRight') open(current + 1);
+    });
+
+    // Touch swipe
+    let startX = 0;
+    lb.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend',   (e) => {
+        const dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) > 50) open(dx < 0 ? current + 1 : current - 1);
+    });
+})();
+</script>
+{% endblock %}

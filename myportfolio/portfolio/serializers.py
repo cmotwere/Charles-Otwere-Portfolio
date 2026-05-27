@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from .models import (
     Project, About, Skill, Testimonial, DownloadTracking, SocialMediaPost,
-    Education, Certification, WorkExperience, BlogCategory, BlogPost
+    Education, Certification, WorkExperience, BlogCategory, BlogPost,
+    Event, EventPhoto
 )
 
 
@@ -163,10 +164,38 @@ class BlogPostDetailSerializer(serializers.ModelSerializer):
     related_projects = ProjectListSerializer(many=True, read_only=True)
     tags_list = serializers.SerializerMethodField()
     is_published = serializers.ReadOnlyField()
-    
+
     class Meta:
         model = BlogPost
         fields = '__all__'
-    
+
     def get_tags_list(self, obj):
         return obj.get_tags_as_list()
+
+
+class EventPhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EventPhoto
+        fields = ['id', 'image', 'caption', 'order']
+
+
+class EventListSerializer(serializers.ModelSerializer):
+    category_display = serializers.CharField(source='get_category_display', read_only=True)
+    photo_count = serializers.ReadOnlyField()
+
+    class Meta:
+        model = Event
+        fields = [
+            'id', 'title', 'slug', 'category', 'category_display',
+            'date', 'location', 'cover_image', 'is_featured', 'photo_count'
+        ]
+
+
+class EventDetailSerializer(serializers.ModelSerializer):
+    category_display = serializers.CharField(source='get_category_display', read_only=True)
+    photos = EventPhotoSerializer(many=True, read_only=True)
+    photo_count = serializers.ReadOnlyField()
+
+    class Meta:
+        model = Event
+        fields = '__all__'

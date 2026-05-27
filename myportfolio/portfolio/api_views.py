@@ -9,14 +9,15 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import (
     Project, About, Skill, Testimonial, DownloadTracking, SocialMediaPost,
-    Education, Certification, WorkExperience, BlogCategory, BlogPost
+    Education, Certification, WorkExperience, BlogCategory, BlogPost, Event
 )
 from .serializers import (
     ProjectListSerializer, ProjectDetailSerializer, AboutSerializer,
     SkillSerializer, TestimonialSerializer, ContactMessageSerializer,
     PortfolioStatsSerializer, DownloadTrackingSerializer, SocialMediaPostSerializer,
     EducationSerializer, CertificationSerializer, WorkExperienceSerializer,
-    BlogCategorySerializer, BlogPostListSerializer, BlogPostDetailSerializer
+    BlogCategorySerializer, BlogPostListSerializer, BlogPostDetailSerializer,
+    EventListSerializer, EventDetailSerializer
 )
 import os
 import mimetypes
@@ -422,4 +423,34 @@ class BlogPostViewSet(viewsets.ReadOnlyModelViewSet):
         instance = self.get_object()
         increment_blog_view_count(instance)
         serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
+
+class EventViewSet(viewsets.ReadOnlyModelViewSet):
+    """API ViewSet for Events"""
+    queryset = Event.objects.prefetch_related('photos').order_by('-date')
+    permission_classes = [AllowAny]
+    lookup_field = 'slug'
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return EventDetailSerializer
+        return EventListSerializer
+
+    def get_queryset(self):
+        queryset = Event.objects.prefetch_related('photos').order_by('-date')
+        category = self.request.query_params.get('category')
+        featured = self.request.query_params.get('featured')
+
+        if category:
+            queryset = queryset.filter(category=category)
+        if featured:
+            queryset = queryset.filter(is_featured=featured.lower() == 'true')
+
+        return queryset
+
+    @action(detail=False, methods=['get'])
+    def featured(self, request):
+        featured_events = self.get_queryset().filter(is_featured=True)
+        serializer = EventListSerializer(featured_events, many=True, context={'request': request})
         return Response(serializer.data)

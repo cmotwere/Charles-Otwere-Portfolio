@@ -523,7 +523,7 @@
                 </h1>
 
                 <p class="hero-title">
-                    {{ about.title|default:"Software Developer & Technology Enthusiast" }}
+                    {{ about.title|default:"Software Developer, Data & Technology Enthusiast" }}
                 </p>
 
                 <p class="hero-quote">
@@ -680,6 +680,62 @@
         <div class="text-center mt-5">
             <a href="{% url 'portfolio:skills' %}" class="btn-view-all">
                 <i class="fas fa-cogs"></i> View All Skills
+            </a>
+        </div>
+
+    </div>
+</section>
+{% endif %}
+
+
+<!-- FEATURED EVENTS -->
+{% if featured_events %}
+<section class="section-padding">
+    <div class="container">
+
+        <div class="text-center mb-2 animate-in">
+            <h2 class="section-heading">Events &amp; Gallery</h2>
+            <p class="section-sub">Highlights from conferences, meetups, and community events</p>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="row g-4">
+            {% for event in featured_events %}
+            <div class="col-lg-3 col-md-6 animate-in" style="animation-delay:{{ forloop.counter0 }}00ms;">
+                <a href="{% url 'portfolio:event_detail' event.slug %}" class="text-decoration-none">
+                    <div class="card h-100" style="overflow:hidden;">
+                        <div style="overflow:hidden;height:160px;">
+                            {% if event.cover_image %}
+                                <img src="{{ event.cover_image.url }}" alt="{{ event.title }}"
+                                     style="width:100%;height:160px;object-fit:cover;transition:transform 0.35s ease;">
+                            {% else %}
+                                <div style="width:100%;height:160px;background:linear-gradient(135deg,var(--bg-light),rgba(127,168,143,0.18));display:flex;align-items:center;justify-content:center;color:var(--secondary-color);font-size:2.2rem;opacity:0.7;">
+                                    <i class="fas fa-camera"></i>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="card-body" style="padding:1rem 1.2rem;">
+                            <p style="font-size:0.7rem;font-weight:600;color:var(--primary-color);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">
+                                {{ event.get_category_display }}
+                            </p>
+                            <h6 style="font-weight:700;color:var(--text-dark);font-size:0.92rem;margin-bottom:4px;line-height:1.35;">
+                                {{ event.title }}
+                            </h6>
+                            <p style="font-size:0.78rem;color:var(--text-light);margin-bottom:0;">
+                                <i class="fas fa-calendar me-1"></i>{{ event.date|date:"M Y" }}
+                                &nbsp;&middot;&nbsp;
+                                <i class="fas fa-images me-1"></i>{{ event.photo_count }}
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="{% url 'portfolio:events' %}" class="btn-view-all">
+                <i class="fas fa-camera"></i> View All Events
             </a>
         </div>
 

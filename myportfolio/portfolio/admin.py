@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.utils import timezone
 from .models import (
     Project, About, Skill, Testimonial, DownloadTracking, SocialMediaPost,
-    Education, Certification, WorkExperience, BlogCategory, BlogPost
+    Education, Certification, WorkExperience, BlogCategory, BlogPost,
+    Event, EventPhoto
 )
 
 @admin.register(About)
@@ -261,8 +262,9 @@ class BlogPostAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         return qs.select_related('category').prefetch_related('related_projects')
-    
+
     def save_model(self, request, obj, form, change):
+
         # Ensure title is set if not provided
         if not obj.title:
             obj.title = f"Untitled Post - {timezone.now().strftime('%Y-%m-%d %H:%M')}"
@@ -274,3 +276,37 @@ class BlogPostAdmin(admin.ModelAdmin):
         if obj.status == 'published' and not obj.published_date:
             obj.published_date = timezone.now()
         super().save_model(request, obj, form, change)
+
+
+class EventPhotoInline(admin.TabularInline):
+    model = EventPhoto
+    extra = 3
+    fields = ['image', 'caption', 'order']
+    ordering = ['order']
+
+
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    list_display = ['title', 'category', 'date', 'location', 'photo_count', 'is_featured']
+    list_filter = ['category', 'is_featured', 'date']
+    search_fields = ['title', 'description', 'location']
+    prepopulated_fields = {'slug': ('title',)}
+    date_hierarchy = 'date'
+    ordering = ['-date']
+    inlines = [EventPhotoInline]
+
+    fieldsets = (
+        ('Event Details', {
+            'fields': ('title', 'slug', 'category', 'date', 'location')
+        }),
+        ('Content', {
+            'fields': ('description', 'cover_image')
+        }),
+        ('Display Options', {
+            'fields': ('is_featured',)
+        }),
+    )
+
+    def photo_count(self, obj):
+        return obj.photos.count()
+    photo_count.short_description = 'Photos'

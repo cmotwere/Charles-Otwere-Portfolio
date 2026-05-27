@@ -775,6 +775,10 @@
                            href="{% url 'portfolio:blog' %}">{% trans "Blog" %}</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'events' or request.resolver_match.url_name == 'event_detail' %}active{% endif %}"
+                           href="{% url 'portfolio:events' %}">{% trans "Events" %}</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {% if request.resolver_match.url_name == 'testimonials' %}active{% endif %}"
                            href="{% url 'portfolio:testimonials' %}">{% trans "Testimonials" %}</a>
                     </li>
@@ -783,59 +787,6 @@
                            href="{% url 'portfolio:contact' %}">{% trans "Contact" %}</a>
                     </li>
 
-                    <!-- Demo Links -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-flask me-1"></i>{% trans "Demo" %}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{% url 'portfolio:social_demo' %}">
-                                <i class="fab fa-github me-2"></i>{% trans "GitHub Integration" %}</a></li>
-                            <li><a class="dropdown-item" href="/api/v1/">
-                                <i class="fas fa-code me-2"></i>{% trans "REST API" %}</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="printPage(); return false;">
-                                <i class="fas fa-print me-2"></i>{% trans "Print View" %}</a></li>
-                        </ul>
-                    </li>
-
-                    <!-- Authentication Links -->
-                    {% if user.is_authenticated %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-user-circle me-1"></i>
-                                {% if user.first_name %}{{ user.first_name }}{% else %}{{ user.username }}{% endif %}
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="{% url 'portfolio:profile' %}">
-                                    <i class="fas fa-user me-2"></i>{% trans "My Profile" %}</a></li>
-                                {% if user.is_staff %}
-                                    <li><a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank">
-                                        <i class="fas fa-cog me-2"></i>{% trans "Admin Panel" %}</a></li>
-                                {% endif %}
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="{% url 'portfolio:logout' %}">
-                                    <i class="fas fa-sign-out-alt me-2"></i>{% trans "Logout" %}</a></li>
-                            </ul>
-                        </li>
-                    {% else %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-sign-in-alt me-1"></i>{% trans "Login" %}
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><h6 class="dropdown-header">{% trans "Social Login" %}</h6></li>
-                                <li><a class="dropdown-item" href="{% url 'social:begin' 'github' %}">
-                                    <i class="fab fa-github me-2"></i>{% trans "Login with GitHub" %}</a></li>
-                                <li><a class="dropdown-item" href="{% url 'social:begin' 'linkedin-oauth2' %}">
-                                    <i class="fab fa-linkedin me-2"></i>{% trans "Login with LinkedIn" %}</a></li>
-                                <!-- Twitter login removed -->
-                                <li><a class="dropdown-item" href="{% url 'portfolio:login' %}">
-                                    <i class="fas fa-envelope me-2"></i>{% trans "Email Login" %}</a></li>
-                                <li><a class="dropdown-item" href="{% url 'portfolio:register' %}">
-                                    <i class="fas fa-user-plus me-2"></i>{% trans "Register" %}</a></li>
-                            </ul>
-                        </li>
-                    {% endif %}
 
                     <!-- Theme Toggle -->
                     <li class="nav-item">
@@ -849,32 +800,6 @@
                         </a>
                     </li>
 
-                    <!-- Language Switcher -->
-                    <li class="nav-item dropdown language-switcher">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-globe"></i> {{ LANGUAGE_CODE|upper }}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li>
-                                <form action="/i18n/setlang/" method="post" style="display:inline;">
-                                    {% csrf_token %}
-                                    <input name="language" type="hidden" value="en">
-                                    <button type="submit" class="dropdown-item {% if LANGUAGE_CODE == 'en' %}active{% endif %}">
-                                        English
-                                    </button>
-                                </form>
-                            </li>
-                            <li>
-                                <form action="/i18n/setlang/" method="post" style="display:inline;">
-                                    {% csrf_token %}
-                                    <input name="language" type="hidden" value="es">
-                                    <button type="submit" class="dropdown-item {% if LANGUAGE_CODE == 'es' %}active{% endif %}">
-                                        Español
-                                    </button>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -891,7 +816,7 @@
             <div class="row g-4">
                 <div class="col-md-8">
                     <h5>{{ global_about.name|default:"Charles Otwere" }}</h5>
-                    <p class="mb-3">{{ global_about.title|default:"Software Developer & Technology Enthusiast" }}</p>
+                    <p class="mb-3">{{ global_about.title|default:"Software Developer, Data & Technology Enthusiast" }}</p>
                     <ul class="list-unstyled mb-3">
                         {% if global_about.location %}
                         <li><i class="fas fa-map-marker-alt me-2" style="color: var(--secondary-color);"></i>{{ global_about.location }}</li>

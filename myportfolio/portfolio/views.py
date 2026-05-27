@@ -16,7 +16,8 @@ from django import forms
 import os
 from .models import (
     Project, About, Skill, Testimonial, DownloadTracking, SocialMediaPost,
-    Education, Certification, WorkExperience, BlogCategory, BlogPost
+    Education, Certification, WorkExperience, BlogCategory, BlogPost,
+    Event
 )
 
 # Blog helper functions to reduce repetition
@@ -110,11 +111,13 @@ def home_view(request):
     about = About.objects.first()
     featured_projects = Project.objects.filter(is_featured=True)[:6]
     featured_skills = Skill.objects.filter(is_featured=True)
-    
+    featured_events = Event.objects.filter(is_featured=True).prefetch_related('photos')[:4]
+
     context = {
         'about': about,
         'featured_projects': featured_projects,
         'featured_skills': featured_skills,
+        'featured_events': featured_events,
     }
     return render(request, 'portfolio/home.html', context)
 
@@ -617,10 +620,39 @@ def blog_category_view(request, slug):
     """Blog posts by category"""
     category = get_object_or_404(BlogCategory, slug=slug)
     posts = get_published_blog_posts().filter(category=category).order_by('-published_date')
-    
+
     context = get_blog_context_data(
         posts=posts,
         category=category,
         current_category=category,
     )
     return render(request, 'portfolio/blog_category.html', context)
+
+
+def events_view(request):
+    """Events gallery listing page"""
+    category = request.GET.get('category')
+
+    events = Event.objects.prefetch_related('photos').order_by('-date')
+
+    if category:
+        events = events.filter(category=category)
+
+    context = {
+        'events': events,
+        'event_categories': Event.EVENT_CATEGORIES,
+        'current_category': category,
+    }
+    return render(request, 'portfolio/events.html', context)
+
+
+def event_detail_view(request, slug):
+    """Single event detail with photo gallery"""
+    event = get_object_or_404(Event.objects.prefetch_related('photos'), slug=slug)
+    photos = event.photos.all()
+
+    context = {
+        'event': event,
+        'photos': photos,
+    }
+    return render(request, 'portfolio/event_detail.html', context)

@@ -438,6 +438,61 @@ class BlogCategory(models.Model):
         return self.name
 
 
+class Event(models.Model):
+    EVENT_CATEGORIES = [
+        ('conference', 'Conference'),
+        ('meetup', 'Meetup'),
+        ('workshop', 'Workshop'),
+        ('hackathon', 'Hackathon'),
+        ('seminar', 'Seminar'),
+        ('networking', 'Networking'),
+        ('other', 'Other'),
+    ]
+
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True)
+    category = models.CharField(max_length=20, choices=EVENT_CATEGORIES, default='other')
+    date = models.DateField(help_text="Date the event took place")
+    location = models.CharField(max_length=200, blank=True, help_text="Venue or city")
+    description = models.TextField(blank=True)
+    cover_image = models.ImageField(upload_to='events/', blank=True, null=True)
+    is_featured = models.BooleanField(default=False, help_text="Show on homepage")
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-date']
+        verbose_name = "Event"
+        verbose_name_plural = "Events"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.title} ({self.date})"
+
+    @property
+    def photo_count(self):
+        return self.photos.count()
+
+
+class EventPhoto(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='photos')
+    image = models.ImageField(upload_to='events/')
+    caption = models.CharField(max_length=300, blank=True)
+    order = models.PositiveIntegerField(default=0, help_text="Display order (lower = first)")
+
+    class Meta:
+        ordering = ['order', 'id']
+        verbose_name = "Event Photo"
+        verbose_name_plural = "Event Photos"
+
+    def __str__(self):
+        return f"{self.event.title} – photo {self.order or self.pk}"
+
+
 class BlogPost(models.Model):
     """Blog posts and articles for thought leadership"""
     STATUS_CHOICES = [

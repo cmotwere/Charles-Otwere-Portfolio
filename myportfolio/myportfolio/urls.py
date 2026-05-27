@@ -18,15 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.conf.urls.i18n import i18n_patterns
 from django.views.generic import TemplateView
 from portfolio.views import twitter_coming_soon
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('social_django.urls', namespace='social')),
-    path('i18n/', include('django.conf.urls.i18n')),
-    
+
     # PWA files
     path('manifest.json', TemplateView.as_view(
         template_name='portfolio/manifest.json',
@@ -36,17 +34,14 @@ urlpatterns = [
         template_name='portfolio/sw.js',
         content_type='application/javascript',
     ), name='service-worker'),
-    
-    # API endpoints (not translated)
+
+    # API endpoints
     path('api/', include('portfolio.api_urls')),
     path('auth/login/twitter/', twitter_coming_soon, name='twitter_coming_soon'),
-]
-    # removed duplicate import
 
-# Add i18n patterns for translated URLs
-urlpatterns += i18n_patterns(
+    # Portfolio app
     path('', include('portfolio.urls')),
-)
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

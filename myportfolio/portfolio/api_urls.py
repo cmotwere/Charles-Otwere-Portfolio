@@ -13,6 +13,7 @@ router.register(r'certifications', api_views.CertificationViewSet)
 router.register(r'work-experience', api_views.WorkExperienceViewSet)
 router.register(r'blog-categories', api_views.BlogCategoryViewSet)
 router.register(r'blog-posts', api_views.BlogPostViewSet, basename='blogpost')
+router.register(r'events', api_views.EventViewSet, basename='event')
 
 urlpatterns = [
     # Router URLs
