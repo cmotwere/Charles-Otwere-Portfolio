@@ -170,6 +170,8 @@
                             <label for="hp_url">Leave this blank</label>
                             <input type="text" id="hp_url" name="hp_url" value="" tabindex="-1" autocomplete="off">
                         </div>
+                        <input type="hidden" name="form_ts" value="{{ form_ts }}">{% if turnstile_site_key %}
+                        <div class="cf-turnstile mb-3" data-sitekey="{{ turnstile_site_key }}"></div>{% endif %}
                         <div class="row g-3 mb-3">
                             <div class="col-sm-6">
                                 <label class="form-label" for="name">Your Name</label>
@@ -289,3 +291,9 @@
 </section>
 
 {% endblock %}
+
+{% if turnstile_site_key %}
+{% block extra_js %}
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+{% endblock %}
+{% endif %}

@@ -1,4 +1,3 @@
-ALLOWED_HOSTS = ['charlesotwere.com', 'www.charlesotwere.com', '104.207.66.57', '127.0.0.1', 'localhost']
 """
 Django settings for myportfolio project.
 
@@ -25,7 +24,7 @@ if _env_file.exists():
             _line = _line.strip()
             if _line and not _line.startswith('#') and '=' in _line:
                 _key, _, _val = _line.partition('=')
-                os.environ.setdefault(_key.strip(), _val.strip())
+                os.environ[_key.strip()] = _val.strip()
 
 
 # Quick-start development settings - unsuitable for production
@@ -38,7 +37,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', secrets.token_urlsafe(50))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['yourdomain.com', 'www.yourdomain.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['charlesotwere.com', 'www.charlesotwere.com', '104.207.66.57', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -225,6 +224,13 @@ EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True') == 'True'
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER)
+
+# Cloudflare Turnstile (spam protection for contact form)
+# Get free keys at https://dash.cloudflare.com/?to=/:account/turnstile
+# If unset, the contact form skips CAPTCHA verification (honeypot + rate
+# limit + time-trap still apply).
+TURNSTILE_SITE_KEY = os.environ.get('TURNSTILE_SITE_KEY', '')
+TURNSTILE_SECRET_KEY = os.environ.get('TURNSTILE_SECRET_KEY', '')
 
 # Cache Configuration
 CACHES = {

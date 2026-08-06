@@ -1,6 +1,9 @@
 def twitter_coming_soon(request):
     return render(request, 'coming_soon.html')
+import logging
 from django.shortcuts import render, get_object_or_404, redirect
+
+logger = logging.getLogger(__name__)
 from django.db.models import Q
 from django.http import JsonResponse, HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
@@ -10,10 +13,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
+from django.core.cache import cache
 from django.conf import settings
 from django.utils import timezone
 from django import forms
 import os
+import time
+import requests
 from .models import (
     Project, About, Skill, Testimonial, DownloadTracking, SocialMediaPost,
     Education, Certification, WorkExperience, BlogCategory, BlogPost,
@@ -213,6 +219,39 @@ def skills_view(request):
     }
     return render(request, 'portfolio/skills.html', context)
 
+CONTACT_RATE_LIMIT_MAX = 5
+CONTACT_RATE_LIMIT_WINDOW = 3600  # seconds
+CONTACT_MIN_FILL_TIME = 3  # seconds — submissions faster than this are treated as bots
+
+
+def _client_ip(request):
+    xff = request.META.get('HTTP_X_FORWARDED_FOR')
+    if xff:
+        return xff.split(',')[0].strip()
+    return request.META.get('REMOTE_ADDR', '')
+
+
+def _verify_turnstile(token, remote_ip):
+    if not settings.TURNSTILE_SECRET_KEY:
+        return True
+    if not token:
+        return False
+    try:
+        resp = requests.post(
+            'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+            data={
+                'secret': settings.TURNSTILE_SECRET_KEY,
+                'response': token,
+                'remoteip': remote_ip,
+            },
+            timeout=5,
+        )
+        return resp.json().get('success', False)
+    except requests.RequestException as e:
+        logger.error("Turnstile verification request failed: %s", e)
+        return False
+
+
 def contact_view(request):
     """Contact information page"""
     about = About.objects.first()
@@ -220,6 +259,26 @@ def contact_view(request):
     if request.method == 'POST':
         # Honeypot check — bots fill this field; silently discard their submission
         if request.POST.get('hp_url', ''):
+            return redirect('portfolio:contact')
+
+        ip = _client_ip(request)
+        rl_key = f'contact_rl:{ip}'
+        attempts = cache.get(rl_key, 0)
+        if attempts >= CONTACT_RATE_LIMIT_MAX:
+            messages.error(request, 'Too many submissions. Please try again later.')
+            return redirect('portfolio:contact')
+        cache.set(rl_key, attempts + 1, CONTACT_RATE_LIMIT_WINDOW)
+
+        # Time-trap — bots that submit immediately after the page loads are silently dropped
+        try:
+            form_ts = float(request.POST.get('form_ts', '0'))
+        except ValueError:
+            form_ts = 0
+        if time.time() - form_ts < CONTACT_MIN_FILL_TIME:
+            return redirect('portfolio:contact')
+
+        if not _verify_turnstile(request.POST.get('cf-turnstile-response', ''), ip):
+            messages.error(request, 'Verification failed. Please try again.')
             return redirect('portfolio:contact')
 
         name = request.POST.get('name', '').strip()
@@ -238,7 +297,8 @@ def contact_view(request):
                     fail_silently=False,
                 )
                 messages.success(request, "Your message has been sent! I'll get back to you soon.")
-            except Exception:
+            except Exception as e:
+                logger.error("Contact form send_mail failed: %s", e, exc_info=True)
                 messages.error(request, 'There was an error sending your message. Please try again or contact me directly via email.')
         else:
             messages.error(request, 'Please fill in all required fields.')
@@ -247,6 +307,8 @@ def contact_view(request):
 
     context = {
         'about': about,
+        'turnstile_site_key': settings.TURNSTILE_SITE_KEY,
+        'form_ts': time.time(),
     }
     return render(request, 'portfolio/contact.html', context)
 
