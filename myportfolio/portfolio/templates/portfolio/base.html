@@ -157,7 +157,6 @@
             border-bottom: 1px solid rgba(127, 168, 143, 0.18);
             padding: 0;
             transition: background var(--transition), box-shadow var(--transition);
-            position: relative;
             z-index: 1000;
         }
 
@@ -740,7 +739,8 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top" id="main-nav">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'portfolio:home' %}">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'portfolio:home' %}">
+                <img src="{% static 'icons/logo.png' %}" alt="" height="32" style="width:auto;">
                 {{ global_about.name|default:"Charles Otwere" }}
             </a>
 
