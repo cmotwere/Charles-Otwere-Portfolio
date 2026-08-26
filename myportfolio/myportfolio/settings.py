@@ -39,6 +39,15 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['charlesotwere.com', 'www.charlesotwere.com', '104.207.66.57', '127.0.0.1', 'localhost']
 
+# Required so Django trusts POSTs (e.g. from the admin) made over HTTPS to
+# these origins — without this, CsrfViewMiddleware rejects them with
+# "CSRF verification failed" because the Origin header has no scheme+host
+# match in this list.
+CSRF_TRUSTED_ORIGINS = [
+    'https://charlesotwere.com',
+    'https://www.charlesotwere.com',
+]
+
 
 # Application definition
 
