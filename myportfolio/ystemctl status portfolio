@@ -1,0 +1,21 @@
+[0;1;32m●[0m caddy.service - Caddy
+     Loaded: loaded (]8;;file://server1.charlesotwere.com/usr/lib/systemd/system/caddy.service/usr/lib/systemd/system/caddy.service]8;;; [0;1;32menabled[0m; preset: [0;1;32menabled[0m)
+     Active: [0;1;32mactive (running)[0m since Thu 2026-02-26 02:14:11 UTC; 16min ago
+       Docs: ]8;;https://caddyserver.com/docs/https://caddyserver.com/docs/]8;;
+   Main PID: 25249 (caddy)
+      Tasks: 8 (limit: 2267)
+     Memory: 9.5M (peak: 10.0M)
+        CPU: 205ms
+     CGroup: /system.slice/caddy.service
+             └─[0;38;5;245m25249 /usr/bin/caddy run --environ --config /etc/caddy/Caddyfile[0m
+
+Feb 26 02:14:11 server1.charlesotwere.com caddy[25249]: {"level":"info","ts":1772072051.1908088,"logger":"tls","msg":"cleaning storage unit","description":"FileStorage:/var/lib/caddy/.local/share/caddy"}
+Feb 26 02:14:11 server1.charlesotwere.com caddy[25249]: {"level":"info","ts":1772072051.1909063,"logger":"http.log","msg":"server running","name":"srv0","protocols":["h1","h2","h3"]}
+Feb 26 02:14:11 server1.charlesotwere.com caddy[25249]: {"level":"info","ts":1772072051.1911304,"logger":"http.log","msg":"server running","name":"remaining_auto_https_redirects","protocols":["h1","h2","h3"]}
+Feb 26 02:14:11 server1.charlesotwere.com caddy[25249]: {"level":"info","ts":1772072051.1911337,"logger":"http","msg":"enabling automatic TLS certificate management","domains":["charlesotwere.com","www.charlesotwere.com"]}
+Feb 26 02:14:11 server1.charlesotwere.com caddy[25249]: {"level":"info","ts":1772072051.1913674,"logger":"tls","msg":"finished cleaning storage units"}
+Feb 26 02:14:11 server1.charlesotwere.com caddy[25249]: {"level":"warn","ts":1772072051.1918328,"logger":"tls","msg":"stapling OCSP","error":"no OCSP stapling for [charlesotwere.com]: no OCSP server specified in certificate","identifiers":["charlesotwere.com"]}
+Feb 26 02:14:11 server1.charlesotwere.com caddy[25249]: {"level":"warn","ts":1772072051.1923182,"logger":"tls","msg":"stapling OCSP","error":"no OCSP stapling for [www.charlesotwere.com]: no OCSP server specified in certificate","identifiers":["www.charlesotwere.com"]}
+Feb 26 02:14:11 server1.charlesotwere.com caddy[25249]: {"level":"info","ts":1772072051.192526,"msg":"autosaved config (load with --resume flag)","file":"/var/lib/caddy/.config/caddy/autosave.json"}
+Feb 26 02:14:11 server1.charlesotwere.com caddy[25249]: {"level":"info","ts":1772072051.192606,"msg":"serving initial configuration"}
+Feb 26 02:14:11 server1.charlesotwere.com systemd[1]: Started caddy.service - Caddy.
