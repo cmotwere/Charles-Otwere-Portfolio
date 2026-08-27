@@ -875,13 +875,13 @@
             <hr>
 
             <div class="row align-items-center">
-                <div class="col-md-6">
-                    <p class="mb-0" style="color: rgba(255,255,255,0.45); font-size: 0.82rem;">
+                <div class="col-12 text-center">
+                    <p class="mb-2" style="color: rgba(255,255,255,0.45); font-size: 0.82rem;">
                         &copy; {% now "Y" %} {{ global_about.name|default:"Charles Otwere" }}. {% trans "All rights reserved." %}
                     </p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <small class="text-light">{% trans "Built with Django & Bootstrap" %}</small>
+                    <p class="mb-0">
+                        <a href="{% url 'portfolio:privacy_policy' %}" style="color: rgba(255,255,255,0.55); font-size: 0.8rem; text-decoration: none;">{% trans "Privacy Policy" %}</a>
+                    </p>
                 </div>
             </div>
         </div>

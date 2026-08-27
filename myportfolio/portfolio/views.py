@@ -44,19 +44,10 @@ def get_blog_context_data(posts=None, **extra_context):
     
     # Get all categories for filters
     all_categories = BlogCategory.objects.all()
-    
-    # Get categories with published posts for "Browse by Category" section  
-    categories_with_posts = []
-    for category in all_categories:
-        published_count = get_published_blog_posts().filter(category=category).count()
-        if published_count > 0:
-            category.published_count = published_count
-            categories_with_posts.append(category)
-    
+
     context = {
         'posts': posts,
         'categories': all_categories,  # For filters dropdown
-        'categories_with_posts': categories_with_posts,  # For browse section
         'featured_posts': posts.filter(is_featured=True)[:3] if posts else [],
         'recent_posts': posts[:10] if posts else [],
     }
@@ -145,6 +136,15 @@ def about_view(request):
         'skills_by_category': skills_by_category,
     }
     return render(request, 'portfolio/about.html', context)
+
+def privacy_policy_view(request):
+    """Privacy policy page"""
+    about = About.objects.first()
+    context = {
+        'about': about,
+        'turnstile_configured': bool(getattr(settings, 'TURNSTILE_SITE_KEY', '')),
+    }
+    return render(request, 'portfolio/privacy_policy.html', context)
 
 def projects_view(request):
     """All projects page with filtering"""

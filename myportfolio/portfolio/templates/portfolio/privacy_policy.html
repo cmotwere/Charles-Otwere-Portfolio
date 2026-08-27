@@ -1,0 +1,189 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}Privacy Policy - {{ about.name|default:"Charles Otwere" }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero-section { padding: 90px 0 64px; }
+    .hero-label { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22); color: rgba(255,255,255,0.9); font-size: 0.78rem; font-weight: 500; padding: 6px 14px; border-radius: 20px; margin-bottom: 18px; letter-spacing: 0.05em; text-transform: uppercase; }
+    .hero-title { font-size: clamp(1.9rem, 4.5vw, 2.8rem); font-weight: 800; letter-spacing: -0.03em; color: white; margin-bottom: 12px; }
+    .hero-lead { font-size: 0.95rem; color: rgba(255,255,255,0.68); }
+
+    .policy-shell { display: flex; gap: 40px; align-items: flex-start; }
+    .policy-toc { position: sticky; top: 88px; width: 240px; flex-shrink: 0; }
+    .policy-toc-title { font-size: 0.68rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; }
+    .policy-toc ul { list-style: none; padding: 0; margin: 0; border-left: 2px solid rgba(127,168,143,0.2); }
+    .policy-toc li { margin-bottom: 4px; }
+    .policy-toc a { display: block; padding: 6px 0 6px 16px; margin-left: -2px; border-left: 2px solid transparent; color: var(--text-light); font-size: 0.84rem; font-weight: 500; text-decoration: none; transition: color 0.2s ease, border-color 0.2s ease; }
+    .policy-toc a:hover { color: var(--primary-color); border-left-color: var(--secondary-color); }
+
+    .policy-content { flex: 1; min-width: 0; background: #fff; border: 1px solid rgba(127,168,143,0.15); border-radius: 18px; padding: 44px 48px; box-shadow: 0 4px 20px rgba(13,75,75,0.07); }
+    .policy-updated { display: inline-flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-light); background: rgba(13,75,75,0.05); border: 1px solid rgba(127,168,143,0.2); padding: 6px 14px; border-radius: 20px; margin-bottom: 32px; }
+
+    .policy-section { margin-bottom: 34px; scroll-margin-top: 90px; }
+    .policy-section:last-child { margin-bottom: 0; }
+    .policy-section h2 { font-size: 1.15rem; font-weight: 700; color: var(--text-dark); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+    .policy-section-num { width: 28px; height: 28px; flex-shrink: 0; background: rgba(13,75,75,0.08); color: var(--primary-color); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; }
+    .policy-section p, .policy-section li { font-size: 0.92rem; color: #3a5252; line-height: 1.8; }
+    .policy-section p { margin-bottom: 12px; }
+    .policy-section ul { padding-left: 20px; margin-bottom: 12px; }
+    .policy-section li { margin-bottom: 6px; }
+    .policy-section a { color: var(--primary-color); font-weight: 600; text-decoration: none; }
+    .policy-section a:hover { color: var(--accent-color); }
+    .policy-section h3 { font-size: 0.94rem; font-weight: 700; color: var(--text-dark); margin: 18px 0 8px; }
+
+    .policy-table { width: 100%; border-collapse: collapse; margin-bottom: 12px; font-size: 0.86rem; }
+    .policy-table th, .policy-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid rgba(127,168,143,0.18); vertical-align: top; }
+    .policy-table th { color: var(--text-dark); font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .policy-table td { color: #3a5252; }
+
+    .policy-contact-box { background: var(--bg-light); border: 1px solid rgba(127,168,143,0.2); border-radius: 14px; padding: 22px 24px; }
+
+    @media (max-width: 991px) {
+        .policy-shell { flex-direction: column; }
+        .policy-toc { position: static; width: 100%; border-left: none; }
+        .policy-toc ul { display: flex; flex-wrap: wrap; gap: 4px 18px; border-left: none; }
+        .policy-toc a { padding: 4px 0; border-left: none; }
+        .policy-content { padding: 28px 22px; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="hero-section">
+    <div class="container text-center animate-in">
+        <div class="hero-label d-inline-flex"><i class="fas fa-shield-alt"></i> Privacy</div>
+        <h1 class="hero-title">Privacy Policy</h1>
+        <p class="hero-lead">How this website collects, uses, and protects your information.</p>
+    </div>
+</section>
+
+<section class="section-padding">
+    <div class="container">
+        <div class="policy-shell">
+
+            <aside class="policy-toc d-none d-lg-block animate-in">
+                <div class="policy-toc-title">On This Page</div>
+                <ul>
+                    <li><a href="#introduction">1. Introduction</a></li>
+                    <li><a href="#information-we-collect">2. Information We Collect</a></li>
+                    <li><a href="#how-we-use">3. How We Use Information</a></li>
+                    <li><a href="#cookies">4. Cookies</a></li>
+                    <li><a href="#third-party">5. Third-Party Services</a></li>
+                    <li><a href="#data-retention">6. Data Retention</a></li>
+                    <li><a href="#data-security">7. Data Security</a></li>
+                    <li><a href="#your-rights">8. Your Rights</a></li>
+                    <li><a href="#children">9. Children's Privacy</a></li>
+                    <li><a href="#changes">10. Changes to This Policy</a></li>
+                    <li><a href="#contact">11. Contact</a></li>
+                </ul>
+            </aside>
+
+            <div class="policy-content animate-in">
+                <div class="policy-updated"><i class="fas fa-calendar-alt"></i> Last updated: {% now "F j, Y" %}</div>
+
+                <div class="policy-section" id="introduction">
+                    <h2><span class="policy-section-num">1</span> Introduction</h2>
+                    <p>This Privacy Policy explains how {{ about.name|default:"Charles Otwere" }} ("I", "me", or "this website") collects, uses, and safeguards information when you visit this personal portfolio website. This site is operated for the purpose of showcasing professional work, projects, and enabling visitors to get in touch — it does not sell or rent personal information to anyone.</p>
+                    <p>By using this website, you agree to the collection and use of information as described in this policy. If you do not agree, please refrain from submitting personal information through the site.</p>
+                </div>
+
+                <div class="policy-section" id="information-we-collect">
+                    <h2><span class="policy-section-num">2</span> Information We Collect</h2>
+                    <h3>Information You Provide Directly</h3>
+                    <p>When you use the <a href="{% url 'portfolio:contact' %}">contact form</a>, I collect the details you submit: your name, email address, subject, and message content. This is used solely to respond to your inquiry.</p>
+                    <h3>Information Collected Automatically</h3>
+                    <ul>
+                        <li><strong>Usage &amp; analytics data</strong> — pages visited, time on site, referring pages, browser and device type, and approximate location (via Google Analytics).</li>
+                        <li><strong>IP address</strong> — used briefly for spam and abuse prevention (e.g. rate-limiting contact form submissions).</li>
+                        <li><strong>Cookies &amp; local storage</strong> — used to remember your display theme (light/dark) and to power analytics, as described in Section 4.</li>
+                    </ul>
+                </div>
+
+                <div class="policy-section" id="how-we-use">
+                    <h2><span class="policy-section-num">3</span> How We Use Information</h2>
+                    <ul>
+                        <li>To respond to messages sent through the contact form.</li>
+                        <li>To understand how visitors use the site and improve its content and performance.</li>
+                        <li>To detect, prevent, and respond to spam, abuse, or malicious activity.</li>
+                        <li>To remember your site preferences, such as theme selection.</li>
+                    </ul>
+                    <p>I do not use your information for advertising, and I do not sell, rent, or trade personal information to third parties.</p>
+                </div>
+
+                <div class="policy-section" id="cookies">
+                    <h2><span class="policy-section-num">4</span> Cookies</h2>
+                    <p>Cookies are small text files stored on your device. This site uses a limited number of cookies:</p>
+                    <table class="policy-table">
+                        <thead><tr><th>Cookie</th><th>Purpose</th><th>Duration</th></tr></thead>
+                        <tbody>
+                            <tr><td>Session / theme preference</td><td>Remembers your light or dark mode choice</td><td>Session / persistent</td></tr>
+                            <tr><td>CSRF token</td><td>Protects form submissions from cross-site request forgery</td><td>Session</td></tr>
+                            <tr><td>Google Analytics (<code>_ga</code>, <code>_gid</code>)</td><td>Measures site traffic and usage patterns</td><td>Up to 2 years</td></tr>
+                        </tbody>
+                    </table>
+                    <p>You can disable cookies through your browser settings; doing so may affect some site functionality, such as remembering your theme preference.</p>
+                </div>
+
+                <div class="policy-section" id="third-party">
+                    <h2><span class="policy-section-num">5</span> Third-Party Services</h2>
+                    <p>This site relies on a small number of trusted third-party services to operate:</p>
+                    <ul>
+                        <li><strong>Google Analytics</strong> — collects anonymized usage statistics to help understand site traffic. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>.</li>
+                        {% if turnstile_configured %}
+                        <li><strong>Cloudflare Turnstile</strong> — a spam-prevention challenge used on the contact form. See <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare's Privacy Policy</a>.</li>
+                        {% endif %}
+                        <li><strong>Email delivery provider</strong> — used to deliver contact form submissions to my inbox.</li>
+                    </ul>
+                    <p>These providers may process data according to their own privacy policies, independent of this site.</p>
+                </div>
+
+                <div class="policy-section" id="data-retention">
+                    <h2><span class="policy-section-num">6</span> Data Retention</h2>
+                    <p>Contact form messages are retained only as long as needed to respond to your inquiry and for a reasonable period afterward for reference, after which they may be deleted. Analytics data is retained according to Google Analytics' default retention settings.</p>
+                </div>
+
+                <div class="policy-section" id="data-security">
+                    <h2><span class="policy-section-num">7</span> Data Security</h2>
+                    <p>This site is served over HTTPS and uses standard safeguards — including CSRF protection, rate limiting, and spam filtering on the contact form — to protect information in transit and reduce misuse. No method of transmission or storage is completely secure, but reasonable measures are taken to protect your information.</p>
+                </div>
+
+                <div class="policy-section" id="your-rights">
+                    <h2><span class="policy-section-num">8</span> Your Rights</h2>
+                    <p>If you are located in the EU or UK, data protection law (GDPR) gives you rights over your personal information regardless of this policy. As a matter of good practice, I extend the same rights to all visitors, regardless of location, including the right to:</p>
+                    <ul>
+                        <li>Request access to the personal information held about you.</li>
+                        <li>Request correction or deletion of your personal information.</li>
+                        <li>Object to or restrict certain processing, including analytics tracking.</li>
+                        <li>Withdraw consent where processing is based on consent.</li>
+                    </ul>
+                    <p>This site is operated by an individual, not a business subject to the CCPA, but California residents' requests will be honored on the same voluntary basis. To exercise any of these rights, contact me using the details in Section 11.</p>
+                </div>
+
+                <div class="policy-section" id="children">
+                    <h2><span class="policy-section-num">9</span> Children's Privacy</h2>
+                    <p>This website is not directed at children under 13, and personal information is not knowingly collected from children. If you believe a child has provided personal information through this site, please contact me so it can be removed.</p>
+                </div>
+
+                <div class="policy-section" id="changes">
+                    <h2><span class="policy-section-num">10</span> Changes to This Policy</h2>
+                    <p>This Privacy Policy may be updated from time to time to reflect changes in practices or for legal and operational reasons. The "Last updated" date at the top of this page indicates when it was last revised. Continued use of the site after changes constitutes acceptance of the updated policy.</p>
+                </div>
+
+                <div class="policy-section" id="contact">
+                    <h2><span class="policy-section-num">11</span> Contact</h2>
+                    <p>If you have questions about this Privacy Policy or how your information is handled, please get in touch:</p>
+                    <div class="policy-contact-box">
+                        {% if about.name %}<div style="font-weight:700; color:var(--text-dark); margin-bottom:4px;">{{ about.name }}</div>{% endif %}
+                        {% if about.email %}<div><i class="fas fa-envelope me-2" style="color:var(--secondary-color);"></i><a href="mailto:{{ about.email }}">{{ about.email }}</a></div>{% endif %}
+                        <div style="margin-top:10px;"><a href="{% url 'portfolio:contact' %}"><i class="fas fa-paper-plane me-2"></i>Use the Contact Form</a></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

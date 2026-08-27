@@ -513,12 +513,12 @@ class BlogPost(models.Model):
         ('other', 'Other'),
     ]
     
-    title = models.CharField(max_length=200, blank=True, help_text="Blog post title (auto-generated if empty)")
+    title = models.CharField(max_length=200, help_text="Blog post title")
     slug = models.SlugField(unique=True, blank=True)
     excerpt = models.CharField(max_length=300, blank=True, help_text="Brief description for previews (optional)")
     content = models.TextField(blank=True, help_text="Full blog post content (supports Markdown)")
     featured_image = models.ImageField(upload_to='blog/', blank=True, null=True)
-    category = models.ForeignKey(BlogCategory, on_delete=models.SET_NULL, null=True, blank=True)
+    category = models.ForeignKey(BlogCategory, on_delete=models.SET_NULL, null=True, help_text="Topic this post belongs to")
     content_type = models.CharField(max_length=20, choices=CONTENT_TYPES, default='technical')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
     tags = models.CharField(max_length=500, blank=True, help_text="Comma-separated tags")
