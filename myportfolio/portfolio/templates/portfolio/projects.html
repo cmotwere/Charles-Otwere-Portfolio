@@ -70,8 +70,15 @@
         padding: 9px 14px;
         font-size: 0.875rem;
         color: var(--text-dark);
-        background: var(--surface-2);
+        background-color: var(--surface-2);
         transition: border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .form-select {
+        padding-right: 2.5rem;
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+        background-size: 14px 10px;
     }
 
     .form-control:focus,
@@ -79,7 +86,7 @@
         border-color: var(--brand-ink);
         box-shadow: 0 0 0 3px rgba(13,75,75,0.1);
         outline: none;
-        background: var(--surface);
+        background-color: var(--surface);
     }
 
     .form-control::placeholder { color: var(--text-light); }
@@ -405,7 +412,7 @@
                     <div style="position: relative;">
                         <i class="fas fa-search" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--text-light); font-size:0.8rem;"></i>
                         <input type="text" class="form-control" id="search" name="search"
-                               value="{{ search_query }}" placeholder="Search by title, description..."
+                               value="{{ search_query|default_if_none:'' }}" placeholder="Search by title, description..."
                                style="padding-left: 34px;">
                     </div>
                 </div>
