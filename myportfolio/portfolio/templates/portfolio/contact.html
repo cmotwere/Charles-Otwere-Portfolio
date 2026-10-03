@@ -9,21 +9,21 @@
     .hero-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; letter-spacing: -0.03em; color: white; margin-bottom: 14px; }
     .hero-lead { font-size: 1rem; color: rgba(255,255,255,0.72); line-height: 1.75; }
 
-    .contact-card { background: #fff; border: 1px solid rgba(127,168,143,0.15); border-radius: 18px; padding: 36px; box-shadow: 0 4px 20px rgba(13,75,75,0.07); height: 100%; transition: box-shadow 0.3s ease; }
+    .contact-card { background: var(--surface); border: 1px solid rgba(127,168,143,0.15); border-radius: 18px; padding: 36px; box-shadow: 0 4px 20px rgba(13,75,75,0.07); height: 100%; transition: box-shadow 0.3s ease; }
     .contact-card:hover { box-shadow: 0 10px 36px rgba(13,75,75,0.11); }
 
     .card-section-title { font-size: 1.05rem; font-weight: 700; color: var(--text-dark); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; padding-bottom: 14px; border-bottom: 1px solid rgba(127,168,143,0.15); }
-    .card-section-icon { width: 30px; height: 30px; background: rgba(127,168,143,0.12); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--secondary-color); font-size: 0.85rem; flex-shrink: 0; }
+    .card-section-icon { width: 30px; height: 30px; background: rgba(127,168,143,0.12); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--secondary-ink); font-size: 0.85rem; flex-shrink: 0; }
 
     .contact-name { font-size: 1.15rem; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
     .contact-role { font-size: 0.875rem; color: var(--text-light); margin-bottom: 24px; }
 
     .info-row { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid rgba(127,168,143,0.1); }
     .info-row:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-    .info-icon { width: 36px; height: 36px; background: rgba(13,75,75,0.07); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--primary-color); font-size: 0.85rem; flex-shrink: 0; margin-top: 2px; }
+    .info-icon { width: 36px; height: 36px; background: rgba(13,75,75,0.07); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--brand-ink); font-size: 0.85rem; flex-shrink: 0; margin-top: 2px; }
     .info-label { font-size: 0.68rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px; display: block; }
     .info-value { font-size: 0.9rem; color: var(--text-dark); font-weight: 500; }
-    .info-value a { color: var(--primary-color); text-decoration: none; transition: color 0.2s ease; }
+    .info-value a { color: var(--brand-ink); text-decoration: none; transition: color 0.2s ease; }
     .info-value a:hover { color: var(--accent-color); }
 
     .follow-label { font-size: 0.72rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; display: block; }
@@ -31,53 +31,53 @@
     .social-btn { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; text-decoration: none; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); border: 1.5px solid; }
     .social-btn-linkedin { color: #0a66c2; border-color: rgba(10,102,194,0.3); background: rgba(10,102,194,0.05); }
     .social-btn-linkedin:hover { background: #0a66c2; color: white; border-color: #0a66c2; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(10,102,194,0.3); }
-    .social-btn-github { color: #24292e; border-color: rgba(36,41,46,0.25); background: rgba(36,41,46,0.04); }
+    .social-btn-github { color: var(--github-ink); border-color: rgba(36,41,46,0.25); background: rgba(36,41,46,0.04); }
     .social-btn-github:hover { background: #24292e; color: white; border-color: #24292e; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.18); }
     .social-btn-twitter { color: #1da1f2; border-color: rgba(29,161,242,0.3); background: rgba(29,161,242,0.05); }
     .social-btn-twitter:hover { background: #1da1f2; color: white; border-color: #1da1f2; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(29,161,242,0.3); }
-    .social-btn-website { color: var(--primary-color); border-color: rgba(13,75,75,0.25); background: rgba(13,75,75,0.04); }
-    .social-btn-website:hover { background: var(--primary-color); color: white; border-color: var(--primary-color); transform: translateY(-2px); box-shadow: 0 4px 14px rgba(13,75,75,0.25); }
+    .social-btn-website { color: var(--brand-ink); border-color: var(--border-hover); background: rgba(13,75,75,0.04); }
+    .social-btn-website:hover { background: var(--primary-color); color: white; border-color: var(--brand-ink); transform: translateY(-2px); box-shadow: 0 4px 14px rgba(13,75,75,0.25); }
 
     .btn-resume { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--primary-color); color: white; border: none; font-weight: 600; font-size: 0.92rem; padding: 12px 20px; border-radius: 11px; text-decoration: none; transition: all 0.28s cubic-bezier(0.4,0,0.2,1); width: 100%; }
-    .btn-resume:hover { background: #0a3b3b; color: white; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(13,75,75,0.28); }
+    .btn-resume:hover { background: var(--primary-hover); color: white; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(13,75,75,0.28); }
 
     .form-label { font-size: 0.72rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; display: block; }
-    .form-control { border: 1.5px solid rgba(127,168,143,0.25); border-radius: 10px; padding: 10px 14px; font-size: 0.9rem; color: var(--text-dark); background: var(--bg-light); transition: border-color 0.22s ease, box-shadow 0.22s ease; width: 100%; }
-    .form-control:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(13,75,75,0.1); background: #fff; outline: none; }
+    .form-control { border: 1.5px solid rgba(127,168,143,0.25); border-radius: 10px; padding: 10px 14px; font-size: 0.9rem; color: var(--text-dark); background: var(--surface-2); transition: border-color 0.22s ease, box-shadow 0.22s ease; width: 100%; }
+    .form-control:focus { border-color: var(--brand-ink); box-shadow: 0 0 0 3px rgba(13,75,75,0.1); background: var(--surface); outline: none; }
     .form-control::placeholder { color: var(--text-light); opacity: 0.7; }
     textarea.form-control { resize: vertical; min-height: 130px; }
 
     .btn-send { background: var(--primary-color); color: white; border: none; font-weight: 700; font-size: 0.92rem; padding: 13px 28px; border-radius: 11px; transition: all 0.28s cubic-bezier(0.4,0,0.2,1); display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; cursor: pointer; }
-    .btn-send:hover { background: #0a3b3b; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(13,75,75,0.28); }
+    .btn-send:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(13,75,75,0.28); }
 
     .form-note { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--text-light); margin-top: 12px; }
-    .form-note i { color: var(--secondary-color); }
+    .form-note i { color: var(--secondary-ink); }
 
-    .connect-section { background: var(--bg-light); position: relative; overflow: hidden; }
+    .connect-section { background: var(--surface-2); position: relative; overflow: hidden; }
     .connect-section::before { content: ''; position: absolute; top: -60px; right: -60px; width: 300px; height: 300px; background: radial-gradient(ellipse, rgba(246,171,21,0.07) 0%, transparent 70%); pointer-events: none; }
 
     .section-heading { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.03em; color: var(--text-dark); margin-bottom: 6px; }
     .section-sub { font-size: 0.97rem; color: var(--text-light); }
     .section-divider { width: 48px; height: 4px; background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); border-radius: 2px; margin: 10px auto 36px; }
 
-    .connect-card { background: #fff; border: 1px solid rgba(127,168,143,0.15); border-radius: 18px; padding: 32px 24px; text-align: center; height: 100%; transition: transform 0.28s cubic-bezier(0.4,0,0.2,1), box-shadow 0.28s ease, border-color 0.28s ease; }
-    .connect-card:hover { transform: translateY(-5px); box-shadow: 0 14px 36px rgba(13,75,75,0.1); border-color: rgba(13,75,75,0.18); }
+    .connect-card { background: var(--surface); border: 1px solid rgba(127,168,143,0.15); border-radius: 18px; padding: 32px 24px; text-align: center; height: 100%; transition: transform 0.28s cubic-bezier(0.4,0,0.2,1), box-shadow 0.28s ease, border-color 0.28s ease; }
+    .connect-card:hover { transform: translateY(-5px); box-shadow: 0 14px 36px rgba(13,75,75,0.1); border-color: var(--border-hover); }
     .connect-icon-wrap { width: 64px; height: 64px; background: rgba(13,75,75,0.07); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; transition: background 0.28s ease, transform 0.28s ease; }
     .connect-card:hover .connect-icon-wrap { background: rgba(13,75,75,0.12); transform: scale(1.08); }
-    .connect-icon { font-size: 1.7rem; color: var(--primary-color); }
+    .connect-icon { font-size: 1.7rem; color: var(--brand-ink); }
     .connect-card-title { font-size: 1.05rem; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; }
-    .connect-card-desc { font-size: 0.875rem; color: #5a6e6e; line-height: 1.7; margin-bottom: 18px; }
+    .connect-card-desc { font-size: 0.875rem; color: var(--text-soft); line-height: 1.7; margin-bottom: 18px; }
 
-    .btn-connect { display: inline-flex; align-items: center; gap: 7px; border: 1.5px solid rgba(127,168,143,0.3); color: var(--primary-color); background: transparent; font-weight: 600; font-size: 0.82rem; padding: 8px 18px; border-radius: 20px; text-decoration: none; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); }
-    .btn-connect:hover { background: var(--primary-color); border-color: var(--primary-color); color: white; transform: translateY(-1px); }
+    .btn-connect { display: inline-flex; align-items: center; gap: 7px; border: 1.5px solid rgba(127,168,143,0.3); color: var(--brand-ink); background: transparent; font-weight: 600; font-size: 0.82rem; padding: 8px 18px; border-radius: 20px; text-decoration: none; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); }
+    .btn-connect:hover { background: var(--primary-color); border-color: var(--brand-ink); color: white; transform: translateY(-1px); }
     .btn-connect.disabled { opacity: 0.45; pointer-events: none; }
 
-    .accordion-item { border: 1px solid rgba(127,168,143,0.18) !important; border-radius: 12px !important; margin-bottom: 10px; overflow: hidden; background: #fff; box-shadow: 0 2px 10px rgba(13,75,75,0.05); }
-    .accordion-button { font-weight: 600; font-size: 0.92rem; color: var(--text-dark); background: #fff; padding: 18px 22px; border-radius: 12px !important; }
-    .accordion-button:not(.collapsed) { background: rgba(13,75,75,0.04); color: var(--primary-color); box-shadow: none; }
+    .accordion-item { border: 1px solid rgba(127,168,143,0.18) !important; border-radius: 12px !important; margin-bottom: 10px; overflow: hidden; background: var(--surface); box-shadow: 0 2px 10px rgba(13,75,75,0.05); }
+    .accordion-button { font-weight: 600; font-size: 0.92rem; color: var(--text-dark); background: var(--surface); padding: 18px 22px; border-radius: 12px !important; }
+    .accordion-button:not(.collapsed) { background: rgba(13,75,75,0.04); color: var(--brand-ink); box-shadow: none; }
     .accordion-button:focus { box-shadow: none; outline: none; }
-    .accordion-body { font-size: 0.9rem; color: #3a5252; line-height: 1.75; padding: 0 22px 20px; background: rgba(13,75,75,0.02); }
-    .accordion-body a { color: var(--primary-color); text-decoration: none; font-weight: 500; }
+    .accordion-body { font-size: 0.9rem; color: var(--text-body); line-height: 1.75; padding: 0 22px 20px; background: rgba(13,75,75,0.02); }
+    .accordion-body a { color: var(--brand-ink); text-decoration: none; font-weight: 500; }
     .accordion-body a:hover { color: var(--accent-color); }
 
     .empty-state { padding: 80px 20px; text-align: center; }

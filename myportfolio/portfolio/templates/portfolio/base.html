@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% load i18n %}
 {% load static %}
-<html lang="{{ LANGUAGE_CODE|default:'en' }}">
+<html lang="{{ LANGUAGE_CODE|default:'en' }}" data-theme="{{ current_theme|default:'light' }}">
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9PZ2WL9Y90"></script>
@@ -17,7 +17,8 @@
 
     <!-- PWA Meta Tags -->
     <meta name="description" content="{% block description %}{{ pwa_data.app_description }}{% endblock %}">
-    <meta name="theme-color" content="{{ pwa_data.theme_color }}">
+    <meta name="theme-color" id="meta-theme-color"
+          content="{% if current_theme == 'dark' %}#0d1a19{% else %}{{ pwa_data.theme_color }}{% endif %}">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="{{ pwa_data.app_name }}">
@@ -62,13 +63,35 @@
     <style>
         /* ─── Original Color Palette — Preserved ─── */
         :root {
+            color-scheme: light;
+
             --primary-color:   #0d4b4b;
+            --primary-hover:   #0a3b3b;
             --secondary-color: #7fa88f;
             --accent-color:    #f6ab15;
             --text-dark:       #0d4b4b;
             --text-light:      #7fa88f;
             --bg-light:        #f5fdff;
             --border-color:    #7fa88f;
+
+            /* Brand colour for TEXT, icons and borders. Distinct from
+               --primary-color, which stays a dark fill that carries white text. */
+            --brand-ink:       #0d4b4b;
+            --surface:         #ffffff;
+            --surface-2:       #f5fdff;
+            --bg-page:         #ffffff;
+            --text-body:       #3a5252;
+            --text-soft:       #5a6e6e;
+            --border-soft:     rgba(127, 168, 143, 0.18);
+            --tint-weak:       rgba(13, 75, 75, 0.06);
+            --tint-strong:     rgba(13, 75, 75, 0.10);
+            /* Sage used for icons/labels, as opposed to --secondary-color which
+               also fills gradients and avatars and must stay dark in dark mode. */
+            --secondary-ink:   #7fa88f;
+            --warn-ink:        #b45309;
+            --warn-ink-strong: #92400e;
+            --github-ink:      #24292e;
+            --border-hover:    rgba(13, 75, 75, 0.20);
 
             --radius-sm:   8px;
             --radius-md:   14px;
@@ -79,36 +102,47 @@
             --shadow-lg:   0 14px 40px rgba(13, 75, 75, 0.14);
         }
 
-        /* ─── Dark Theme — Preserved ─── */
+        /* ─── Dark Theme ─── */
         [data-theme="dark"] {
-            --primary-color:   #0d4b4b;
-            --secondary-color: #3f2a1a;
-            --accent-color:    #f6ab15;
-            --text-dark:       #f5fdff;
-            --text-light:      #7fa88f;
-            --bg-light:        #0d4b4b;
-            --border-color:    #3f2a1a;
-        }
+            color-scheme: dark;
 
-        [data-theme="dark"] body {
-            background-color: #111827;
-            color: var(--text-dark);
+            --primary-color:   #0f514c;
+            --primary-hover:   #17645d;
+            --secondary-color: #2f5a4d;
+            --accent-color:    #f6ab15;
+            --text-dark:       #e9f5f2;
+            --text-light:      #9bbcb0;
+            --bg-light:        #1b2e2b;
+            --border-color:    #2b4441;
+
+            --brand-ink:       #74cdb8;
+            --surface:         #152523;
+            --surface-2:       #1b2e2b;
+            --bg-page:         #0d1a19;
+            --text-body:       #c3d8d2;
+            --text-soft:       #9bbcb0;
+            --border-soft:     rgba(127, 168, 143, 0.20);
+            --tint-weak:       rgba(116, 205, 184, 0.10);
+            --tint-strong:     rgba(116, 205, 184, 0.17);
+            --secondary-ink:   #8fc4ae;
+            --warn-ink:        #f0b962;
+            --warn-ink-strong: #f7d4a0;
+            --github-ink:      #d0d7de;
+            --border-hover:    rgba(116, 205, 184, 0.38);
         }
 
         [data-theme="dark"] .navbar {
-            background: rgba(17, 24, 39, 0.96) !important;
-            backdrop-filter: blur(18px);
-            border-bottom: 1px solid rgba(127, 168, 143, 0.15);
+            background: rgba(13, 26, 25, 0.92) !important;
+            border-bottom: 1px solid var(--border-soft);
         }
 
-        [data-theme="dark"] .card {
-            background-color: #162828;
-            color: var(--text-dark);
-            border: 1px solid rgba(127, 168, 143, 0.18);
+        [data-theme="dark"] .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28233, 245, 242, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
 
-        [data-theme="dark"] .bg-light {
-            background-color: var(--bg-light) !important;
+        [data-theme="dark"] .bg-light,
+        [data-theme="dark"] .bg-white {
+            background-color: var(--surface-2) !important;
         }
 
         [data-theme="dark"] .text-muted {
@@ -116,18 +150,40 @@
         }
 
         [data-theme="dark"] .dropdown-menu {
-            background: #1a2e2e;
-            border-color: rgba(127, 168, 143, 0.2);
+            background: var(--surface);
+            border-color: var(--border-soft);
         }
 
-        [data-theme="dark"] .dropdown-item {
-            color: #c8ddd6;
+        [data-theme="dark"] .dropdown-item { color: var(--text-body); }
+
+        [data-theme="dark"] footer { background: #102e2b; }
+
+        [data-theme="dark"] #scroll-to-top { border: 1px solid var(--border-soft); }
+
+        /* Bootstrap components that would otherwise stay light */
+        [data-theme="dark"] .form-control,
+        [data-theme="dark"] .form-select,
+        [data-theme="dark"] .modal-content,
+        [data-theme="dark"] .accordion-item,
+        [data-theme="dark"] .accordion-button,
+        [data-theme="dark"] .list-group-item {
+            background-color: var(--surface);
+            color: var(--text-dark);
+            border-color: var(--border-soft);
         }
 
-        [data-theme="dark"] .dropdown-item:hover {
-            background: rgba(13, 75, 75, 0.5);
-            color: #f5fdff;
+        [data-theme="dark"] .form-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c3d8d2' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
         }
+
+        [data-theme="dark"] .accordion-button::after { filter: invert(1) brightness(1.7); }
+        [data-theme="dark"] .accordion-body { color: var(--text-body); }
+        [data-theme="dark"] .table { color: var(--text-body); --bs-table-color: var(--text-body); }
+        [data-theme="dark"] .modal-header,
+        [data-theme="dark"] .modal-footer { border-color: var(--border-soft); }
+        [data-theme="dark"] .btn-close { filter: invert(1) grayscale(1) brightness(1.8); }
+        [data-theme="dark"] .progress { background-color: var(--surface-2); }
+        [data-theme="dark"] .breadcrumb-item + .breadcrumb-item::before { color: var(--text-light); }
 
         /* ─── Reset & Base ─── */
         *, *::before, *::after { box-sizing: border-box; }
@@ -135,6 +191,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
+            background-color: var(--bg-page);
             color: var(--text-dark);
             line-height: 1.7;
             font-size: 15px;
@@ -186,7 +243,7 @@
         .navbar-brand {
             font-weight: 700;
             font-size: 1.35rem;
-            color: var(--primary-color) !important;
+            color: var(--brand-ink) !important;
             letter-spacing: -0.02em;
             padding: 0;
             transition: color var(--transition), opacity var(--transition);
@@ -204,18 +261,18 @@
         }
 
         .nav-link:hover {
-            color: var(--primary-color) !important;
-            background: rgba(13, 75, 75, 0.06);
+            color: var(--brand-ink) !important;
+            background: var(--tint-weak);
         }
 
         .nav-link.active {
-            color: var(--primary-color) !important;
-            background: rgba(13, 75, 75, 0.08);
+            color: var(--brand-ink) !important;
+            background: var(--tint-strong);
             font-weight: 600;
         }
 
         .navbar-toggler {
-            border: 1px solid rgba(13, 75, 75, 0.2);
+            border: 1px solid var(--border-soft);
             border-radius: var(--radius-sm);
             padding: 6px 10px;
             transition: border-color var(--transition);
@@ -248,13 +305,13 @@
         }
 
         .dropdown-item:hover, .dropdown-item:focus {
-            background: rgba(13, 75, 75, 0.07);
-            color: var(--primary-color);
+            background: var(--tint-weak);
+            color: var(--brand-ink);
         }
 
         .dropdown-item.active {
-            background: rgba(13, 75, 75, 0.1);
-            color: var(--primary-color);
+            background: var(--tint-strong);
+            color: var(--brand-ink);
             font-weight: 600;
         }
 
@@ -270,17 +327,12 @@
 
         @media (max-width: 991px) {
             .navbar-collapse {
-                background: rgba(255, 255, 255, 0.98);
-                border: 1px solid rgba(127, 168, 143, 0.2);
+                background: var(--surface);
+                border: 1px solid var(--border-soft);
                 border-radius: var(--radius-md);
                 margin-top: 10px;
                 padding: 12px 16px;
                 box-shadow: var(--shadow-md);
-            }
-
-            [data-theme="dark"] .navbar-collapse {
-                background: #1a2e2e;
-                border-color: rgba(127, 168, 143, 0.15);
             }
         }
 
@@ -325,13 +377,13 @@
                 border-color var(--transition),
                 background-color var(--transition);
             border-radius: var(--radius-md);
-            background: #fff;
+            background: var(--surface);
         }
 
         .card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
-            border-color: rgba(13, 75, 75, 0.2);
+            border-color: var(--border-hover);
         }
 
         .card-body { padding: 1.6rem; }
@@ -359,7 +411,7 @@
         }
 
         .btn-primary:hover {
-            background: #0a3b3b;
+            background: var(--primary-hover);
             color: white;
             transform: translateY(-2px);
             box-shadow: 0 6px 18px rgba(13, 75, 75, 0.3);
@@ -368,8 +420,8 @@
         .btn-primary:active { transform: translateY(0); }
 
         .btn-outline-primary {
-            border: 1.5px solid var(--primary-color);
-            color: var(--primary-color);
+            border: 1.5px solid var(--brand-ink);
+            color: var(--brand-ink);
             background: transparent;
         }
 
@@ -403,7 +455,7 @@
 
         /* ─── Skill Badges ─── */
         .skill-badge {
-            background: var(--bg-light);
+            background: var(--surface-2);
             color: var(--text-dark);
             border: 1px solid rgba(127, 168, 143, 0.25);
             padding: 7px 15px;
@@ -415,9 +467,9 @@
         }
 
         .skill-badge:hover {
-            background: rgba(13, 75, 75, 0.08);
+            background: var(--tint-strong);
             border-color: var(--secondary-color);
-            color: var(--primary-color);
+            color: var(--brand-ink);
             transform: translateY(-2px);
         }
 
@@ -452,7 +504,23 @@
         }
 
         /* ─── Theme Toggle ─── */
+        /* Applied for ~300ms around a theme switch only, so the repaint eases
+           instead of snapping, without taxing every other interaction. */
+        .theme-switching, .theme-switching *, .theme-switching *::before, .theme-switching *::after {
+            transition: background-color 0.3s ease, background-image 0.3s ease,
+                        border-color 0.3s ease, color 0.3s ease, fill 0.3s ease !important;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .theme-switching, .theme-switching *, .theme-switching *::before, .theme-switching *::after {
+                transition: none !important;
+            }
+        }
+
         .theme-toggle {
+            background: none;
+            border: none;
+            font-family: inherit;
             cursor: pointer;
             transition: transform var(--transition), color var(--transition), background var(--transition) !important;
             border-radius: var(--radius-sm);
@@ -630,6 +698,24 @@
 
         /* ─── Print Styles ─── */
         @media print {
+            /* Printing while in dark mode would otherwise put dark surfaces and
+               pale text on paper, so force the tokens back to an ink-on-white set. */
+            :root, [data-theme="dark"] {
+                --surface:     #ffffff;
+                --surface-2:   #ffffff;
+                --bg-page:     #ffffff;
+                --text-dark:   #000000;
+                --text-body:   #222222;
+                --text-soft:   #444444;
+                --brand-ink:   #000000;
+                --border-soft: #dddddd;
+                --secondary-ink:   #555555;
+                --warn-ink:        #7a3c06;
+                --warn-ink-strong: #5f2a05;
+                --github-ink:      #24292e;
+                --border-hover:    #bbbbbb;
+            }
+
             .navbar, footer, .social-share-buttons,
             .theme-toggle, .language-switcher,
             .btn, .badge, .pwa-install-banner { display: none !important; }
@@ -700,13 +786,13 @@
         }
         #scroll-to-top:hover {
             background: var(--accent-color);
-            color: #fff;
+            color: #0d4b4b;
         }
     </style>
 
     {% block extra_css %}{% endblock %}
 </head>
-<body data-theme="{{ current_theme }}">
+<body>
 
     <!-- PWA Install Banner -->
     <div id="pwa-install-banner" class="pwa-install-banner">
@@ -798,14 +884,18 @@
 
                     <!-- Theme Toggle -->
                     <li class="nav-item">
-                        <a class="nav-link theme-toggle" href="{% url 'portfolio:toggle_theme' %}"
-                           title="{% trans 'Toggle Dark/Light Mode' %}" id="theme-toggle">
+                        <button type="button" class="nav-link theme-toggle" id="theme-toggle"
+                                aria-pressed="{% if current_theme == 'dark' %}true{% else %}false{% endif %}"
+                                data-label-to-light="{% trans 'Switch to light mode' %}"
+                                data-label-to-dark="{% trans 'Switch to dark mode' %}"
+                                aria-label="{% if current_theme == 'dark' %}{% trans 'Switch to light mode' %}{% else %}{% trans 'Switch to dark mode' %}{% endif %}"
+                                title="{% if current_theme == 'dark' %}{% trans 'Switch to light mode' %}{% else %}{% trans 'Switch to dark mode' %}{% endif %}">
                             {% if current_theme == 'dark' %}
-                                <i class="fas fa-sun"></i>
+                                <i class="fas fa-sun" aria-hidden="true"></i>
                             {% else %}
-                                <i class="fas fa-moon"></i>
+                                <i class="fas fa-moon" aria-hidden="true"></i>
                             {% endif %}
-                        </a>
+                        </button>
                     </li>
 
                 </ul>
@@ -824,17 +914,17 @@
             <div class="row g-4">
                 <div class="col-md-8">
                     <h5>{{ global_about.name|default:"Charles Otwere" }}</h5>
-                    <p class="mb-3">{{ global_about.title|default:"Software Developer, Data & Technology Enthusiast" }}</p>
+                    <p class="mb-3">{{ global_about.title|default:"Aspiring Software & Analytics Engineer | Full‑Stack Development | Data Analytics" }}</p>
                     <ul class="list-unstyled mb-3">
                         {% if global_about.location %}
-                        <li><i class="fas fa-map-marker-alt me-2" style="color: var(--secondary-color);"></i>{{ global_about.location }}</li>
+                        <li><i class="fas fa-map-marker-alt me-2" style="color: var(--secondary-ink);"></i>{{ global_about.location }}</li>
                         {% endif %}
                         {% if global_about.email %}
-                        <li><i class="fas fa-envelope me-2" style="color: var(--secondary-color);"></i>
+                        <li><i class="fas fa-envelope me-2" style="color: var(--secondary-ink);"></i>
                             <a href="mailto:{{ global_about.email }}">{{ global_about.email }}</a></li>
                         {% endif %}
                         {% if global_about.phone %}
-                        <li><i class="fas fa-phone me-2" style="color: var(--secondary-color);"></i>
+                        <li><i class="fas fa-phone me-2" style="color: var(--secondary-ink);"></i>
                             <a href="tel:{{ global_about.phone }}">{{ global_about.phone }}</a></li>
                         {% endif %}
                     </ul>
@@ -938,8 +1028,34 @@
         // ── Theme Toggle ──
         const themeToggle = document.getElementById('theme-toggle');
         if (themeToggle) {
-            themeToggle.addEventListener('click', (e) => {
-                e.preventDefault();
+            const metaThemeColor = document.getElementById('meta-theme-color');
+            const lightThemeColor = '{{ pwa_data.theme_color }}';
+            let themeBusy = false;
+
+            const applyTheme = (theme) => {
+                const isDark = theme === 'dark';
+                const root = document.documentElement;
+
+                root.classList.add('theme-switching');
+                root.setAttribute('data-theme', theme);
+                window.setTimeout(() => root.classList.remove('theme-switching'), 320);
+
+                const label = isDark
+                    ? themeToggle.dataset.labelToLight
+                    : themeToggle.dataset.labelToDark;
+                themeToggle.querySelector('i').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+                themeToggle.setAttribute('aria-pressed', String(isDark));
+                themeToggle.setAttribute('aria-label', label);
+                themeToggle.title = label;
+
+                if (metaThemeColor) {
+                    metaThemeColor.setAttribute('content', isDark ? '#0d1a19' : lightThemeColor);
+                }
+            };
+
+            themeToggle.addEventListener('click', () => {
+                if (themeBusy) return;
+                themeBusy = true;
                 fetch('{% url "portfolio:toggle_theme" %}', {
                     method: 'POST',
                     headers: {
@@ -948,14 +1064,13 @@
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
                 })
-                .then(r => r.json())
-                .then(data => {
-                    document.body.setAttribute('data-theme', data.theme);
-                    const icon = themeToggle.querySelector('i');
-                    icon.className = data.theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-                    themeToggle.title = data.theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+                .then(r => {
+                    if (!r.ok) throw new Error('toggle failed');
+                    return r.json();
                 })
-                .catch(() => { window.location.href = '{% url "portfolio:toggle_theme" %}'; });
+                .then(data => { applyTheme(data.theme); })
+                .catch(() => { window.location.reload(); })
+                .finally(() => { themeBusy = false; });
             });
         }
 

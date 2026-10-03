@@ -69,8 +69,8 @@
     .hero-stat-value { font-size: 0.92rem; font-weight: 600; color: white; }
 
     .btn-hero-primary {
-        background: white;
-        color: var(--primary-color);
+        background: var(--surface);
+        color: var(--brand-ink);
         border: none;
         font-weight: 700;
         font-size: 0.92rem;
@@ -83,7 +83,7 @@
         text-decoration: none;
     }
 
-    .btn-hero-primary:hover { background: var(--bg-light); color: var(--primary-color); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .btn-hero-primary:hover { background: var(--surface-2); color: var(--brand-ink); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
 
     .btn-hero-outline {
         background: transparent;
@@ -128,7 +128,7 @@
 
     /* ─── Detail cards ─── */
     .detail-card {
-        background: #fff;
+        background: var(--surface);
         border: 1px solid rgba(127,168,143,0.15);
         border-radius: 18px;
         padding: 32px;
@@ -152,7 +152,7 @@
     }
 
     .detail-card-title i {
-        color: var(--secondary-color);
+        color: var(--secondary-ink);
         font-size: 1rem;
         width: 30px;
         height: 30px;
@@ -164,7 +164,7 @@
         flex-shrink: 0;
     }
 
-    .detail-body { font-size: 0.93rem; color: #3a5252; line-height: 1.85; }
+    .detail-body { font-size: 0.93rem; color: var(--text-body); line-height: 1.85; }
 
     .gallery-img {
         border-radius: 12px;
@@ -179,7 +179,7 @@
 
     /* ─── Sidebar ─── */
     .sidebar-card {
-        background: #fff;
+        background: var(--surface);
         border: 1px solid rgba(127,168,143,0.15);
         border-radius: 18px;
         padding: 26px;
@@ -199,13 +199,13 @@
         border-bottom: 1px solid rgba(127,168,143,0.14);
     }
 
-    .sidebar-card-title i { color: var(--secondary-color); }
+    .sidebar-card-title i { color: var(--secondary-ink); }
 
     .tech-tag {
         display: inline-flex;
         align-items: center;
         gap: 5px;
-        background: var(--bg-light);
+        background: var(--surface-2);
         border: 1px solid rgba(127,168,143,0.22);
         color: var(--text-dark);
         font-size: 0.8rem;
@@ -215,7 +215,7 @@
         transition: all 0.22s ease;
     }
 
-    .tech-tag:hover { background: rgba(13,75,75,0.07); border-color: var(--secondary-color); color: var(--primary-color); }
+    .tech-tag:hover { background: rgba(13,75,75,0.07); border-color: var(--secondary-color); color: var(--brand-ink); }
 
     .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
 
@@ -225,7 +225,7 @@
 
     .status-pill { display: inline-block; font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; }
     .status-completed { background: rgba(34,197,94,0.1);   color: #16a34a; }
-    .status-progress  { background: rgba(246,171,21,0.12);  color: #b45309; }
+    .status-progress  { background: rgba(246,171,21,0.12);  color: var(--warn-ink); }
     .status-other     { background: rgba(127,168,143,0.12); color: var(--text-light); }
 
     .btn-sidebar {
@@ -244,13 +244,13 @@
     }
 
     .btn-sidebar-primary { background: var(--primary-color); color: white; border: none; }
-    .btn-sidebar-primary:hover { background: #0a3b3b; color: white; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(13,75,75,0.28); }
+    .btn-sidebar-primary:hover { background: var(--primary-hover); color: white; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(13,75,75,0.28); }
 
     .btn-sidebar-dark { background: #1a1a2e; color: white; border: none; }
     .btn-sidebar-dark:hover { background: #111; color: white; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
 
     /* ─── Related Projects ─── */
-    .related-section { background: var(--bg-light); position: relative; overflow: hidden; }
+    .related-section { background: var(--surface-2); position: relative; overflow: hidden; }
 
     .related-section::before {
         content: '';
@@ -272,7 +272,7 @@
     }
 
     .related-card {
-        background: #fff;
+        background: var(--surface);
         border: 1px solid rgba(127,168,143,0.15);
         border-radius: 16px;
         overflow: hidden;
@@ -280,7 +280,7 @@
         transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s ease, border-color 0.3s ease;
     }
 
-    .related-card:hover { transform: translateY(-5px); box-shadow: 0 18px 44px rgba(13,75,75,0.12); border-color: rgba(13,75,75,0.2); }
+    .related-card:hover { transform: translateY(-5px); box-shadow: 0 18px 44px rgba(13,75,75,0.12); border-color: var(--border-hover); }
 
     .related-thumb { width: 100%; height: 170px; object-fit: cover; display: block; transition: transform 0.4s ease; }
     .related-card:hover .related-thumb { transform: scale(1.04); }
@@ -296,7 +296,7 @@
     .related-badge {
         display: inline-block;
         background: rgba(13,75,75,0.07);
-        color: var(--primary-color);
+        color: var(--brand-ink);
         font-size: 0.68rem;
         font-weight: 600;
         padding: 3px 9px;
@@ -307,7 +307,7 @@
     }
 
     .related-title { font-size: 0.97rem; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
-    .related-desc { font-size: 0.84rem; color: #5a6e6e; line-height: 1.6; margin-bottom: 14px; }
+    .related-desc { font-size: 0.84rem; color: var(--text-soft); line-height: 1.6; margin-bottom: 14px; }
 
     .btn-related {
         display: inline-flex;
@@ -324,7 +324,7 @@
         transition: all 0.22s ease;
     }
 
-    .btn-related:hover { background: #0a3b3b; color: white; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(13,75,75,0.22); }
+    .btn-related:hover { background: var(--primary-hover); color: white; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(13,75,75,0.22); }
 
     @media (max-width: 991px) {
         .hero-section { padding: 80px 0 60px; }
@@ -568,7 +568,7 @@
                             <img src="{{ related.image.url }}" alt="{{ related.title }}" class="related-thumb">
                         {% else %}
                             <div class="related-thumb-placeholder">
-                                <i class="fas fa-image" style="font-size:2.5rem; color:var(--secondary-color); opacity:0.4;"></i>
+                                <i class="fas fa-image" style="font-size:2.5rem; color: var(--secondary-ink); opacity:0.4;"></i>
                             </div>
                         {% endif %}
                     </div>

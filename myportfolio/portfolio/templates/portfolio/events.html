@@ -25,7 +25,7 @@
 
     /* ─── Filter bar ─── */
     .filter-bar {
-        background: #fff;
+        background: var(--surface);
         border-bottom: 1px solid rgba(127,168,143,0.18);
         padding: 16px 0;
         position: sticky;
@@ -34,10 +34,6 @@
         box-shadow: 0 2px 12px rgba(13,75,75,0.06);
     }
 
-    [data-theme="dark"] .filter-bar {
-        background: #162828;
-        border-color: rgba(127,168,143,0.15);
-    }
 
     .filter-btn {
         font-size: 0.82rem;
@@ -56,7 +52,7 @@
     .filter-btn:hover,
     .filter-btn.active {
         background: var(--primary-color);
-        border-color: var(--primary-color);
+        border-color: var(--brand-ink);
         color: #fff;
     }
 
@@ -65,19 +61,18 @@
         border-radius: var(--radius-md);
         overflow: hidden;
         border: 1px solid rgba(127,168,143,0.15);
-        background: #fff;
+        background: var(--surface);
         transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
         height: 100%;
         display: flex;
         flex-direction: column;
     }
 
-    [data-theme="dark"] .event-card { background: #162828; }
 
     .event-card:hover {
         transform: translateY(-5px);
         box-shadow: var(--shadow-lg);
-        border-color: rgba(13,75,75,0.2);
+        border-color: var(--border-hover);
     }
 
     .event-cover {
@@ -100,7 +95,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--secondary-color);
+        color: var(--secondary-ink);
         font-size: 2.6rem;
         opacity: 0.7;
     }
@@ -125,7 +120,7 @@
         padding: 3px 10px;
         border-radius: 20px;
         background: rgba(13,75,75,0.08);
-        color: var(--primary-color);
+        color: var(--brand-ink);
         border: 1px solid rgba(13,75,75,0.15);
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -153,7 +148,7 @@
 
     .event-description {
         font-size: 0.86rem;
-        color: #5a6e6e;
+        color: var(--text-soft);
         line-height: 1.65;
         flex: 1;
         margin-bottom: 14px;
@@ -185,7 +180,7 @@
     }
 
     .btn-event:hover {
-        background: #0a3b3b;
+        background: var(--primary-hover);
         color: #fff;
         transform: translateY(-1px);
         box-shadow: 0 4px 14px rgba(13,75,75,0.25);
@@ -209,7 +204,7 @@
 
     /* ─── Empty state ─── */
     .empty-state { padding: 80px 20px; text-align: center; }
-    .empty-state-icon { font-size: 4rem; color: var(--secondary-color); opacity: 0.45; margin-bottom: 16px; display: block; }
+    .empty-state-icon { font-size: 4rem; color: var(--secondary-ink); opacity: 0.45; margin-bottom: 16px; display: block; }
 </style>
 {% endblock %}
 

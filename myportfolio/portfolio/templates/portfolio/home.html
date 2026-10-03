@@ -27,14 +27,13 @@
         letter-spacing: 0.01em;
     }
 
-    .hero-quote {
-        font-size: 0.95rem;
-        line-height: 1.85;
-        color: rgba(255,255,255,0.72);
+    .hero-lead {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: rgba(255,255,255,0.78);
         border-left: 3px solid var(--accent-color);
         padding-left: 16px;
         margin-bottom: 2rem;
-        font-style: italic;
     }
 
     /* Profile image */
@@ -143,14 +142,14 @@
         transition: transform 0.3s cubic-bezier(0.4,0,0.2,1),
                     box-shadow 0.3s ease,
                     border-color 0.3s ease;
-        background: #fff;
+        background: var(--surface);
         height: 100%;
     }
 
     .project-card:hover {
         transform: translateY(-6px);
         box-shadow: 0 20px 48px rgba(13, 75, 75, 0.13);
-        border-color: rgba(13, 75, 75, 0.2);
+        border-color: var(--border-hover);
     }
 
     .project-thumb {
@@ -190,7 +189,7 @@
         display: inline-flex;
         align-items: center;
         background: rgba(13, 75, 75, 0.08);
-        color: var(--primary-color);
+        color: var(--brand-ink);
         font-size: 0.72rem;
         font-weight: 600;
         padding: 3px 10px;
@@ -215,7 +214,7 @@
 
     .project-desc {
         font-size: 0.875rem;
-        color: #5a6e6e;
+        color: var(--text-soft);
         line-height: 1.65;
         margin-bottom: 14px;
     }
@@ -228,7 +227,7 @@
     }
 
     .project-tag {
-        background: var(--bg-light);
+        background: var(--surface-2);
         color: var(--text-dark);
         border: 1px solid rgba(127, 168, 143, 0.25);
         font-size: 0.75rem;
@@ -239,7 +238,7 @@
 
     .project-tag:hover {
         background: rgba(13, 75, 75, 0.08);
-        color: var(--primary-color);
+        color: var(--brand-ink);
     }
 
     .project-actions {
@@ -267,7 +266,7 @@
     }
 
     .btn-project-primary:hover {
-        background: #0a3b3b;
+        background: var(--primary-hover);
         color: white;
         transform: translateY(-1px);
         box-shadow: 0 4px 12px rgba(13,75,75,0.25);
@@ -282,13 +281,13 @@
     .btn-project-outline:hover {
         background: rgba(13,75,75,0.05);
         border-color: var(--secondary-color);
-        color: var(--primary-color);
+        color: var(--brand-ink);
         transform: translateY(-1px);
     }
 
     /* ─── Skills Section ─── */
     .skills-section {
-        background: var(--bg-light);
+        background: var(--surface-2);
         position: relative;
         overflow: hidden;
     }
@@ -303,7 +302,7 @@
     }
 
     .skill-item {
-        background: #fff;
+        background: var(--surface);
         border: 1px solid rgba(127, 168, 143, 0.18);
         border-radius: 14px;
         padding: 24px 16px 20px;
@@ -317,19 +316,19 @@
     .skill-item:hover {
         transform: translateY(-5px);
         box-shadow: 0 12px 32px rgba(13,75,75,0.1);
-        border-color: rgba(13,75,75,0.2);
+        border-color: var(--border-hover);
     }
 
     .skill-icon {
         font-size: 2.6rem;
-        color: var(--secondary-color);
+        color: var(--secondary-ink);
         margin-bottom: 10px;
         display: block;
         transition: color 0.28s ease, transform 0.28s ease;
     }
 
     .skill-item:hover .skill-icon {
-        color: var(--primary-color);
+        color: var(--brand-ink);
         transform: scale(1.1);
     }
 
@@ -357,7 +356,7 @@
 
     .empty-state-icon {
         font-size: 4rem;
-        color: var(--secondary-color);
+        color: var(--secondary-ink);
         opacity: 0.5;
         margin-bottom: 16px;
         display: block;
@@ -472,8 +471,8 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        border: 1.5px solid var(--primary-color);
-        color: var(--primary-color);
+        border: 1.5px solid var(--brand-ink);
+        color: var(--brand-ink);
         background: transparent;
         font-weight: 600;
         font-size: 0.9rem;
@@ -523,14 +522,14 @@
                 </h1>
 
                 <p class="hero-title">
-                    {{ about.title|default:"Software Developer, Data & Technology Enthusiast" }}
+                    {{ about.title|default:"Aspiring Software & Analytics Engineer | Full‑Stack Development | Data Analytics" }}
                 </p>
 
-                <p class="hero-quote">
-                    AI can generate ideas — but only humans can give them meaning.<br>
-                    Our stories, our culture, our imagination — that's our power.<br>
-                    Let AI help you think bigger, but let your creativity lead the way.<br>
-                    The heart remains human.
+                <p class="hero-lead">
+                    I build AI‑enabled software systems, agentic workflows, and full‑stack
+                    applications that turn complex data into practical solutions. My work spans
+                    Python engineering, Django development, cloud deployment, and multi‑agent
+                    AI systems designed for real‑world impact.
                 </p>
 
                 <div class="d-flex flex-wrap gap-3">
@@ -582,7 +581,7 @@
                             <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-thumb">
                         {% else %}
                             <div class="project-thumb-placeholder">
-                                <i class="fas fa-image" style="font-size: 3rem; color: var(--secondary-color); opacity: 0.5;"></i>
+                                <i class="fas fa-image" style="font-size: 3rem; color: var(--secondary-ink); opacity: 0.5;"></i>
                             </div>
                         {% endif %}
                     </div>
@@ -709,13 +708,13 @@
                                 <img src="{{ event.cover_image.url }}" alt="{{ event.title }}"
                                      style="width:100%;height:160px;object-fit:cover;transition:transform 0.35s ease;">
                             {% else %}
-                                <div style="width:100%;height:160px;background:linear-gradient(135deg,var(--bg-light),rgba(127,168,143,0.18));display:flex;align-items:center;justify-content:center;color:var(--secondary-color);font-size:2.2rem;opacity:0.7;">
+                                <div style="width:100%;height:160px;background:linear-gradient(135deg,var(--bg-light),rgba(127,168,143,0.18));display:flex;align-items:center;justify-content:center;color: var(--secondary-ink);font-size:2.2rem;opacity:0.7;">
                                     <i class="fas fa-camera"></i>
                                 </div>
                             {% endif %}
                         </div>
                         <div class="card-body" style="padding:1rem 1.2rem;">
-                            <p style="font-size:0.7rem;font-weight:600;color:var(--primary-color);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">
+                            <p style="font-size:0.7rem;font-weight:600;color: var(--brand-ink);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">
                                 {{ event.get_category_display }}
                             </p>
                             <h6 style="font-weight:700;color:var(--text-dark);font-size:0.92rem;margin-bottom:4px;line-height:1.35;">

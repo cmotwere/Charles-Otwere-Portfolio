@@ -210,17 +210,13 @@
 
     /* ─── Info card ─── */
     .info-card {
-        background: var(--bg-light);
+        background: var(--surface-2);
         border: 1px solid rgba(127,168,143,0.18);
         border-radius: var(--radius-md);
         padding: 1.4rem 1.6rem;
         margin-bottom: 2rem;
     }
 
-    [data-theme="dark"] .info-card {
-        background: #162828;
-        border-color: rgba(127,168,143,0.15);
-    }
 
     .info-row {
         display: flex;
@@ -233,7 +229,7 @@
 
     .info-row:last-child { margin-bottom: 0; }
 
-    .info-row i { color: var(--secondary-color); width: 18px; text-align: center; }
+    .info-row i { color: var(--secondary-ink); width: 18px; text-align: center; }
 
     /* ─── Section heading ─── */
     .section-heading {
@@ -254,7 +250,7 @@
 
     /* ─── Empty state ─── */
     .empty-state { padding: 60px 20px; text-align: center; }
-    .empty-state-icon { font-size: 3.5rem; color: var(--secondary-color); opacity: 0.45; margin-bottom: 14px; display: block; }
+    .empty-state-icon { font-size: 3.5rem; color: var(--secondary-ink); opacity: 0.45; margin-bottom: 14px; display: block; }
 
     /* ─── Back link ─── */
     .back-link {
@@ -347,7 +343,7 @@
             <!-- Sidebar -->
             <div class="col-lg-3">
                 <div class="info-card animate-in delay-1">
-                    <h6 style="font-weight:700;color:var(--primary-color);text-transform:uppercase;font-size:0.72rem;letter-spacing:0.1em;margin-bottom:14px;">
+                    <h6 style="font-weight:700;color: var(--brand-ink);text-transform:uppercase;font-size:0.72rem;letter-spacing:0.1em;margin-bottom:14px;">
                         {% trans "Event Details" %}
                     </h6>
 
