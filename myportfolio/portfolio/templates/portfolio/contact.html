@@ -6,7 +6,6 @@
 <style>
     .hero-section { padding: 100px 0 80px; position: relative; overflow: hidden; }
     .hero-label { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22); color: rgba(255,255,255,0.9); font-size: 0.78rem; font-weight: 500; padding: 6px 14px; border-radius: 20px; margin-bottom: 18px; letter-spacing: 0.05em; text-transform: uppercase; }
-    .hero-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; letter-spacing: -0.03em; color: white; margin-bottom: 14px; }
     .hero-lead { font-size: 1rem; color: rgba(255,255,255,0.72); line-height: 1.75; }
 
     .contact-card { background: var(--surface); border: 1px solid rgba(127,168,143,0.15); border-radius: 18px; padding: 36px; box-shadow: 0 4px 20px rgba(13,75,75,0.07); height: 100%; transition: box-shadow 0.3s ease; }
@@ -22,9 +21,7 @@
     .info-row:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
     .info-icon { width: 36px; height: 36px; background: rgba(13,75,75,0.07); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--brand-ink); font-size: 0.85rem; flex-shrink: 0; margin-top: 2px; }
     .info-label { font-size: 0.68rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px; display: block; }
-    .info-value { font-size: 0.9rem; color: var(--text-dark); font-weight: 500; }
     .info-value a { color: var(--brand-ink); text-decoration: none; transition: color 0.2s ease; }
-    .info-value a:hover { color: var(--accent-color); }
 
     .follow-label { font-size: 0.72rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; display: block; }
     .social-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
@@ -39,11 +36,10 @@
     .social-btn-website:hover { background: var(--primary-color); color: white; border-color: var(--brand-ink); transform: translateY(-2px); box-shadow: 0 4px 14px rgba(13,75,75,0.25); }
 
     .btn-resume { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--primary-color); color: white; border: none; font-weight: 600; font-size: 0.92rem; padding: 12px 20px; border-radius: 11px; text-decoration: none; transition: all 0.28s cubic-bezier(0.4,0,0.2,1); width: 100%; }
-    .btn-resume:hover { background: var(--primary-hover); color: white; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(13,75,75,0.28); }
 
     .form-label { font-size: 0.72rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; display: block; }
-    .form-control { border: 1.5px solid rgba(127,168,143,0.25); border-radius: 10px; padding: 10px 14px; font-size: 0.9rem; color: var(--text-dark); background: var(--surface-2); transition: border-color 0.22s ease, box-shadow 0.22s ease; width: 100%; }
-    .form-control:focus { border-color: var(--brand-ink); box-shadow: 0 0 0 3px rgba(13,75,75,0.1); background: var(--surface); outline: none; }
+    .form-control { border: 1.5px solid rgba(127,168,143,0.25); border-radius: 10px; padding: 10px 14px; font-size: 0.9rem; color: var(--text-dark); background-color: var(--surface-2); transition: border-color 0.22s ease, box-shadow 0.22s ease; width: 100%; }
+    .form-control:focus { border-color: var(--brand-ink); box-shadow: 0 0 0 3px rgba(13,75,75,0.1); background-color: var(--surface); outline: none; }
     .form-control::placeholder { color: var(--text-light); opacity: 0.7; }
     textarea.form-control { resize: vertical; min-height: 130px; }
 
@@ -56,7 +52,7 @@
     .connect-section { background: var(--surface-2); position: relative; overflow: hidden; }
     .connect-section::before { content: ''; position: absolute; top: -60px; right: -60px; width: 300px; height: 300px; background: radial-gradient(ellipse, rgba(246,171,21,0.07) 0%, transparent 70%); pointer-events: none; }
 
-    .section-heading { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.03em; color: var(--text-dark); margin-bottom: 6px; }
+    .section-heading { margin-bottom: 6px; }
     .section-sub { font-size: 0.97rem; color: var(--text-light); }
     .section-divider { width: 48px; height: 4px; background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); border-radius: 2px; margin: 10px auto 36px; }
 
@@ -79,8 +75,6 @@
     .accordion-body { font-size: 0.9rem; color: var(--text-body); line-height: 1.75; padding: 0 22px 20px; background: rgba(13,75,75,0.02); }
     .accordion-body a { color: var(--brand-ink); text-decoration: none; font-weight: 500; }
     .accordion-body a:hover { color: var(--accent-color); }
-
-    .empty-state { padding: 80px 20px; text-align: center; }
 
     @media (max-width: 991px) { .hero-section { padding: 72px 0 56px; } .contact-card { padding: 24px 20px; } }
 </style>

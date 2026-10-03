@@ -27,14 +27,7 @@
         text-transform: uppercase;
     }
 
-    .hero-title {
-        font-size: clamp(2rem, 5vw, 3.2rem);
-        font-weight: 800;
-        letter-spacing: -0.03em;
-        line-height: 1.1;
-        color: white;
-        margin-bottom: 14px;
-    }
+    .hero-title { line-height: 1.1; }
 
     .hero-lead {
         font-size: 1rem;
@@ -131,14 +124,6 @@
         background: rgba(13,75,75,0.06);
         border-color: var(--secondary-color);
         color: var(--brand-ink);
-    }
-
-    /* ─── Section headings ─── */
-    .section-heading {
-        font-size: clamp(1.5rem, 3vw, 2rem);
-        font-weight: 800;
-        letter-spacing: -0.03em;
-        color: var(--text-dark);
     }
 
     .section-divider {
@@ -267,9 +252,9 @@
         white-space: nowrap;
     }
 
-    .status-completed  { background: rgba(34,197,94,0.1);   color: #16a34a; border: 1px solid rgba(34,197,94,0.25); }
-    .status-progress   { background: rgba(246,171,21,0.12);  color: var(--warn-ink); border: 1px solid rgba(246,171,21,0.3); }
-    .status-other      { background: rgba(127,168,143,0.12); color: var(--text-light); border: 1px solid rgba(127,168,143,0.25); }
+    .status-completed { border: 1px solid rgba(34,197,94,0.25); }
+    .status-progress { border: 1px solid rgba(246,171,21,0.3); }
+    .status-other { border: 1px solid rgba(127,168,143,0.25); }
 
     .project-date { font-size: 0.75rem; color: var(--text-light); text-align: right; }
 
@@ -355,27 +340,6 @@
     }
 
     .results-bar i { color: var(--secondary-ink); }
-
-    /* ─── Empty state ─── */
-    .empty-state { padding: 80px 20px; text-align: center; }
-    .empty-state-icon { font-size: 4rem; color: var(--secondary-ink); opacity: 0.4; margin-bottom: 16px; display: block; }
-
-    .btn-view-all {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        border: 1.5px solid var(--brand-ink);
-        color: var(--brand-ink);
-        background: transparent;
-        font-weight: 600;
-        font-size: 0.875rem;
-        padding: 10px 24px;
-        border-radius: 10px;
-        transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
-        text-decoration: none;
-    }
-
-    .btn-view-all:hover { background: var(--primary-color); color: white; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(13,75,75,0.22); }
 
     @media (max-width: 767px) {
         .filters-section { position: static; }

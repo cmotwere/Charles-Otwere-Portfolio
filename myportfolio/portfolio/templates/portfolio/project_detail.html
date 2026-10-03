@@ -22,10 +22,6 @@
         flex-wrap: wrap;
     }
 
-    .breadcrumb-nav li { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; }
-    .breadcrumb-nav li + li::before { content: '/'; color: rgba(255,255,255,0.35); }
-    .breadcrumb-nav a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s ease; }
-    .breadcrumb-nav a:hover { color: rgba(255,255,255,0.95); }
     .breadcrumb-nav .active { color: rgba(255,255,255,0.9); font-weight: 500; }
 
     .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
@@ -44,14 +40,7 @@
     .hbadge-amber { background: rgba(246,171,21,0.2);   color: #fcd34d; border: 1px solid rgba(246,171,21,0.3); }
     .hbadge-gray  { background: rgba(255,255,255,0.1);  color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.18); }
 
-    .hero-title {
-        font-size: clamp(1.9rem, 4.5vw, 3rem);
-        font-weight: 800;
-        letter-spacing: -0.03em;
-        line-height: 1.15;
-        color: white;
-        margin-bottom: 14px;
-    }
+    .hero-title { font-size: clamp(1.9rem, 4.5vw, 3rem); line-height: 1.15; }
 
     .hero-short-desc { font-size: 1rem; color: rgba(255,255,255,0.75); line-height: 1.75; margin-bottom: 28px; }
 
@@ -224,9 +213,6 @@
     .stat-cell-value { font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
 
     .status-pill { display: inline-block; font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; }
-    .status-completed { background: rgba(34,197,94,0.1);   color: #16a34a; }
-    .status-progress  { background: rgba(246,171,21,0.12);  color: var(--warn-ink); }
-    .status-other     { background: rgba(127,168,143,0.12); color: var(--text-light); }
 
     .btn-sidebar {
         display: flex;
@@ -260,8 +246,6 @@
         background: radial-gradient(ellipse, rgba(246,171,21,0.07) 0%, transparent 70%);
         pointer-events: none;
     }
-
-    .section-heading { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.03em; color: var(--text-dark); }
 
     .section-divider {
         width: 48px;

@@ -7,12 +7,11 @@
 <style>
     .hero-section { padding: 100px 0 80px; position: relative; overflow: hidden; }
     .hero-label { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22); color: rgba(255,255,255,0.9); font-size: 0.78rem; font-weight: 500; padding: 6px 14px; border-radius: 20px; margin-bottom: 18px; letter-spacing: 0.05em; text-transform: uppercase; }
-    .hero-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; letter-spacing: -0.03em; color: white; margin-bottom: 14px; }
     .hero-lead { font-size: 1rem; color: rgba(255,255,255,0.72); line-height: 1.75; }
 
     .blog-filter-bar { background: var(--surface); border-bottom: 1px solid rgba(127,168,143,0.18); padding: 20px 0; position: sticky; top: 68px; z-index: 100; box-shadow: 0 4px 20px rgba(13,75,75,0.06); }
-    .form-control { border: 1.5px solid rgba(127,168,143,0.25); border-radius: 10px; padding: 9px 14px; font-size: 0.875rem; color: var(--text-dark); background: var(--surface-2); transition: border-color 0.22s ease, box-shadow 0.22s ease; }
-    .form-control:focus { border-color: var(--brand-ink); box-shadow: 0 0 0 3px rgba(13,75,75,0.1); outline: none; background: var(--surface); }
+    .form-control { border: 1.5px solid rgba(127,168,143,0.25); border-radius: 10px; padding: 9px 14px; font-size: 0.875rem; color: var(--text-dark); background-color: var(--surface-2); transition: border-color 0.22s ease, box-shadow 0.22s ease; }
+    .form-control:focus { border-color: var(--brand-ink); box-shadow: 0 0 0 3px rgba(13,75,75,0.1); outline: none; background-color: var(--surface); }
     .form-control::placeholder { color: var(--text-light); opacity: 0.7; }
     .btn-search { background: var(--primary-color); color: white; border: none; padding: 9px 16px; border-radius: 10px; transition: all 0.22s ease; cursor: pointer; }
     .btn-search:hover { background: var(--primary-hover); transform: translateY(-1px); }
@@ -23,10 +22,7 @@
     .dropdown-item { border-radius: 8px; font-size: 0.875rem; color: var(--text-dark); padding: 8px 12px; transition: all 0.18s ease; }
     .dropdown-item:hover { background: rgba(13,75,75,0.07); color: var(--brand-ink); }
 
-    .section-label { font-size: 0.72rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-    .section-label i { color: var(--secondary-ink); }
-    .section-title-text { font-size: clamp(1.3rem, 2.5vw, 1.7rem); font-weight: 800; letter-spacing: -0.03em; color: var(--text-dark); margin-bottom: 6px; }
-    .section-title-divider { width: 40px; height: 3px; background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); border-radius: 2px; margin-bottom: 28px; }
+    .section-label { margin-bottom: 6px; gap: 6px; }
 
     .blog-card { background: var(--surface); border: 1px solid rgba(127,168,143,0.15); border-radius: 16px; overflow: hidden; height: 100%; transition: transform 0.28s cubic-bezier(0.4,0,0.2,1), box-shadow 0.28s ease, border-color 0.28s ease; display: flex; flex-direction: column; }
     .blog-card:hover { transform: translateY(-6px); box-shadow: 0 18px 44px rgba(13,75,75,0.12); border-color: var(--border-hover); }
@@ -50,8 +46,6 @@
     .blog-stat i { color: var(--secondary-ink); font-size: 0.7rem; }
     .btn-read-more { display: inline-flex; align-items: center; gap: 5px; background: var(--primary-color); color: white; border: none; font-size: 0.75rem; font-weight: 600; padding: 5px 13px; border-radius: 8px; text-decoration: none; transition: all 0.22s ease; white-space: nowrap; }
     .btn-read-more:hover { background: var(--primary-hover); color: white; transform: translateY(-1px); }
-
-    .empty-state { padding: 80px 20px; text-align: center; }
 
     @media (max-width: 767px) { .blog-filter-bar { position: static; } .hero-section { padding: 72px 0 56px; } }
 </style>
