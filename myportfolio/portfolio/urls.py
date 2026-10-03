@@ -24,17 +24,6 @@ urlpatterns = [
     path('toggle-theme/', views.toggle_theme, name='toggle_theme'),
     path('social-share/<str:platform>/<int:project_id>/', views.social_share, name='social_share'),
     
-    # Authentication URLs
-    path('auth/login/', views.login_view, name='login'),
-    path('auth/register/', views.register_view, name='register'),
-    path('auth/logout/', views.logout_view, name='logout'),
-    path('auth/profile/', views.profile_view, name='profile'),
-    path('auth/error/', views.auth_error_view, name='auth_error'),
-    path('auth/social-demo/', views.social_demo_view, name='social_demo'),
-    
-    # API URLs
-    path('api/v1/', include('portfolio.api_urls')),
-    
     # Events gallery
     path('events/', views.events_view, name='events'),
     path('events/<slug:slug>/', views.event_detail_view, name='event_detail'),

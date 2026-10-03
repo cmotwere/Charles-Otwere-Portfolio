@@ -19,11 +19,9 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
-from portfolio.views import twitter_coming_soon
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/', include('social_django.urls', namespace='social')),
 
     # PWA files
     path('manifest.json', TemplateView.as_view(
@@ -34,10 +32,6 @@ urlpatterns = [
         template_name='portfolio/sw.js',
         content_type='application/javascript',
     ), name='service-worker'),
-
-    # API endpoints
-    path('api/', include('portfolio.api_urls')),
-    path('auth/login/twitter/', twitter_coming_soon, name='twitter_coming_soon'),
 
     # Portfolio app
     path('', include('portfolio.urls')),

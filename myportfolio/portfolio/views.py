@@ -1,23 +1,14 @@
-def twitter_coming_soon(request):
-    return render(request, 'coming_soon.html')
 import logging
 from django.shortcuts import render, get_object_or_404, redirect
 
 logger = logging.getLogger(__name__)
 from django.db.models import Q
 from django.http import JsonResponse, HttpResponse, Http404, FileResponse
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
-from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
-from django.utils.http import url_has_allowed_host_and_scheme
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.core.cache import cache
 from django.conf import settings
 from django.utils import timezone
-from django import forms
 import os
 import time
 from pathlib import Path
@@ -56,54 +47,6 @@ def get_blog_context_data(posts=None, **extra_context):
     context.update(extra_context)
     return context
 
-
-class CustomUserCreationForm(UserCreationForm):
-    """Enhanced user registration form"""
-    email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control'}))
-    first_name = forms.CharField(max_length=30, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    last_name = forms.CharField(max_length=30, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    
-    class Meta:
-        model = User
-        fields = ("username", "email", "first_name", "last_name", "password1", "password2")
-        widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-        }
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['password1'].widget.attrs.update({'class': 'form-control'})
-        self.fields['password2'].widget.attrs.update({'class': 'form-control'})
-    
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.email = self.cleaned_data["email"]
-        user.first_name = self.cleaned_data["first_name"]
-        user.last_name = self.cleaned_data["last_name"]
-        if commit:
-            user.save()
-        return user
-
-
-class CustomAuthenticationForm(AuthenticationForm):
-    """Enhanced login form"""
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Username or Email'})
-        self.fields['password'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Password'})
-
-
-class UserProfileForm(forms.ModelForm):
-    """User profile editing form"""
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'first_name', 'last_name']
-        widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-        }
 
 def home_view(request):
     """Main portfolio home page"""
@@ -411,94 +354,6 @@ def social_share(request, platform, project_id):
 
 
 # Authentication Views
-def login_view(request):
-    """Custom login view"""
-    if request.user.is_authenticated:
-        return redirect('portfolio:home')
-    
-    if request.method == 'POST':
-        form = CustomAuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                messages.success(request, f'Welcome back, {user.first_name or user.username}!')
-                next_url = request.GET.get('next')
-                if next_url and url_has_allowed_host_and_scheme(
-                    next_url, allowed_hosts={request.get_host()}, require_https=request.is_secure()
-                ):
-                    return redirect(next_url)
-                return redirect('portfolio:home')
-    else:
-        form = CustomAuthenticationForm()
-    
-    context = {'form': form}
-    return render(request, 'portfolio/auth/login.html', context)
-
-
-def register_view(request):
-    """User registration view"""
-    if request.user.is_authenticated:
-        return redirect('portfolio:home')
-    
-    if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}! You can now log in.')
-            return redirect('portfolio:login')
-    else:
-        form = CustomUserCreationForm()
-    
-    context = {'form': form}
-    return render(request, 'portfolio/auth/register.html', context)
-
-
-def logout_view(request):
-    """User logout view"""
-    if request.user.is_authenticated:
-        username = request.user.first_name or request.user.username
-        logout(request)
-        messages.success(request, f'You have been logged out. Thanks for visiting, {username}!')
-    return redirect('portfolio:home')
-
-
-@login_required
-def profile_view(request):
-    """User profile management"""
-    if request.method == 'POST':
-        form = UserProfileForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Your profile has been updated successfully!')
-            return redirect('portfolio:profile')
-    else:
-        form = UserProfileForm(instance=request.user)
-    
-    # Get connected social providers
-    connected_providers = list(request.user.social_auth.values_list('provider', flat=True))
-    
-    context = {
-        'form': form,
-        'user': request.user,
-        'connected_providers': connected_providers,
-    }
-    return render(request, 'portfolio/auth/profile.html', context)
-
-
-def auth_error_view(request):
-    """Social authentication error handler"""
-    return render(request, 'portfolio/auth/error.html')
-
-
-def social_demo_view(request):
-    """Demo page showing social authentication integration"""
-    return render(request, 'portfolio/social_demo.html')
-
-
 def education_view(request):
     """Education and academic background page"""
     education = Education.objects.all().order_by('-start_date', '-end_date')
