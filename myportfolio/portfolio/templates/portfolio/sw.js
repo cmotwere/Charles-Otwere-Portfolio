@@ -1,10 +1,11 @@
 // Service Worker for {{ pwa_data.app_name }}
-const CACHE_NAME = 'portfolio-v1';
+// Bump the version to drop every visitor's old cache on their next visit
+const CACHE_NAME = 'portfolio-v2';
 const OFFLINE_URL = '/static/offline.html';
 
-// Files to cache for offline functionality
+// Files to cache for offline functionality. Pages are never precached:
+// they are always fetched fresh so content, theme and CSRF tokens stay current.
 const FILES_TO_CACHE = [
-  '/',
   '/static/css/style.css',
   '/static/js/main.js',
   '/static/icons/icon-192x192.png',
@@ -48,54 +49,40 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch event - serve cached content when offline
+// Fetch event
 self.addEventListener('fetch', (event) => {
-  console.log('[SW] Fetch', event.request.url);
-  
-  // Skip non-GET requests
-  if (event.request.method !== 'GET') return;
-  
-  // Skip API requests
-  if (event.request.url.includes('/api/')) return;
-  
-  event.respondWith(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        return cache.match(event.request)
-          .then((response) => {
-            if (response) {
-              console.log('[SW] Serving from cache: ', event.request.url);
-              return response;
+  const request = event.request;
+
+  // Only handle same-origin GETs; admin and downloads always go to the network
+  if (request.method !== 'GET') return;
+  const url = new URL(request.url);
+  if (url.origin !== self.location.origin) return;
+  if (url.pathname.startsWith('/admin/') || url.pathname.startsWith('/download/')) return;
+
+  // Pages: network first, offline page only when the network is unavailable
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request).catch(() => caches.match(OFFLINE_URL))
+    );
+    return;
+  }
+
+  // Static and media assets: serve from cache, refresh the cache in the background
+  if (url.pathname.startsWith('/static/') || url.pathname.startsWith('/media/')) {
+    event.respondWith(
+      caches.open(CACHE_NAME).then((cache) =>
+        cache.match(request).then((cached) => {
+          const network = fetch(request).then((response) => {
+            if (response && response.status === 200 && response.type === 'basic') {
+              cache.put(request, response.clone());
             }
-            
-            // Fetch from network
-            return fetch(event.request)
-              .then((response) => {
-                // Don't cache non-successful responses
-                if (!response || response.status !== 200 || response.type !== 'basic') {
-                  return response;
-                }
-                
-                // Clone the response
-                const responseToCache = response.clone();
-                
-                // Cache certain types of requests
-                if (event.request.url.includes('/static/') || 
-                    event.request.url.match(/\.(css|js|png|jpg|jpeg|svg|woff|woff2)$/)) {
-                  cache.put(event.request, responseToCache);
-                }
-                
-                return response;
-              })
-              .catch(() => {
-                // If network fails, serve offline page for navigation requests
-                if (event.request.mode === 'navigate') {
-                  return cache.match(OFFLINE_URL);
-                }
-              });
-          });
-      })
-  );
+            return response;
+          }).catch(() => cached);
+          return cached || network;
+        })
+      )
+    );
+  }
 });
 
 // Background sync for form submissions

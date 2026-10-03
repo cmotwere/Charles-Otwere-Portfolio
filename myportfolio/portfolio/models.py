@@ -34,6 +34,17 @@ class About(models.Model):
         """Bare file name of the resume, as used in the download URL."""
         return os.path.basename(self.resume_file.name) if self.resume_file else ''
 
+# Sort proficiency by level, not alphabetically (expert first)
+SKILL_PROFICIENCY_RANK = models.Case(
+    models.When(proficiency='expert', then=models.Value(4)),
+    models.When(proficiency='advanced', then=models.Value(3)),
+    models.When(proficiency='intermediate', then=models.Value(2)),
+    models.When(proficiency='beginner', then=models.Value(1)),
+    default=models.Value(0),
+    output_field=models.IntegerField(),
+)
+
+
 class Skill(models.Model):
     SKILL_CATEGORIES = [
         ('programming', 'Programming Languages'),
@@ -63,7 +74,7 @@ class Skill(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
-        ordering = ['category', '-proficiency', 'name']
+        ordering = ['category', SKILL_PROFICIENCY_RANK.desc(), 'name']
 
     def __str__(self):
         return f"{self.name} ({self.get_proficiency_display()})"

@@ -51,7 +51,7 @@ def get_blog_context_data(posts=None, **extra_context):
 def home_view(request):
     """Main portfolio home page"""
     about = About.objects.first()
-    featured_projects = Project.objects.filter(is_featured=True)[:6]
+    featured_projects = Project.objects.filter(is_featured=True).prefetch_related('technologies_used')[:6]
     featured_skills = Skill.objects.filter(is_featured=True)
     featured_events = Event.objects.filter(is_featured=True).prefetch_related('photos')[:4]
 
@@ -66,7 +66,7 @@ def home_view(request):
 def about_view(request):
     """Detailed about me page"""
     about = About.objects.first()
-    all_skills = Skill.objects.all().order_by('category', '-proficiency')
+    all_skills = Skill.objects.all()  # Meta ordering: category, then proficiency level
     
     # Group skills by category
     skills_by_category = {}
@@ -110,7 +110,7 @@ def projects_view(request):
             Q(technologies_used__name__icontains=search)
         ).distinct()
 
-    projects = projects.order_by('-start_date')
+    projects = projects.order_by('-start_date').prefetch_related('technologies_used')
 
     # Get filter options
     project_types = Project.PROJECT_TYPES
@@ -178,7 +178,11 @@ def _client_ip(request):
 
 def _verify_turnstile(token, remote_ip):
     if not settings.TURNSTILE_SECRET_KEY:
-        return True
+        if settings.TURNSTILE_SITE_KEY:
+            # Widget is shown but tokens can't be checked: refuse rather than let bots through
+            logger.error("TURNSTILE_SITE_KEY is set but TURNSTILE_SECRET_KEY is missing")
+            return False
+        return True  # Turnstile not configured; other spam defences still apply
     if not token:
         return False
     try:
@@ -265,7 +269,7 @@ def portfolio_view(request):
 
 def testimonials_view(request):
     """Testimonials page"""
-    testimonials = Testimonial.objects.filter(is_approved=True)
+    testimonials = Testimonial.objects.filter(is_approved=True).select_related('project')
     
     # Filter by type if specified
     testimonial_type = request.GET.get('type')
@@ -376,21 +380,22 @@ def education_view(request):
 
 def certifications_view(request):
     """Certifications and credentials page"""
-    certifications = Certification.objects.select_related().prefetch_related('skills_gained')
-    active_certs = certifications.filter(status='active').order_by('-issue_date')
+    certifications = Certification.objects.prefetch_related('skills_gained')
+    all_certs = certifications.order_by('-issue_date')
     featured_certs = certifications.filter(is_featured=True)
-    
-    # Get expiring certifications (within 60 days)
+
+    # Same 30-day window as Certification.is_expiring_soon
     from datetime import timedelta
-    sixty_days_from_now = timezone.now().date() + timedelta(days=60)
-    expiring_certs = active_certs.filter(
-        expiry_date__lte=sixty_days_from_now,
-        expiry_date__gte=timezone.now().date()
+    today = timezone.now().date()
+    expiring_certs = all_certs.filter(
+        status='active',
+        expiry_date__gt=today,
+        expiry_date__lte=today + timedelta(days=30),
     )
-    
+
     context = {
         'certifications': certifications,
-        'active_certs': active_certs,
+        'all_certs': all_certs,
         'featured_certs': featured_certs,
         'expiring_certs': expiring_certs,
     }

@@ -1,7 +1,7 @@
 {% extends 'portfolio/base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Certifications" %} - {{ about.name|default:"Charles Otwere" }}{% endblock %}
+{% block title %}{% trans "Certifications" %} - {{ global_about.name|default:"Charles Otwere" }}{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -96,7 +96,7 @@
         {% if expiring_certs %}
         <div class="expiry-alert animate-in">
             <div class="expiry-alert-title"><i class="fas fa-exclamation-triangle"></i> {% trans "Expiring Soon" %}</div>
-            <p style="font-size:0.84rem; color: var(--warn-ink-strong); margin-bottom:8px;">{% trans "The following certifications are expiring within 60 days:" %}</p>
+            <p style="font-size:0.84rem; color: var(--warn-ink-strong); margin-bottom:8px;">{% trans "The following certifications are expiring within 30 days:" %}</p>
             <ul class="expiry-list">
                 {% for cert in expiring_certs %}
                 <li>{{ cert.name }} — {% trans "Expires" %} {{ cert.expiry_date|date:"M d, Y" }}</li>
@@ -150,7 +150,7 @@
             <h2 class="section-title-text">{% trans "All Certifications" %}</h2>
             <div class="section-title-divider"></div>
             <div class="row g-4">
-                {% for cert in active_certs %}
+                {% for cert in all_certs %}
                 <div class="col-lg-4 col-md-6">
                     <div class="cert-card">
                         <div class="cert-badge-wrap">

@@ -1,8 +1,8 @@
 {% extends 'portfolio/base.html' %}
 {% load i18n %}
 
-{% block title %}{{ post.seo_title|default:post.title }} - {{ about.name|default:"Charles Otwere" }}{% endblock %}
-{% block meta_description %}{{ post.meta_description|default:post.excerpt }}{% endblock %}
+{% block title %}{{ post.seo_title|default:post.title }} - {{ global_about.name|default:"Charles Otwere" }}{% endblock %}
+{% block description %}{{ post.meta_description|default:post.excerpt }}{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -193,7 +193,7 @@
                 <div class="tags-section animate-in">
                     <span class="tags-label">Tags</span>
                     {% for tag in post.get_tags_as_list %}
-                    <a href="{% url 'portfolio:blog' %}?search={{ tag }}" class="tag-pill">#{{ tag }}</a>
+                    <a href="{% url 'portfolio:blog' %}?search={{ tag|urlencode }}" class="tag-pill">#{{ tag }}</a>
                     {% endfor %}
                 </div>
                 {% endif %}

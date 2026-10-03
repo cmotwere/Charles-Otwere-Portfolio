@@ -20,7 +20,6 @@ class SkillAdmin(admin.ModelAdmin):
     list_display = ['name', 'category', 'proficiency', 'years_experience', 'is_featured']
     list_filter = ['category', 'proficiency', 'is_featured']
     search_fields = ['name', 'description']
-    ordering = ['category', '-proficiency', 'name']
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):

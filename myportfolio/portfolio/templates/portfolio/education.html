@@ -1,7 +1,7 @@
 {% extends 'portfolio/base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Education" %} - {{ about.name|default:"Charles Otwere" }}{% endblock %}
+{% block title %}{% trans "Education" %} - {{ global_about.name|default:"Charles Otwere" }}{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -109,7 +109,7 @@
                         </div>
                         <div class="meta-badges">
                             <span class="mbadge mbadge-primary">{{ edu.get_degree_type_display }}</span>
-                            <span class="mbadge {% if edu.status == 'completed' %}mbadge-green{% elif edu.status == 'ongoing' %}mbadge-amber{% else %}mbadge-gray{% endif %}">{{ edu.get_status_display }}</span>
+                            <span class="mbadge {% if edu.status == 'completed' %}mbadge-green{% elif edu.status == 'in_progress' %}mbadge-amber{% else %}mbadge-gray{% endif %}">{{ edu.get_status_display }}</span>
                             {% if edu.field_of_study %}<span class="mbadge mbadge-blue">{{ edu.field_of_study }}</span>{% endif %}
                         </div>
                         <div class="edu-timeline-text">
@@ -147,7 +147,7 @@
                         <p class="edu-card-institution">{{ edu.institution }}</p>
                         {% if edu.field_of_study %}<p class="field-study-row"><strong>{% trans "Field of Study:" %}</strong> {{ edu.field_of_study }}</p>{% endif %}
                         <div class="edu-meta-row">
-                            <span class="status-pill {% if edu.status == 'completed' %}status-completed{% elif edu.status == 'ongoing' %}status-progress{% else %}status-other{% endif %}">{{ edu.get_status_display }}</span>
+                            <span class="status-pill {% if edu.status == 'completed' %}status-completed{% elif edu.status == 'in_progress' %}status-progress{% else %}status-other{% endif %}">{{ edu.get_status_display }}</span>
                             {% if edu.gpa %}<span class="gpa-pill" style="margin-bottom:0;"><i class="fas fa-award"></i> {% trans "GPA:" %} {{ edu.gpa }}/4.0</span>{% endif %}
                             {% if edu.location %}<span class="edu-location" style="margin-bottom:0;"><i class="fas fa-map-marker-alt"></i> {{ edu.location }}</span>{% endif %}
                         </div>
