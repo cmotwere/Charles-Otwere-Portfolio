@@ -24,18 +24,33 @@ if _env_file.exists():
             _line = _line.strip()
             if _line and not _line.startswith('#') and '=' in _line:
                 _key, _, _val = _line.partition('=')
-                os.environ[_key.strip()] = _val.strip()
+                # Real environment variables win over .env values
+                os.environ.setdefault(_key.strip(), _val.strip())
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-import secrets
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', secrets.token_urlsafe(50))
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+# Off unless explicitly enabled (set DEBUG=True in your local .env).
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+if not SECRET_KEY:
+    if not DEBUG:
+        from django.core.exceptions import ImproperlyConfigured
+        raise ImproperlyConfigured('DJANGO_SECRET_KEY must be set when DEBUG is off.')
+    import secrets
+    SECRET_KEY = secrets.token_urlsafe(50)
+
+# HTTPS hardening for production (Caddy terminates TLS and forwards the scheme)
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    # Start short; raise to 31536000 (1 year) once the site is confirmed fine on HTTPS
+    SECURE_HSTS_SECONDS = int(os.environ.get('SECURE_HSTS_SECONDS', '3600'))
 
 ALLOWED_HOSTS = ['charlesotwere.com', 'www.charlesotwere.com', '104.207.66.57', '127.0.0.1', 'localhost']
 

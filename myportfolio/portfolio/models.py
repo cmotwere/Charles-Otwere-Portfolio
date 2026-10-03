@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -26,6 +28,11 @@ class About(models.Model):
     def __str__(self):
         title_part = self.title if self.title else "(No title)"
         return f"{self.name} - {title_part}"
+
+    @property
+    def resume_filename(self):
+        """Bare file name of the resume, as used in the download URL."""
+        return os.path.basename(self.resume_file.name) if self.resume_file else ''
 
 class Skill(models.Model):
     SKILL_CATEGORIES = [

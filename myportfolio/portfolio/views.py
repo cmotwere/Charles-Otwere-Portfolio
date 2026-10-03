@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 logger = logging.getLogger(__name__)
 from django.db.models import Q
-from django.http import JsonResponse, HttpResponse, Http404
+from django.http import JsonResponse, HttpResponse, Http404, FileResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
@@ -19,6 +19,7 @@ from django.utils import timezone
 from django import forms
 import os
 import time
+from pathlib import Path
 import requests
 from .models import (
     Project, About, Skill, Testimonial, DownloadTracking, SocialMediaPost,
@@ -335,38 +336,33 @@ def testimonials_view(request):
     return render(request, 'portfolio/testimonials.html', context)
 
 
+# Download types that may be served, mapped to their folder under MEDIA_ROOT.
+DOWNLOADABLE_DIRS = {
+    'resume': 'resume',
+}
+
+
 def track_file_download(request, file_type, filename):
     """Track file downloads and serve the file"""
-    # Get client IP address
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    
-    # Get user agent and referrer
-    user_agent = request.META.get('HTTP_USER_AGENT', '')
-    referrer = request.META.get('HTTP_REFERER', '')
-    
-    # Create tracking record
+    subdir = DOWNLOADABLE_DIRS.get(file_type)
+    if subdir is None or filename != os.path.basename(filename) or filename.startswith('.'):
+        raise Http404("File not found")
+
+    # Resolve the real path and refuse anything that escapes the allowed folder
+    base_dir = (Path(settings.MEDIA_ROOT) / subdir).resolve()
+    file_path = (base_dir / filename).resolve()
+    if file_path.parent != base_dir or not file_path.is_file():
+        raise Http404("File not found")
+
     DownloadTracking.objects.create(
         file_name=filename,
         file_type=file_type,
-        ip_address=ip,
-        user_agent=user_agent,
-        referrer=referrer,
+        ip_address=_client_ip(request),
+        user_agent=request.META.get('HTTP_USER_AGENT', ''),
+        referrer=request.META.get('HTTP_REFERER', ''),
     )
-    
-    # Serve the file
-    file_path = os.path.join(settings.MEDIA_ROOT, file_type, filename)
-    
-    if os.path.exists(file_path):
-        with open(file_path, 'rb') as f:
-            response = HttpResponse(f.read())
-            response['Content-Disposition'] = f'attachment; filename="{filename}"'
-            return response
-    else:
-        raise Http404("File not found")
+
+    return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=filename)
 
 
 def toggle_theme(request):

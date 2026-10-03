@@ -89,3 +89,6 @@ pytest.ini
 
 # Node (if ever used for frontend tooling)
 node_modules/
+# Database dumps (may contain user accounts and sessions)
+portfolio_data.json
+*.dump.json
