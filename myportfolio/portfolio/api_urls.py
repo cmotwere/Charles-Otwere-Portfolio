@@ -20,7 +20,6 @@ urlpatterns = [
     path('', include(router.urls)),
     
     # Custom API endpoints
-    path('contact/', api_views.contact_message, name='api-contact'),
     path('stats/', api_views.portfolio_stats, name='api-stats'),
     path('downloads/<str:file_type>/<str:file_name>/', api_views.track_download, name='api-track-download'),
     path('download-stats/', api_views.download_stats, name='api-download-stats'),

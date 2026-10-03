@@ -268,11 +268,8 @@ class BlogPostAdmin(admin.ModelAdmin):
         # Ensure title is set if not provided
         if not obj.title:
             obj.title = f"Untitled Post - {timezone.now().strftime('%Y-%m-%d %H:%M')}"
-        
-        # Auto-publish if content is provided and no status set
-        if obj.content and obj.status == 'draft':
-            obj.status = 'published'
-            
+
+
         if obj.status == 'published' and not obj.published_date:
             obj.published_date = timezone.now()
         super().save_model(request, obj, form, change)

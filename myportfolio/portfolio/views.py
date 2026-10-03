@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
@@ -424,8 +425,12 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f'Welcome back, {user.first_name or user.username}!')
-                next_url = request.GET.get('next', 'portfolio:home')
-                return redirect(next_url)
+                next_url = request.GET.get('next')
+                if next_url and url_has_allowed_host_and_scheme(
+                    next_url, allowed_hosts={request.get_host()}, require_https=request.is_secure()
+                ):
+                    return redirect(next_url)
+                return redirect('portfolio:home')
     else:
         form = CustomAuthenticationForm()
     
@@ -558,8 +563,8 @@ def work_experience_view(request):
 
 def blog_view(request):
     """Blog and articles listing page"""
-    # Show all posts for debugging, or just published ones in production
-    if request.GET.get('debug') == 'true':
+    # Staff can preview all posts (including drafts) with ?debug=true
+    if request.GET.get('debug') == 'true' and request.user.is_staff:
         posts = BlogPost.objects.all().select_related('category').order_by('-created_at')
         messages.info(request, 'Debug mode: Showing all blog posts regardless of status')
     else:
@@ -594,61 +599,15 @@ def blog_view(request):
     return render(request, 'portfolio/blog.html', context)
 
 
-def blog_debug_view(request):
-    """Debug view to show all blog posts with detailed information"""
-    from django.http import HttpResponse
-    
-    posts = BlogPost.objects.all().order_by('-created_at')
-    
-    html = """
-    <html>
-    <head><title>Blog Debug Information</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .post { border: 1px solid #ccc; margin: 10px 0; padding: 15px; }
-        .published { background-color: #d4edda; }
-        .draft { background-color: #f8d7da; }
-        .empty-content { color: red; font-weight: bold; }
-    </style>
-    </head>
-    <body>
-    <h1>Blog Posts Debug Information</h1>
-    <p><strong>Total blog posts:</strong> {}</p>
-    """.format(posts.count())
-    
-    for post in posts:
-        status_class = 'published' if post.status == 'published' else 'draft'
-        content_warning = '' if post.content else '<span class="empty-content">⚠️ NO CONTENT</span>'
-        
-        html += f"""
-        <div class="post {status_class}">
-            <h3>📝 {post.title or 'Untitled Post'}</h3>
-            <p><strong>Slug:</strong> {post.slug}</p>
-            <p><strong>Status:</strong> {post.status} {content_warning}</p>
-            <p><strong>Created:</strong> {post.created_at}</p>
-            <p><strong>Published:</strong> {post.published_date or 'Not published'}</p>
-            <p><strong>Excerpt:</strong> "{post.excerpt or 'No excerpt'}"</p>
-            <p><strong>Content Length:</strong> {len(post.content or '')} characters</p>
-            {f'<p><strong>Content Preview:</strong> {post.content[:200]}...</p>' if post.content else '<p><strong>Content:</strong> Empty</p>'}
-            <p><strong>Admin Link:</strong> <a href="/admin/portfolio/blogpost/{post.id}/change/">Edit in Admin</a></p>
-        </div>
-        """
-    
-    html += """
-    </body>
-    </html>
-    """
-    
-    return HttpResponse(html)
-
-
 def blog_post_detail_view(request, slug):
     """Individual blog post detail page"""
     # First try to find published posts
     try:
         post = get_published_blog_posts().get(slug=slug)
     except BlogPost.DoesNotExist:
-        # If no published post found, try any status (for debugging/preview)
+        # Unpublished posts are only viewable by staff (preview)
+        if not request.user.is_staff:
+            raise Http404("Blog post not found")
         post = get_object_or_404(
             BlogPost.objects.select_related('category').prefetch_related('related_projects'),
             slug=slug

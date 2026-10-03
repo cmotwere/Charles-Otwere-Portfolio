@@ -6,14 +6,14 @@ from django.db.models import Count
 from rest_framework import viewsets, status, permissions
 from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from .models import (
     Project, About, Skill, Testimonial, DownloadTracking, SocialMediaPost,
     Education, Certification, WorkExperience, BlogCategory, BlogPost, Event
 )
 from .serializers import (
     ProjectListSerializer, ProjectDetailSerializer, AboutSerializer,
-    SkillSerializer, TestimonialSerializer, ContactMessageSerializer,
+    SkillSerializer, TestimonialSerializer,
     PortfolioStatsSerializer, DownloadTrackingSerializer, SocialMediaPostSerializer,
     EducationSerializer, CertificationSerializer, WorkExperienceSerializer,
     BlogCategorySerializer, BlogPostListSerializer, BlogPostDetailSerializer,
@@ -143,47 +143,6 @@ class TestimonialViewSet(viewsets.ReadOnlyModelViewSet):
         return Response(serializer.data)
 
 
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def contact_message(request):
-    """Handle contact form submissions"""
-    serializer = ContactMessageSerializer(data=request.data)
-    if serializer.is_valid():
-        data = serializer.validated_data
-        
-        # Send email notification
-        subject = f"Portfolio Contact: {data['subject']}"
-        message = f"""
-New contact form submission:
-
-Name: {data['name']}
-Email: {data['email']}
-Phone: {data.get('phone', 'Not provided')}
-Company: {data.get('company', 'Not provided')}
-
-Subject: {data['subject']}
-
-Message:
-{data['message']}
-        """
-        
-        try:
-            send_mail(
-                subject=subject,
-                message=message,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.DEFAULT_FROM_EMAIL],
-                fail_silently=False,
-            )
-            return Response({'message': 'Your message has been sent successfully!'}, 
-                          status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response({'error': 'Failed to send message. Please try again later.'}, 
-                          status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def portfolio_stats(request):
@@ -230,7 +189,7 @@ def track_download(request, file_type, file_name):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAdminUser])
 def download_stats(request):
     """Get download statistics (admin only)"""
     stats = DownloadTracking.objects.values('file_type').annotate(

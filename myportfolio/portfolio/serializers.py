@@ -47,10 +47,10 @@ class AboutSerializer(serializers.ModelSerializer):
 class TestimonialSerializer(serializers.ModelSerializer):
     """Serializer for Testimonial model"""
     project = ProjectListSerializer(read_only=True)
-    
+
     class Meta:
         model = Testimonial
-        fields = '__all__'
+        exclude = ['email']  # reviewers' contact details are private
 
 
 class DownloadTrackingSerializer(serializers.ModelSerializer):
